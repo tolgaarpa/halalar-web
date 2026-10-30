@@ -1,0 +1,10 @@
+# JOURNAL (en yeni üstte, 5 satır/oturum)
+
+## 2026-10-29 — Halalar başlangıç
+37 HEIC incelendi, rembg+birefnet ile kesim, yön sorunu (EXIF 6) çözüldü, index.html iskeleti yazıldı, ek kırpma listesi (26 parça) hazırlandı.
+
+## 2026-10-29 gece — düzeltme
+Tolga: istenen liste değil, "tavşan deliği" tüneli (derinliğe ilerleme, hover detay, tıkla ürün sayfası). index.html baştan yazıldı (CSS 3D perspective, scroll=kamera z), urun.html + urunler.js eklendi. Ders LESSONS + ortak hafızaya yazıldı.
+
+## 2026-10-30 sabah
+Siyah zemin, 4 duvar+köşe yerleşimi, forma göre duvar seçimi, pus kaldırıldı. Instagram @halalarsunar 217 kare indi, 23 ürün seçilip kesildi ve eklendi. Telefon kopmaları: pmset kaydı kapak kapanınca pilde uyku (29.10 12:09, 30.10 01:07).
