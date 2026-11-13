@@ -1,7 +1,7 @@
 # JOURNAL (en yeni üstte, 5 satır/oturum)
 
 ## 13.11 Taş Fener — tünel takılması 2
-Tolga: biraz düzeldi, hâlâ hafif takılıyor. Ölçüm (80 derinlik noktası): yakın ürünler ekranın ~9 katı alanı kaplıyor, maliyet piksel sayısıyla gidiyor. Tuval çözünürlük tavanı 2 -> 1.5 (ortalama kare 104 -> 44 ms, en kötü 415 -> 117 ms, yazılım çizimde), 640px kopya eklendi. Yerel, yayın bekliyor.
+Tolga: biraz düzeldi, hâlâ hafif takılıyor. Ölçüm (80 derinlik noktası): yakın ürünler ekranın ~9 katı alanı kaplıyor, maliyet piksel sayısıyla gidiyor. Tuval çözünürlük tavanı 2 -> 1.5 (ortalama kare 104 -> 44 ms, en kötü 415 -> 117 ms, yazılım çizimde), 640px kopya eklendi. YAYINDA, canlıda doğrulandı.
 
 ## 13.11 Taş Fener — tünel takılması
 Tolga: web çok takılıyor. Sebep: görseller 900px oldu, her karede ~114 ürün büyük resimden küçültülerek çiziliyordu (ölçüm: kare başı 462 ms). Çözüm: her ürünün 96/192/384px kopyası bir kez hazırlanıyor, ekrandaki boyuna yetecek en küçük kopya çiziliyor (ölçüm: 14 ms, ~32 kat hızlı). YAYINDA, canlıda doğrulandı.
