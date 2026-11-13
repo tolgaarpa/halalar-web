@@ -1,5 +1,8 @@
 # JOURNAL (en yeni üstte, 5 satır/oturum)
 
+## 13.11 Taş Fener — app ile eşitleme
+Tolga: "web versiyonunu da aynı şekilde düzenle". Gömülü URUNLER/ASPECT çıkarıldı, veri/ dosyalarından okunuyor (app ile aynı). kaynak/web app img/ ile eşitlendi (eski hali .tmp/web-yedek). Tünele Ara+kategori, ürün sayfasına açı galerisi. Test: 94 ürün yüklendi, kırık 0, "porselen" 9 sonuç, lamba 4 açı tam görünüyor.
+
 ## 2026-10-29 — Halalar başlangıç
 37 HEIC incelendi, rembg+birefnet ile kesim, yön sorunu (EXIF 6) çözüldü, index.html iskeleti yazıldı, ek kırpma listesi (26 parça) hazırlandı.
 
