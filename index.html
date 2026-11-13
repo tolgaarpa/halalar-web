@@ -88,9 +88,13 @@ let DPR=1,VW=0,VH=0;
 function boyut(){DPR=Math.min(window.devicePixelRatio||1,2);VW=innerWidth;VH=innerHeight;cv.width=Math.round(VW*DPR);cv.height=Math.round(VH*DPR)}
 boyut(); addEventListener('resize',boyut);
 // --- görseller: her ürün bir kez yüklenir, alfa haritası çıkarılır ---
-const IMG={}, ALPHA={};
+const IMG={}, ALPHA={}, KOPYA={};
 URUNLER.forEach(u=>{ if(IMG[u[0]])return; const im=new Image(); im.src=`kaynak/web/${u[0]}.webp`; IMG[u[0]]=im;
-  im.decode().then(()=>{const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d');x.drawImage(im,0,0,48,48);ALPHA[u[0]]=x.getImageData(0,0,48,48).data}).catch(()=>{}) });
+  im.decode().then(()=>{const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d');x.drawImage(im,0,0,48,48);ALPHA[u[0]]=x.getImageData(0,0,48,48).data;
+    // küçük kopyalar: uzaktaki ürün büyük resimden değil küçük kopyadan çizilir (takılmayı önler)
+    const L=[];for(const m of [96,192,384]){const s=m/Math.max(im.naturalWidth,im.naturalHeight);if(s>=1)break;const k=document.createElement('canvas');k.width=Math.max(1,Math.round(im.naturalWidth*s));k.height=Math.max(1,Math.round(im.naturalHeight*s));k.getContext('2d').drawImage(im,0,0,k.width,k.height);L.push(k)}
+    KOPYA[u[0]]=L}).catch(()=>{}) });
+function kaynak(id,px){const L=KOPYA[id];if(L)for(const k of L)if(Math.max(k.width,k.height)>=px)return k;return IMG[id]}
 // --- yerleşim (önceki ile aynı kurallar) ---
 const LISTE=[];for(let t=0;t<TEKRAR;t++)URUNLER.forEach(u=>LISTE.push(u));
 const N=LISTE.length;
@@ -152,7 +156,7 @@ function render(){
   g.setTransform(DPR,0,0,DPR,0,0); g.globalAlpha=1; g.fillStyle=BG; g.fillRect(0,0,VW,VH);
   for(const it of drawn){
     g.save(); g.globalAlpha=it.op; g.translate(it.sx,it.sy); g.rotate(it.rot);
-    g.drawImage(IMG[it.u[0]],-it.sw/2,-it.sh/2,it.sw,it.sh); g.restore();
+    g.drawImage(kaynak(it.u[0],Math.max(it.sw,it.sh)*DPR),-it.sw/2,-it.sh/2,it.sw,it.sh); g.restore();
   }
   document.getElementById('end').classList.toggle('on',camZ>TOTAL-STEP*1.2);
   requestAnimationFrame(render);

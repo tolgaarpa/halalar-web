@@ -1,5 +1,8 @@
 # JOURNAL (en yeni üstte, 5 satır/oturum)
 
+## 13.11 Taş Fener — tünel takılması
+Tolga: web çok takılıyor. Sebep: görseller 900px oldu, her karede ~114 ürün büyük resimden küçültülerek çiziliyordu (ölçüm: kare başı 462 ms). Çözüm: her ürünün 96/192/384px kopyası bir kez hazırlanıyor, ekrandaki boyuna yetecek en küçük kopya çiziliyor (ölçüm: 14 ms, ~32 kat hızlı). Yerel, yayın bekliyor.
+
 ## 13.11 Taş Fener — app ile eşitleme
 Tolga: "web versiyonunu da aynı şekilde düzenle". Gömülü URUNLER/ASPECT çıkarıldı, veri/ dosyalarından okunuyor (app ile aynı). kaynak/web app img/ ile eşitlendi (eski hali .tmp/web-yedek). Tünele Ara+kategori, ürün sayfasına açı galerisi. Test: 94 ürün yüklendi, kırık 0, "porselen" 9 sonuç, lamba 4 açı tam görünüyor.
 
