@@ -85,14 +85,14 @@ const world=document.getElementById('world'); world.innerHTML='';
 const cv=document.createElement('canvas'); cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;display:block';
 world.appendChild(cv); const g=cv.getContext('2d');
 let DPR=1,VW=0,VH=0;
-function boyut(){DPR=Math.min(window.devicePixelRatio||1,2);VW=innerWidth;VH=innerHeight;cv.width=Math.round(VW*DPR);cv.height=Math.round(VH*DPR)}
+function boyut(){DPR=Math.min(window.devicePixelRatio||1,1.5);VW=innerWidth;VH=innerHeight;cv.width=Math.round(VW*DPR);cv.height=Math.round(VH*DPR)}
 boyut(); addEventListener('resize',boyut);
 // --- görseller: her ürün bir kez yüklenir, alfa haritası çıkarılır ---
 const IMG={}, ALPHA={}, KOPYA={};
 URUNLER.forEach(u=>{ if(IMG[u[0]])return; const im=new Image(); im.src=`kaynak/web/${u[0]}.webp`; IMG[u[0]]=im;
   im.decode().then(()=>{const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d');x.drawImage(im,0,0,48,48);ALPHA[u[0]]=x.getImageData(0,0,48,48).data;
     // küçük kopyalar: uzaktaki ürün büyük resimden değil küçük kopyadan çizilir (takılmayı önler)
-    const L=[];for(const m of [96,192,384]){const s=m/Math.max(im.naturalWidth,im.naturalHeight);if(s>=1)break;const k=document.createElement('canvas');k.width=Math.max(1,Math.round(im.naturalWidth*s));k.height=Math.max(1,Math.round(im.naturalHeight*s));k.getContext('2d').drawImage(im,0,0,k.width,k.height);L.push(k)}
+    const L=[];for(const m of [96,192,384,640]){const s=m/Math.max(im.naturalWidth,im.naturalHeight);if(s>=1)break;const k=document.createElement('canvas');k.width=Math.max(1,Math.round(im.naturalWidth*s));k.height=Math.max(1,Math.round(im.naturalHeight*s));k.getContext('2d').drawImage(im,0,0,k.width,k.height);L.push(k)}
     KOPYA[u[0]]=L}).catch(()=>{}) });
 function kaynak(id,px){const L=KOPYA[id];if(L)for(const k of L)if(Math.max(k.width,k.height)>=px)return k;return IMG[id]}
 // --- yerleşim (önceki ile aynı kurallar) ---
