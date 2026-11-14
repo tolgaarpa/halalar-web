@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0b0d">
+<title>Hit Pazarı</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* sitenin dili: koyu zemin, krem mürekkep, kobalt vurgu, Fraunces + Space Grotesk */
+:root{--ink:#f2efe9;--paper:#0b0b0d;--accent:#1f22ff;--muted:#777;--line:#232328;--panel:#121216}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper);scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}
+.small{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.serif{font-family:Fraunces,serif;font-weight:300}
+.sar{max-width:1240px;margin:0 auto;padding:0 32px}
+/* nav: tünel sayfasıyla aynı */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:22px 32px;background:linear-gradient(#0b0b0de6,#0b0b0d00)}
+nav .marka{display:flex;flex-direction:column}
+nav .hit{font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#ff5a1f;text-decoration:none;margin-bottom:2px}
+nav .logo{font-family:Fraunces,serif;font-size:26px;letter-spacing:-.02em;text-decoration:none}
+nav .sag{display:flex;gap:22px;align-items:center}
+nav .sag a.l{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+nav .sag a.l:hover{color:var(--ink)}
+.hap{display:inline-block;background:none;border:1px solid #444;color:var(--ink);border-radius:999px;padding:9px 18px;font:500 12px "Space Grotesk";letter-spacing:.2em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:.3s}
+.hap:hover{border-color:var(--ink)}
+.hap.dolu{background:var(--ink);color:#111;border-color:var(--ink)}
+.hap.dolu:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.hap.buyuk{padding:16px 40px;font-size:13px}
+/* kapı: derinlikte süzülen ürünler */
+.kapi{position:relative;height:100vh;min-height:640px;overflow:hidden;perspective:700px;perspective-origin:50% 50%}
+.sahne{position:absolute;inset:0;transform-style:preserve-3d}
+.sahne img{position:absolute;left:50%;top:50%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.75));will-change:transform;pointer-events:none}
+.kapi::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#0b0b0d00 0%,#0b0b0d00 30%,#0b0b0dcc 75%,#0b0b0d 100%);pointer-events:none}
+.kapi .orta{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;text-align:center;padding:0 20px}
+.kapi h1{font-family:Fraunces,serif;font-weight:300;font-size:clamp(64px,12vw,184px);letter-spacing:-.04em;line-height:.86;text-shadow:0 4px 40px #0b0b0d}
+.kapi h1 em{font-style:italic;display:block}
+.kapi p{font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:clamp(18px,2.2vw,26px);color:#bdb8ae;max-width:32ch;text-shadow:0 2px 20px #0b0b0d}
+.kapi .asagi{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:2}
+/* bant */
+.bant{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:16px 0}
+.bant .ic{display:inline-block;animation:kay 90s linear infinite;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.bant .ic b{color:var(--accent);margin:0 22px;font-weight:500}
+@keyframes kay{to{transform:translateX(-50%)}}
+/* bölümler */
+.bolum{padding:120px 0}
+.bas{display:flex;align-items:baseline;gap:22px;margin-bottom:56px;flex-wrap:wrap}
+.bas .no{font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:22px;color:var(--accent)}
+.bas h2{font-family:Fraunces,serif;font-weight:300;font-size:clamp(44px,6.4vw,96px);letter-spacing:-.035em;line-height:.92}
+.bas h2 em{font-style:italic}
+.bas .small{margin-left:auto}
+/* vitrin camı */
+.dukkanlar{display:grid;grid-template-columns:1.5fr 1fr;gap:24px}
+.vitrin{position:relative;display:block;text-decoration:none;border:1px solid #2c2c33;border-radius:18px;overflow:hidden;min-height:380px;background:radial-gradient(ellipse at 50% 120%,#1f22ff33 0%,#0b0b0d00 60%),linear-gradient(#141418,#0d0d10)}
+.vitrin .cam{position:absolute;inset:0;background:linear-gradient(115deg,#ffffff00 30%,#ffffff12 42%,#ffffff00 46%,#ffffff00 60%,#ffffff0a 66%,#ffffff00 70%);transition:transform 1s;pointer-events:none;z-index:3}
+.vitrin:hover .cam{transform:translateX(18%)}
+.vitrin .raf{position:absolute;left:6%;right:6%;bottom:96px;height:200px;display:flex;align-items:flex-end;justify-content:center;gap:2%;z-index:1}
+.vitrin .raf::after{content:"";position:absolute;left:-3%;right:-3%;bottom:-8px;height:8px;border-radius:2px;background:linear-gradient(#2a2a30,#17171b);box-shadow:0 18px 30px #000}
+.vitrin .raf img{max-height:100%;max-width:24%;object-fit:contain;filter:drop-shadow(0 16px 18px rgba(0,0,0,.7));transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.vitrin:hover .raf img:nth-child(odd){transform:translateY(-8px)}
+.vitrin .ad{position:absolute;left:28px;right:28px;bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;z-index:2}
+.vitrin h3{font-family:Fraunces,serif;font-weight:300;font-size:54px;letter-spacing:-.03em;line-height:.9}
+.vitrin .acik{display:flex;align-items:center;gap:8px}
+.vitrin .acik i{width:8px;height:8px;border-radius:50%;background:#5fd38a;box-shadow:0 0 0 4px #5fd38a22}
+.siradaki{border:1px dashed #333;border-radius:18px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;text-align:center;padding:30px;min-height:380px}
+.siradaki .serif{font-size:34px;letter-spacing:-.02em;font-style:italic;color:#555}
+/* hesap: krem bilet (tüneldeki ürün kartının rengi) */
+.hesap{display:grid;grid-template-columns:1fr 1.2fr;gap:70px;align-items:center}
+.hesap .yazi p{font-family:Fraunces,serif;font-weight:300;font-size:28px;line-height:1.25;letter-spacing:-.01em}
+.hesap .yazi p em{font-style:italic;color:#9ea0ff}
+.hesap .yazi .small{display:block;margin-top:22px;line-height:1.8;letter-spacing:.2em}
+.bilet{position:relative;display:grid;grid-template-columns:1fr 70px;background:var(--ink);color:#111;border-radius:14px;min-height:320px;box-shadow:0 40px 80px #000a}
+.bilet::before,.bilet::after{content:"";position:absolute;right:58px;width:24px;height:24px;border-radius:50%;background:var(--paper)}
+.bilet::before{top:-12px}.bilet::after{bottom:-12px}
+.bilet .gov{padding:32px 34px;min-width:0}
+.bilet .koc{border-left:2px dashed #11111133;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#666}
+.bilet .koc b{color:var(--accent);font-weight:500}
+.bilet .k{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#666}
+.bilet h3{font-family:Fraunces,serif;font-weight:300;font-size:44px;letter-spacing:-.025em;line-height:1;margin:10px 0 14px}
+.bilet h3 em{font-style:italic}
+.bilet .not{font-size:13px;color:#555;line-height:1.5}
+.bilet .gbtn{display:inline-flex;align-items:center;gap:12px;border:1px solid #111;background:none;color:#111;border-radius:999px;padding:14px 26px;font:500 12px "Space Grotesk";letter-spacing:.2em;text-transform:uppercase;cursor:pointer;margin-top:22px;transition:.3s}
+.bilet .gbtn:hover{background:#111;color:var(--ink)}
+.bilet .gbtn:disabled{opacity:.5}
+.bilet .hata{color:#c4321d;font-size:13px;margin-top:10px}
+.kim{display:flex;align-items:center;gap:14px;margin:4px 0 20px}
+.kim .av{width:50px;height:50px;border-radius:50%;background:#111;color:var(--ink);display:grid;place-items:center;font-family:Fraunces,serif;font-size:22px;overflow:hidden;flex:none}
+.kim .av img{width:100%;height:100%;object-fit:cover}
+.kim b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:26px;letter-spacing:-.02em;line-height:1.05}
+.kim small{color:#666;font-size:13px;word-break:break-all}
+.sekme{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.sekme button{background:none;border:1px solid #11111133;color:#111;border-radius:999px;padding:8px 14px;font:500 11px "Space Grotesk";letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+.sekme button.on{background:#111;color:var(--ink);border-color:#111}
+.sekme button i{font-style:normal;opacity:.55;margin-left:5px}
+.raflar{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;max-height:290px;overflow:auto}
+.raflar a{background:#e8e4dc;border-radius:10px;padding:8px;text-decoration:none;display:block;color:#111}
+.raflar a:hover{background:#dedad1}
+.raflar img{width:100%;aspect-ratio:1;object-fit:contain;display:block;filter:drop-shadow(0 6px 8px #0003)}
+.raflar b{display:block;font-size:12px;font-weight:500;line-height:1.2;margin-top:6px}
+.raflar small{display:block;font-size:11px;color:#666;margin-top:2px}
+.raflar .yok{grid-column:1/-1;font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:18px;color:#666;padding:20px 0}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form input{background:#fff;border:1px solid #11111226;border-radius:10px;color:#111;padding:13px;font:400 15px "Space Grotesk";outline:none;min-width:0}
+.form input:focus{border-color:#111}
+.form .not{grid-column:1/-1}
+.kucuk{background:none;border:1px solid #11111155;color:#111;border-radius:999px;padding:9px 18px;font:500 11px "Space Grotesk";letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+.kucuk:hover{background:#111;color:var(--ink)}
+.dug{display:flex;gap:10px;margin-top:16px}
+/* nasıl çalışır */
+.yonler{display:grid;grid-template-columns:1fr 280px 1fr;grid-template-rows:auto auto auto;gap:22px 50px;align-items:center;justify-items:center}
+.kart{grid-column:2;grid-row:2;width:280px;aspect-ratio:3/4;border-radius:22px;background:#16161a;border:1px solid #2a2a30;display:flex;flex-direction:column;overflow:hidden;cursor:pointer;box-shadow:0 30px 60px #000a;transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
+.kart:hover{transform:rotate(-2deg)}
+.kart .g{flex:1;min-height:0;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 40%,#232329 0%,#141417 70%)}
+.kart img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(0,0,0,.6));transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s}
+.kart .alt{border-top:1px solid #25252a;padding:14px 18px;background:#111114}
+.kart .alt b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:20px;letter-spacing:-.02em;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kart .alt small{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.yon{text-align:center;max-width:220px}
+.yon .ok{font-family:Fraunces,serif;font-weight:300;font-size:46px;line-height:1}
+.yon b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:32px;letter-spacing:-.025em;margin-top:2px}
+.yon .small{display:block;margin-top:6px;letter-spacing:.22em}
+.y-ust{grid-column:2;grid-row:1}.y-alt{grid-column:2;grid-row:3}.y-sol{grid-column:1;grid-row:2;justify-self:end;text-align:right}.y-sag{grid-column:3;grid-row:2;justify-self:start;text-align:left}
+.y-ust .ok{color:#f2c14e}.y-alt .ok{color:#8fb8ff}.y-sol .ok{color:#ff6b5e}.y-sag .ok{color:#7fd69a}
+.yon-not{text-align:center;margin-top:44px;font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:20px;color:#9a958c}
+/* askı etiketleri: krem, ürün kartı gibi */
+.etiketler{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;padding-top:34px}
+.etiket{position:relative;background:var(--ink);color:#111;border-radius:6px 6px 14px 14px;padding:56px 22px 26px;clip-path:polygon(24% 0,76% 0,100% 12%,100% 100%,0 100%,0 12%);transform-origin:50% -40px;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.etiket::before{content:"";position:absolute;top:18px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--paper)}
+.etiket::after{content:"";position:absolute;top:-30px;left:50%;width:1px;height:50px;background:#555}
+.etiket:nth-child(1){transform:rotate(-3deg)}.etiket:nth-child(2){transform:rotate(2deg)}.etiket:nth-child(3){transform:rotate(-1.5deg)}.etiket:nth-child(4){transform:rotate(2.5deg)}
+.etiket:hover{transform:rotate(0) translateY(-6px)}
+.etiket .no{font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:46px;line-height:.9;color:var(--accent)}
+.etiket b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:24px;letter-spacing:-.02em;line-height:1.05;margin:12px 0 10px}
+.etiket p{font-size:14px;line-height:1.5;color:#333}
+.etiket a{color:var(--accent)}
+/* son: tünelin sonundaki dev yazı */
+.son{padding:60px 0 40px;border-top:1px solid var(--line);text-align:center;overflow:hidden}
+.son .dev{font-family:Fraunces,serif;font-weight:600;font-size:clamp(70px,17vw,260px);letter-spacing:-.05em;line-height:.85;color:var(--accent);white-space:nowrap}
+.son .linkler{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 30px;margin-top:34px}
+.son .linkler a{text-decoration:none}.son .linkler a:hover{color:var(--ink)}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#111;padding:12px 20px;border-radius:999px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;z-index:90}
+#toast.on{opacity:1;transform:translateX(-50%)}
+[hidden]{display:none!important}
+@media(max-width:900px){
+  nav{padding:18px 16px}nav .sag a.l{display:none}
+  .sar{padding:0 16px}.bolum{padding:84px 0}
+  .dukkanlar,.hesap{grid-template-columns:1fr}.hesap{gap:40px}
+  .vitrin,.siradaki{min-height:320px}.siradaki{min-height:160px}
+  .bas .small{margin-left:0;width:100%}
+  .yonler{grid-template-columns:1fr 1fr;gap:26px 16px}
+  .kart{grid-column:1/-1;grid-row:1;width:min(280px,100%)}
+  .y-ust,.y-alt,.y-sol,.y-sag{grid-column:auto;grid-row:auto;justify-self:center;text-align:center}
+  .etiketler{grid-template-columns:1fr 1fr;gap:34px 18px}
+  .bilet{grid-template-columns:1fr 48px}.bilet::before,.bilet::after{right:36px}.bilet .gov{padding:28px 22px}
+  .form{grid-template-columns:1fr}
+}
+@media(max-width:540px){.etiketler{grid-template-columns:1fr}.vitrin h3{font-size:42px}}
+@media(prefers-reduced-motion:reduce){.bant .ic{animation:none}}
+</style>
+</head>
+<body>
+<nav><span class="marka"><a class="hit" href="#">Hit Pazarı</a><a class="logo" href="index.html">Halalar</a></span>
+  <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="l" href="#nasil">Nasıl</a><a class="l" href="#bilmen">Bilmen gerekenler</a><a class="hap" href="#hesap" id="ustHesap">Üye girişi</a></span></nav>
+
+<header class="kapi" id="kapi">
+  <div class="sahne" id="sahne"></div>
+  <div class="orta">
+    <div class="small" id="sayi">94 parça · bir tünel</div>
+    <h1>Hit <em>pazarı</em></h1>
+    <p>Dükkânların vitrinlerini bir tünelde gez; beğen, teklif ver, pazarlık et.</p>
+    <a class="hap dolu buyuk" href="index.html">Tünele giriş</a>
+  </div>
+  <div class="small asagi">aşağı kaydır ↓</div>
+</header>
+
+<div class="bant"><div class="ic" id="bant"></div></div>
+
+<section class="bolum" id="dukkanlar"><div class="sar">
+  <div class="bas"><span class="no">i.</span><h2>Açık <em>vitrinler</em></h2><span class="small">şimdilik bir dükkân</span></div>
+  <div class="dukkanlar">
+    <a class="vitrin" href="index.html"><div class="raf" id="raf"></div><div class="cam"></div>
+      <div class="ad"><div><div class="small acik"><i></i>Açık</div><h3>Halalar</h3></div><span class="small" id="hSay">94 ürün →</span></div></a>
+    <div class="siradaki"><span class="serif">Sıradaki vitrin</span><span class="small">yakında</span></div>
+  </div>
+</div></section>
+
+<section class="bolum" id="hesap"><div class="sar">
+  <div class="bas"><span class="no">ii.</span><h2>Üye <em>girişi</em></h2></div>
+  <div class="hesap">
+    <div class="yazi"><p>Google hesabınla gir; <em>beğendiklerin</em>, verdiğin teklifler ve iletişim bilgilerin tek yerde dursun.</p>
+      <span class="small">Girmeden de gezebilirsin · Şifre tutmayız</span></div>
+    <div class="bilet">
+      <div class="gov">
+        <div id="girisYok">
+          <div class="k">Giriş bileti</div>
+          <h3>Tezgâha <em>hoş geldin.</em></h3>
+          <p class="not">Giriş Google ile yapılır. Beğeniler ve teklifler bu tarayıcıda, telefon uygulamasıyla aynı yerde tutulur.</p>
+          <button class="gbtn" id="googleGir"><svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.4-4.1 7-10.1 7-17.6z"/><path fill="#FBBC05" d="M10.5 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>Google ile giriş</button>
+          <div class="hata" id="ghata"></div>
+        </div>
+        <div id="girisVar" hidden>
+          <div class="kim"><div class="av" id="av"></div><div><b id="pAd"></b><small id="pMail"></small></div></div>
+          <div class="sekme" id="sekme"><button data-s="begeni" class="on">Beğenilerim<i id="nB">0</i></button><button data-s="islem">Tekliflerim<i id="nI">0</i></button><button data-s="bilgi">Bilgilerim</button></div>
+          <div class="raflar" id="s-begeni"></div>
+          <div class="raflar" id="s-islem" hidden></div>
+          <div id="s-bilgi" hidden><div class="form">
+            <input id="fAd" autocomplete="name" placeholder="Adın"><input id="fTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon (05..)">
+            <p class="not">Teklif formlarında hazır gelir. Bu tarayıcıda saklanır.</p></div>
+            <div class="dug"><button class="kucuk" id="kaydet">Kaydet</button></div></div>
+          <div class="dug"><button class="kucuk" id="cikis">Çıkış yap</button></div>
+        </div>
+      </div>
+      <div class="koc"><span>Hit Pazarı · <b>No <span id="biletNo">0001</span></b></span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="bolum" id="nasil"><div class="sar">
+  <div class="bas"><span class="no">iii.</span><h2>Dört yön, <em>dört karar</em></h2></div>
+  <div class="yonler">
+    <div class="yon y-ust"><div class="ok">↑</div><b>Teklif</b><span class="small">fiyatı sen söyle</span></div>
+    <div class="yon y-sol"><div class="ok">←</div><b>Geç</b><span class="small">sıradakine bak</span></div>
+    <div class="kart" id="kart" title="Başka bir ürün"><div class="g"><img id="kImg" alt=""></div><div class="alt"><small id="kKat">dokun · başka ürün</small><b id="kAd"></b></div></div>
+    <div class="yon y-sag"><div class="ok">→</div><b>Beğen</b><span class="small">listene ekle</span></div>
+    <div class="yon y-alt"><div class="ok">↓</div><b>Satın al</b><span class="small">talebini bırak</span></div>
+  </div>
+  <p class="yon-not">Telefonda kartı parmağınla kaydırırsın; tünelde bir ürüne dokunursan doğrudan ona gidersin.</p>
+</div></section>
+
+<section class="bolum" id="bilmen"><div class="sar">
+  <div class="bas"><span class="no">iv.</span><h2>Etiketi <em>oku</em></h2></div>
+  <div class="etiketler">
+    <div class="etiket"><div class="no">01</div><b>Fiyatlar şimdilik örnek</b><p>"ÖRNEK" yazan fiyatlar gerçek satış fiyatı değildir. Gerçek fiyat dükkânla konuşurken netleşir.</p></div>
+    <div class="etiket"><div class="no">02</div><b>Burada ödeme alınmaz</b><p>Teklif ve satın alma bir taleptir; kart bilgisi istenmez. Dükkân seni arar, ödeme ve teslim birlikte kararlaştırılır.</p></div>
+    <div class="etiket"><div class="no">03</div><b>Ürün fotoğraftaki gibidir</b><p>Birçok ürün ikinci el ya da koleksiyon parçasıdır. Almadan önce durumunu sor, mümkünse yerinde gör.</p></div>
+    <div class="etiket"><div class="no">04</div><b>Kişisel verilerin</b><p>Adın ve telefonun yalnız talebin için dükkâna iletilir. Ayrıntılar <a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">aydınlatma metninde</a>.</p></div>
+  </div>
+</div></section>
+
+<footer class="son">
+  <div class="dev">hit pazarı</div>
+  <div class="linkler small"><a href="index.html">Tünel</a><a href="https://tolgaarpa.github.io/halalar-app/">Telefon uygulaması</a><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">Aydınlatma metni</a><a href="https://tolgaarpa.github.io/halalar-app/panel.html">Dükkân girişi</a></div>
+</footer>
+<div id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="veri/firebase-ayar.js"></script>
+<script src="veri/urunler.js"></script>
+<script src="veri/fiyatlar.js"></script>
+<script src="veri/kategoriler.js"></script>
+<script>
+const KEY='halalar-app-v1';   // telefon uygulamasıyla aynı kayıt (aynı alan adı)
+let D={begeni:[],islem:[]};
+try{const x=JSON.parse(localStorage.getItem(KEY));if(x)D=Object.assign(D,x)}catch(e){}
+const kaydetD=()=>{try{const x=JSON.parse(localStorage.getItem(KEY))||{};Object.assign(x,{kisi:D.kisi,islem:D.islem});localStorage.setItem(KEY,JSON.stringify(x))}catch(e){}};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const U=id=>URUNLER.find(u=>u[0]===id);
+const KAT=id=>(typeof KATEGORI!=='undefined'&&KATEGORI[id])||'';
+const TL=n=>(n||0).toLocaleString('tr-TR')+' ₺';
+const res=id=>`kaynak/web/${id}.webp`;
+const toast=t=>{const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.z);toast.z=setTimeout(()=>e.classList.remove('on'),1800)};
+document.getElementById('sayi').textContent=URUNLER.length+' parça · bir tünel';
+document.getElementById('hSay').textContent=URUNLER.length+' ürün →';
+
+// kapı: ürünler kenarlarda, farklı derinliklerde süzülür (tünelin küçük yankısı)
+const KAPI=[['ig/ig_fender',-.80,-.25,-150,190,-12],['h/fisher',.72,-.45,-250,220,6],['3464',-.68,.55,-100,230,4],['ig/ig_maske',.84,.25,-60,150,-8],
+            ['ig/ig_kurt',-.62,-.80,-300,160,10],['h/actionman',.68,.74,-200,130,-6],['ek/3482_papagan',.42,-1.02,-300,120,14],['3490',-.95,.15,-300,170,-4],
+            ['ig/ig_hoparlor',.95,-.05,-450,200,3],['h/daktilo',-.62,.88,-250,150,-10]];
+const sahne=document.getElementById('sahne'),PARCA=[];
+KAPI.forEach(([id,x,y,z,w,r])=>{if(!U(id))return;const im=new Image();im.src=res(id);im.alt='';sahne.appendChild(im);PARCA.push({im,x,y,z,w,r,f:Math.random()*6.28})});
+let mx=0,my=0,cx=0,cy=0;const azHareket=matchMedia('(prefers-reduced-motion: reduce)').matches;
+addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+function kare(t){const W=innerWidth,H=Math.max(innerHeight,640),olc=Math.min(1,W/1200)*.9+.1;cx+=(mx-cx)*.06;cy+=(my-cy)*.06;
+  const sy=Math.min(scrollY,H);
+  for(const p of PARCA){const s=azHareket?0:Math.sin(t/1400+p.f)*10;
+    if(W<700&&Math.abs(p.y)<.5){p.im.style.display='none';continue}else p.im.style.display='';
+    p.im.style.width=(p.w*olc)+'px';
+    p.im.style.transform=`translate(-50%,-50%) translate3d(${p.x*W*.5-cx*60}px,${p.y*H*.5+s-cy*40}px,${p.z+sy*1.6}px) rotate(${p.r+cx*4}deg)`;
+    p.im.style.opacity=Math.max(0,Math.min(1,1-(p.z+sy*1.6)/500))}
+  sahne.style.transform=`rotateY(${cx*6}deg) rotateX(${-cy*5}deg)`;
+  if(scrollY<H*1.2)requestAnimationFrame(kare);else bekle=true}
+let bekle=false;requestAnimationFrame(kare);
+addEventListener('scroll',()=>{if(bekle&&scrollY<innerHeight*1.2){bekle=false;requestAnimationFrame(kare)}},{passive:true});
+
+// bant
+const adlar=URUNLER.map(u=>esc(u[1])).join('<b>·</b>')+'<b>·</b>';
+document.getElementById('bant').innerHTML=adlar+adlar;
+
+// vitrin rafı
+document.getElementById('raf').innerHTML=['ig/ig_hoparlor','h/daktilo','3464','ig/ig_fender'].filter(U).map(id=>`<img src="${res(id)}" alt="" loading="lazy">`).join('');
+
+// ortadaki kart: dokununca başka ürün
+let ki=Math.floor(Math.random()*URUNLER.length);
+function kart(){const u=URUNLER[ki%URUNLER.length],im=document.getElementById('kImg');im.style.opacity=0;im.style.transform='scale(.7) rotate(-8deg)';
+  im.onload=()=>{im.style.opacity=1;im.style.transform='none'};im.src=res(u[0]);
+  document.getElementById('kAd').textContent=u[1];document.getElementById('kKat').textContent=KAT(u[0])||'Halalar'}
+document.getElementById('kart').onclick=()=>{ki+=7;kart()};kart();
+
+// ---- hesap ----
+let auth=null,VT=null;
+try{firebase.initializeApp(FIREBASE_AYAR);auth=firebase.auth();VT=firebase.firestore()}catch(e){console.warn(e)}
+const kutu=(id,alt)=>{const u=U(id);if(!u)return '';return `<a href="urun.html?id=${encodeURIComponent(id)}"><img src="${res(id)}" alt="" loading="lazy"><b>${esc(u[1])}</b><small>${alt}</small></a>`};
+function listeler(){
+  document.getElementById('nB').textContent=D.begeni.length;document.getElementById('nI').textContent=D.islem.length;
+  document.getElementById('s-begeni').innerHTML=D.begeni.length?D.begeni.slice().reverse().map(id=>kutu(id,TL(FIYAT[id]))).join(''):'<div class="yok">Henüz beğeni yok. Telefon uygulamasında sağa kaydırdıkların burada görünür.</div>';
+  document.getElementById('s-islem').innerHTML=D.islem.length?D.islem.map(x=>kutu(x.id,`${x.tur==='teklif'?'Teklif':'Alım'} · ${TL(x.tutar)} · ${esc(x.durum)}`)).join(''):'<div class="yok">Henüz teklif yok.</div>';
+  const k=D.kisi||{};document.getElementById('fAd').value=k.ad||'';document.getElementById('fTel').value=k.tel||''}
+async function durumTazele(){if(!VT)return;let d=false;
+  await Promise.all(D.islem.filter(x=>x.ref).map(async x=>{try{const s=await VT.collection('talepler').doc(x.ref).get();if(!s.exists)return;const v=s.data();if(v.durum!==x.durum){x.durum=v.durum;d=true}}catch(e){}}));
+  if(d){kaydetD();listeler()}}
+document.querySelectorAll('#sekme button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#sekme button').forEach(x=>x.classList.toggle('on',x===b));
+  ['begeni','islem','bilgi'].forEach(s=>document.getElementById('s-'+s).hidden=s!==b.dataset.s)});
+document.getElementById('kaydet').onclick=()=>{
+  const ad=document.getElementById('fAd').value.trim(),tel=document.getElementById('fTel').value.replace(/[^0-9+]/g,'');
+  if(ad.length<2){toast('Adını yaz');return} if(tel&&tel.replace(/\D/g,'').length<10){toast('Telefon 10-11 hane olmalı');return}
+  D.kisi=Object.assign({},D.kisi,{ad,tel});kaydetD();toast('Kaydedildi')};
+document.getElementById('googleGir').onclick=async e=>{
+  if(!auth){document.getElementById('ghata').textContent='Bağlantı kurulamadı, internetini kontrol et.';return}
+  const b=e.currentTarget;b.disabled=true;document.getElementById('ghata').textContent='';
+  const p=new firebase.auth.GoogleAuthProvider();
+  try{await auth.signInWithPopup(p)}
+  catch(err){if(err.code==='auth/popup-blocked'){try{await auth.signInWithRedirect(p);return}catch(e2){err=e2}}
+    if(err.code!=='auth/popup-closed-by-user'&&err.code!=='auth/cancelled-popup-request')document.getElementById('ghata').textContent='Giriş olmadı, tekrar dene.';console.warn(err)}
+  b.disabled=false};
+document.getElementById('cikis').onclick=()=>auth&&auth.signOut();
+function goster(u){
+  document.getElementById('girisYok').hidden=!!u;document.getElementById('girisVar').hidden=!u;
+  document.getElementById('ustHesap').textContent=u?'Hesabım':'Üye girişi';
+  if(!u){document.getElementById('biletNo').textContent='0001';return}
+  const ad=u.displayName||(u.email||'').split('@')[0];
+  document.getElementById('pAd').textContent=ad;document.getElementById('pMail').textContent=u.email||'';
+  document.getElementById('biletNo').textContent=String(((u.uid||ad).split('').reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7))%9000+1000);
+  const av=document.getElementById('av');av.textContent=(ad[0]||'?').toUpperCase();
+  if(u.photoURL){const im=new Image();im.alt='';im.referrerPolicy='no-referrer';im.onload=()=>{av.textContent='';av.appendChild(im)};im.src=u.photoURL}
+  if(!(D.kisi&&D.kisi.ad)&&u.displayName){D.kisi=Object.assign({},D.kisi,{ad:u.displayName});kaydetD()}
+  listeler();durumTazele()}
+if(auth)auth.onAuthStateChanged(goster);else goster(null);
+listeler();
+</script>
+</body>
+</html>
