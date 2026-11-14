@@ -30,15 +30,15 @@ nav .sag a.l:hover{color:var(--ink)}
 .hap.dolu:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 .hap.buyuk{padding:16px 40px;font-size:13px}
 /* kapı: derinlikte süzülen ürünler */
-.kapi{position:relative;height:100vh;min-height:640px;overflow:hidden;perspective:700px;perspective-origin:50% 50%}
-.sahne{position:absolute;inset:0;transform-style:preserve-3d}
-.sahne img{position:absolute;left:50%;top:50%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.75));will-change:transform;pointer-events:none}
-.kapi::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#0b0b0d00 0%,#0b0b0d00 30%,#0b0b0dcc 75%,#0b0b0d 100%);pointer-events:none}
-.kapi .orta{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;text-align:center;padding:0 20px}
+.kapi{position:relative;height:100vh;min-height:560px;overflow:hidden}
+.sahne{position:absolute;inset:0}
+.kapi .karanlik{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 38% 34% at 50% 50%,#0b0b0de0 0%,#0b0b0d99 55%,#0b0b0d00 100%),radial-gradient(ellipse at 50% 50%,#0b0b0d00 60%,#0b0b0d99 100%)}
+.sahne img{position:absolute;left:0;top:0;transform-origin:50% 50%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.75));will-change:transform,opacity;pointer-events:none}
+.kapi .orta{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;text-align:center;padding:0 20px}
 .kapi h1{font-family:Fraunces,serif;font-weight:300;font-size:clamp(64px,12vw,184px);letter-spacing:-.04em;line-height:.86;text-shadow:0 4px 40px #0b0b0d}
 .kapi h1 em{font-style:italic;display:block}
 .kapi p{font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:clamp(18px,2.2vw,26px);color:#bdb8ae;max-width:32ch;text-shadow:0 2px 20px #0b0b0d}
-.kapi .asagi{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:2}
+.kapi .asagi{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:4}
 /* bant */
 .bant{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:16px 0}
 .bant .ic{display:inline-block;animation:kay 90s linear infinite;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
@@ -47,7 +47,7 @@ nav .sag a.l:hover{color:var(--ink)}
 /* bölümler */
 .bolum{padding:120px 0}
 .bas{display:flex;align-items:baseline;gap:22px;margin-bottom:56px;flex-wrap:wrap}
-.bas .no{font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:22px;color:var(--accent)}
+.bas .no{font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:clamp(30px,3.4vw,52px);line-height:1;color:var(--accent);min-width:1.4em}
 .bas h2{font-family:Fraunces,serif;font-weight:300;font-size:clamp(44px,6.4vw,96px);letter-spacing:-.035em;line-height:.92}
 .bas h2 em{font-style:italic}
 .bas .small{margin-left:auto}
@@ -125,12 +125,14 @@ nav .sag a.l:hover{color:var(--ink)}
 .y-ust .ok{color:#f2c14e}.y-alt .ok{color:#8fb8ff}.y-sol .ok{color:#ff6b5e}.y-sag .ok{color:#7fd69a}
 .yon-not{text-align:center;margin-top:44px;font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:20px;color:#9a958c}
 /* askı etiketleri: krem, ürün kartı gibi */
-.etiketler{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;padding-top:34px}
-.etiket{position:relative;background:var(--ink);color:#111;border-radius:6px 6px 14px 14px;padding:56px 22px 26px;clip-path:polygon(24% 0,76% 0,100% 12%,100% 100%,0 100%,0 12%);transform-origin:50% -40px;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.etiketler{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;padding-top:10px}
+.etiket{position:relative;background:var(--ink);color:#111;border-radius:6px 6px 14px 14px;padding:56px 22px 26px;clip-path:polygon(24% 0,76% 0,100% 12%,100% 100%,0 100%,0 12%);}
 .etiket::before{content:"";position:absolute;top:18px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--paper)}
-.etiket::after{content:"";position:absolute;top:-30px;left:50%;width:1px;height:50px;background:#555}
-.etiket:nth-child(1){transform:rotate(-3deg)}.etiket:nth-child(2){transform:rotate(2deg)}.etiket:nth-child(3){transform:rotate(-1.5deg)}.etiket:nth-child(4){transform:rotate(2.5deg)}
-.etiket:hover{transform:rotate(0) translateY(-6px)}
+.aski{position:relative;padding-top:44px;transform-origin:50% 0;transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
+.aski::before{content:"";position:absolute;top:0;left:50%;width:1px;height:62px;background:linear-gradient(#0000,#8a857c);z-index:2}
+.aski::after{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:#3a3a40}
+.aski:nth-child(1){transform:rotate(-3deg)}.aski:nth-child(2){transform:rotate(2deg)}.aski:nth-child(3){transform:rotate(-1.5deg)}.aski:nth-child(4){transform:rotate(2.5deg)}
+.aski:hover{transform:rotate(0)}
 .etiket .no{font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:46px;line-height:.9;color:var(--accent)}
 .etiket b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:24px;letter-spacing:-.02em;line-height:1.05;margin:12px 0 10px}
 .etiket p{font-size:14px;line-height:1.5;color:#333}
@@ -165,7 +167,7 @@ nav .sag a.l:hover{color:var(--ink)}
   <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="l" href="#nasil">Nasıl</a><a class="l" href="#bilmen">Bilmen gerekenler</a><a class="hap" href="#hesap" id="ustHesap">Üye girişi</a></span></nav>
 
 <header class="kapi" id="kapi">
-  <div class="sahne" id="sahne"></div>
+  <div class="sahne" id="sahne"></div><div class="karanlik"></div>
   <div class="orta">
     <div class="small" id="sayi">94 parça · bir tünel</div>
     <h1>Hit <em>pazarı</em></h1>
@@ -232,10 +234,10 @@ nav .sag a.l:hover{color:var(--ink)}
 <section class="bolum" id="bilmen"><div class="sar">
   <div class="bas"><span class="no">iv.</span><h2>Etiketi <em>oku</em></h2></div>
   <div class="etiketler">
-    <div class="etiket"><div class="no">01</div><b>Fiyatlar şimdilik örnek</b><p>"ÖRNEK" yazan fiyatlar gerçek satış fiyatı değildir. Gerçek fiyat dükkânla konuşurken netleşir.</p></div>
-    <div class="etiket"><div class="no">02</div><b>Burada ödeme alınmaz</b><p>Teklif ve satın alma bir taleptir; kart bilgisi istenmez. Dükkân seni arar, ödeme ve teslim birlikte kararlaştırılır.</p></div>
-    <div class="etiket"><div class="no">03</div><b>Ürün fotoğraftaki gibidir</b><p>Birçok ürün ikinci el ya da koleksiyon parçasıdır. Almadan önce durumunu sor, mümkünse yerinde gör.</p></div>
-    <div class="etiket"><div class="no">04</div><b>Kişisel verilerin</b><p>Adın ve telefonun yalnız talebin için dükkâna iletilir. Ayrıntılar <a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">aydınlatma metninde</a>.</p></div>
+    <div class="aski"><div class="etiket"><div class="no">01</div><b>Fiyatlar şimdilik örnek</b><p>"ÖRNEK" yazan fiyatlar gerçek satış fiyatı değildir. Gerçek fiyat dükkânla konuşurken netleşir.</p></div></div>
+    <div class="aski"><div class="etiket"><div class="no">02</div><b>Burada ödeme alınmaz</b><p>Teklif ve satın alma bir taleptir; kart bilgisi istenmez. Dükkân seni arar, ödeme ve teslim birlikte kararlaştırılır.</p></div></div>
+    <div class="aski"><div class="etiket"><div class="no">03</div><b>Ürün fotoğraftaki gibidir</b><p>Birçok ürün ikinci el ya da koleksiyon parçasıdır. Almadan önce durumunu sor, mümkünse yerinde gör.</p></div></div>
+    <div class="aski"><div class="etiket"><div class="no">04</div><b>Kişisel verilerin</b><p>Adın ve telefonun yalnız talebin için dükkâna iletilir. Ayrıntılar <a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">aydınlatma metninde</a>.</p></div></div>
   </div>
 </div></section>
 
@@ -266,25 +268,30 @@ const toast=t=>{const e=document.getElementById('toast');e.textContent=t;e.class
 document.getElementById('sayi').textContent=URUNLER.length+' parça · bir tünel';
 document.getElementById('hSay').textContent=URUNLER.length+' ürün →';
 
-// kapı: ürünler kenarlarda, farklı derinliklerde süzülür (tünelin küçük yankısı)
-const KAPI=[['ig/ig_fender',-.80,-.25,-150,190,-12],['h/fisher',.72,-.45,-250,220,6],['3464',-.68,.55,-100,230,4],['ig/ig_maske',.84,.25,-60,150,-8],
-            ['ig/ig_kurt',-.62,-.80,-300,160,10],['h/actionman',.68,.74,-200,130,-6],['ek/3482_papagan',.42,-1.02,-300,120,14],['3490',-.95,.15,-300,170,-4],
-            ['ig/ig_hoparlor',.95,-.05,-450,200,3],['h/daktilo',-.62,.88,-250,150,-10]];
-const sahne=document.getElementById('sahne'),PARCA=[];
-KAPI.forEach(([id,x,y,z,w,r])=>{if(!U(id))return;const im=new Image();im.src=res(id);im.alt='';sahne.appendChild(im);PARCA.push({im,x,y,z,w,r,f:Math.random()*6.28})});
-let mx=0,my=0,cx=0,cy=0;const azHareket=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// kapı: tünelin ağzı. Başlık kaçış noktasında; ürünler halkalar hâlinde derine uzanır,
+// yakındakiler kadrajdan taşar, uzaktakiler sise gömülür. Kamera yavaşça içeri süzülür, kaydırınca dalar.
+const sahne=document.getElementById('sahne'),PARCA=[],P=700,L=2600;
+const secim=['ig/ig_fender','h/fisher','3464','ig/ig_maske','ig/ig_kurt','h/actionman','ek/3482_papagan','3490','ig/ig_hoparlor','h/daktilo']
+  .concat(URUNLER.map(u=>u[0])).filter((v,i,a)=>a.indexOf(v)===i&&U(v)).slice(0,24);
+secim.forEach((id,i)=>{const im=new Image();im.src=res(id);im.alt='';im.decoding='async';sahne.appendChild(im);
+  PARCA.push({im,a:i*2.39996,r:.92+((i*37)%23)/23*.3,z:-(i/secim.length)*L,w:200+((i*53)%70),rot:((i*71)%28)-14})});
+const azHareket=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let mx=0,my=0,cx=0,cy=0,kam=0,son=performance.now(),bekle=false;
 addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
-function kare(t){const W=innerWidth,H=Math.max(innerHeight,640),olc=Math.min(1,W/1200)*.9+.1;cx+=(mx-cx)*.06;cy+=(my-cy)*.06;
-  const sy=Math.min(scrollY,H);
-  for(const p of PARCA){const s=azHareket?0:Math.sin(t/1400+p.f)*10;
-    if(W<700&&Math.abs(p.y)<.5){p.im.style.display='none';continue}else p.im.style.display='';
+function kare(t){const dt=Math.min(.05,(t-son)/1000);son=t;
+  const W=innerWidth,H=Math.max(innerHeight,560),RX=W*.40,RY=H*.42,olc=Math.max(.55,Math.min(1,Math.min(W,H)/800));
+  if(!azHareket)kam+=dt*55;cx+=(mx-cx)*.05;cy+=(my-cy)*.05;
+  const dal=Math.min(scrollY,H)*2.2,vx=W/2-cx*W*.08,vy=H/2-cy*H*.08;
+  for(const p of PARCA){let dz=((p.z+kam+dal)%L+L)%L-L+160;   // -L+160 .. 160
+    const k=P/(P-dz),sis=Math.min(1,Math.max(0,(-dz-200)/(L*.6))),gecis=dz>40?Math.max(0,1-(dz-40)/120):1,giris=Math.min(1,(dz+L-160)/300);
+    const x=vx+Math.cos(p.a)*RX*p.r*k,y=vy+Math.sin(p.a)*RY*p.r*k;
     p.im.style.width=(p.w*olc)+'px';
-    p.im.style.transform=`translate(-50%,-50%) translate3d(${p.x*W*.5-cx*60}px,${p.y*H*.5+s-cy*40}px,${p.z+sy*1.6}px) rotate(${p.r+cx*4}deg)`;
-    p.im.style.opacity=Math.max(0,Math.min(1,1-(p.z+sy*1.6)/500))}
-  sahne.style.transform=`rotateY(${cx*6}deg) rotateX(${-cy*5}deg)`;
+    p.im.style.transform=`translate3d(${x}px,${y}px,0) translate(-50%,-50%) scale(${k}) rotate(${p.rot}deg)`;
+    const yar=p.w*olc*k*.45,nx=Math.max(0,Math.abs(x-vx)-yar)/(W*.27),ny=Math.max(0,Math.abs(y-vy)-yar)/(H*.33),d=Math.hypot(nx,ny),orta=d<1?Math.max(.08,d*d*d):1;   // yazının önü açık kalsın
+    p.im.style.opacity=((1-sis*.97)*gecis*giris*orta).toFixed(3);p.im.style.zIndex=Math.round(3000+dz)}
   if(scrollY<H*1.2)requestAnimationFrame(kare);else bekle=true}
-let bekle=false;requestAnimationFrame(kare);
-addEventListener('scroll',()=>{if(bekle&&scrollY<innerHeight*1.2){bekle=false;requestAnimationFrame(kare)}},{passive:true});
+requestAnimationFrame(kare);
+addEventListener('scroll',()=>{if(bekle&&scrollY<innerHeight*1.2){bekle=false;son=performance.now();requestAnimationFrame(kare)}},{passive:true});
 
 // bant
 const adlar=URUNLER.map(u=>esc(u[1])).join('<b>·</b>')+'<b>·</b>';
