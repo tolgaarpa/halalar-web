@@ -7,81 +7,87 @@
 <title>Hit Pazarı</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* sitenin dili: koyu zemin, krem mürekkep, kobalt vurgu, Fraunces + Space Grotesk */
-:root{--ink:#f2efe9;--paper:#0b0b0d;--accent:#1f22ff;--muted:#777;--line:#232328;--panel:#121216}
+/* Gece çarşısı: sitenin karanlığı + Halalar tabelasının neonu (gerçek vitrin fotoğrafından) */
+:root{--ink:#f2efe9;--paper:#0b0b0d;--accent:#1f22ff;--muted:#7d7a74;--line:#222227;--panel:#121216;
+  --neon:#ff5a1f;--neon-sicak:#ffb08a;--cerceve:#ff2d55;--kepenk:#2a2a30}
 *{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--paper);scroll-behavior:smooth}
+html{background:var(--paper)}
 body{background:var(--paper);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;overflow-x:hidden}
 a{color:inherit}
-.small{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
-.serif{font-family:Fraunces,serif;font-weight:300}
+:focus-visible{outline:2px solid var(--neon-sicak);outline-offset:3px;border-radius:6px}
 .sar{max-width:1240px;margin:0 auto;padding:0 32px}
-/* nav: tünel sayfasıyla aynı */
-nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:22px 32px;background:linear-gradient(#0b0b0de6,#0b0b0d00)}
-nav .marka{display:flex;flex-direction:column}
-nav .hit{font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#ff5a1f;text-decoration:none;margin-bottom:2px}
-nav .logo{font-family:Fraunces,serif;font-size:26px;letter-spacing:-.02em;text-decoration:none}
-nav .sag{display:flex;gap:22px;align-items:center}
-nav .sag a.l{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+/* nav: Hit Pazarı büyük, Halalar bir tık küçük */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:20px 32px;background:linear-gradient(#0b0b0de6,#0b0b0d00)}
+nav .marka{display:flex;flex-direction:column;line-height:1}
+nav .hit{font-family:Fraunces,serif;font-size:28px;letter-spacing:-.02em;color:var(--neon);text-decoration:none}
+nav .logo{font-family:Fraunces,serif;font-size:17px;letter-spacing:-.01em;text-decoration:none;color:#cfcac1;margin-top:4px}
+nav .sag{display:flex;gap:24px;align-items:center}
+nav .sag a.l{font-size:14px;color:var(--muted);text-decoration:none}
 nav .sag a.l:hover{color:var(--ink)}
-.hap{display:inline-block;background:none;border:1px solid #444;color:var(--ink);border-radius:999px;padding:9px 18px;font:500 12px "Space Grotesk";letter-spacing:.2em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:.3s}
+.hap{display:inline-block;background:none;border:1px solid #444;color:var(--ink);border-radius:999px;padding:9px 18px;font:500 13px "Space Grotesk";cursor:pointer;text-decoration:none;transition:border-color .3s,background .3s,color .3s}
 .hap:hover{border-color:var(--ink)}
-.hap.dolu{background:var(--ink);color:#111;border-color:var(--ink)}
-.hap.dolu:hover{background:var(--accent);border-color:var(--accent);color:#fff}
-.hap.buyuk{padding:16px 40px;font-size:13px}
-/* kapı: derinlikte süzülen ürünler */
+.hap.dolu{background:var(--ink);color:#111;border-color:var(--ink);padding:15px 36px;font-size:15px}
+.hap.dolu:hover{background:var(--neon);border-color:var(--neon);color:#fff}
+/* kapı: tünel ağzı + neon tabela */
 .kapi{position:relative;height:100vh;min-height:560px;overflow:hidden}
-.sahne{position:absolute;inset:0}
-.kapi .karanlik{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 38% 34% at 50% 50%,#0b0b0de0 0%,#0b0b0d99 55%,#0b0b0d00 100%),radial-gradient(ellipse at 50% 50%,#0b0b0d00 60%,#0b0b0d99 100%)}
+.sahne{position:absolute;inset:0;z-index:0}
 .sahne img{position:absolute;left:0;top:0;transform-origin:50% 50%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.75));will-change:transform,opacity;pointer-events:none}
-.kapi .orta{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;text-align:center;padding:0 20px}
-.kapi h1{font-family:Fraunces,serif;font-weight:300;font-size:clamp(64px,12vw,184px);letter-spacing:-.04em;line-height:.86;text-shadow:0 4px 40px #0b0b0d}
-.kapi h1 em{font-style:italic;display:block}
-.kapi p{font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:clamp(18px,2.2vw,26px);color:#bdb8ae;max-width:32ch;text-shadow:0 2px 20px #0b0b0d}
-.kapi .asagi{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:4}
-/* bant */
-.bant{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:16px 0}
-.bant .ic{display:inline-block;animation:kay 90s linear infinite;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
-.bant .ic b{color:var(--accent);margin:0 22px;font-weight:500}
-@keyframes kay{to{transform:translateX(-50%)}}
+.kapi .karanlik{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 38% 34% at 50% 50%,#0b0b0de6 0%,#0b0b0d99 55%,#0b0b0d00 100%),radial-gradient(ellipse at 50% 50%,#0b0b0d00 60%,#0b0b0d99 100%)}
+.kapi .orta{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center;padding:0 20px}
+.tabela{position:relative;padding:.06em .5em .14em}
+.tabela svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 4px var(--cerceve)) drop-shadow(0 0 14px #ff2d5599)}
+.tabela svg path,.tabela svg rect{fill:none;stroke:#ff6b85;stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.tabela h1{position:relative;font-family:Fraunces,serif;font-weight:300;font-size:clamp(160px,24vw,340px);letter-spacing:-.045em;line-height:.9;color:#fff1ea;
+  text-shadow:0 0 2px #fff,0 0 10px var(--neon),0 0 26px var(--neon),0 0 60px #ff5a1f88}
+.yaniyor{animation:yan 1.6s steps(1,end) .3s both}
+@keyframes yan{0%{opacity:.05}12%{opacity:1}18%{opacity:.15}26%{opacity:1}31%{opacity:.35}36%,100%{opacity:1}}
+.kapi p{font-family:Fraunces,serif;font-weight:300;font-size:clamp(20px,2.3vw,28px);line-height:1.3;color:#d5d0c7;max-width:26ch;text-shadow:0 2px 20px #0b0b0d}
 /* bölümler */
 .bolum{padding:120px 0}
-.bas{display:flex;align-items:baseline;gap:22px;margin-bottom:56px;flex-wrap:wrap}
-.bas .no{font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:clamp(30px,3.4vw,52px);line-height:1;color:var(--accent);min-width:1.4em}
-.bas h2{font-family:Fraunces,serif;font-weight:300;font-size:clamp(44px,6.4vw,96px);letter-spacing:-.035em;line-height:.92}
-.bas h2 em{font-style:italic}
-.bas .small{margin-left:auto}
-/* vitrin camı */
-.dukkanlar{display:grid;grid-template-columns:1.5fr 1fr;gap:24px}
-.vitrin{position:relative;display:block;text-decoration:none;border:1px solid #2c2c33;border-radius:18px;overflow:hidden;min-height:380px;background:radial-gradient(ellipse at 50% 120%,#1f22ff33 0%,#0b0b0d00 60%),linear-gradient(#141418,#0d0d10)}
-.vitrin .cam{position:absolute;inset:0;background:linear-gradient(115deg,#ffffff00 30%,#ffffff12 42%,#ffffff00 46%,#ffffff00 60%,#ffffff0a 66%,#ffffff00 70%);transition:transform 1s;pointer-events:none;z-index:3}
-.vitrin:hover .cam{transform:translateX(18%)}
-.vitrin .raf{position:absolute;left:6%;right:6%;bottom:96px;height:200px;display:flex;align-items:flex-end;justify-content:center;gap:2%;z-index:1}
-.vitrin .raf::after{content:"";position:absolute;left:-3%;right:-3%;bottom:-8px;height:8px;border-radius:2px;background:linear-gradient(#2a2a30,#17171b);box-shadow:0 18px 30px #000}
-.vitrin .raf img{max-height:100%;max-width:24%;object-fit:contain;filter:drop-shadow(0 16px 18px rgba(0,0,0,.7));transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
-.vitrin:hover .raf img:nth-child(odd){transform:translateY(-8px)}
-.vitrin .ad{position:absolute;left:28px;right:28px;bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;z-index:2}
-.vitrin h3{font-family:Fraunces,serif;font-weight:300;font-size:54px;letter-spacing:-.03em;line-height:.9}
-.vitrin .acik{display:flex;align-items:center;gap:8px}
-.vitrin .acik i{width:8px;height:8px;border-radius:50%;background:#5fd38a;box-shadow:0 0 0 4px #5fd38a22}
-.siradaki{border:1px dashed #333;border-radius:18px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;text-align:center;padding:30px;min-height:380px}
-.siradaki .serif{font-size:34px;letter-spacing:-.02em;font-style:italic;color:#555}
-/* hesap: krem bilet (tüneldeki ürün kartının rengi) */
+.bolum h2{font-family:Fraunces,serif;font-weight:300;font-size:clamp(44px,6vw,88px);letter-spacing:-.035em;line-height:.95;margin-bottom:48px}
+.ust-satir{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px}
+.ust-satir h2{margin-bottom:0}
+/* sokak: kaydırmalı vitrinler */
+.oklar{display:flex;align-items:center;gap:10px}
+.oklar span{font-size:14px;color:var(--muted);min-width:44px;text-align:center}
+.ok{width:52px;height:52px;border-radius:50%;border:1px solid #444;background:none;color:var(--ink);font-size:22px;cursor:pointer;display:grid;place-items:center;transition:border-color .3s,opacity .3s}
+.ok:hover:not(:disabled){border-color:var(--ink)}
+.ok:disabled{opacity:.25;cursor:default}
+.sokak{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;gap:32px}
+.sokak::-webkit-scrollbar{display:none}
+.dukkan{flex:0 0 100%;scroll-snap-align:start;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;align-items:stretch}
+.foto{position:relative;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:591/868;max-height:720px;justify-self:start;width:100%}
+.foto img{width:100%;height:100%;object-fit:cover;display:block}
+.foto::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 80px #000c;pointer-events:none}
+.icerik{display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-width:0}
+.icerik h3{font-family:Fraunces,serif;font-weight:300;font-size:clamp(48px,5vw,72px);letter-spacing:-.03em;line-height:.9}
+.icerik .alt{color:var(--muted);font-size:15px;margin-top:10px;max-width:46ch;line-height:1.5}
+.raf9{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.raf9 a{position:relative;aspect-ratio:4/3;border-radius:14px;background:radial-gradient(ellipse at 50% 40%,#1d1d22 0%,#111114 75%);border:1px solid var(--line);display:grid;place-items:center;padding:10% 14%;text-decoration:none;overflow:hidden}
+.raf9 a:hover{border-color:#55555e}
+.raf9 img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 12px 14px rgba(0,0,0,.7))}
+.raf9 b{position:absolute;left:10px;right:10px;bottom:8px;font-weight:400;font-size:12px;color:#bdb8ae;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .25s}
+.raf9 a:hover b,.raf9 a:focus-visible b{opacity:1}
+.icerik .hap{align-self:flex-start}
+/* kepenk: sıradaki vitrin */
+.kapali{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.kepenk{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:591/868;max-height:720px;width:100%;
+  background:repeating-linear-gradient(#34343b 0 3px,#26262c 3px 14px,#1b1b20 14px 16px);box-shadow:inset 0 0 80px #000}
+.kepenk::after{content:"";position:absolute;left:44%;right:44%;bottom:5%;height:10px;border-radius:3px;background:#3b3b42;box-shadow:0 2px 0 #111}
+.kepenk .levha{position:absolute;left:12%;right:12%;top:10%;padding:14px;border:1px solid #3a3a42;border-radius:8px;background:#111114;text-align:center;font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:24px;color:#8b877f}
+/* hesap: bilet */
 .hesap{display:grid;grid-template-columns:1fr 1.2fr;gap:70px;align-items:center}
-.hesap .yazi p{font-family:Fraunces,serif;font-weight:300;font-size:28px;line-height:1.25;letter-spacing:-.01em}
-.hesap .yazi p em{font-style:italic;color:#9ea0ff}
-.hesap .yazi .small{display:block;margin-top:22px;line-height:1.8;letter-spacing:.2em}
-.bilet{position:relative;display:grid;grid-template-columns:1fr 70px;background:var(--ink);color:#111;border-radius:14px;min-height:320px;box-shadow:0 40px 80px #000a}
-.bilet::before,.bilet::after{content:"";position:absolute;right:58px;width:24px;height:24px;border-radius:50%;background:var(--paper)}
+.hesap .yazi p{font-family:Fraunces,serif;font-weight:300;font-size:28px;line-height:1.25;letter-spacing:-.01em;max-width:24ch}
+.hesap .yazi small{display:block;margin-top:18px;font-size:15px;color:var(--muted);line-height:1.6}
+.bilet{position:relative;display:grid;grid-template-columns:1fr 64px;background:#e9e4da;color:#111;border-radius:14px;min-height:300px;box-shadow:0 40px 80px #000a}
+.bilet::before,.bilet::after{content:"";position:absolute;right:52px;width:24px;height:24px;border-radius:50%;background:var(--paper)}
 .bilet::before{top:-12px}.bilet::after{bottom:-12px}
 .bilet .gov{padding:32px 34px;min-width:0}
-.bilet .koc{border-left:2px dashed #11111133;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#666}
-.bilet .koc b{color:var(--accent);font-weight:500}
-.bilet .k{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#666}
-.bilet h3{font-family:Fraunces,serif;font-weight:300;font-size:44px;letter-spacing:-.025em;line-height:1;margin:10px 0 14px}
-.bilet h3 em{font-style:italic}
-.bilet .not{font-size:13px;color:#555;line-height:1.5}
-.bilet .gbtn{display:inline-flex;align-items:center;gap:12px;border:1px solid #111;background:none;color:#111;border-radius:999px;padding:14px 26px;font:500 12px "Space Grotesk";letter-spacing:.2em;text-transform:uppercase;cursor:pointer;margin-top:22px;transition:.3s}
+.bilet .koc{border-left:2px dashed #11111133;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;letter-spacing:.12em;color:#666}
+.bilet .koc b{color:var(--neon);font-weight:500}
+.bilet h3{font-family:Fraunces,serif;font-weight:300;font-size:42px;letter-spacing:-.025em;line-height:1;margin-bottom:14px}
+.bilet .not{font-size:14px;color:#555;line-height:1.5;max-width:44ch}
+.bilet .gbtn{display:inline-flex;align-items:center;gap:12px;border:1px solid #111;background:none;color:#111;border-radius:999px;padding:14px 24px;font:500 14px "Space Grotesk";cursor:pointer;margin-top:22px;transition:background .3s,color .3s}
 .bilet .gbtn:hover{background:#111;color:var(--ink)}
 .bilet .gbtn:disabled{opacity:.5}
 .bilet .hata{color:#c4321d;font-size:13px;margin-top:10px}
@@ -91,12 +97,11 @@ nav .sag a.l:hover{color:var(--ink)}
 .kim b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:26px;letter-spacing:-.02em;line-height:1.05}
 .kim small{color:#666;font-size:13px;word-break:break-all}
 .sekme{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.sekme button{background:none;border:1px solid #11111133;color:#111;border-radius:999px;padding:8px 14px;font:500 11px "Space Grotesk";letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+.sekme button{background:none;border:1px solid #11111133;color:#111;border-radius:999px;padding:8px 14px;font:500 13px "Space Grotesk";cursor:pointer}
 .sekme button.on{background:#111;color:var(--ink);border-color:#111}
 .sekme button i{font-style:normal;opacity:.55;margin-left:5px}
 .raflar{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;max-height:290px;overflow:auto}
-.raflar a{background:#e8e4dc;border-radius:10px;padding:8px;text-decoration:none;display:block;color:#111}
-.raflar a:hover{background:#dedad1}
+.raflar a{background:#dcd7cd;border-radius:10px;padding:8px;text-decoration:none;display:block;color:#111}
 .raflar img{width:100%;aspect-ratio:1;object-fit:contain;display:block;filter:drop-shadow(0 6px 8px #0003)}
 .raflar b{display:block;font-size:12px;font-weight:500;line-height:1.2;margin-top:6px}
 .raflar small{display:block;font-size:11px;color:#666;margin-top:2px}
@@ -105,101 +110,114 @@ nav .sag a.l:hover{color:var(--ink)}
 .form input{background:#fff;border:1px solid #11111226;border-radius:10px;color:#111;padding:13px;font:400 15px "Space Grotesk";outline:none;min-width:0}
 .form input:focus{border-color:#111}
 .form .not{grid-column:1/-1}
-.kucuk{background:none;border:1px solid #11111155;color:#111;border-radius:999px;padding:9px 18px;font:500 11px "Space Grotesk";letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+.kucuk{background:none;border:1px solid #11111155;color:#111;border-radius:999px;padding:9px 18px;font:500 13px "Space Grotesk";cursor:pointer}
 .kucuk:hover{background:#111;color:var(--ink)}
 .dug{display:flex;gap:10px;margin-top:16px}
 /* nasıl çalışır */
 .yonler{display:grid;grid-template-columns:1fr 280px 1fr;grid-template-rows:auto auto auto;gap:22px 50px;align-items:center;justify-items:center}
-.kart{grid-column:2;grid-row:2;width:280px;aspect-ratio:3/4;border-radius:22px;background:#16161a;border:1px solid #2a2a30;display:flex;flex-direction:column;overflow:hidden;cursor:pointer;box-shadow:0 30px 60px #000a;transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
-.kart:hover{transform:rotate(-2deg)}
-.kart .g{flex:1;min-height:0;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 40%,#232329 0%,#141417 70%)}
+.kart{grid-column:2;grid-row:2;width:280px;aspect-ratio:3/4;border-radius:22px;background:#16161a;border:1px solid #2a2a30;display:flex;flex-direction:column;overflow:hidden;cursor:pointer;box-shadow:0 30px 60px #000a;font:inherit;color:inherit;text-align:left;padding:0}
+.kart .g{flex:1;min-height:0;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 40%,#232329 0%,#141417 70%);width:100%}
 .kart img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(0,0,0,.6));transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s}
-.kart .alt{border-top:1px solid #25252a;padding:14px 18px;background:#111114}
+.kart .alt{border-top:1px solid #25252a;padding:14px 18px;background:#111114;width:100%}
 .kart .alt b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:20px;letter-spacing:-.02em;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.kart .alt small{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.kart .alt small{font-size:12px;color:var(--muted)}
 .yon{text-align:center;max-width:220px}
-.yon .ok{font-family:Fraunces,serif;font-weight:300;font-size:46px;line-height:1}
+.yon .ok2{font-family:Fraunces,serif;font-weight:300;font-size:46px;line-height:1}
 .yon b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:32px;letter-spacing:-.025em;margin-top:2px}
-.yon .small{display:block;margin-top:6px;letter-spacing:.22em}
+.yon small{display:block;margin-top:6px;font-size:14px;color:var(--muted)}
 .y-ust{grid-column:2;grid-row:1}.y-alt{grid-column:2;grid-row:3}.y-sol{grid-column:1;grid-row:2;justify-self:end;text-align:right}.y-sag{grid-column:3;grid-row:2;justify-self:start;text-align:left}
-.y-ust .ok{color:#f2c14e}.y-alt .ok{color:#8fb8ff}.y-sol .ok{color:#ff6b5e}.y-sag .ok{color:#7fd69a}
-.yon-not{text-align:center;margin-top:44px;font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:20px;color:#9a958c}
-/* askı etiketleri: krem, ürün kartı gibi */
-.etiketler{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;padding-top:10px}
-.etiket{position:relative;background:var(--ink);color:#111;border-radius:6px 6px 14px 14px;padding:56px 22px 26px;clip-path:polygon(24% 0,76% 0,100% 12%,100% 100%,0 100%,0 12%);}
-.etiket::before{content:"";position:absolute;top:18px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--paper)}
-.aski{position:relative;padding-top:44px;transform-origin:50% 0;transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
-.aski::before{content:"";position:absolute;top:0;left:50%;width:1px;height:62px;background:linear-gradient(#0000,#8a857c);z-index:2}
-.aski::after{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:#3a3a40}
-.aski:nth-child(1){transform:rotate(-3deg)}.aski:nth-child(2){transform:rotate(2deg)}.aski:nth-child(3){transform:rotate(-1.5deg)}.aski:nth-child(4){transform:rotate(2.5deg)}
-.aski:hover{transform:rotate(0)}
-.etiket .no{font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:46px;line-height:.9;color:var(--accent)}
-.etiket b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:24px;letter-spacing:-.02em;line-height:1.05;margin:12px 0 10px}
-.etiket p{font-size:14px;line-height:1.5;color:#333}
-.etiket a{color:var(--accent)}
-/* son: tünelin sonundaki dev yazı */
+.y-ust .ok2{color:#f2c14e}.y-alt .ok2{color:#8fb8ff}.y-sol .ok2{color:#ff6b5e}.y-sag .ok2{color:#7fd69a}
+/* asma tabelalar: koyu, iplerinden salınır */
+.cubuk{height:3px;border-radius:2px;background:linear-gradient(90deg,#1c1c21,#3a3a41 20%,#3a3a41 80%,#1c1c21);margin-bottom:0}
+.asmalar{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.asma{position:relative;padding-top:58px;transform-origin:50% 0;animation:salin 5.2s ease-in-out infinite}
+.asma:nth-child(1){animation-duration:4.6s;animation-delay:-1.1s}.asma:nth-child(2){animation-duration:5.4s;animation-delay:-3.2s}
+.asma:nth-child(3){animation-duration:6.1s;animation-delay:-.4s}.asma:nth-child(4){animation-duration:5s;animation-delay:-2.5s}
+@keyframes salin{0%,100%{transform:rotate(-2.4deg)}50%{transform:rotate(2.4deg)}}
+.asma::before,.asma::after{content:"";position:absolute;top:0;width:1px;height:62px;background:#55535a}
+.asma::before{left:22%;transform:skewX(14deg);transform-origin:top}.asma::after{right:22%;transform:skewX(-14deg);transform-origin:top}
+.levha2{position:relative;background:#141418;border:1px solid #2e2e35;border-radius:10px;padding:26px 22px 24px;box-shadow:0 24px 40px #0008}
+.levha2::before,.levha2::after{content:"";position:absolute;top:10px;width:7px;height:7px;border-radius:50%;background:#2d2d33;border:1px solid #45454c}
+.levha2::before{left:calc(22% - 4px)}.levha2::after{right:calc(22% - 4px)}
+.levha2 b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:24px;letter-spacing:-.02em;line-height:1.1;margin:8px 0 10px}
+.levha2 p{font-size:14px;line-height:1.55;color:#a9a49b}
+.levha2 a{color:var(--neon-sicak)}
+/* son */
 .son{padding:60px 0 40px;border-top:1px solid var(--line);text-align:center;overflow:hidden}
 .son .dev{font-family:Fraunces,serif;font-weight:600;font-size:clamp(70px,17vw,260px);letter-spacing:-.05em;line-height:.85;color:var(--accent);white-space:nowrap}
-.son .linkler{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 30px;margin-top:34px}
+.son .linkler{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 30px;margin-top:34px;font-size:14px;color:var(--muted)}
 .son .linkler a{text-decoration:none}.son .linkler a:hover{color:var(--ink)}
 #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#111;padding:12px 20px;border-radius:999px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;z-index:90}
 #toast.on{opacity:1;transform:translateX(-50%)}
 [hidden]{display:none!important}
 @media(max-width:900px){
-  nav{padding:18px 16px}nav .sag a.l{display:none}
+  nav{padding:16px 16px}nav .sag a.l{display:none}nav .hit{font-size:24px}nav .logo{font-size:15px}
   .sar{padding:0 16px}.bolum{padding:84px 0}
-  .dukkanlar,.hesap{grid-template-columns:1fr}.hesap{gap:40px}
-  .vitrin,.siradaki{min-height:320px}.siradaki{min-height:160px}
-  .bas .small{margin-left:0;width:100%}
+  .dukkan,.kapali{grid-template-columns:1fr;gap:22px}
+  .foto,.kepenk{aspect-ratio:4/5;max-height:none}
+  .hesap{grid-template-columns:1fr;gap:40px}
   .yonler{grid-template-columns:1fr 1fr;gap:26px 16px}
   .kart{grid-column:1/-1;grid-row:1;width:min(280px,100%)}
   .y-ust,.y-alt,.y-sol,.y-sag{grid-column:auto;grid-row:auto;justify-self:center;text-align:center}
-  .etiketler{grid-template-columns:1fr 1fr;gap:34px 18px}
-  .bilet{grid-template-columns:1fr 48px}.bilet::before,.bilet::after{right:36px}.bilet .gov{padding:28px 22px}
+  .asmalar{grid-template-columns:1fr 1fr;gap:10px 18px}
+  .bilet{grid-template-columns:1fr 46px}.bilet::before,.bilet::after{right:34px}.bilet .gov{padding:28px 22px}
   .form{grid-template-columns:1fr}
+  .ok{width:44px;height:44px}
 }
-@media(max-width:540px){.etiketler{grid-template-columns:1fr}.vitrin h3{font-size:42px}}
-@media(prefers-reduced-motion:reduce){.bant .ic{animation:none}}
+@media(max-width:540px){.asmalar{grid-template-columns:1fr}.raf9{gap:8px}}
+@media(prefers-reduced-motion:reduce){.asma,.yaniyor{animation:none}.sokak{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <nav><span class="marka"><a class="hit" href="#">Hit Pazarı</a><a class="logo" href="index.html">Halalar</a></span>
-  <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="l" href="#nasil">Nasıl</a><a class="l" href="#bilmen">Bilmen gerekenler</a><a class="hap" href="#hesap" id="ustHesap">Üye girişi</a></span></nav>
+  <span class="sag"><a class="l" href="#dukkanlar">Vitrinler</a><a class="l" href="#nasil">Nasıl çalışır</a><a class="l" href="#bilmen">Bilmen gerekenler</a><a class="hap" href="#hesap" id="ustHesap">Üye girişi</a></span></nav>
 
 <header class="kapi" id="kapi">
   <div class="sahne" id="sahne"></div><div class="karanlik"></div>
   <div class="orta">
-    <div class="small" id="sayi">94 parça · bir tünel</div>
-    <h1>Hit <em>pazarı</em></h1>
-    <p>Dükkânların vitrinlerini bir tünelde gez; beğen, teklif ver, pazarlık et.</p>
-    <a class="hap dolu buyuk" href="index.html">Tünele giriş</a>
+    <div class="tabela yaniyor" aria-label="Hit">
+      <svg viewBox="0 0 400 220" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="6" y="6" width="388" height="208" rx="26"/>
+        <path d="M40 30 c-12 0 -18 10 -12 18 c5 7 15 3 13 -4"/><path d="M360 30 c12 0 18 10 12 18 c-5 7 -15 3 -13 -4"/>
+        <path d="M40 190 c-12 0 -18 -10 -12 -18 c5 -7 15 -3 13 4"/><path d="M360 190 c12 0 18 -10 12 -18 c-5 -7 -15 -3 -13 4"/>
+      </svg>
+      <h1>Hit</h1>
+    </div>
+    <p>Tünelinde gez; beğen, pazarlık et. Hit'len.</p>
+    <a class="hap dolu" href="index.html">Tünele giriş</a>
   </div>
-  <div class="small asagi">aşağı kaydır ↓</div>
 </header>
 
-<div class="bant"><div class="ic" id="bant"></div></div>
-
 <section class="bolum" id="dukkanlar"><div class="sar">
-  <div class="bas"><span class="no">i.</span><h2>Açık <em>vitrinler</em></h2><span class="small">şimdilik bir dükkân</span></div>
-  <div class="dukkanlar">
-    <a class="vitrin" href="index.html"><div class="raf" id="raf"></div><div class="cam"></div>
-      <div class="ad"><div><div class="small acik"><i></i>Açık</div><h3>Halalar</h3></div><span class="small" id="hSay">94 ürün →</span></div></a>
-    <div class="siradaki"><span class="serif">Sıradaki vitrin</span><span class="small">yakında</span></div>
+  <div class="ust-satir"><h2>Açık vitrinler</h2>
+    <div class="oklar"><button class="ok" id="geri" aria-label="Önceki vitrin" disabled>←</button><span id="sira">1 / 2</span><button class="ok" id="ileri" aria-label="Sıradaki vitrin">→</button></div></div>
+  <div class="sokak" id="sokak">
+    <article class="dukkan">
+      <a class="foto" href="index.html"><img src="kaynak/vitrin/halalar.webp" alt="Halalar dükkânının gece vitrini, neon tabelası yanıyor" loading="lazy"></a>
+      <div class="icerik">
+        <div><h3>Halalar</h3><p class="alt" id="hAlt">Plaktan porselene, Fender gitardan Buda heykeline 94 parça. Hepsi tünelde.</p></div>
+        <div class="raf9" id="raf9"></div>
+        <a class="hap" href="index.html">Halalar tüneline gir</a>
+      </div>
+    </article>
+    <article class="dukkan kapali" aria-label="Sıradaki vitrin">
+      <div class="kepenk"><div class="levha">Kepenk yakında açılıyor</div></div>
+      <div class="icerik"><div><h3>Sıradaki vitrin</h3><p class="alt">Yeni dükkânlar sokağa katıldıkça burada, Halalar'ın yanında yerini alacak.</p></div></div>
+    </article>
   </div>
 </div></section>
 
 <section class="bolum" id="hesap"><div class="sar">
-  <div class="bas"><span class="no">ii.</span><h2>Üye <em>girişi</em></h2></div>
+  <h2>Üye girişi</h2>
   <div class="hesap">
-    <div class="yazi"><p>Google hesabınla gir; <em>beğendiklerin</em>, verdiğin teklifler ve iletişim bilgilerin tek yerde dursun.</p>
-      <span class="small">Girmeden de gezebilirsin · Şifre tutmayız</span></div>
+    <div class="yazi"><p>Google hesabınla gir; beğendiklerin, verdiğin teklifler ve iletişim bilgilerin tek yerde dursun.</p>
+      <small>Girmeden de gezebilirsin. Şifre tutmayız.</small></div>
     <div class="bilet">
       <div class="gov">
         <div id="girisYok">
-          <div class="k">Giriş bileti</div>
-          <h3>Tezgâha <em>hoş geldin.</em></h3>
+          <h3>Tezgâha hoş geldin.</h3>
           <p class="not">Giriş Google ile yapılır. Beğeniler ve teklifler bu tarayıcıda, telefon uygulamasıyla aynı yerde tutulur.</p>
-          <button class="gbtn" id="googleGir"><svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.4-4.1 7-10.1 7-17.6z"/><path fill="#FBBC05" d="M10.5 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>Google ile giriş</button>
+          <button class="gbtn" id="googleGir"><svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.4-4.1 7-10.1 7-17.6z"/><path fill="#FBBC05" d="M10.5 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>Google ile giriş yap</button>
           <div class="hata" id="ghata"></div>
         </div>
         <div id="girisVar" hidden>
@@ -208,42 +226,42 @@ nav .sag a.l:hover{color:var(--ink)}
           <div class="raflar" id="s-begeni"></div>
           <div class="raflar" id="s-islem" hidden></div>
           <div id="s-bilgi" hidden><div class="form">
-            <input id="fAd" autocomplete="name" placeholder="Adın"><input id="fTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon (05..)">
+            <input id="fAd" autocomplete="name" placeholder="Adın" aria-label="Adın"><input id="fTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon (05..)" aria-label="Telefon">
             <p class="not">Teklif formlarında hazır gelir. Bu tarayıcıda saklanır.</p></div>
             <div class="dug"><button class="kucuk" id="kaydet">Kaydet</button></div></div>
           <div class="dug"><button class="kucuk" id="cikis">Çıkış yap</button></div>
         </div>
       </div>
-      <div class="koc"><span>Hit Pazarı · <b>No <span id="biletNo">0001</span></b></span></div>
+      <div class="koc"><span>Hit Pazarı bileti <b>No <span id="biletNo">0001</span></b></span></div>
     </div>
   </div>
 </div></section>
 
 <section class="bolum" id="nasil"><div class="sar">
-  <div class="bas"><span class="no">iii.</span><h2>Dört yön, <em>dört karar</em></h2></div>
+  <h2>Dört yön, dört karar</h2>
   <div class="yonler">
-    <div class="yon y-ust"><div class="ok">↑</div><b>Teklif</b><span class="small">fiyatı sen söyle</span></div>
-    <div class="yon y-sol"><div class="ok">←</div><b>Geç</b><span class="small">sıradakine bak</span></div>
-    <div class="kart" id="kart" title="Başka bir ürün"><div class="g"><img id="kImg" alt=""></div><div class="alt"><small id="kKat">dokun · başka ürün</small><b id="kAd"></b></div></div>
-    <div class="yon y-sag"><div class="ok">→</div><b>Beğen</b><span class="small">listene ekle</span></div>
-    <div class="yon y-alt"><div class="ok">↓</div><b>Satın al</b><span class="small">talebini bırak</span></div>
+    <div class="yon y-ust"><div class="ok2">↑</div><b>Teklif</b><small>Fiyatı sen söyle</small></div>
+    <div class="yon y-sol"><div class="ok2">←</div><b>Geç</b><small>Sıradakine bak</small></div>
+    <button class="kart" id="kart" type="button" aria-label="Başka bir ürün göster"><div class="g"><img id="kImg" alt=""></div><div class="alt"><small id="kKat">Dokun, başka ürün gelsin</small><b id="kAd"></b></div></button>
+    <div class="yon y-sag"><div class="ok2">→</div><b>Beğen</b><small>Listene ekle</small></div>
+    <div class="yon y-alt"><div class="ok2">↓</div><b>Satın al</b><small>Talebini bırak</small></div>
   </div>
-  <p class="yon-not">Telefonda kartı parmağınla kaydırırsın; tünelde bir ürüne dokunursan doğrudan ona gidersin.</p>
 </div></section>
 
 <section class="bolum" id="bilmen"><div class="sar">
-  <div class="bas"><span class="no">iv.</span><h2>Etiketi <em>oku</em></h2></div>
-  <div class="etiketler">
-    <div class="aski"><div class="etiket"><div class="no">01</div><b>Fiyatlar şimdilik örnek</b><p>"ÖRNEK" yazan fiyatlar gerçek satış fiyatı değildir. Gerçek fiyat dükkânla konuşurken netleşir.</p></div></div>
-    <div class="aski"><div class="etiket"><div class="no">02</div><b>Burada ödeme alınmaz</b><p>Teklif ve satın alma bir taleptir; kart bilgisi istenmez. Dükkân seni arar, ödeme ve teslim birlikte kararlaştırılır.</p></div></div>
-    <div class="aski"><div class="etiket"><div class="no">03</div><b>Ürün fotoğraftaki gibidir</b><p>Birçok ürün ikinci el ya da koleksiyon parçasıdır. Almadan önce durumunu sor, mümkünse yerinde gör.</p></div></div>
-    <div class="aski"><div class="etiket"><div class="no">04</div><b>Kişisel verilerin</b><p>Adın ve telefonun yalnız talebin için dükkâna iletilir. Ayrıntılar <a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">aydınlatma metninde</a>.</p></div></div>
+  <h2>Bilmen gerekenler</h2>
+  <div class="cubuk"></div>
+  <div class="asmalar">
+    <div class="asma"><div class="levha2"><b>Fiyatlar şimdilik örnek</b><p>"ÖRNEK" yazan fiyatlar gerçek satış fiyatı değildir. Gerçek fiyat dükkânla konuşurken netleşir.</p></div></div>
+    <div class="asma"><div class="levha2"><b>Burada ödeme alınmaz</b><p>Teklif ve satın alma bir taleptir; kart bilgisi istenmez. Dükkân seni arar, ödeme ve teslim birlikte kararlaştırılır.</p></div></div>
+    <div class="asma"><div class="levha2"><b>Ürün fotoğraftaki gibidir</b><p>Birçok ürün ikinci el ya da koleksiyon parçasıdır. Almadan önce durumunu sor, mümkünse yerinde gör.</p></div></div>
+    <div class="asma"><div class="levha2"><b>Kişisel verilerin</b><p>Adın ve telefonun yalnız talebin için dükkâna iletilir. Ayrıntılar <a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">aydınlatma metninde</a>.</p></div></div>
   </div>
 </div></section>
 
 <footer class="son">
   <div class="dev">hit pazarı</div>
-  <div class="linkler small"><a href="index.html">Tünel</a><a href="https://tolgaarpa.github.io/halalar-app/">Telefon uygulaması</a><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">Aydınlatma metni</a><a href="https://tolgaarpa.github.io/halalar-app/panel.html">Dükkân girişi</a></div>
+  <div class="linkler"><a href="index.html">Tünel</a><a href="https://tolgaarpa.github.io/halalar-app/">Telefon uygulaması</a><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">Aydınlatma metni</a><a href="https://tolgaarpa.github.io/halalar-app/panel.html">Dükkân girişi</a></div>
 </footer>
 <div id="toast"></div>
 
@@ -265,8 +283,6 @@ const KAT=id=>(typeof KATEGORI!=='undefined'&&KATEGORI[id])||'';
 const TL=n=>(n||0).toLocaleString('tr-TR')+' ₺';
 const res=id=>`kaynak/web/${id}.webp`;
 const toast=t=>{const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.z);toast.z=setTimeout(()=>e.classList.remove('on'),1800)};
-document.getElementById('sayi').textContent=URUNLER.length+' parça · bir tünel';
-document.getElementById('hSay').textContent=URUNLER.length+' ürün →';
 
 // kapı: tünelin ağzı. Başlık kaçış noktasında; ürünler halkalar hâlinde derine uzanır,
 // yakındakiler kadrajdan taşar, uzaktakiler sise gömülür. Kamera yavaşça içeri süzülür, kaydırınca dalar.
@@ -293,12 +309,17 @@ function kare(t){const dt=Math.min(.05,(t-son)/1000);son=t;
 requestAnimationFrame(kare);
 addEventListener('scroll',()=>{if(bekle&&scrollY<innerHeight*1.2){bekle=false;son=performance.now();requestAnimationFrame(kare)}},{passive:true});
 
-// bant
-const adlar=URUNLER.map(u=>esc(u[1])).join('<b>·</b>')+'<b>·</b>';
-document.getElementById('bant').innerHTML=adlar+adlar;
-
-// vitrin rafı
-document.getElementById('raf').innerHTML=['ig/ig_hoparlor','h/daktilo','3464','ig/ig_fender'].filter(U).map(id=>`<img src="${res(id)}" alt="" loading="lazy">`).join('');
+// Halalar vitrini: 9 ürün
+const DOKUZ=['ig/ig_fender','h/fisher','3464','ig/ig_maske','h/daktilo','ig/ig_hoparlor','ek/3482_papagan','3490','h/actionman'].filter(U).slice(0,9);
+document.getElementById('raf9').innerHTML=DOKUZ.map(id=>`<a href="urun.html?id=${encodeURIComponent(id)}"><img src="${res(id)}" alt="${esc(U(id)[1])}" loading="lazy"><b>${esc(U(id)[1])}</b></a>`).join('');
+document.getElementById('hAlt').textContent=`Plaktan porselene, Fender gitardan Buda heykeline ${URUNLER.length} parça. Hepsi tünelde.`;
+// sokak: okla kaydırılan vitrinler
+const sokak=document.getElementById('sokak'),vit=[...sokak.children],geri=document.getElementById('geri'),ileri=document.getElementById('ileri');
+const kacinci=()=>Math.round(sokak.scrollLeft/(sokak.clientWidth+32));
+function oklar(){const k=kacinci();geri.disabled=k<=0;ileri.disabled=k>=vit.length-1;document.getElementById('sira').textContent=(k+1)+' / '+vit.length}
+const git=k=>{k=Math.max(0,Math.min(vit.length-1,k));sokak.scrollTo({left:vit[k].offsetLeft-sokak.offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});setTimeout(oklar,600)};
+geri.onclick=()=>git(kacinci()-1);ileri.onclick=()=>git(kacinci()+1);
+sokak.addEventListener('scroll',oklar,{passive:true});oklar();
 
 // ortadaki kart: dokununca başka ürün
 let ki=Math.floor(Math.random()*URUNLER.length);
