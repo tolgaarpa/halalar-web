@@ -59,13 +59,15 @@ nav .sag a.l:hover{color:var(--ink)}
 .foto{position:relative;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:591/868;max-height:720px;justify-self:start;width:100%}
 .foto img{width:100%;height:100%;object-fit:cover;display:block}
 .foto::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 80px #000c;pointer-events:none}
-.icerik{display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-width:0}
+.icerik{display:flex;flex-direction:column;justify-content:space-between;gap:20px;min-width:0;contain:size}
+.kapali .icerik{contain:none}
 .icerik h3{font-family:Fraunces,serif;font-weight:300;font-size:clamp(48px,5vw,72px);letter-spacing:-.03em;line-height:.9}
+.icerik .buyuk-alt{font-family:Fraunces,serif;font-weight:300;font-size:30px;line-height:1.25;color:#bdb8ae;max-width:22ch}
 .icerik .alt{color:var(--muted);font-size:15px;margin-top:10px;max-width:46ch;line-height:1.5}
-.raf9{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.raf9 a{position:relative;aspect-ratio:4/3;border-radius:14px;background:radial-gradient(ellipse at 50% 40%,#1d1d22 0%,#111114 75%);border:1px solid var(--line);display:grid;place-items:center;padding:10% 14%;text-decoration:none;overflow:hidden}
+.raf9{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:14px}
+.raf9 a{position:relative;min-height:0;border-radius:14px;background:radial-gradient(ellipse at 50% 40%,#1d1d22 0%,#111114 75%);border:1px solid var(--line);display:grid;place-items:center;padding:10% 14%;text-decoration:none;overflow:hidden}
 .raf9 a:hover{border-color:#55555e}
-.raf9 img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 12px 14px rgba(0,0,0,.7))}
+.raf9 img{position:absolute;left:7%;top:6%;width:86%;height:86%;object-fit:contain;filter:drop-shadow(0 12px 14px rgba(0,0,0,.7))}
 .raf9 b{position:absolute;left:10px;right:10px;bottom:8px;font-weight:400;font-size:12px;color:#bdb8ae;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .25s}
 .raf9 a:hover b,.raf9 a:focus-visible b{opacity:1}
 .icerik .hap{align-self:flex-start}
@@ -127,11 +129,30 @@ nav .sag a.l:hover{color:var(--ink)}
 .yon small{display:block;margin-top:6px;font-size:14px;color:var(--muted)}
 .y-ust{grid-column:2;grid-row:1}.y-alt{grid-column:2;grid-row:3}.y-sol{grid-column:1;grid-row:2;justify-self:end;text-align:right}.y-sag{grid-column:3;grid-row:2;justify-self:start;text-align:left}
 .y-ust .ok2{color:#f2c14e}.y-alt .ok2{color:#8fb8ff}.y-sol .ok2{color:#ff6b5e}.y-sag .ok2{color:#7fd69a}
-/* bilmen gerekenler: düz yazı */
-.notlar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 64px;max-width:1000px}
-.notlar h3{font-family:Fraunces,serif;font-weight:300;font-size:28px;letter-spacing:-.02em;line-height:1.1;margin-bottom:10px}
-.notlar p{font-size:16px;line-height:1.65;color:#a9a49b;max-width:46ch}
-.notlar a{color:var(--neon-sicak)}
+/* bilmen gerekenler: karanlık duvar, inen neon hat, çerçeveli levhalar, farenin taşıdığı ışık */
+#bilmen{position:relative;background:radial-gradient(circle 460px at var(--mx,50%) var(--my,35%),#1f22ff26 0%,#1f22ff0d 45%,#0b0b0d00 70%),var(--paper)}
+#bilmen h2{text-align:center;margin-bottom:0}
+.agac{--hat:#ff7a92cc;position:relative;max-width:1120px;margin:0 auto}
+.govde{position:relative;height:90px;width:1.5px;margin:0 auto;background:var(--hat);box-shadow:0 0 6px #ff2d5566;transform-origin:top}
+.dugum{position:absolute;left:50%;bottom:-7px;width:13px;height:13px;margin-left:-6.5px;transform:rotate(45deg);border:1px solid #ff8aa0;background:var(--paper);box-shadow:0 0 10px #ff2d5599;z-index:2}
+.dallar{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;padding-top:44px}
+.dallar::before{content:"";position:absolute;top:0;left:12.5%;right:12.5%;height:1.5px;background:var(--hat);box-shadow:0 0 6px #ff2d5566;transform-origin:center}
+.nlevha{position:relative;padding-top:0}
+.nlevha::before{content:"";position:absolute;top:-44px;left:50%;width:1.5px;height:44px;background:var(--hat);box-shadow:0 0 6px #ff2d5566;transform-origin:top}
+.cer{position:relative;border:3px double #5e4a55;border-radius:6px;padding:8px;background:linear-gradient(#141117,#0d0b0e);box-shadow:0 30px 60px #000c}
+.cer .ic{position:relative;border:1px solid #3a3038;border-radius:2px;padding:44px 22px 26px;min-height:190px}
+.cer .ic::before,.cer .ic::after{content:"";position:absolute;width:14px;height:14px;border:1px solid #ff6b8566}
+.cer .ic::before{left:6px;bottom:6px;border-right:0;border-top:0}.cer .ic::after{right:6px;bottom:6px;border-left:0;border-top:0}
+.plaka{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);white-space:nowrap;background:#16121a;border:1px solid #ff7a9266;border-radius:3px;padding:8px 16px;font-family:Fraunces,serif;font-weight:300;font-size:19px;letter-spacing:-.01em;color:#efe6e9;box-shadow:0 0 0 3px #0e0c0f}
+.cer p{font-size:15px;line-height:1.65;color:#bdb6ad;text-align:center}
+.cer a{color:var(--neon-sicak)}
+/* tek seferlik açılış: hat iner, dallar açılır, levhalar sırayla belirir */
+.cizim .govde{transform:scaleY(0);transition:transform .7s ease-out}
+.cizim .dallar::before{transform:scaleX(0);transition:transform .7s ease-out .6s}
+.cizim .nlevha::before{transform:scaleY(0);transition:transform .4s ease-out 1.2s}
+.cizim .cer{opacity:0;transform:translateY(10px);transition:opacity .6s ease-out,transform .6s ease-out}
+.cizim .nlevha:nth-child(1) .cer{transition-delay:1.45s}.cizim .nlevha:nth-child(2) .cer{transition-delay:1.6s}.cizim .nlevha:nth-child(3) .cer{transition-delay:1.75s}.cizim .nlevha:nth-child(4) .cer{transition-delay:1.9s}
+.cizim.acik .govde,.cizim.acik .nlevha::before{transform:none}.cizim.acik .dallar::before{transform:none}.cizim.acik .cer{opacity:1;transform:none}
 /* son */
 .son{padding:60px 0 40px;border-top:1px solid var(--line);text-align:center;overflow:hidden}
 .son .dev{font-family:Fraunces,serif;font-weight:600;font-size:clamp(70px,17vw,260px);letter-spacing:-.05em;line-height:.85;color:var(--accent);white-space:nowrap}
@@ -149,13 +170,21 @@ nav .sag a.l:hover{color:var(--ink)}
   .yonler{grid-template-columns:1fr 1fr;gap:26px 16px}
   .kart{grid-column:1/-1;grid-row:1;width:min(280px,100%)}
   .y-ust,.y-alt,.y-sol,.y-sag{grid-column:auto;grid-row:auto;justify-self:center;text-align:center}
-  .notlar{grid-template-columns:1fr;gap:32px}
+  .dallar{grid-template-columns:1fr;gap:34px;padding:34px 0 0 26px}
+  .dallar::before{top:0;bottom:60px;left:0;right:auto;width:1px;height:auto}
+  .nlevha::before{top:50%;left:-26px;width:26px;height:1px}
+  .cizim .dallar::before{transform:scaleY(0);transform-origin:top}.cizim.acik .dallar::before{transform:none}
+  .cizim .nlevha::before{transform:scaleX(0);transform-origin:left}
+  .govde{margin:0 0 0 0;height:50px}.dugum{left:0}
+  .cer .ic{min-height:0}
+  .icerik{contain:none}.raf9{grid-template-rows:none}.raf9 a{aspect-ratio:1}
+  #bilmen h2{text-align:left}
   .bilet{grid-template-columns:1fr 46px}.bilet::before,.bilet::after{right:34px}.bilet .gov{padding:28px 22px}
   .form{grid-template-columns:1fr}
   .ok{width:44px;height:44px}
 }
 @media(max-width:540px){.raf9{gap:8px}}
-@media(prefers-reduced-motion:reduce){.yaniyor{animation:none}.sokak{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.yaniyor{animation:none}.cizim .govde,.cizim .dallar::before,.cizim .nlevha::before,.cizim .cer{transform:none!important;opacity:1!important;transition:none!important}.sokak{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -179,20 +208,19 @@ nav .sag a.l:hover{color:var(--ink)}
 </header>
 
 <section class="bolum" id="dukkanlar"><div class="sar">
-  <div class="ust-satir"><h2>Açık vitrinler</h2>
+  <div class="ust-satir"><h2 id="vAd">Halalar</h2>
     <div class="oklar"><button class="ok" id="geri" aria-label="Önceki vitrin" disabled>←</button><span id="sira">1 / 2</span><button class="ok" id="ileri" aria-label="Sıradaki vitrin">→</button></div></div>
   <div class="sokak" id="sokak">
-    <article class="dukkan">
+    <article class="dukkan" data-ad="Halalar">
       <a class="foto" href="index.html"><img src="kaynak/vitrin/halalar.webp" alt="Halalar dükkânının gece vitrini, neon tabelası yanıyor" loading="lazy"></a>
       <div class="icerik">
-        <div><h3>Halalar</h3><p class="alt" id="hAlt">Plaktan porselene, Fender gitardan Buda heykeline 94 parça. Hepsi tünelde.</p></div>
         <div class="raf9" id="raf9"></div>
         <a class="hap" href="index.html">Halalar tüneline gir</a>
       </div>
     </article>
-    <article class="dukkan kapali" aria-label="Sıradaki vitrin">
+    <article class="dukkan kapali" data-ad="Sıradaki vitrin" aria-label="Sıradaki vitrin">
       <div class="kepenk"><div class="levha">Kepenk yakında açılıyor</div></div>
-      <div class="icerik"><div><h3>Sıradaki vitrin</h3><p class="alt">Yeni dükkânlar sokağa katıldıkça burada, Halalar'ın yanında yerini alacak.</p></div></div>
+      <div class="icerik"><div><p class="alt buyuk-alt">Yeni dükkânlar sokağa katıldıkça burada, Halalar'ın yanında yerini alacak.</p></div></div>
     </article>
   </div>
 </div></section>
@@ -240,11 +268,12 @@ nav .sag a.l:hover{color:var(--ink)}
 
 <section class="bolum" id="bilmen"><div class="sar">
   <h2>Bilmen gerekenler</h2>
-  <div class="notlar">
-    <div><h3>Fiyatlar şimdilik örnek</h3><p>"ÖRNEK" yazan fiyatlar gerçek satış fiyatı değildir. Gerçek fiyat dükkânla konuşurken netleşir.</p></div>
-    <div><h3>Burada ödeme alınmaz</h3><p>Teklif ve satın alma bir taleptir; kart bilgisi istenmez. Dükkân seni arar, ödeme ve teslim birlikte kararlaştırılır.</p></div>
-    <div><h3>Ürün fotoğraftaki gibidir</h3><p>Birçok ürün ikinci el ya da koleksiyon parçasıdır. Almadan önce durumunu sor, mümkünse yerinde gör.</p></div>
-    <div><h3>Kişisel verilerin</h3><p>Adın ve telefonun yalnız talebin için dükkâna iletilir. Ayrıntılar <a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">aydınlatma metninde</a>.</p></div>
+  <div class="agac" id="agac"><div class="govde"><span class="dugum"></span></div><div class="dallar">
+    <div class="nlevha"><div class="cer"><div class="ic"><span class="plaka">Fiyatlar şimdilik örnek</span><p>"ÖRNEK" yazan fiyatlar gerçek satış fiyatı değildir. Gerçek fiyat dükkânla konuşurken netleşir.</p></div></div></div>
+    <div class="nlevha"><div class="cer"><div class="ic"><span class="plaka">Burada ödeme alınmaz</span><p>Teklif ve satın alma bir taleptir; kart bilgisi istenmez. Dükkân seni arar, ödeme ve teslim birlikte kararlaştırılır.</p></div></div></div>
+    <div class="nlevha"><div class="cer"><div class="ic"><span class="plaka">Ürün fotoğraftaki gibidir</span><p>Birçok ürün ikinci el ya da koleksiyon parçasıdır. Almadan önce durumunu sor, mümkünse yerinde gör.</p></div></div></div>
+    <div class="nlevha"><div class="cer"><div class="ic"><span class="plaka">Kişisel verilerin</span><p>Adın ve telefonun yalnız talebin için dükkâna iletilir. Ayrıntılar <a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">aydınlatma metninde</a>.</p></div></div></div>
+  </div></div>
   </div>
 </div></section>
 
@@ -301,11 +330,10 @@ addEventListener('scroll',()=>{if(bekle&&scrollY<innerHeight*1.2){bekle=false;so
 // Halalar vitrini: 9 ürün
 const DOKUZ=['ig/ig_fender','h/fisher','3464','ig/ig_maske','h/daktilo','ig/ig_hoparlor','ek/3482_papagan','3490','h/actionman'].filter(U).slice(0,9);
 document.getElementById('raf9').innerHTML=DOKUZ.map(id=>`<a href="urun.html?id=${encodeURIComponent(id)}"><img src="${res(id)}" alt="${esc(U(id)[1])}" loading="lazy"><b>${esc(U(id)[1])}</b></a>`).join('');
-document.getElementById('hAlt').textContent=`Plaktan porselene, Fender gitardan Buda heykeline ${URUNLER.length} parça. Hepsi tünelde.`;
 // sokak: okla kaydırılan vitrinler
 const sokak=document.getElementById('sokak'),vit=[...sokak.children],geri=document.getElementById('geri'),ileri=document.getElementById('ileri');
 const kacinci=()=>Math.round(sokak.scrollLeft/(sokak.clientWidth+32));
-function oklar(){const k=kacinci();geri.disabled=k<=0;ileri.disabled=k>=vit.length-1;document.getElementById('sira').textContent=(k+1)+' / '+vit.length}
+function oklar(){const k=kacinci();document.getElementById('vAd').textContent=vit[Math.min(k,vit.length-1)].dataset.ad;geri.disabled=k<=0;ileri.disabled=k>=vit.length-1;document.getElementById('sira').textContent=(k+1)+' / '+vit.length}
 const git=k=>{k=Math.max(0,Math.min(vit.length-1,k));sokak.scrollTo({left:vit[k].offsetLeft-sokak.offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});setTimeout(oklar,600)};
 geri.onclick=()=>git(kacinci()-1);ileri.onclick=()=>git(kacinci()+1);
 sokak.addEventListener('scroll',oklar,{passive:true});oklar();
@@ -316,6 +344,12 @@ function kart(){const u=URUNLER[ki%URUNLER.length],im=document.getElementById('k
   im.onload=()=>{im.style.opacity=1;im.style.transform='none'};im.src=res(u[0]);
   document.getElementById('kAd').textContent=u[1];document.getElementById('kKat').textContent=KAT(u[0])||'Halalar'}
 document.getElementById('kart').onclick=()=>{ki+=7;kart()};kart();
+
+// bilmen gerekenler: fare ışığı + hat bir kez çizilir
+const duvar=document.getElementById('bilmen'),agac=document.getElementById('agac');
+duvar.addEventListener('mousemove',e=>{const r=duvar.getBoundingClientRect();duvar.style.setProperty('--mx',(e.clientX-r.left)+'px');duvar.style.setProperty('--my',(e.clientY-r.top)+'px')});
+// animasyon yalnız bölüm henüz ekranın altındaysa kurulur; aksi hâlde notlar zaten görünür kalır
+if('IntersectionObserver' in window&&agac.getBoundingClientRect().top>innerHeight){agac.classList.add('cizim');const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){agac.classList.add('acik');io.disconnect()}},{threshold:.25});io.observe(agac);setTimeout(()=>agac.classList.add('acik'),15000)}
 
 // ---- hesap ----
 let auth=null,VT=null;
