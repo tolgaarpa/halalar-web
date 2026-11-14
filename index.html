@@ -20,6 +20,8 @@ body.locked{overflow:hidden}
 #cover button:hover{background:var(--ink);color:#fff}
 nav{position:fixed;top:0;left:0;right:0;z-index:60;transform:translateZ(0);text-shadow:0 1px 8px rgba(0,0,0,.9);display:flex;justify-content:space-between;align-items:center;padding:22px 32px;pointer-events:none}
 nav .logo{font-family:Fraunces,serif;font-size:26px;letter-spacing:-.02em;color:var(--ink);text-decoration:none;pointer-events:auto}
+nav .marka{display:flex;flex-direction:column;align-items:flex-start}
+nav .hit{pointer-events:auto;font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#ff5a1f;text-decoration:none;margin-bottom:2px}
 nav .depth{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
 /* ---- tünel ---- */
 #world{position:fixed;inset:0;z-index:1;isolation:isolate;perspective:600px;perspective-origin:50% 50%;overflow:hidden}
@@ -62,7 +64,7 @@ nav .ara-ac:hover{border-color:var(--ink)}
 </style>
 </head>
 <body>
-<nav><a class="logo" href="#">Halalar</a><span class="sag"><span class="depth" id="depth">0 m</span><button class="ara-ac" id="araAc">Ara</button></span></nav>
+<nav><span class="marka"><a class="hit" href="https://tolgaarpa.github.io/halalar-app/hit.html">Hit Pazarı ↗</a><a class="logo" href="#">Halalar</a></span><span class="sag"><span class="depth" id="depth">0 m</span><button class="ara-ac" id="araAc">Ara</button></span></nav>
 <div id="world"><div id="cam"></div></div>
 <div class="vignette"></div>
 <div id="card"><div class="k" id="c-k"></div><h3 id="c-h"></h3><p id="c-p"></p><span class="go">Ürün sayfası →</span></div>
