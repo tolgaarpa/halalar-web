@@ -136,6 +136,8 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 <script>
 // Kategori modu (?mod=kategori): aynı tünel, ürün yerine kategorilerin ikonik görselleri; dokununca o kategori açılır
 const KMOD=new URLSearchParams(location.search).get('mod')==='kategori'&&typeof KATEGORI_IKON!=='undefined';
+// Pazar modu (?mod=pazar): ana sayfadan kaydırınca girilen, bütün dükkânların ürünleri karışık; her girişte farklı sıra
+const KPAZAR=new URLSearchParams(location.search).get('mod')==='pazar';
 // her tekrar turunda kategori kendi içinden başka bir ürünle gelir (ilk turda ikonik görsel)
 const KSEC=new URLSearchParams(location.search).get('kat');
 const KFILTRE=!KMOD&&KSEC&&typeof KATEGORI!=='undefined'?URUNLER.filter(u=>KATEGORI[u[0]]===KSEC):null;
@@ -145,7 +147,8 @@ if(KFILTRE&&KFILTRE.length){document.querySelector('nav .logo').textContent=KSEC
   setTimeout(()=>{if(target<10)target=520},450);setTimeout(function izle(){if(camZ>110){kg.classList.add('off');return}requestAnimationFrame(izle)},0)}
 const KAYNAK=KMOD?(()=>{const L=[],ks=Object.keys(KATEGORI_IKON);
   const uy=k=>URUNLER.filter(u=>KATEGORI[u[0]]===k&&u[0]!==KATEGORI_IKON[k]).map(u=>u[0]);
-  for(let t=0;t<8;t++)ks.forEach(k=>{const d=uy(k);const id=t===0||!d.length?KATEGORI_IKON[k]:d[(t-1)%d.length];L.push([id,k,'Bu kategorideki ürünleri gör','—'])});return L})():(KFILTRE&&KFILTRE.length?KFILTRE:URUNLER);
+  for(let t=0;t<8;t++)ks.forEach(k=>{const d=uy(k);const id=t===0||!d.length?KATEGORI_IKON[k]:d[(t-1)%d.length];L.push([id,k,'Bu kategorideki ürünleri gör','—'])});return L})():(KFILTRE&&KFILTRE.length?KFILTRE:KPAZAR?(()=>{const L=URUNLER.slice();for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}return L})():URUNLER);
+if(KPAZAR){document.querySelector('nav .logo').textContent='Pazar';document.title='Hit Pazarı · Pazar';setTimeout(()=>{if(target<10)target=520},250)}
 if(KMOD){document.querySelector('nav .logo').textContent='Kategoriler';document.getElementById('end').textContent='kategoriler';document.title='Hit Pazarı · Kategoriler';document.querySelector('#card .go').textContent='Ürünleri gör →'}
 // Her ürüne tünelde bir yer: z (derinlik), x/y (yana ofset), boyut. Deterministik dağılım.
 const STEP=KMOD?110:32;                        // ürünler arası derinlik
@@ -210,7 +213,7 @@ function render(){
   for(const it of items){
     const dz=it.z+camZ; it.dz=dz;
     if(dz>250||dz<-7000)continue;
-    let vis=1; if(KFILTRE&&KFILTRE.length) vis*=Math.min(1,camZ/350);
+    let vis=1; if((KFILTRE&&KFILTRE.length)||KPAZAR) vis*=Math.min(1,camZ/350);
     if(dz>0) vis*=Math.max(0,(250-dz)/250);
     if(dz<-5500) vis*=Math.max(0,(7000+dz)/1500);
     if(it.thin) vis*=Math.min(1,Math.max(0,(dz+THIN_Z+500)/500));
