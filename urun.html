@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Halalar · Ürün</title>
+<html lang="tr"><head><meta charset="utf-8"><meta name="theme-color" content="#ffffff"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Halalar · Ürün</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -64,6 +64,21 @@ html{font-synthesis:none}
 .hpi-sol{display:flex;align-items:center;gap:12px;min-width:0}
 .hp-logo{display:inline-flex;align-items:center;gap:.36em;flex:none;text-decoration:none;pointer-events:auto;color:#f2efe9;font:400 22px/1 Anton,"Arial Narrow",Impact,sans-serif;letter-spacing:.005em;white-space:nowrap;text-shadow:none}
 .hp-logo .hp-c{color:#e8201c;font-size:1.1em;letter-spacing:-.04em;transform:skewX(-14deg)}
+
+/* dükkân içi: beyaz fon, çerçevesiz, ürün dekupe hâliyle */
+:root{--bg:#ffffff;--ink:#111114;--yumusak:#4a4a52;--muted:#77777f;--line:#e4e4e8;--panel:#f6f6f8}
+.hp-logo{color:#111114}
+.logo{border-left-color:#c9c9d0}
+main img{filter:drop-shadow(0 24px 30px rgba(0,0,0,.16))}
+.cta{border-color:#c9c9d0}
+.hizli button{border-color:#c9c9d0}
+.alanlar input{background:#fff;border-color:#c9c9d0}
+.rza input{accent-color:#111114}
+.hata{color:#c4140f}
+.tamam a{color:var(--ink)}
+.acilar button{border:0;background:none;border-bottom:2px solid transparent;padding:4px}
+.acilar button.on{border-bottom-color:var(--accent)}
+.acilar img{filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
 </style><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e8201c%27/%3E%3C/svg%3E">
 </head>
 <body>

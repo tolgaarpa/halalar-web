@@ -21,16 +21,18 @@ header.bas p{margin-top:16px;font-size:clamp(18px,1.8vw,22px);color:var(--yumusa
 .kat{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
 .kat button{background:none;border:1px solid #c9c9d0;color:var(--ink);font:700 15px/1 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:12px 18px;cursor:pointer}
 .kat button.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.raf{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;padding:16px 0 80px}
-.urun{display:flex;flex-direction:column;text-decoration:none;background:var(--panel);border:1px solid var(--line);transition:border-color .2s}
-.urun:hover{border-color:#111114}
-.urun .g{aspect-ratio:1;background:#fff;display:grid;place-items:center;overflow:hidden}
-.urun img{width:100%;height:100%;object-fit:contain}
-.urun .b{padding:14px 16px 16px}
+.raf{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:34px 24px;padding:16px 0 80px}
+.urun{display:flex;flex-direction:column;text-decoration:none}
+.urun .g img{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.urun:hover .g img{transform:translateY(-6px) scale(1.03)}
+.urun:hover h2{color:var(--accent)}
+.urun .g{position:relative;aspect-ratio:1;width:100%}
+.urun img{position:absolute;left:8%;top:8%;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 14px 16px rgba(0,0,0,.14))}
+.urun .b{padding:6px 4px 10px;text-align:center}
 .urun small{font:700 12px "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .urun h2{font:600 17px/1.25 Barlow,sans-serif;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .urun .f{font:400 24px/1 Anton,sans-serif;margin-top:10px}
-.bos{grid-column:1/-1;border:1px solid var(--line);padding:48px 34px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:center}
+.bos{grid-column:1/-1;padding:48px 34px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:center}
 .bos h2{font:400 clamp(34px,4vw,56px)/1 Anton,sans-serif;text-transform:uppercase}
 .bos p{margin-top:14px;color:var(--yumusak);font-size:18px;line-height:1.5;max-width:52ch}
 .bos .rafl{display:flex;gap:10px}
@@ -43,7 +45,7 @@ footer{border-top:1px solid var(--line);padding:30px 32px;display:flex;flex-wrap
 footer a{text-decoration:none}footer a:hover{color:var(--ink)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 @media(max-width:700px){nav{padding:16px}.sar{padding:0 16px}.hp-logo{font-size:22px}header.bas{padding:40px 0 24px}
-  .raf{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.urun .b{padding:10px 12px 12px}.urun h2{font-size:15px}.urun .f{font-size:20px}
+  .raf{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.urun .b{padding:4px 2px 8px}.urun h2{font-size:15px}.urun .f{font-size:20px}
   .bos{grid-template-columns:1fr;padding:30px 20px}.bos .rafl{display:none}.guven{grid-template-columns:1fr}footer{padding:24px 16px}}
 </style></head><body>
 <nav><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span>HİT PAZARI</span></a><a class="back" href="hit.html#dukkanlar">← Dükkânlar</a></nav>
