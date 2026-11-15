@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0b0d"><title>Hit Pazarı · Kategorini seç</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2712%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M16 48 28 16M30 48 42 16%27 stroke=%27%23e8201c%27 stroke-width=%278%27 stroke-linecap=%27square%27/%3E%3C/svg%3E">
+<style>
+:root{--bg:#0b0b0d;--ink:#f2efe9;--yumusak:#cfcac1;--accent:#e8201c}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);height:100%;overflow:hidden}
+body{color:var(--ink);font-family:Barlow,system-ui,sans-serif}
+nav{position:fixed;top:0;left:0;right:0;z-index:5000;display:flex;justify-content:space-between;align-items:center;padding:20px 32px;background:linear-gradient(#0b0b0de6,#0b0b0d00)}
+nav a{text-decoration:none;color:inherit}
+.hp-logo{display:inline-flex;align-items:center;gap:.36em;font:400 30px/1 Anton,Impact,sans-serif;white-space:nowrap;text-shadow:0 1px 8px #000}
+.hp-logo .hp-c{color:var(--accent);font-size:1.1em;letter-spacing:-.04em;transform:skewX(-14deg)}
+.back{font:700 14px/1 "Barlow Condensed",sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--yumusak)}
+.sahne{position:fixed;inset:0;overflow:hidden}
+.kp{position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;background:none;border:0;color:var(--ink);font:inherit;will-change:transform,opacity;transform-origin:50% 50%}
+.kp img{width:100%;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 26px 30px rgba(0,0,0,.8));transition:filter .25s}
+.kp span{font:400 22px/1 Anton,sans-serif;text-transform:uppercase;letter-spacing:.01em;white-space:nowrap;text-shadow:0 2px 10px #000;padding:6px 10px;transition:background .2s}
+.kp:hover span,.kp:focus-visible span{background:var(--accent)}
+.kp:hover img{filter:drop-shadow(0 26px 30px rgba(0,0,0,.8)) brightness(1.12)}
+.orta{position:fixed;inset:0;z-index:4000;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;padding:0 20px}
+.orta h1{font:400 clamp(54px,8vw,120px)/.92 Anton,sans-serif;text-transform:uppercase;color:var(--accent);text-shadow:0 4px 30px #000}
+.orta p{margin-top:16px;font-size:clamp(17px,1.6vw,21px);color:var(--yumusak);text-shadow:0 2px 14px #000}
+.karanlik{position:fixed;inset:0;z-index:3500;pointer-events:none;background:radial-gradient(ellipse 30% 26% at 50% 50%,#0b0b0dd9 0%,#0b0b0d80 55%,#0b0b0d00 100%)}
+.liste{position:fixed;left:0;right:0;bottom:0;z-index:5000;display:flex;gap:8px;overflow-x:auto;padding:16px 32px 22px;background:linear-gradient(#0b0b0d00,#0b0b0df0 40%);scrollbar-width:none}
+.liste::-webkit-scrollbar{display:none}
+.liste a{flex:none;text-decoration:none;color:var(--ink);border:1px solid #3a3a42;padding:11px 16px;font:700 14px/1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;background:#0b0b0d}
+.liste a:hover,.liste a:focus-visible{background:var(--accent);border-color:var(--accent)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media(max-width:700px){nav{padding:16px}.hp-logo{font-size:22px}.kp span{font-size:16px}.liste{padding:14px 16px 18px}}
+</style></head><body>
+<nav><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span>HİT PAZARI</span></a><a class="back" href="hit.html">← Geri</a></nav>
+<div class="sahne" id="sahne" aria-hidden="true"></div>
+<div class="karanlik"></div>
+<div class="orta"><h1>Kategorini<br>seç</h1><p>Tünelde süzülen görsellerden birine dokun.</p></div>
+<div class="liste" id="liste" role="navigation" aria-label="Kategoriler"></div>
+<script src="veri/urunler.js"></script>
+<script src="veri/kategoriler.js"></script>
+<script src="veri/kategori-ikon.js"></script>
+<script>
+const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const git=k=>location.href='index.html?kat='+encodeURIComponent(k);
+const KATS=(typeof KATEGORILER!=='undefined'?KATEGORILER:Object.keys(KATEGORI_IKON)).filter(k=>KATEGORI_IKON[k]);
+document.getElementById('liste').innerHTML=KATS.map(k=>`<a href="index.html?kat=${encodeURIComponent(k)}">${esc(k)}</a>`).join('');
+// tünel: her kategori iki kez, farklı derinlikte; görseller halkalar hâlinde yaklaşır
+const sahne=document.getElementById('sahne'),PARCA=[],P=700,L=2400;
+const sira=KATS.concat(KATS);
+sira.forEach((k,i)=>{const b=document.createElement('button');b.className='kp';b.type='button';b.tabIndex=-1;
+  b.innerHTML=`<img src="kaynak/web/${KATEGORI_IKON[k]}.webp" alt="" decoding="async"><span>${esc(k)}</span>`;
+  b.onclick=()=>git(k);b.onmouseenter=()=>dur=true;b.onmouseleave=()=>dur=false;sahne.appendChild(b);
+  PARCA.push({el:b,a:i*2.39996,r:.95+((i*37)%23)/23*.25,z:-(i/sira.length)*L,w:190+((i*53)%60)})});
+const azHareket=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let mx=0,my=0,cx=0,cy=0,kam=0,son=performance.now(),dur=false;
+addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+function kare(t){const dt=Math.min(.05,(t-son)/1000);son=t;
+  const W=innerWidth,H=innerHeight,RX=W*.38,RY=H*.36,olc=Math.max(.5,Math.min(1,Math.min(W,H)/820));
+  if(!azHareket&&!dur)kam+=dt*42;cx+=(mx-cx)*.05;cy+=(my-cy)*.05;
+  const vx=W/2-cx*W*.08,vy=H/2-cy*H*.08;
+  for(const p of PARCA){const dz=((p.z+kam)%L+L)%L-L+160;
+    const k=P/(P-dz),sis=Math.min(1,Math.max(0,(-dz-200)/(L*.6))),gecis=dz>40?Math.max(0,1-(dz-40)/120):1,giris=Math.min(1,(dz+L-160)/300);
+    const x=vx+Math.cos(p.a)*RX*p.r*k,y=vy+Math.sin(p.a)*RY*p.r*k;
+    p.el.style.width=(p.w*olc)+'px';
+    p.el.style.transform=`translate3d(${x}px,${y}px,0) translate(-50%,-50%) scale(${k})`;
+    const op=(1-sis*.95)*gecis*giris;p.el.style.opacity=op.toFixed(3);p.el.style.zIndex=Math.round(3000+dz);
+    p.el.style.pointerEvents=op>.35&&k<2.2?'auto':'none'}
+  requestAnimationFrame(kare)}
+requestAnimationFrame(kare);
+</script>
+</body></html>

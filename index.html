@@ -250,6 +250,8 @@ target=parseFloat(new URLSearchParams(location.search).get('z')||0);
   document.getElementById('araKapat').onclick=()=>{pen.classList.remove('on');open=true};
   addEventListener('keydown',e=>{if(e.key==='Escape'&&pen.classList.contains('on'))document.getElementById('araKapat').click()});
 })();
+// kategori tünelinden gelindiyse (?kat=...) aramayı o kategoriyle aç
+(()=>{const k=new URLSearchParams(location.search).get('kat');if(!k)return;document.getElementById('araAc').click();const b=[...document.querySelectorAll('#katlar button')].find(x=>x.dataset.k===k);if(b)b.click()})();
 </script>
 </body>
 </html>
