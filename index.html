@@ -119,9 +119,14 @@ nav .logo{font:400 102px/.9 Anton,"Arial Narrow",Impact,sans-serif;letter-spacin
 <script src="veri/aspect.js"></script>
 <script src="veri/galeri.js"></script>
 <script src="veri/kategoriler.js"></script>
+<script src="veri/kategori-ikon.js"></script>
 <script>
+// Kategori modu (?mod=kategori): aynı tünel, ürün yerine kategorilerin ikonik görselleri; dokununca o kategori açılır
+const KMOD=new URLSearchParams(location.search).get('mod')==='kategori'&&typeof KATEGORI_IKON!=='undefined';
+const KAYNAK=KMOD?Object.keys(KATEGORI_IKON).map(k=>[KATEGORI_IKON[k],k,'Bu kategorideki ürünleri gör','—']):URUNLER;
+if(KMOD){document.querySelector('nav .logo').textContent='Kategoriler';document.getElementById('end').textContent='kategoriler';document.title='Hit Pazarı · Kategoriler';document.querySelector('#card .go').textContent='Ürünleri gör →'}
 // Her ürüne tünelde bir yer: z (derinlik), x/y (yana ofset), boyut. Deterministik dağılım.
-const STEP=32;                        // ürünler arası derinlik
+const STEP=KMOD?110:32;                        // ürünler arası derinlik
 const TEKRAR=12;                      // liste tekrarı: tünel uzun ve dolu
 const P=600;                          // perspektif (eski CSS ile aynı)
 const BG='#0b0b0d';
@@ -134,14 +139,14 @@ function boyut(){DPR=Math.min(window.devicePixelRatio||1,1.5);VW=innerWidth;VH=i
 boyut(); addEventListener('resize',boyut);
 // --- görseller: her ürün bir kez yüklenir, alfa haritası çıkarılır ---
 const IMG={}, ALPHA={}, KOPYA={};
-URUNLER.forEach(u=>{ if(IMG[u[0]])return; const im=new Image(); im.src=`kaynak/web/${u[0]}.webp`; IMG[u[0]]=im;
+KAYNAK.forEach(u=>{ if(IMG[u[0]])return; const im=new Image(); im.src=`kaynak/web/${u[0]}.webp`; IMG[u[0]]=im;
   im.decode().then(()=>{const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d');x.drawImage(im,0,0,48,48);ALPHA[u[0]]=x.getImageData(0,0,48,48).data;
     // küçük kopyalar: uzaktaki ürün büyük resimden değil küçük kopyadan çizilir (takılmayı önler)
     const L=[];for(const m of [96,192,384,640]){const s=m/Math.max(im.naturalWidth,im.naturalHeight);if(s>=1)break;const k=document.createElement('canvas');k.width=Math.max(1,Math.round(im.naturalWidth*s));k.height=Math.max(1,Math.round(im.naturalHeight*s));k.getContext('2d').drawImage(im,0,0,k.width,k.height);L.push(k)}
     KOPYA[u[0]]=L}).catch(()=>{}) });
 function kaynak(id,px){const L=KOPYA[id];if(L)for(const k of L)if(Math.max(k.width,k.height)>=px)return k;return IMG[id]}
 // --- yerleşim (önceki ile aynı kurallar) ---
-const LISTE=[];for(let t=0;t<TEKRAR;t++)URUNLER.forEach(u=>LISTE.push(u));
+const LISTE=[];for(let t=0;t<(KMOD?8:TEKRAR);t++)KAYNAK.forEach(u=>LISTE.push(u));
 const N=LISTE.length;
 const items=LISTE.map((u,i)=>{
   const ar=ASPECT[u[0]]||1;
@@ -202,6 +207,7 @@ function render(){
   for(const it of drawn){
     g.save(); g.globalAlpha=it.op; g.translate(it.sx,it.sy); g.rotate(it.rot);
     g.drawImage(kaynak(it.u[0],Math.max(it.sw,it.sh)*DPR),-it.sw/2,-it.sh/2,it.sw,it.sh); g.restore();
+    if(KMOD&&it.op>.25&&it.sw>70&&it.dz>-1400){const fs=Math.max(14,Math.min(72,it.sw*.15));g.save();g.globalAlpha=it.op;g.font=fs+'px Anton, Impact, sans-serif';g.textAlign='center';g.textBaseline='top';g.shadowColor='#000';g.shadowBlur=14;g.fillStyle='#f2efe9';g.fillText(it.u[1].toLocaleUpperCase('tr-TR'),it.sx,it.sy+it.sh/2+fs*.35);g.restore()}
   }
   document.getElementById('end').classList.toggle('on',camZ>TOTAL-STEP*1.2);
   requestAnimationFrame(render);
@@ -216,7 +222,7 @@ function pickIs(it,x,y){
   const u=Math.floor((lx_/it.sw+0.5)*48), v=Math.floor((ly_/it.sh+0.5)*48);
   if(u<0||u>47||v<0||v>47)return false; return d[(v*48+u)*4+3]>40}
 function pick(x,y){ for(let j=drawn.length-1;j>=0;j--){ if(pickIs(drawn[j],x,y))return drawn[j] } return null }
-function showCard(it){card.style.left=Math.min(lx+16,innerWidth-230)+'px';card.style.top=Math.min(ly+16,innerHeight-110)+'px';document.getElementById('c-k').textContent=[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];document.getElementById('c-p').textContent=it.u[2];card.classList.add('on')}
+function showCard(it){card.style.left=Math.min(lx+16,innerWidth-230)+'px';card.style.top=Math.min(ly+16,innerHeight-110)+'px';document.getElementById('c-k').textContent=KMOD?'Kategori':[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];document.getElementById('c-p').textContent=it.u[2];card.classList.add('on')}
 let cand=null,candT=0,offT=null;
 function setHot(o){
   if(o===hot){clearTimeout(offT);offT=null;cand=null;return}
@@ -231,7 +237,7 @@ let lx=-1,ly=-1;
 function hover(){if(lx<0)return;let o=pick(lx,ly);if(!o&&nearHot(lx,ly))o=hot;setHot(o)}
 addEventListener('mousemove',e=>{lx=e.clientX;ly=e.clientY;hover()});
 setInterval(hover,90);
-cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o)location.href='urun.html?id='+encodeURIComponent(o.u[0])});
+cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o)location.href=KMOD?'index.html?kat='+encodeURIComponent(o.u[1]):'urun.html?id='+encodeURIComponent(o.u[0])});
 addEventListener('mousemove',e=>{if(!card.classList.contains('on'))return;const x=Math.min(e.clientX+16,innerWidth-230),y=Math.min(e.clientY+16,innerHeight-110);card.style.left=x+'px';card.style.top=y+'px'});
 target=parseFloat(new URLSearchParams(location.search).get('z')||0);
 
