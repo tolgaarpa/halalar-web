@@ -90,6 +90,13 @@ nav .logo{font:400 102px/1.08 Anton,"Arial Narrow",Impact,sans-serif;letter-spac
 @media(max-width:600px){.hpi-sol{gap:10px}nav .hp-logo{font-size:55px}nav .logo{font-size:84px;letter-spacing:0}nav .ara-ac{font-size:22px!important;padding:12px 18px!important}}
 nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:.16em!important}
 /* ara: dükkân içi gibi beyaz, çerçevesiz, dekupe ürünler */
+#kgiris{position:fixed;inset:0;z-index:30;display:none;place-items:center;pointer-events:none;transition:opacity .6s,transform .9s cubic-bezier(.3,0,.2,1)}
+#kgiris.on{display:grid}#kgiris.off{opacity:0;transform:scale(1.6)}
+#kgiris div{display:flex;flex-direction:column;align-items:center;gap:14px}
+#kgiris img{height:min(46vh,480px);max-width:70vw;object-fit:contain;filter:drop-shadow(0 30px 40px rgba(0,0,0,.8))}
+#kgiris b{font:400 clamp(56px,9vw,150px)/1 Anton,Impact,sans-serif;text-transform:uppercase;color:#e8201c;text-shadow:0 4px 30px #000}
+#kperde{position:fixed;inset:0;z-index:90;background:#0b0b0d;opacity:0;pointer-events:none;transition:opacity .55s ease-in}
+#kperde.on{opacity:1}
 #ara{background:#fff;color:#111114}
 #ara input{background:#fff;border:0;border-bottom:2px solid #111114;border-radius:0;color:#111114;font:500 20px Barlow;padding:12px 2px}
 #ara input::placeholder{color:#8a8a92}
@@ -104,6 +111,10 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 #ara .oge:hover b{color:#e8201c}
 #ara .oge small{color:#77777f}
 #ara .yok{color:#77777f}
+#ara .katlar{align-items:center}
+#ara .katlar button.b1{font-size:26px;padding:14px 22px}
+#ara .katlar button.b2{font-size:19px;padding:11px 17px}
+#ara .katlar button.b3{font-size:14px;padding:8px 13px}
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e8201c%27/%3E%3C/svg%3E">
 </head>
@@ -112,6 +123,7 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 <div id="world"><div id="cam"></div></div>
 <div class="vignette"></div>
 <div id="card"><div class="k" id="c-k"></div><h3 id="c-h"></h3><p id="c-p"></p><span class="go">Ürün sayfası →</span></div>
+<div id="kgiris" aria-hidden="true"><div><img id="kgImg" alt=""><b id="kgAd"></b></div></div><div id="kperde"></div>
 <div class="hint" id="hint">kaydır ↓ içeri gir</div>
 <div id="end">halalar</div>
 <div id="ara"><div class="ust2"><input id="araKutu" type="search" placeholder="Ürün ara: plak, tablo, porselen…" autocomplete="off"><button class="kapat" id="araKapat">Kapat</button></div>
@@ -127,7 +139,10 @@ const KMOD=new URLSearchParams(location.search).get('mod')==='kategori'&&typeof 
 // her tekrar turunda kategori kendi içinden başka bir ürünle gelir (ilk turda ikonik görsel)
 const KSEC=new URLSearchParams(location.search).get('kat');
 const KFILTRE=!KMOD&&KSEC&&typeof KATEGORI!=='undefined'?URUNLER.filter(u=>KATEGORI[u[0]]===KSEC):null;
-if(KFILTRE&&KFILTRE.length){document.querySelector('nav .logo').textContent=KSEC;document.title='Hit Pazarı · '+KSEC}
+if(KFILTRE&&KFILTRE.length){document.querySelector('nav .logo').textContent=KSEC;document.title='Hit Pazarı · '+KSEC;
+  const kg=document.getElementById('kgiris');document.getElementById('kgAd').textContent=KSEC;document.getElementById('kgImg').src='kaynak/web/'+((typeof KATEGORI_IKON!=='undefined'&&KATEGORI_IKON[KSEC])||KFILTRE[0][0])+'.webp';kg.classList.add('on');
+  // giriş: tabela ortada, kamera kendiliğinden içeri süzülür; tabela büyüyüp kaybolur, ürünler derinden belirir
+  setTimeout(()=>{if(target<10)target=520},450);setTimeout(function izle(){if(camZ>110){kg.classList.add('off');return}requestAnimationFrame(izle)},0)}
 const KAYNAK=KMOD?(()=>{const L=[],ks=Object.keys(KATEGORI_IKON);
   const uy=k=>URUNLER.filter(u=>KATEGORI[u[0]]===k&&u[0]!==KATEGORI_IKON[k]).map(u=>u[0]);
   for(let t=0;t<8;t++)ks.forEach(k=>{const d=uy(k);const id=t===0||!d.length?KATEGORI_IKON[k]:d[(t-1)%d.length];L.push([id,k,'Bu kategorideki ürünleri gör','—'])});return L})():(KFILTRE&&KFILTRE.length?KFILTRE:URUNLER);
@@ -195,7 +210,7 @@ function render(){
   for(const it of items){
     const dz=it.z+camZ; it.dz=dz;
     if(dz>250||dz<-7000)continue;
-    let vis=1;
+    let vis=1; if(KFILTRE&&KFILTRE.length) vis*=Math.min(1,camZ/350);
     if(dz>0) vis*=Math.max(0,(250-dz)/250);
     if(dz<-5500) vis*=Math.max(0,(7000+dz)/1500);
     if(it.thin) vis*=Math.min(1,Math.max(0,(dz+THIN_Z+500)/500));
@@ -244,7 +259,7 @@ let lx=-1,ly=-1;
 function hover(){if(lx<0)return;let o=pick(lx,ly);if(!o&&nearHot(lx,ly))o=hot;setHot(o)}
 addEventListener('mousemove',e=>{lx=e.clientX;ly=e.clientY;hover()});
 setInterval(hover,90);
-cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o)location.href=KMOD?'index.html?kat='+encodeURIComponent(o.u[1]):'urun.html?id='+encodeURIComponent(o.u[0])});
+cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o){if(KMOD){target=clamp(camZ+1600);document.getElementById('kperde').classList.add('on');setTimeout(()=>location.href='index.html?kat='+encodeURIComponent(o.u[1]),620)}else location.href='urun.html?id='+encodeURIComponent(o.u[0])}});
 addEventListener('mousemove',e=>{if(!card.classList.contains('on'))return;const x=Math.min(e.clientX+16,innerWidth-230),y=Math.min(e.clientY+16,innerHeight-110);card.style.left=x+'px';card.style.top=y+'px'});
 target=parseFloat(new URLSearchParams(location.search).get('z')||0);
 
@@ -253,7 +268,10 @@ target=parseFloat(new URLSearchParams(location.search).get('z')||0);
   const kutu=document.getElementById('araKutu'),kl=document.getElementById('katlar'),so=document.getElementById('sonuc'),pen=document.getElementById('ara');let kat='';
   const norm=t=>(t||'').toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
   const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  kl.innerHTML=['',...(typeof KATEGORILER!=='undefined'?KATEGORILER:[])].map(k=>`<button data-k="${esc(k)}" class="${k?'':'on'}">${k?esc(k):'Tümü'}</button>`).join('');
+  // popülerlik (şimdilik kategorideki ürün sayısı) sırasıyla; ilk 3 büyük, sonraki 4 orta, kalanı küçük
+  const SAY={};URUNLER.forEach(u=>{const k=KAT(u[0]);if(k)SAY[k]=(SAY[k]||0)+1});
+  const KS=(typeof KATEGORILER!=='undefined'?KATEGORILER:[]).slice().sort((a,b)=>(SAY[b]||0)-(SAY[a]||0));
+  kl.innerHTML=`<button data-k="" class="on b3">Tümü</button>`+KS.map((k,i)=>`<button data-k="${esc(k)}" class="${i<3?'b1':i<7?'b2':'b3'}">${esc(k)}</button>`).join('');
   kl.onclick=e=>{const b=e.target.closest('button');if(!b)return;kat=b.dataset.k;kl.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));goster()};
   function goster(){const q=norm(kutu.value).trim();
     const L=URUNLER.filter(u=>(!kat||KAT(u[0])===kat)&&(!q||q.split(/\s+/).every(w=>norm(u[1]+' '+u[2]+' '+u[3]+' '+KAT(u[0])).includes(w))));
