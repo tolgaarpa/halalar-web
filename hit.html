@@ -321,9 +321,9 @@ nav .sepet i{position:absolute;right:0;top:0;min-width:19px;height:19px;border-r
 </div></section>
 
 <section class="bolum" id="nasil"><div class="sar">
-  <h2>Alışık olduğun gibi: kaydır, seç.</h2>
+  <h2>Alışık olduğun gibi: kaydır, seç, teklif yap, satın al.</h2>
   <div class="yonler">
-    <div class="yon y-ust"><div class="ok2">↑</div><b>Teklif</b><small>Fiyatı sen söyle</small></div>
+    <div class="yon y-ust"><div class="ok2">↑</div><b>Teklif yap</b><small>Fiyatı sen söyle</small></div>
     <div class="yon y-sol"><div class="ok2">←</div><b>Geç</b><small>Sıradakine bak</small></div>
     <button class="kart" id="kart" type="button" aria-label="Başka bir ürün göster"><div class="g"><img id="kImg" alt=""></div><div class="alt"><small id="kKat">Dokun, başka ürün gelsin</small><b id="kAd"></b></div></button>
     <div class="yon y-sag"><div class="ok2">→</div><b>Beğen</b><small>Listene ekle</small></div>
@@ -448,10 +448,14 @@ document.getElementById('kaydet').onclick=()=>{
 document.getElementById('googleGir').onclick=async e=>{
   if(!auth){document.getElementById('ghata').textContent='Bağlantı kurulamadı, internetini kontrol et.';return}
   const b=e.currentTarget;b.disabled=true;document.getElementById('ghata').textContent='';
-  const p=new firebase.auth.GoogleAuthProvider();
+  // WhatsApp/Instagram gibi uygulama içi tarayıcılarda Google girişe izin vermez
+  if(/FBAN|FBAV|Instagram|WhatsApp|Line\/|; wv\)|GSA\//.test(navigator.userAgent)){document.getElementById('ghata').textContent='Bu sayfa bir uygulamanın içinde açıldı; Google burada girişe izin vermiyor. Sağ üstteki menüden "Tarayıcıda aç" (Safari/Chrome) deyip tekrar dene.';b.disabled=false;return}
+  const p=new firebase.auth.GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});
   try{await auth.signInWithPopup(p)}
-  catch(err){if(err.code==='auth/popup-blocked'){try{await auth.signInWithRedirect(p);return}catch(e2){err=e2}}
-    if(err.code!=='auth/popup-closed-by-user'&&err.code!=='auth/cancelled-popup-request')document.getElementById('ghata').textContent='Giriş olmadı, tekrar dene.';console.warn(err)}
+  catch(err){console.warn(err);
+    const k=err.code||'';
+    if(k!=='auth/popup-closed-by-user'&&k!=='auth/cancelled-popup-request')
+      document.getElementById('ghata').textContent=k==='auth/popup-blocked'?'Tarayıcı giriş penceresini engelledi. Açılır pencerelere izin verip tekrar dene.':k==='auth/network-request-failed'?'İnternet bağlantısı yok gibi, tekrar dene.':'Giriş olmadı, tekrar dene. (Hata kodu: '+(k||err.message)+')'}
   b.disabled=false};
 document.getElementById('cikis').onclick=()=>auth&&auth.signOut();
 function goster(u){
@@ -468,5 +472,6 @@ function goster(u){
 if(auth)auth.onAuthStateChanged(goster);else goster(null);
 listeler();
 </script>
+<script src="veri/uye.js"></script>
 </body>
 </html>

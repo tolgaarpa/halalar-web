@@ -1,68 +1,73 @@
 <!doctype html>
 <html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Halalar · Ürün</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#111;--accent:#1f22ff;--muted:#777}*{box-sizing:border-box;margin:0;padding:0}
-body{background:#fff;color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;min-height:100vh}
-nav{display:flex;justify-content:space-between;align-items:center;padding:22px 32px}
-nav a{color:var(--ink);text-decoration:none}.logo{font-family:Fraunces,serif;font-size:26px;letter-spacing:-.02em}
-.back{font-size:12px;letter-spacing:.3em;text-transform:uppercase}
+:root{--bg:#0b0b0d;--ink:#f2efe9;--yumusak:#cfcac1;--muted:#8d887f;--line:#26262c;--panel:#141418;--accent:#e8201c;--mavi:#1b2fa0}*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:Barlow,system-ui,sans-serif;min-height:100vh}
+nav{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:20px 32px;border-bottom:1px solid var(--line)}
+nav a{color:var(--ink);text-decoration:none}
+.logo{font:700 15px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.24em;color:var(--yumusak);padding-left:12px;border-left:1px solid #55555e}
+.back{font:700 14px/1 "Barlow Condensed",sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--yumusak);white-space:nowrap}
+.back:hover{color:var(--ink)}
 main{display:grid;grid-template-columns:1.1fr 1fr;gap:6vw;align-items:center;padding:4vh 6vw 10vh;min-height:80vh}
-main img{width:100%;max-height:72vh;object-fit:contain;filter:drop-shadow(0 40px 60px rgba(0,0,0,.25))}
-.k{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
-h1{font-family:Fraunces,serif;font-weight:300;font-size:clamp(40px,6vw,96px);letter-spacing:-.03em;line-height:.95;margin:14px 0 22px}
-p{font-size:18px;line-height:1.5;color:#333;max-width:40ch}
-.fiyat{font-family:Fraunces,serif;font-weight:300;font-size:40px;letter-spacing:-.02em;margin-top:26px}
-.fiyat small{font-family:"Space Grotesk";font-size:11px;letter-spacing:.2em;color:var(--muted);margin-left:8px;vertical-align:middle}
+main img{width:100%;max-height:72vh;object-fit:contain;filter:drop-shadow(0 40px 60px rgba(0,0,0,.7))}
+.k{font:700 14px/1.3 "Barlow Condensed",sans-serif;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(40px,5.6vw,92px);line-height:1.04;margin:14px 0 22px;color:var(--accent)}
+p{font-size:18px;line-height:1.55;color:var(--yumusak);max-width:40ch}
+.fiyat{font-family:Anton,sans-serif;font-size:42px;line-height:1.1;margin-top:26px}
+.fiyat small{font:700 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.22em;color:var(--muted);margin-left:10px;vertical-align:middle}
 .eylem{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-.cta{display:inline-block;border:1px solid var(--ink);background:none;padding:15px 30px;border-radius:999px;font:500 14px "Space Grotesk";color:var(--ink);text-decoration:none;cursor:pointer;transition:background .25s,color .25s}
-.cta:hover,.cta.on{background:var(--ink);color:#fff}
+.cta{display:inline-block;border:1px solid #55555e;background:none;padding:15px 28px 14px;font:400 19px/1 Anton,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);text-decoration:none;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.cta:hover{border-color:var(--ink)}
+.cta.on{background:var(--mavi);border-color:var(--mavi);color:#fff}
+.cta.on:hover{background:var(--accent);border-color:var(--accent)}
 .cta:disabled{opacity:.5;cursor:default}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.talep{margin-top:22px;padding:24px;border:1px solid #e3e0da;border-radius:18px;background:#faf8f4;max-width:460px}
-.talep h2{font-family:Fraunces,serif;font-weight:300;font-size:28px;letter-spacing:-.02em;margin-bottom:14px}
-.tutar{display:flex;align-items:baseline;gap:8px;border-bottom:1px solid #111;padding-bottom:6px}
-.tutar input{flex:1;min-width:0;width:100%;border:0;background:none;font:300 40px Fraunces,serif;letter-spacing:-.02em;outline:none;color:#111}
-.tutar span{font:300 28px Fraunces,serif}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.talep{margin-top:22px;padding:24px;border:1px solid var(--line);background:var(--panel);max-width:480px}
+.talep h2{font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;font-size:30px;line-height:1.1;margin-bottom:14px}
+.tutar{display:flex;align-items:baseline;gap:8px;border-bottom:2px solid var(--ink);padding-bottom:6px}
+.tutar input{flex:1;min-width:0;width:100%;border:0;background:none;font:400 42px Anton,sans-serif;outline:none;color:var(--ink)}
+.tutar span{font:400 28px Anton,sans-serif}
 .hizli{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
-.hizli button{border:1px solid #d9d5cd;background:#fff;border-radius:999px;padding:7px 12px;font:400 13px "Space Grotesk";cursor:pointer}
-.hizli button:hover{border-color:#111}
-.ozet div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e8e4dc;font-size:15px}
-.ozet div:last-child{border-bottom:0}
+.hizli button{border:1px solid #3a3a42;background:none;color:var(--ink);padding:8px 12px;font:600 14px Barlow,sans-serif;cursor:pointer}
+.hizli button:hover{border-color:var(--ink)}
+.ozet div{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:16px;color:var(--yumusak)}
+.ozet div:last-child{border-bottom:0;color:var(--ink)}
 .alanlar{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.alanlar input{border:1px solid #d9d5cd;border-radius:12px;padding:13px;font:400 15px "Space Grotesk";background:#fff;outline:none;min-width:0}
-.alanlar input:focus{border-color:#111}
-.rza{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:13px;line-height:1.45;color:#555}
-.rza input{margin-top:3px;flex:none}
-.rza a{color:#111}
-.not{font-size:13px;color:#777;line-height:1.5;margin-top:12px}
-.hata{color:#c4321d;font-size:14px;margin-top:10px;min-height:1px}
-.dug{display:flex;gap:10px;margin-top:16px}
-.dug .cta{padding:13px 24px}
-.tamam{margin-top:22px;padding:22px 24px;border-radius:18px;background:#111;color:#f2efe9;max-width:460px}
-.tamam b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:26px;margin-bottom:8px}
-.tamam p{color:#cfcac1;font-size:15px;max-width:none}
-.tamam a{color:#ffb08a}
+.alanlar input{border:1px solid #3a3a42;padding:13px;font:500 16px Barlow,sans-serif;background:#0d0d10;color:var(--ink);outline:none;min-width:0}
+.alanlar input:focus{border-color:var(--ink)}
+.rza{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:13.5px;line-height:1.45;color:var(--muted)}
+.rza input{margin-top:3px;flex:none;accent-color:#f2efe9}
+.rza a{color:var(--ink)}
+.not{font-size:13.5px;color:var(--muted);line-height:1.5;margin-top:12px;max-width:none}
+.hata{color:#ff6b5e;font-size:14px;font-weight:600;margin-top:10px;min-height:1px}
+.dug{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.dug .cta{padding:13px 22px 12px;font-size:17px}
+.tamam{margin-top:22px;padding:22px 24px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);color:var(--ink);max-width:480px}
+.tamam b{display:block;font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;font-size:26px;line-height:1.15;margin-bottom:8px}
+.tamam p{color:var(--yumusak);font-size:15px;max-width:none}
+.tamam a{color:#fff}
 @media(max-width:520px){.alanlar{grid-template-columns:1fr}}
 .foto{min-width:0}
 main>div{min-width:0}
 .talep,.tamam{width:100%}
 .acilar{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;justify-content:center}
-.acilar button{width:64px;height:64px;border:1px solid #e3e0da;border-radius:10px;background:#f6f4f0;padding:5px;cursor:pointer}
+.acilar button{width:64px;height:64px;border:1px solid var(--line);background:var(--panel);padding:5px;cursor:pointer}
 .acilar button.on{border-color:var(--ink)}
 .acilar img{width:100%;height:100%;object-fit:contain;filter:none;max-height:none}
-@media(max-width:760px){main{grid-template-columns:1fr}}
+@media(max-width:760px){main{grid-template-columns:1fr;padding:3vh 16px 8vh}nav{padding:16px}.hp-logo{font-size:19px}.logo{display:none}.back{font-size:12px;letter-spacing:.16em}}
 
-/* Hit Pazarı ikonu: minik neon tabela (her sayfanın sol üstünde) */
-.hpi-sol{display:flex;align-items:center;gap:12px}
-.hpi{position:relative;display:inline-grid;place-items:center;width:48px;height:34px;flex:none;text-decoration:none;pointer-events:auto;background:#0b0b0d;border-radius:9px}
-.hpi svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 2px #ff2d55) drop-shadow(0 0 6px #ff2d5588)}
-.hpi svg rect,.hpi svg path{fill:none;stroke:#ff6b85;stroke-width:1.6;stroke-linecap:round}
-.hpi b{position:relative;font:300 18px/1 Fraunces,Georgia,serif;letter-spacing:-.03em;color:#fff1ea;text-shadow:0 0 1px #fff,0 0 5px #ff5a1f,0 0 12px #ff5a1f}
-</style><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%230b0b0d%27/%3E%3Crect x=%277%27 y=%2714%27 width=%2750%27 height=%2736%27 rx=%279%27 fill=%27none%27 stroke=%27%23ff6b85%27 stroke-width=%273%27/%3E%3Ctext x=%2732%27 y=%2741%27 font-family=%27Georgia,serif%27 font-size=%2722%27 text-anchor=%27middle%27 fill=%27%23fff1ea%27%3EHit%3C/text%3E%3C/svg%3E">
+/* Hit Pazarı logosu: kırmızı çift eğik çizgi + HİT PAZARI (her sayfanın sol üstünde) */
+html{font-synthesis:none}
+.hpi-sol{display:flex;align-items:center;gap:12px;min-width:0}
+.hp-logo{display:inline-flex;align-items:center;gap:.36em;flex:none;text-decoration:none;pointer-events:auto;color:#f2efe9;font:400 22px/1 Anton,"Arial Narrow",Impact,sans-serif;letter-spacing:.005em;white-space:nowrap;text-shadow:none}
+.hp-logo .hp-c{color:#e8201c;font-size:1.1em;letter-spacing:-.04em;transform:skewX(-14deg)}
+</style><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e8201c%27/%3E%3C/svg%3E">
 </head>
 <body>
-<nav><span class="hpi-sol"><a class="hpi" href="hit.html" aria-label="Hit Pazarı"><svg viewBox="0 0 48 34" aria-hidden="true"><rect x="1.5" y="1.5" width="45" height="31" rx="7"/><path d="M6 7.5c-1.6 0-2.2 1.6-1.4 2.4.7.6 1.8.2 1.5-.7"/><path d="M42 7.5c1.6 0 2.2 1.6 1.4 2.4-.7.6-1.8.2-1.5-.7"/><path d="M6 26.5c-1.6 0-2.2-1.6-1.4-2.4.7-.6 1.8-.2 1.5.7"/><path d="M42 26.5c1.6 0 2.2-1.6 1.4-2.4-.7-.6-1.8-.2-1.5.7"/></svg><b>Hit</b></a><a class="logo" href="index.html#ic">Halalar</a></span><a class="back" href="index.html#ic">← tünele giriş</a></nav>
+<nav><span class="hpi-sol"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><a class="logo" href="index.html#ic">Halalar</a></span><a class="back" href="index.html#ic">← tünele giriş</a></nav>
 <main><div class="foto"><img id="img" alt=""><div class="acilar" id="acilar"></div></div><div><div class="k" id="k"></div><h1 id="h"></h1><p id="p"></p><div class="fiyat" id="fy"></div>
   <div class="eylem"><button class="cta" id="bTeklif" type="button">Teklif ver</button><button class="cta" id="bAlim" type="button">Satın al</button></div>
   <form class="talep" id="talep" hidden novalidate></form>
@@ -72,6 +77,7 @@ main>div{min-width:0}
 <script src="veri/kategoriler.js"></script>
 <script src="veri/fiyatlar.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="veri/firebase-ayar.js"></script>
 <script>
@@ -129,4 +135,5 @@ form.onsubmit=async e=>{e.preventDefault();const tur=form.dataset.tur,h=document
     tamam.focus&&tamam.scrollIntoView({block:'nearest',behavior:'smooth'})}
   catch(err){console.warn(err);h.textContent='Gönderilemedi. İnternetini kontrol edip tekrar dene.';btn.disabled=false;btn.textContent=eski}};
 </script>
+<script src="veri/uye.js"></script>
 </body></html>
