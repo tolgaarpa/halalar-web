@@ -158,7 +158,7 @@ const items=LISTE.map((u,i)=>{
   else if(p<2*X+2*Y){xv=X-inn; yv=-Y+(p-2*X)}
   else if(p<4*X+2*Y){xv=X-(p-2*X-2*Y); yv=Y-inn}
   else {xv=-X+inn; yv=Y-(p-4*X-2*Y)}
-  const w=(ar>1.25?460:ar<0.75?300:380)+((i*13)%6)*45;
+  const w=((ar>1.25?460:ar<0.75?300:380)+((i*13)%6)*45)*(KMOD?1.25:1);   // kategori modunda ikonlar bir tık büyük
   const z=-(i*STEP)-250;
   let rot=0;
   if(ar<0.75){ const mag=9+((i*0.7548)%1)*11; const side=Math.abs(xv)>Math.abs(yv)?Math.sign(xv):(((i*0.31)%1)<0.5?-1:1); rot=-side*mag; }
