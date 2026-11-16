@@ -142,6 +142,15 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 .hp-menu a b{display:block;font:400 21px/1.1 Anton,sans-serif;text-transform:uppercase}
 .hp-menu a small{display:block;margin-top:2px;font-size:12.5px;color:#9a958d}
 .hp-menu a:hover,.hp-menu a:focus-visible{background:#16161a;border-left-color:#e8201c}
+.hpm-dukkan{display:flex;flex-wrap:wrap;align-items:baseline;width:100%;background:none;border:0;border-left:3px solid transparent;padding:11px 20px;color:#f2efe9;text-align:left;cursor:pointer;font:inherit}
+.hpm-dukkan b{font:400 21px/1.1 Anton,sans-serif;text-transform:uppercase}
+.hpm-dukkan b::after{content:"";display:inline-block;width:8px;height:8px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);margin-left:12px;transition:transform .2s}
+.hpm-dukkan[aria-expanded="true"] b::after{transform:rotate(225deg) translate(-1px,-1px)}
+.hpm-dukkan small{flex-basis:100%;margin-top:2px;font-size:12.5px;color:#9a958d}
+.hpm-dukkan:hover,.hpm-dukkan:focus-visible{background:#16161a;border-left-color:#e8201c}
+.hp-menu .hpm-liste{margin:2px 0 6px 20px;border-left:1px solid #2a2a30}
+.hp-menu .hpm-liste a{padding:9px 18px;color:#cfcac1;border-left:0}
+.hp-menu .hpm-liste a b{font-size:19px}
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e8201c%27/%3E%3C/svg%3E">
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/halalar-web/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
@@ -149,14 +158,11 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 <body>
 <nav><span class="hpi-sol"><a class="hp-logo" href="hit.html" id="hpLogo" aria-label="Hit Pazarı menüsü" aria-expanded="false"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><a class="logo" href="#">Halalar</a></span><span class="sag"><span class="depth" id="depth">0 m</span><button class="ara-ac" id="araAc">Ara</button></span></nav>
 <div class="hp-menu" id="hpMenu" hidden>
-  <a href="hit.html"><b>Ana sayfa</b><small>Hit Pazarı girişi</small></a>
-  <a href="index.html?mod=pazar"><b>Pazar</b><small>Bütün dükkânlar, karışık tünel</small></a>
-  <a href="index.html"><b>Halalar</b><small>Halalar'ın tüneli</small></a>
-  <a href="dukkan.html"><b>Yeni Dükkân</b><small>Giyim, hediyelik, ev dekorasyonu</small></a>
   <a href="index.html?mod=kategori"><b>Kategoriler</b><small>Kategori seçerek gez</small></a>
-  <a href="hit.html#hesap"><b>Hesabım</b><small>Beğenilerim, tekliflerim, üye girişi</small></a>
-  <a href="hit.html#bilmen"><b>Bilmen gerekenler</b><small>Fiyat, ödeme, ürün durumu</small></a>
+  <button class="hpm-dukkan" id="hpmDukkan" type="button" aria-expanded="false" aria-controls="hpmListe"><b>Dükkânlar</b><small>Dükkân seçerek gez</small></button>
+  <div class="hpm-liste" id="hpmListe" hidden><a href="index.html"><b>Halalar</b></a><a href="dukkan.html"><b>Yeni Dükkân</b></a></div>
 </div>
+<script src="veri/hesap-ikon.js"></script>
 <div id="world"><div id="cam"></div></div>
 <div class="vignette"></div>
 <div id="card"><div class="k" id="c-k"></div><h3 id="c-h"></h3><p id="c-p"></p><span class="go">Ürünü aç →</span></div>
@@ -341,6 +347,7 @@ document.body.addEventListener('scroll',()=>{if(document.body.scrollTop)document
 // logo menüsü: her sayfada aynı yol haritası
 (()=>{const l=document.getElementById('hpLogo'),m=document.getElementById('hpMenu');if(!l||!m)return;
   const kapa=()=>{m.hidden=true;l.setAttribute('aria-expanded','false')};
+  const hd=document.getElementById('hpmDukkan'),hl=document.getElementById('hpmListe');if(hd)hd.onclick=e=>{e.stopPropagation();hl.hidden=!hl.hidden;hd.setAttribute('aria-expanded',String(!hl.hidden))};
   l.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();m.hidden=!m.hidden;l.setAttribute('aria-expanded',String(!m.hidden));if(typeof open!=='undefined')open=m.hidden});
   addEventListener('click',e=>{if(!m.hidden&&!e.target.closest('#hpMenu'))kapa()});addEventListener('keydown',e=>{if(e.key==='Escape')kapa()})})();
 </script>

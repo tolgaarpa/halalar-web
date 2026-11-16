@@ -45,7 +45,7 @@ nav .sepet i{position:absolute;right:0;top:0;min-width:19px;height:19px;border-r
 .kapi .karanlik{position:absolute;left:0;right:0;top:0;height:100vh;min-height:520px;z-index:1;pointer-events:none;background:linear-gradient(90deg,#0b0b0db8 0%,#0b0b0d00 32%,#0b0b0d00 66%,#0b0b0da8 100%),radial-gradient(ellipse at 50% 50%,#0b0b0d00 55%,#0b0b0daa 100%)}
 .kapi-ic{position:relative;z-index:2;flex:1;min-height:0;width:calc(var(--u)*100);margin:0 auto}
 .sol{position:absolute;left:calc(var(--u)*2.2);top:calc(50% + var(--u)*2.6);transform:translateY(-50%);z-index:3}
-.sol h1{font-size:calc(var(--u)*11.4);line-height:.87;letter-spacing:-.012em;color:var(--kirmizi);transform:rotate(-4deg) skewX(-5deg) scaleY(1.22);transform-origin:left top;margin-bottom:calc(var(--u)*5.9);filter:url(#kaba);white-space:nowrap;padding-top:.1em}
+.sol h1{font-size:calc(var(--u)*5.7);line-height:.87;letter-spacing:-.012em;color:var(--kirmizi);transform:rotate(-4deg) skewX(-5deg) scaleY(1.22);transform-origin:left top;margin-bottom:calc(var(--u)*3.6);filter:url(#kaba);white-space:nowrap;padding-top:.1em}
 .sol h1 span{display:block}
 .sol .altb{display:block;font:700 calc(var(--u)*1.25)/1 "Barlow Condensed",sans-serif;letter-spacing:.42em;text-transform:uppercase;transform:rotate(-4deg);transform-origin:left center;white-space:nowrap}
 .sol .altb::after{content:"";display:block;width:5.2em;height:.36em;background:var(--kirmizi);margin-top:1.1em}
@@ -76,7 +76,7 @@ nav .sepet i{position:absolute;right:0;top:0;min-width:19px;height:19px;border-r
   @keyframes otur-k{from{scale:.93;rotate:3deg}to{scale:1;rotate:0deg}}
 }
 /* söz */
-.soz{position:absolute;right:calc(var(--u)*1.5);top:36%;z-index:3;text-align:center;transform:translateY(-50%) rotate(-5deg) skewX(-9deg);padding:.3em 0 .1em;font-size:calc(var(--u)*6);line-height:1.03;letter-spacing:-.008em;color:var(--kirmizi);filter:url(#kaba);white-space:nowrap}
+.soz{position:absolute;right:calc(var(--u)*3);top:36%;z-index:3;text-align:center;transform:translateY(-50%) rotate(-5deg) skewX(-9deg);padding:.3em 0 .1em;font-size:calc(var(--u)*6);line-height:1.03;letter-spacing:-.008em;color:var(--kirmizi);filter:url(#kaba);white-space:nowrap}
 .soz span{display:block}
 .soz .var{color:var(--mavi-acik);font-size:1.5em;line-height:.95;margin-top:.02em}
 /* kısa yollar: tek sıra ince bağlantı */
@@ -212,7 +212,7 @@ a.kepenk{display:block;text-decoration:none}
   .kapi{height:auto;min-height:0;display:block;padding:84px 0 26px;--kw:min(calc(100vw - 32px),560px)}
   .kapi-ic{width:auto;padding:0 16px;display:flex;flex-direction:column}
   .sol{position:static;transform:none}
-  .sol h1{font-size:min(27vw,170px);transform:rotate(-4deg) skewX(-5deg) scaleY(1.15);margin-bottom:min(13vw,84px)}
+  .sol h1{font-size:min(13.5vw,85px);transform:rotate(-4deg) skewX(-5deg) scaleY(1.15);margin-bottom:min(6.5vw,42px)}
   .sol .altb{font-size:min(3.5vw,20px);letter-spacing:.36em}
   .sol p{font-size:16px;margin-top:22px;white-space:normal}
   .gir{font-size:min(10.5vw,60px);margin:26px 0 0 0;align-self:flex-start}
@@ -248,7 +248,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 .kapi.dag .kapi-ic,.kapi.dag .kisayol,.kapi.dag .sahne{transform:scale(4);transition:transform .6s cubic-bezier(.7,0,.84,0)}
 .kapi.dag .kisayol{transform:translateY(40px);transition:transform .4s ease-in,opacity .25s linear}
 #pazaraGir{cursor:pointer}
-.gir-alt{display:block;margin-top:10px;font:700 12px/1.3 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#cfcac1}
+.gir-alt{display:block;max-width:calc(var(--u)*25);margin-top:10px;font:700 12px/1.3 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#cfcac1}
 @keyframes asagi{0%,100%{transform:translateY(-2px)}50%{transform:translateY(5px)}}
 /* logo altında açılan menü */
 nav .marka{cursor:pointer}
@@ -261,6 +261,16 @@ nav .marka[aria-expanded="true"]::after{transform:rotate(225deg) translateY(-1px
 .hp-menu>a:hover,.hp-menu>a:focus-visible{background:#16161a;border-left-color:#e8201c}
 .hp-menu .alt-link{display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 22px 10px;border-top:1px solid #222227;margin-top:6px}
 .hp-menu .alt-link a{font-size:13px;color:#9a958d;text-decoration:none}.hp-menu .alt-link a:hover{color:#f2efe9}
+.hpm-dukkan{display:flex;flex-wrap:wrap;align-items:baseline;width:100%;background:none;border:0;border-left:3px solid transparent;padding:13px 22px;color:#f2efe9;text-align:left;cursor:pointer;font:inherit}
+.hpm-dukkan b{font:400 22px/1.1 Anton,sans-serif;text-transform:uppercase}
+.hpm-dukkan b::after{content:"";display:inline-block;width:8px;height:8px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);margin-left:12px;transition:transform .2s}
+.hpm-dukkan[aria-expanded="true"] b::after{transform:rotate(225deg) translate(-1px,-1px)}
+.hpm-dukkan small{flex-basis:100%;margin-top:3px;font-size:13px;color:#9a958d}
+.hpm-dukkan:hover,.hpm-dukkan:focus-visible{background:#16161a;border-left-color:#e8201c}
+.hpm-liste{margin:2px 0 6px 22px;border-left:1px solid #2a2a30}
+.hpm-liste a{display:block;padding:9px 18px;text-decoration:none;color:#cfcac1}
+.hpm-liste a b{font:400 19px/1.1 Anton,sans-serif;text-transform:uppercase}
+.hpm-liste a:hover,.hpm-liste a:focus-visible{color:#f2efe9;background:#16161a}
 /* bölümler kendi sekmelerinde */
 .katman{position:fixed;inset:0;z-index:58;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:#0b0b0d;padding-top:140px;animation:sekmeAc .35s ease-out}
 @keyframes sekmeAc{from{transform:translateY(24px)}to{transform:none}}
@@ -275,11 +285,11 @@ nav .marka[aria-expanded="true"]::after{transform:rotate(225deg) translateY(-1px
 @media(max-width:700px){
   .kapi{height:100svh;min-height:0;display:flex;flex-direction:column;padding:64px 0 0;overflow:hidden;--kw:min(calc(100vw - 32px),calc(44svh*.95))}
   .kapi-ic{flex:1;min-height:0;display:flex;flex-direction:column;align-items:stretch;padding:0 16px}
-  .sol h1{font-size:min(15vw,84px);margin-bottom:4px;transform:rotate(-4deg) skewX(-5deg) scaleY(1.08)}
+  .sol h1{font-size:min(7.5vw,42px);margin-bottom:4px;transform:rotate(-4deg) skewX(-5deg) scaleY(1.08)}
   .sol .altb{font-size:11px;letter-spacing:.32em}
   .sol p{display:none}
   .gir{position:fixed;left:16px;right:16px;bottom:calc(40px + env(safe-area-inset-bottom));z-index:6;margin:0;justify-content:center;font-size:min(6.6vw,28px);padding:14px 16px}
-  .gir-alt{position:fixed;left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:6;text-align:center;margin:0;font-size:10.5px;letter-spacing:.12em}
+  .gir-alt{position:fixed;left:16px;right:16px;max-width:none;bottom:calc(12px + env(safe-area-inset-bottom));z-index:6;text-align:center;margin:0;font-size:10.5px;letter-spacing:.12em}
   .kolaj{width:var(--kw);margin:10px auto 0}
   .soz{font-size:min(6.4vw,30px);margin:6px 0 0;align-self:center;transform:rotate(-4deg) skewX(-8deg)}
   .soz span{display:inline;margin-right:.25em}
@@ -297,16 +307,13 @@ nav .marka[aria-expanded="true"]::after{transform:rotate(225deg) translateY(-1px
 </defs></svg>
 
 <nav><a class="marka" href="#" id="marka" aria-label="Hit Pazarı menüsü" aria-expanded="false" aria-controls="hpMenu"><span class="cizgi" aria-hidden="true">//</span><span class="ad">HİT PAZARI</span><span class="alt">Dijital<br>Dükkân</span></a>
-  <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="l" href="#nasil">Nasıl çalışır?</a><a class="uye" href="#hesap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c.8-4.4 4.2-6.6 8.5-6.6s7.700 2.200 8.500 6.600"/></svg><span id="ustHesap">Üye girişi</span></a><a class="sepet" href="#hesap" aria-label="Beğendiklerim"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1.200 13H3.800z"/><path d="M8.500 10V6.500a3.500 3.500 0 0 1 7 0V10"/></svg><i id="sepetN">0</i></a></span></nav>
+  <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="sepet" href="#hesap" aria-label="Beğendiklerim"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1.200 13H3.800z"/><path d="M8.500 10V6.500a3.500 3.500 0 0 1 7 0V10"/></svg><i id="sepetN">0</i></a></span></nav>
 <div class="hp-menu" id="hpMenu" hidden>
-  <a href="index.html?mod=pazar"><b>Pazar</b><small>Bütün dükkânlar, karışık tünel</small></a>
-  <a href="index.html"><b>Halalar</b><small>Halalar'ın tüneli</small></a>
-  <a href="dukkan.html"><b>Yeni Dükkân</b><small>Giyim, hediyelik, ev dekorasyonu</small></a>
   <a href="index.html?mod=kategori"><b>Kategoriler</b><small>Kategori seçerek gez</small></a>
-  <a href="#hesap"><b>Hesabım</b><small>Beğenilerim, tekliflerim, üye girişi</small></a>
-  <a href="#bilmen"><b>Bilmen gerekenler</b><small>Fiyat, ödeme, ürün durumu</small></a>
-  <div class="alt-link"><a href="satis-kosullari.html">Satış koşulları</a><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">Aydınlatma metni</a><a href="https://tolgaarpa.github.io/halalar-app/panel.html">Dükkân girişi</a></div>
+  <button class="hpm-dukkan" id="hpmDukkan" type="button" aria-expanded="false" aria-controls="hpmListe"><b>Dükkânlar</b><small>Dükkân seçerek gez</small></button>
+  <div class="hpm-liste" id="hpmListe" hidden><a href="index.html"><b>Halalar</b></a><a href="dukkan.html"><b id="hpmD2">Yeni Dükkân</b></a></div>
 </div>
+<script src="veri/hesap-ikon.js"></script>
 
 <header class="kapi" id="kapi">
   <div class="sahne" id="sahne" aria-hidden="true"></div><div class="karanlik"></div>
@@ -327,7 +334,6 @@ nav .marka[aria-expanded="true"]::after{transform:rotate(225deg) translateY(-1px
     </div>
     <p class="soz dv"><span>HER ŞEYİN</span><span>BİR HİKÂYESİ</span><span class="var">VAR</span></p>
   </div>
-  <div class="kisayol"><a href="#bilmen">Bilmen gerekenler</a><a href="index.html">Teklif ver</a><a href="#hesap">Beğendiklerim</a><a href="#dukkan-ac">Dükkân aç</a></div>
 </header>
 
 <div class="katman" id="katman" hidden role="dialog" aria-modal="true" aria-label="Hit Pazarı"><button class="katman-kapat" id="sekmeKapat" type="button" aria-label="Kapat">×</button>
@@ -564,6 +570,10 @@ addEventListener('pageshow',e=>{if(e.persisted){girildi=false;kapi.classList.rem
 // ---- logo menüsü ve sekmeler ----
 const marka=document.getElementById('marka'),hpMenu=document.getElementById('hpMenu'),sekme=document.getElementById('katman');
 const menuKapa=()=>{hpMenu.hidden=true;marka.setAttribute('aria-expanded','false')};
+// Dükkânlar: dükkân adları ayrı bir alt listede, tıklayınca açılır
+const hpmD=document.getElementById('hpmDukkan'),hpmL=document.getElementById('hpmListe');
+hpmD.onclick=()=>{hpmL.hidden=!hpmL.hidden;hpmD.setAttribute('aria-expanded',String(!hpmL.hidden))};
+if(typeof DUKKAN2!=='undefined'&&DUKKAN2.ad)document.getElementById('hpmD2').textContent=DUKKAN2.ad;
 marka.onclick=e=>{e.preventDefault();hpMenu.hidden=!hpMenu.hidden;marka.setAttribute('aria-expanded',String(!hpMenu.hidden))};
 addEventListener('click',e=>{if(!hpMenu.hidden&&!e.target.closest('#hpMenu,#marka'))menuKapa()});
 function sekmeAc(id){const s=document.getElementById(id);if(!s||s.parentElement!==sekme)return false;
