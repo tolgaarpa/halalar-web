@@ -56,7 +56,9 @@ nav .sepet i{position:absolute;right:0;top:0;min-width:19px;height:19px;border-r
 .gir:hover svg{transform:translateX(.15em)}
 /* kolaj: tek görsel. Görselin sağ altındaki gömülü kart bölgesi kırpılır, canlı Halalar kartı tam o bölgenin üstüne oturur */
 .kolaj{position:absolute;left:calc(var(--u)*52);top:50%;width:var(--kw);aspect-ratio:747/785;transform:translate(-50%,-50%);z-index:2}
-.kolaj>img{display:block;width:100%;height:100%;-webkit-mask-image:linear-gradient(90deg,transparent 1%,#000 7%);mask-image:linear-gradient(90deg,transparent 1%,#000 7%);pointer-events:none;-webkit-user-select:none;user-select:none;clip-path:polygon(0 0,100% 0,100% 65.6%,46.5% 68.3%,46.5% 90.5%,42% 90.5%,42% 100%,0 100%)}
+.kolaj{-webkit-mask-image:linear-gradient(90deg,transparent 1%,#000 7%);mask-image:linear-gradient(90deg,transparent 1%,#000 7%)}
+/* öne çıkan dükkân kartı kaldırıldı: görseldeki gömülü kart bölgesi sert kesilmez, aşağı doğru yumuşakça kaybolur */
+.kolaj>img{display:block;width:100%;height:100%;--ust:linear-gradient(to bottom,#000 56%,transparent 66%),linear-gradient(to right,#000 37%,transparent 46%);-webkit-mask:var(--ust);mask:var(--ust);pointer-events:none;-webkit-user-select:none;user-select:none;clip-path:polygon(0 0,100% 0,100% 100%,46.5% 100%,46.5% 90.5%,42% 90.5%,42% 100%,0 100%)}
 .one{position:absolute;left:45%;top:67.3%;width:min(104%,calc(var(--u)*46 + 5%));min-height:34.5%;z-index:4;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:4%;align-items:center;padding:calc(var(--kw)*.035) calc(var(--kw)*.04) calc(var(--kw)*.035) calc(var(--kw)*.06);text-decoration:none;color:var(--siyah);transform:rotate(-3deg);transform-origin:0 0;transition:transform .25s}
 .one:hover{transform:rotate(-3deg) translateY(-5px)}
 .one::before{content:"";position:absolute;inset:-4px;background:var(--krem);filter:url(#yirtik);z-index:-1}
@@ -76,9 +78,9 @@ nav .sepet i{position:absolute;right:0;top:0;min-width:19px;height:19px;border-r
   @keyframes otur-k{from{scale:.93;rotate:3deg}to{scale:1;rotate:0deg}}
 }
 /* söz */
-.soz{position:absolute;right:calc(var(--u)*3);top:36%;z-index:3;text-align:center;transform:translateY(-50%) rotate(-5deg) skewX(-9deg);padding:.3em 0 .1em;font-size:calc(var(--u)*6);line-height:1.03;letter-spacing:-.008em;color:var(--kirmizi);filter:url(#kaba);white-space:nowrap}
+.soz{position:absolute;right:calc(var(--u)*3);top:36%;z-index:3;text-align:center;transform:translateY(-50%) rotate(-5deg) skewX(-9deg);padding:.3em 0 .1em;font-size:calc(var(--u)*6);line-height:1.24;letter-spacing:-.008em;color:var(--kirmizi);filter:url(#kaba);white-space:nowrap}
 .soz span{display:block}
-.soz .var{color:var(--mavi-acik);font-size:1.5em;line-height:.95;margin-top:.02em}
+.soz .var{color:var(--mavi-acik);font-size:1.5em;line-height:1.02;margin-top:.04em}
 /* kısa yollar: tek sıra ince bağlantı */
 .kisayol{position:relative;z-index:5;flex:none;display:flex;justify-content:center;gap:calc(var(--u)*3.4);margin:0 auto calc(var(--u)*1.8);padding:0 16px}
 .kisayol a{font:700 max(13px,calc(var(--u)*1.15))/1 "Barlow Condensed",sans-serif;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--yumusak);padding:10px 0;white-space:nowrap;transition:color .2s}
@@ -328,11 +330,6 @@ html.ev,html.ev body{overflow:hidden;height:100%}
     </div>
     <div class="kolaj">
       <img src="kaynak/referans/kolaj-seffaf.webp" alt="" width="747" height="785">
-      <a class="one" href="index.html" aria-label="Öne çıkan dükkân: Halalar tüneline gir">
-        <span><span class="et">Öne çıkan dükkân</span><b class="isim dv">HALALAR</b><span class="tur">Vintage <i>•</i> Koleksiyon <i>•</i> Özel&nbsp;parçalar</span>
-          <svg class="okk" viewBox="0 0 44 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M1 12h40M31 3l10 9-10 9"/></svg></span>
-        <span class="dfoto"><img src="kaynak/vitrin/halalar.webp" alt="Halalar dükkânının gece vitrini" width="591" height="868"></span>
-      </a>
     </div>
     <p class="soz dv"><span>HER ŞEYİN</span><span>BİR HİKÂYESİ</span><span class="var">VAR</span></p>
   </div>

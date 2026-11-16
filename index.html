@@ -89,10 +89,10 @@ nav .hp-logo{text-shadow:0 1px 8px rgba(0,0,0,.9)}
 @media(max-width:600px){.hp-logo{font-size:19px}nav .logo{font-size:13px;letter-spacing:.16em;padding-left:9px}nav .sag{gap:10px}.hpi-sol{gap:9px}}
 
 /* tünel başlığı: Hit Pazarı logosu 2 kat, dükkân adı alt satırda 3 kat büyük ve kırmızı */
-.hpi-sol{flex-direction:column;align-items:flex-start;gap:18px}
-nav .hp-logo{font-size:85px}
-nav .logo{font:400 102px/1.08 Anton,"Arial Narrow",Impact,sans-serif;letter-spacing:.005em;text-transform:uppercase;color:#e8201c;border-left:0;padding-left:0;margin-top:0}
-@media(max-width:600px){.hpi-sol{gap:6px}nav .hp-logo{font-size:40px}nav .logo{font-size:28px;letter-spacing:.01em}nav .ara-ac{font-size:16px!important;padding:10px 12px!important}}
+.hpi-sol{flex-direction:column;align-items:flex-start;gap:9px}
+nav .hp-logo{font-size:42.5px}
+nav .logo{font:400 51px/1.08 Anton,"Arial Narrow",Impact,sans-serif;letter-spacing:.005em;text-transform:uppercase;color:#e8201c;border-left:0;padding-left:0;margin-top:0}
+@media(max-width:600px){.hpi-sol{gap:3px}nav .hp-logo{font-size:20px}nav .logo{font-size:14px;letter-spacing:.01em}nav .ara-ac{font-size:16px!important;padding:10px 12px!important}}
 nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:.16em!important}
 @media(max-width:600px){nav .ara-ac{font-size:16px!important;padding:10px 12px!important}}
 /* ara: dükkân içi gibi beyaz, çerçevesiz, dekupe ürünler */
@@ -349,6 +349,10 @@ target=parseFloat(new URLSearchParams(location.search).get('z')||0);
 // gövde kaymasın: arama kutusuna odaklanınca tarayıcı sayfayı yukarı itip başlığı (logoyu) ekrandan çıkarıyordu
 document.body.addEventListener('scroll',()=>{if(document.body.scrollTop)document.body.scrollTop=0});addEventListener('scroll',()=>{if(scrollY&&getComputedStyle(document.body).overflow==='hidden')scrollTo(0,0)});
 
+// dükkân adı (PAZAR / HALALAR) logodaki HİT PAZARI yazısının hizasından başlar, // çizgisinin değil
+(()=>{const a=document.querySelector('nav .hp-a'),d=document.querySelector('nav .logo'),k=document.querySelector('nav .hpi-sol');if(!a||!d||!k)return;
+  const hizala=()=>{d.style.marginLeft=Math.max(0,a.getBoundingClientRect().left-k.getBoundingClientRect().left)+'px'};
+  hizala();addEventListener('resize',hizala);if(document.fonts)document.fonts.ready.then(hizala)})();
 // logo menüsü: her sayfada aynı yol haritası
 (()=>{const l=document.getElementById('hpAc'),m=document.getElementById('hpMenu');if(!l||!m)return;
   const kapa=()=>{m.hidden=true;l.setAttribute('aria-expanded','false')};
