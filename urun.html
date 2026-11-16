@@ -105,7 +105,7 @@ const D2=id&&id.startsWith('d2:')&&typeof DUKKAN2!=='undefined'?DUKKAN2.urunler.
 const SATICI=D2?'dukkan2':'halalar';
 const u=D2?['d2:'+D2.id,D2.ad,D2.aciklama||'','—']:(URUNLER.find(x=>x[0]===id)||URUNLER[0]);
 const fotolar=D2?[D2.gorsel]:[`kaynak/web/${u[0]}.webp`].concat(((typeof GALERI!=='undefined'&&GALERI[u[0]])||[]).map(g=>`kaynak/web/${g}.webp`));
-if(D2){const l=document.querySelector('nav .logo');l.textContent=DUKKAN2.ad;l.href='dukkan.html';const b=document.querySelector('nav .back');b.textContent='← '+DUKKAN2.ad;b.href='dukkan.html';document.getElementById('bTeklif').hidden=true}
+if(D2){const l=document.querySelector('nav .logo');l.textContent=DUKKAN2.ad;l.href='dukkan.html';const b=document.querySelector('nav .back');b.textContent='← '+DUKKAN2.ad;b.href='dukkan.html';if(D2.fiyat)document.getElementById('bTeklif').hidden=true}
 const ana=document.getElementById('img');ana.src=fotolar[0];
 const kat=D2?(D2.kategori||''):((typeof KATEGORI!=='undefined'&&KATEGORI[u[0]])||'');
 document.getElementById('k').textContent=[kat,u[3]==='—'?'':u[3]].filter(Boolean).join(' · ')||(D2?DUKKAN2.ad:'Halalar koleksiyonu');
@@ -125,13 +125,15 @@ const FY=D2?(D2.fiyat||0):((typeof FIYAT!=='undefined'&&FIYAT[u[0]])||0);
 document.getElementById('fy').innerHTML=FY?`${TL(FY)}${D2?'<small>KDV DAHİL</small>':'<small>ÖRNEK FİYAT</small>'}`:'';
 let VT=null;try{firebase.initializeApp(FIREBASE_AYAR);VT=firebase.firestore()}catch(e){console.warn('veritabanı yok',e)}
 const form=document.getElementById('talep'),tamam=document.getElementById('tamam'),bT=document.getElementById('bTeklif'),bA=document.getElementById('bAlim');
+// fiyatı henüz girilmemiş ürün: satın alma yok, yalnız teklif
+if(!FY){bA.hidden=true;bA.style.display='none';bT.hidden=false;document.getElementById('fy').innerHTML='<small>FİYAT YAKINDA · TEKLİFİNİ YAZ</small>'}
 function kisiHTML(){const k=oku().kisi||{};return `<div class="alanlar"><input id="kad" autocomplete="name" placeholder="Adın" aria-label="Adın" value="${esc(k.ad)}"><input id="ktel" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon (05..)" aria-label="Telefon" value="${esc(k.tel)}"></div>
   <label class="rza"><input type="checkbox" id="krz" ${k.rza?'checked':''}><span><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html" target="_blank" rel="noopener">Aydınlatma metnini</a> okudum; adımın ve telefonumun talebim için işlenmesine ve ABD'deki sunucularda saklanmasına açık rıza veriyorum.</span></label>`}
 function ac(tur){
   tamam.hidden=true;form.hidden=false;bT.classList.toggle('on',tur==='teklif');bA.classList.toggle('on',tur==='alim');
   if(tur==='teklif'){const o=[.7,.8,.9].map(r=>Math.round(FY*r/50)*50);
     form.innerHTML=`<h2>Teklif ver</h2><div class="tutar"><input id="tk" inputmode="numeric" aria-label="Teklif tutarı" value="${o[1]||''}"><span>₺</span></div>
-      <div class="hizli">${o.map(v=>`<button type="button" data-v="${v}">${TL(v)}</button>`).join('')}</div>${kisiHTML()}
+      <div class="hizli">${o.filter(v=>v>0).map(v=>`<button type="button" data-v="${v}">${TL(v)}</button>`).join('')}</div>${kisiHTML()}
       <p class="not">Teklifin dükkâna iletilir; dükkân seni telefonla arar. Durumu Hit Pazarı'nda "Tekliflerim"de görürsün.</p>
       <div class="hata" id="khata"></div><div class="dug"><button class="cta" type="button" id="vz">Vazgeç</button><button class="cta on" type="submit" id="gn">Teklifi gönder</button></div>`;
     form.querySelectorAll('.hizli button').forEach(b=>b.onclick=()=>{document.getElementById('tk').value=b.dataset.v})}
