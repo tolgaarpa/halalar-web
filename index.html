@@ -117,6 +117,12 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 #ara .oge:hover b{color:#e8201c}
 #ara .oge small{color:#77777f}
 #ara .yok{color:#77777f}
+#ara .ara-bas{display:flex;align-items:baseline;gap:14px;padding:18px 32px 0;max-width:1200px;width:100%;margin:0 auto}
+#ara .ara-bas .hp-logo{color:#111114;text-shadow:none;font-size:30px;display:inline-flex!important}
+#ara .ara-bas .hp-a{display:inline!important}
+#ara .ara-bas b{font:400 30px/1 Anton,Impact,sans-serif;text-transform:uppercase;color:#e8201c}
+#ara .ust2{padding-top:10px}
+
 #ara .katlar{align-items:center}
 #ara .katlar button.b1{font-size:26px;padding:14px 22px}
 #ara .katlar button.b2{font-size:19px;padding:11px 17px}
@@ -135,7 +141,7 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 <a class="deste-ac" id="desteAc" href="#">KAYDIR, SEÇ <small>beğen · teklif ver · satın al</small></a>
 <div class="hint" id="hint">kaydır ↓ içeri gir</div>
 <div id="end">halalar</div>
-<div id="ara"><div class="ust2"><input id="araKutu" type="search" placeholder="Ürün ara: plak, tablo, porselen…" autocomplete="off"><button class="kapat" id="araKapat">Kapat</button></div>
+<div id="ara"><div class="ara-bas"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><b>Ara</b></div><div class="ust2"><input id="araKutu" type="search" placeholder="Ürün ara: plak, tablo, porselen…" autocomplete="off"><button class="kapat" id="araKapat">Kapat</button></div>
 <div class="katlar" id="katlar"></div><div class="sonuc" id="sonuc"></div></div>
 <script src="veri/urunler.js"></script>
 <script src="veri/aspect.js"></script>
@@ -302,6 +308,9 @@ target=parseFloat(new URLSearchParams(location.search).get('z')||0);
   addEventListener('keydown',e=>{if(e.key==='Escape'&&pen.classList.contains('on'))document.getElementById('araKapat').click()});
 })();
 
+
+// gövde kaymasın: arama kutusuna odaklanınca tarayıcı sayfayı yukarı itip başlığı (logoyu) ekrandan çıkarıyordu
+document.body.addEventListener('scroll',()=>{if(document.body.scrollTop)document.body.scrollTop=0});addEventListener('scroll',()=>{if(scrollY&&getComputedStyle(document.body).overflow==='hidden')scrollTo(0,0)});
 </script>
 </body>
 </html>
