@@ -251,9 +251,11 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 .gir-alt{display:block;max-width:calc(var(--u)*25);margin-top:10px;font:700 12px/1.3 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#cfcac1}
 @keyframes asagi{0%,100%{transform:translateY(-2px)}50%{transform:translateY(5px)}}
 /* logo altında açılan menü */
-nav .marka{cursor:pointer}
-nav .marka::after{content:"";width:9px;height:9px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translateY(-3px);margin-left:2px;transition:transform .25s}
-nav .marka[aria-expanded="true"]::after{transform:rotate(225deg) translateY(-1px)}
+.hp-satir{display:flex;align-items:center;gap:4px;min-width:0}
+.hp-ac{flex:none;display:grid;place-items:center;width:40px;height:40px;margin:0;padding:0;background:none;border:0;color:#f2efe9;cursor:pointer;pointer-events:auto}
+.hp-ac::before{content:"";width:10px;height:10px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s}
+.hp-ac[aria-expanded="true"]::before{transform:rotate(225deg) translate(-2px,-2px)}
+.hp-ac:hover{color:#e8201c}
 .hp-menu{position:fixed;top:72px;left:24px;z-index:70;width:min(360px,calc(100vw - 32px));background:#0b0b0df5;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid #2a2a30;box-shadow:0 30px 60px #000c;padding:8px 0}
 .hp-menu>a{display:block;padding:13px 22px;text-decoration:none;color:#f2efe9;border-left:3px solid transparent}
 .hp-menu>a b{display:block;font:400 22px/1.1 Anton,sans-serif;text-transform:uppercase}
@@ -306,7 +308,7 @@ nav .marka[aria-expanded="true"]::after{transform:rotate(225deg) translateY(-1px
   <filter id="yirtik" x="-6%" y="-12%" width="112%" height="124%"><feTurbulence type="fractalNoise" baseFrequency=".022 .05" numOctaves="4" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="20" xChannelSelector="R" yChannelSelector="G"/></filter>
 </defs></svg>
 
-<nav><a class="marka" href="#" id="marka" aria-label="Hit Pazarı menüsü" aria-expanded="false" aria-controls="hpMenu"><span class="cizgi" aria-hidden="true">//</span><span class="ad">HİT PAZARI</span><span class="alt">Dijital<br>Dükkân</span></a>
+<nav><span class="hp-satir"><a class="marka" href="hit.html" id="marka" aria-label="Hit Pazarı ana sayfa"><span class="cizgi" aria-hidden="true">//</span><span class="ad">HİT PAZARI</span><span class="alt">Dijital<br>Dükkân</span></a><button class="hp-ac" id="hpAc" type="button" aria-label="Hit Pazarı menüsü" aria-expanded="false" aria-controls="hpMenu"></button></span>
   <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="sepet" href="#hesap" aria-label="Beğendiklerim"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1.200 13H3.800z"/><path d="M8.500 10V6.500a3.500 3.500 0 0 1 7 0V10"/></svg><i id="sepetN">0</i></a></span></nav>
 <div class="hp-menu" id="hpMenu" hidden>
   <a href="index.html?mod=kategori"><b>Kategoriler</b><small>Kategori seçerek gez</small></a>
@@ -568,14 +570,14 @@ addEventListener('touchmove',e=>{if(dokY!==null&&!sekmeAcik()&&dokY-e.touches[0]
 addEventListener('keydown',e=>{if(!sekmeAcik()&&['ArrowDown','PageDown',' '].includes(e.key)&&!e.target.closest('input,textarea,button,a')){e.preventDefault();pazaraGir()}});
 addEventListener('pageshow',e=>{if(e.persisted){girildi=false;kapi.classList.remove('dag')}});
 // ---- logo menüsü ve sekmeler ----
-const marka=document.getElementById('marka'),hpMenu=document.getElementById('hpMenu'),sekme=document.getElementById('katman');
+const marka=document.getElementById('hpAc'),hpMenu=document.getElementById('hpMenu'),sekme=document.getElementById('katman');
 const menuKapa=()=>{hpMenu.hidden=true;marka.setAttribute('aria-expanded','false')};
 // Dükkânlar: dükkân adları ayrı bir alt listede, tıklayınca açılır
 const hpmD=document.getElementById('hpmDukkan'),hpmL=document.getElementById('hpmListe');
 hpmD.onclick=()=>{hpmL.hidden=!hpmL.hidden;hpmD.setAttribute('aria-expanded',String(!hpmL.hidden))};
 if(typeof DUKKAN2!=='undefined'&&DUKKAN2.ad)document.getElementById('hpmD2').textContent=DUKKAN2.ad;
-marka.onclick=e=>{e.preventDefault();hpMenu.hidden=!hpMenu.hidden;marka.setAttribute('aria-expanded',String(!hpMenu.hidden))};
-addEventListener('click',e=>{if(!hpMenu.hidden&&!e.target.closest('#hpMenu,#marka'))menuKapa()});
+marka.onclick=e=>{e.stopPropagation();hpMenu.hidden=!hpMenu.hidden;marka.setAttribute('aria-expanded',String(!hpMenu.hidden))};
+addEventListener('click',e=>{if(!hpMenu.hidden&&!e.target.closest('#hpMenu,#hpAc'))menuKapa()});
 function sekmeAc(id){const s=document.getElementById(id);if(!s||s.parentElement!==sekme)return false;
   sekme.querySelectorAll(':scope>section').forEach(x=>x.classList.toggle('on',x===s));sekme.hidden=false;sekme.scrollTop=0;menuKapa();
   if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);if(id==='dukkanlar'&&typeof oklar==='function')setTimeout(oklar,30);return true}

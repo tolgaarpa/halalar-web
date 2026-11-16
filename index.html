@@ -67,6 +67,11 @@ nav .ara-ac:hover{border-color:var(--ink)}
 html{font-synthesis:none}
 .hpi-sol{display:flex;align-items:center;gap:12px;min-width:0}
 .hp-logo{display:inline-flex;align-items:center;gap:.36em;flex:none;text-decoration:none;pointer-events:auto;color:#f2efe9;font:400 22px/1 Anton,"Arial Narrow",Impact,sans-serif;letter-spacing:.005em;white-space:nowrap;text-shadow:none}
+.hp-satir{display:flex;align-items:center;gap:4px;min-width:0}
+.hp-ac{flex:none;display:grid;place-items:center;width:40px;height:40px;margin:0;padding:0;background:none;border:0;color:#f2efe9;cursor:pointer;pointer-events:auto}
+.hp-ac::before{content:"";width:10px;height:10px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s}
+.hp-ac[aria-expanded="true"]::before{transform:rotate(225deg) translate(-2px,-2px)}
+.hp-ac:hover{color:#e8201c}
 .hp-logo .hp-c{color:#e8201c;font-size:1.1em;letter-spacing:-.04em;transform:skewX(-14deg)}
 /* vintage dili: Anton başlık, Barlow gövde, kırmızı vurgu */
 nav .logo{font:700 15px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.24em;color:#cfcac1;margin-top:0;padding-left:12px;border-left:1px solid #55555e}
@@ -156,7 +161,7 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/halalar-web/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
 </head>
 <body>
-<nav><span class="hpi-sol"><a class="hp-logo" href="hit.html" id="hpLogo" aria-label="Hit Pazarı menüsü" aria-expanded="false"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><a class="logo" href="#">Halalar</a></span><span class="sag"><span class="depth" id="depth">0 m</span><button class="ara-ac" id="araAc">Ara</button></span></nav>
+<nav><span class="hpi-sol"><span class="hp-satir"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı ana sayfa"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><button class="hp-ac" id="hpAc" type="button" aria-label="Hit Pazarı menüsü" aria-expanded="false" aria-controls="hpMenu"></button></span><a class="logo" href="#">Halalar</a></span><span class="sag"><span class="depth" id="depth">0 m</span><button class="ara-ac" id="araAc">Ara</button></span></nav>
 <div class="hp-menu" id="hpMenu" hidden>
   <a href="index.html?mod=kategori"><b>Kategoriler</b><small>Kategori seçerek gez</small></a>
   <button class="hpm-dukkan" id="hpmDukkan" type="button" aria-expanded="false" aria-controls="hpmListe"><b>Dükkânlar</b><small>Dükkân seçerek gez</small></button>
@@ -345,7 +350,7 @@ target=parseFloat(new URLSearchParams(location.search).get('z')||0);
 document.body.addEventListener('scroll',()=>{if(document.body.scrollTop)document.body.scrollTop=0});addEventListener('scroll',()=>{if(scrollY&&getComputedStyle(document.body).overflow==='hidden')scrollTo(0,0)});
 
 // logo menüsü: her sayfada aynı yol haritası
-(()=>{const l=document.getElementById('hpLogo'),m=document.getElementById('hpMenu');if(!l||!m)return;
+(()=>{const l=document.getElementById('hpAc'),m=document.getElementById('hpMenu');if(!l||!m)return;
   const kapa=()=>{m.hidden=true;l.setAttribute('aria-expanded','false')};
   const hd=document.getElementById('hpmDukkan'),hl=document.getElementById('hpmListe');if(hd)hd.onclick=e=>{e.stopPropagation();hl.hidden=!hl.hidden;hd.setAttribute('aria-expanded',String(!hl.hidden))};
   l.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();m.hidden=!m.hidden;l.setAttribute('aria-expanded',String(!m.hidden));if(typeof open!=='undefined')open=m.hidden});
