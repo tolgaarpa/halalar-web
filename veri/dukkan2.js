@@ -256,6 +256,9 @@ const DUKKAN2={
 "kategori": "Alt giyim",
 "fiyat": 0,
 "gorsel": "kaynak/dsg/18_kot_mavi_slim.webp",
+"oran": 0.439,
+"gorseller": ["kaynak/dsg/18_kot_mavi_slim.webp", "kaynak/dsg/18_kot_mavi_slim_yan.webp", "kaynak/dsg/18_kot_mavi_slim_art.webp"],
+"tunel": true,
 "stok": 1
 },
 {
@@ -472,6 +475,9 @@ const DUKKAN2={
 "kategori": "Üst giyim",
 "fiyat": 0,
 "gorsel": "kaynak/dsg/39_sweat_beyaz_puma.webp",
+"oran": 0.804,
+"gorseller": ["kaynak/dsg/39_sweat_beyaz_puma.webp", "kaynak/dsg/39_sweat_beyaz_puma_yan.webp", "kaynak/dsg/39_sweat_beyaz_puma_art.webp"],
+"tunel": true,
 "stok": 1
 },
 {
@@ -625,6 +631,9 @@ const DUKKAN2={
 "kategori": "Dış giyim",
 "fiyat": 0,
 "gorsel": "kaynak/dsg/61_mont_lacivert.webp",
+"oran": 0.752,
+"gorseller": ["kaynak/dsg/61_mont_lacivert.webp", "kaynak/dsg/61_mont_lacivert_yan.webp", "kaynak/dsg/61_mont_lacivert_art.webp"],
+"tunel": true,
 "stok": 1
 },
 {
