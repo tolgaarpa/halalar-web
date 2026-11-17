@@ -331,7 +331,10 @@ function pick(x,y){ for(let j=drawn.length-1;j>=0;j--){ if(pickIs(drawn[j],x,y))
 const menuAcik=()=>['hikMenu','hpMenu'].some(i=>{const m=document.getElementById(i);return m&&!m.hidden})||!!(window.tunelKurAcik&&tunelKurAcik());
 {const izle=new MutationObserver(()=>{if(menuAcik()){clearTimeout(hoverT);card.classList.remove('on');hot=null;open=false}else if(!document.getElementById('ara').classList.contains('on'))open=true});
  ['hikMenu','hpMenu'].forEach(i=>{const m=document.getElementById(i);if(m)izle.observe(m,{attributes:true,attributeFilter:['hidden']})})}
-function showCard(it){if(menuAcik())return;card.style.left=Math.min(lx+16,innerWidth-230)+'px';card.style.top=Math.min(ly+16,innerHeight-110)+'px';document.getElementById('c-k').textContent=KMOD?'Kategori':[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];document.getElementById('c-p').textContent=it.u[2];card.classList.add('on')}
+// ürün kartı ekrandan taşmaz ve alttaki 'Kaydır, seç' düğmesinin üstüne binmez
+function kartYer(x,y){const w=card.offsetWidth,h=card.offsetHeight,dg=document.getElementById('desteAc'),dr=dg&&getComputedStyle(dg).display!=='none'&&dg.getBoundingClientRect().height>0?dg.getBoundingClientRect():null;
+  const alt=(dr?dr.top:innerHeight)-14;card.style.left=Math.max(8,Math.min(x+16,innerWidth-w-8))+'px';card.style.top=Math.max(8,Math.min(y+16,alt-h))+'px'}
+function showCard(it){if(menuAcik())return;document.getElementById('c-k').textContent=KMOD?'Kategori':[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];document.getElementById('c-p').textContent=it.u[2];kartYer(lx,ly);card.classList.add('on')}
 let cand=null,candT=0,offT=null;
 function setHot(o){
   if(o===hot){clearTimeout(offT);offT=null;cand=null;return}
@@ -355,7 +358,7 @@ function desteAdres(id){const p=location.port,yerel={'8766':'8769','8770':'8771'
   // Pazar / kendi tünelin ya da başka dükkânın ürünü: deste bütün dükkânların ürünleriyle açılır
   const hep=KPAZAR||!!(KST&&KST.length)||/^d[23]:/.test(id||'');
   return kok+'index.html'+(hep?'?pazar=1':'')+'#u='+encodeURIComponent(id)}
-addEventListener('mousemove',e=>{if(!card.classList.contains('on'))return;const x=Math.min(e.clientX+16,innerWidth-230),y=Math.min(e.clientY+16,innerHeight-110);card.style.left=x+'px';card.style.top=y+'px'});
+addEventListener('mousemove',e=>{if(!card.classList.contains('on'))return;kartYer(e.clientX,e.clientY)});
 target=parseFloat(new URLSearchParams(location.search).get('z')||0);
 
 // --- arama ve kategoriler ---
