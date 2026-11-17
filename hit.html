@@ -106,6 +106,12 @@ nav .sepet i{position:absolute;right:0;top:0;min-width:19px;height:19px;border-r
 .kapali .icerik{contain:none}
 .kapali .icerik{justify-content:space-between}.d2kat{margin-top:22px;font:400 clamp(30px,3.4vw,48px)/1.1 Anton,sans-serif;text-transform:uppercase;color:#e8201c}
 a.kepenk{display:block;text-decoration:none}
+/* açık dükkân vitrini (DSG, Önsal): gece vitrini, ışıklı tabela, rafta ürünler */
+.vitrin2{display:flex;flex-direction:column;text-decoration:none;background:radial-gradient(ellipse at 50% 30%,#2a2620 0%,#121114 60%,#09090b 100%);border:10px solid #18181c;outline:1px solid #2e2e35;box-shadow:inset 0 0 60px #000}
+.v2-tabela{display:block;margin:7% 8% 4%;padding:.35em .4em;text-align:center;font:400 clamp(30px,3.6vw,52px)/1 Anton,sans-serif;text-transform:uppercase;letter-spacing:.04em;color:#fff4e0;border:2px solid #e8201c;border-radius:6px;text-shadow:0 0 6px #ff5a4a,0 0 18px #e8201c,0 0 34px #e8201c;box-shadow:0 0 14px #e8201c88,inset 0 0 14px #e8201c55}
+.v2-raf{flex:1 1 0;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:3% 3%;padding:2% 5% 7%;background:linear-gradient(transparent 32.5%,#3a2c20 32.5%,#3a2c20 33.5%,transparent 33.5%,transparent 66%,#3a2c20 66%,#3a2c20 67%,transparent 67%)}
+.v2-raf img{width:100%;height:100%;min-height:0;max-height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 10px 14px rgba(0,0,0,.8))}
+.vitrin2:hover .v2-tabela{box-shadow:0 0 22px #e8201c,inset 0 0 18px #e8201c88}
 .icerik .buyuk-alt{font-family:Anton,sans-serif;font-weight:400;font-size:clamp(26px,3vw,40px);line-height:1.2;color:var(--yumusak);max-width:20ch;text-transform:uppercase}
 .raf9{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:14px}
 .raf9 a{position:relative;min-height:0;background:radial-gradient(ellipse at 50% 40%,#1d1d22 0%,#111114 75%);border:1px solid var(--line);display:grid;place-items:center;text-decoration:none;overflow:hidden;transition:border-color .2s}
@@ -481,7 +487,15 @@ document.getElementById('raf9').innerHTML=DOKUZ.map(id=>`<a href="urun.html?id=$
 // diğer dükkânlar (veri/dukkan2.js DSG, veri/dukkan3.js Önsal Elektronik): adı, kategorileri; ürün varsa ilk 9 ürün vitrine
 function vitrinKur(d,k,on){if(!d)return;const a=document.getElementById(k);a.dataset.ad=d.ad;a.setAttribute('aria-label',d.ad);
   document.getElementById(k+'Slogan').textContent=d.slogan;document.getElementById(k+'Kat').innerHTML=d.kategoriler.map(esc).join('<br>');
-  if(d.urunler.length){document.getElementById(k+'Levha').textContent=d.ad;const r=document.createElement('div');r.className='raf9';
+  if(d.urunler.length){document.getElementById(k+'Levha').textContent=d.ad;
+    // ürünü olan dükkânın kepengi açılır: kendi ürünlerinden ışıklı bir vitrin (Halalar'ın vitrin fotoğrafı gibi)
+    a.classList.remove('kapali');const kp=a.querySelector('.kepenk');
+    if(kp){const sec=d.urunler.filter(u=>u.stok!==0&&u.tunel).slice(0,24),V=[];for(let i=0;i<6&&sec.length;i++)V.push(sec[(i*5)%sec.length]);
+      const kc=p=>p.replace(/^kaynak\//,'kaynak/k/');
+      const v=document.createElement('a');v.className='foto vitrin2';v.href=kp.getAttribute('href');v.setAttribute('aria-label',d.ad+' dükkânına gir');
+      v.innerHTML=`<span class="v2-tabela">${esc(d.ad)}</span><span class="v2-raf">${V.map(u=>`<img src="${esc(kc(u.tgorsel||u.gorsel))}" data-b="${esc(u.tgorsel||u.gorsel)}" alt="" loading="lazy">`).join('')}</span>`;
+      v.querySelectorAll('img').forEach(im=>im.onerror=()=>{if(im.src.indexOf('/k/')>-1)im.src=im.dataset.b});
+      kp.replaceWith(v)}const r=document.createElement('div');r.className='raf9';
     r.innerHTML=d.urunler.filter(u=>u.stok!==0).slice(0,9).map(u=>`<a href="urun.html?id=${encodeURIComponent(on+u.id)}"><img src="${esc(u.gorsel)}" alt="${esc(u.ad)}" loading="lazy" referrerpolicy="no-referrer"><b>${esc(u.ad)}</b></a>`).join('');
     const ic=document.getElementById(k+'Icerik');ic.replaceChild(r,ic.firstElementChild);ic.style.contain='size'}}
 vitrinKur(typeof DUKKAN2!=='undefined'&&DUKKAN2,'d2','d2:');
