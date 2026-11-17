@@ -206,8 +206,8 @@ const GOR={};
 function dukT(on,D){return D.urunler.filter(x=>x.tunel&&x.stok!==0).map(x=>{const id=on+x.id;GOR[id]=x.tgorsel||x.gorsel;const o=x.toran||x.oran;if(o)ASPECT[id]=o;return [id,x.ad,x.aciklama||'',x.kategori]})}
 const D2T=KPAZAR?[].concat(typeof DUKKAN2!=='undefined'?dukT('d2:',DUKKAN2):[],typeof DUKKAN3!=='undefined'?dukT('d3:',DUKKAN3):[]):[];
 const KDT=KD?dukT(KD[0],KD[1]):null;
-// Kendi tünelin (?sec=h:Müzik~d3:Beyaz Eşya): ziyaretçinin seçtiği kategoriler, bütün dükkânlardan karışık
-const KSECIM=(()=>{const s=new URLSearchParams(location.search).get('sec');return s?s.split('~').filter(Boolean):null})();
+// Kendi tünelin (?sec=Giyim~Beyaz Eşya): ziyaretçinin seçtiği genel kategoriler, bütün dükkânlardan karışık
+const KSECIM=(()=>{const s=new URLSearchParams(location.search).get('sec');if(!s)return null;const L=s.split('~').filter(Boolean);return window.tunelSecimCoz?tunelSecimCoz(L):L})();
 const KST=KSECIM?(()=>{const L=[].concat(typeof KATEGORI!=='undefined'?URUNLER.filter(u=>KSECIM.includes('h:'+KATEGORI[u[0]])):[],
   typeof DUKKAN2!=='undefined'?dukT('d2:',DUKKAN2).filter(u=>KSECIM.includes('d2:'+u[3])):[],
   typeof DUKKAN3!=='undefined'?dukT('d3:',DUKKAN3).filter(u=>KSECIM.includes('d3:'+u[3])):[]);

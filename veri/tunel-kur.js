@@ -1,11 +1,14 @@
-// Kendi tünelini kur: ziyaretçi bütün dükkânların kategorilerinden istediklerini seçer, yalnız onlarla dolu bir tünelde gezer.
-// Açmak için: data-tunel-kur özniteliği olan herhangi bir bağlantı/düğme. Seçim index.html?sec=h:Müzik~d3:Beyaz Eşya olarak gider.
+// Kendi tünelini kur: ziyaretçi genel ürün kategorilerini seçer (dükkân adı yok), yalnız onlarla dolu bir tünelde gezer.
+// Açmak için: data-tunel-kur özniteliği olan herhangi bir bağlantı/düğme. Seçim index.html?sec=Giyim~Beyaz Eşya olarak gider.
+// Dükkânların kendi kategorileri GENEL tablosuyla genel kategoriye bağlanır; tabloda olmayan kendi adıyla genel kategoridir.
 // Gerekli veri (varsa kullanılır): urunler.js + kategoriler.js (Halalar), dukkan2.js (DSG), dukkan3.js (Önsal).
 (()=>{
   const ANAHTAR='hp-tunel-sec';
   const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  // dükkân grupları: [başlık, alt yazı, [[anahtar, kategori adı, ürün sayısı], ...]]
-  function gruplar(){const G=[];
+  const GENEL={'d2:Üst giyim':'Giyim','d2:Alt giyim':'Giyim','d2:Dış giyim':'Giyim','d2:Takım':'Giyim','h:Elektronik & Kamera':'Elektronik','d3:Televizyon':'Elektronik'};
+  const genelAd=k=>GENEL[k]||k.slice(k.indexOf(':')+1);
+  // dükkân grupları (iç kullanım): [başlık, alt yazı, [[anahtar, kategori adı, ürün sayısı], ...]]
+  function dukGruplar(){const G=[];
     if(typeof URUNLER!=='undefined'&&typeof KATEGORI!=='undefined'){const s={};URUNLER.forEach(u=>{const k=KATEGORI[u[0]];if(k)s[k]=(s[k]||0)+1});
       const sira=(typeof KATEGORILER!=='undefined'?KATEGORILER:Object.keys(s)).filter(k=>s[k]);G.push(['Halalar','Vintage ve koleksiyon',sira.map(k=>['h:'+k,k,s[k]])])}
     const duk=(on,D,alt)=>{const s={};D.urunler.filter(x=>x.tunel&&x.stok!==0).forEach(x=>s[x.kategori]=(s[x.kategori]||0)+1);
@@ -13,6 +16,11 @@
     if(typeof DUKKAN2!=='undefined')duk('d2:',DUKKAN2,'Giyim');
     if(typeof DUKKAN3!=='undefined')duk('d3:',DUKKAN3,'Elektronik ve beyaz eşya');
     return G}
+  // ziyaretçiye görünen tek liste: genel kategoriler, çoktan aza
+  function gruplar(){const s={},sira=[];dukGruplar().forEach(g=>g[2].forEach(c=>{const a=genelAd(c[0]);if(!(a in s)){s[a]=0;sira.push(a)}s[a]+=c[2]}));
+    return [['Kategoriler','',sira.sort((a,b)=>s[b]-s[a]).map(a=>[a,a,s[a]])]]}
+  // seçim (genel ad ya da eski 'h:Müzik' biçimi) -> dükkân anahtarları; tünel bunu kullanır
+  window.tunelSecimCoz=L=>{const S=new Set(L.map(k=>k.includes(':')?genelAd(k):k)),out=[];dukGruplar().forEach(g=>g[2].forEach(c=>{if(S.has(genelAd(c[0])))out.push(c[0])}));return out};
   const css=`.tk{position:fixed;inset:0;z-index:120;background:rgba(8,8,10,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:flex;justify-content:center;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;color:#f2efe9;font-family:Barlow,system-ui,sans-serif}
 .tk[hidden]{display:none}
 .tk-ic{width:100%;max-width:860px;padding:28px 24px 120px}
@@ -50,7 +58,7 @@
     G=gruplar();kur=document.createElement('div');kur.className='tk';kur.id='tk';kur.hidden=true;
     kur.setAttribute('role','dialog');kur.setAttribute('aria-modal','true');kur.setAttribute('aria-labelledby','tkB');
     kur.innerHTML=`<div class="tk-ic"><div class="tk-bas"><b id="tkB">Kendi <span>tünelin</span></b><button class="tk-x" type="button">Kapat</button></div>
-<p class="tk-ac">Görmek istediğin kategorileri seç. Tünelde yalnız onlar gelir; istediğin dükkândan istediğin kadar karıştırabilirsin.</p>
+<p class="tk-ac">Görmek istediğin ürün kategorilerini seç, tünelde yalnız onlar gelsin. İstediğin kadar karıştırabilirsin.</p>
 ${G.map((g,gi)=>`<section class="tk-g"><div class="tk-gb"><h4>${esc(g[0])}</h4><small>${esc(g[1])}</small><button class="tk-hep" type="button" data-g="${gi}">Hepsini seç</button></div>
 <div class="tk-cips">${g[2].map(c=>`<button class="tk-cip" type="button" aria-pressed="false" data-k="${esc(c[0])}">${esc(c[1])} <i>${c[2]}</i></button>`).join('')}</div></section>`).join('')}
 </div><div class="tk-alt"><div><button class="tk-tem" type="button">Temizle</button><button class="tk-git" type="button">Tünele gir<small></small></button></div></div>`;
@@ -77,6 +85,7 @@ ${G.map((g,gi)=>`<section class="tk-g"><div class="tk-gb"><h4>${esc(g[0])}</h4><
     // önceki seçim: adresteki tünel, yoksa son kurulan
     let L=null;const s=new URLSearchParams(location.search).get('sec');if(s)L=s.split('~');
     if(!L)try{L=JSON.parse(localStorage.getItem(ANAHTAR))}catch(_){}
+    if(L)L=L.map(k=>k.includes(':')?genelAd(k):k);
     const var_=new Set();G.forEach(g=>g[2].forEach(c=>var_.add(c[0])));sec=new Set((L||[]).filter(k=>var_.has(k)));
     guncelle();kur.hidden=false;kur.scrollTop=0;dispatchEvent(new CustomEvent('tunelkur',{detail:true}));
     setTimeout(()=>{const b=kur.querySelector('.tk-cip');if(b)b.focus({preventScroll:true})},30)}
