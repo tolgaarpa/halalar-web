@@ -48,9 +48,12 @@ footer a{text-decoration:none}footer a:hover{color:var(--ink)}
 @media(max-width:700px){nav{padding:16px}.sar{padding:0 16px}.hp-logo{font-size:22px}header.bas{padding:40px 0 24px}
   .raf{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.urun .b{padding:4px 2px 8px}.urun h2{font-size:15px}.urun .f{font-size:20px}
   .bos{grid-template-columns:1fr;padding:30px 20px}.bos .rafl{display:none}.guven{grid-template-columns:1fr}footer{padding:24px 16px}}
+
+nav{position:sticky;top:0;z-index:50;background:#0b0b0d}
+nav .back{display:inline-flex;align-items:center;border:1px solid #55555e;padding:10px 14px;color:#f2efe9;text-decoration:none}
 </style><script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
 </head><body>
-<nav><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span>HİT PAZARI</span></a><a class="back" href="hit.html#dukkanlar">← Dükkânlar</a></nav>
+<nav><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span>HİT PAZARI</span></a><a class="back" href="index.html?dukkan=2" id="tDon">← Tünele dön</a></nav>
 <script src="veri/hesap-ikon.js"></script>
 <div class="sar">
   <header class="bas"><h1 id="ad"></h1><p id="slogan"></p><a class="tgir" id="tgir" href="index.html?dukkan=2">Tünelde gez →</a><div class="kat" id="kat"></div></header>
@@ -67,6 +70,8 @@ footer a{text-decoration:none}footer a:hover{color:var(--ink)}
 <script>
 const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const TL=n=>(n||0).toLocaleString('tr-TR')+' ₺';
+/* 'Tünele dön' bu dükkânın tüneline */
+addEventListener('DOMContentLoaded',()=>{const t=document.getElementById('tDon');if(t)t.href=new URLSearchParams(location.search).get('d')==='3'?'index.html?dukkan=3':'index.html?dukkan=2'});
 const D3=new URLSearchParams(location.search).get('d')==='3'&&typeof DUKKAN3!=='undefined',D=D3?DUKKAN3:DUKKAN2,ON=D3?'d3:':'d2:';document.title='Hit Pazarı · '+D.ad;
 document.getElementById('ad').textContent=D.ad;document.getElementById('slogan').textContent=D.slogan;document.getElementById('teslim').textContent=D.teslim+'. Kargo takip bilgisi telefonuna gelir.';
 document.getElementById('tgir').href='index.html?dukkan='+(D3?'3':'2');

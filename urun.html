@@ -80,6 +80,11 @@ main img{filter:drop-shadow(0 24px 30px rgba(0,0,0,.16))}
 .acilar button.on{border-bottom-color:var(--accent)}
 .acilar img{filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
 .yok{max-width:640px;margin:12vh auto;padding:0 24px;text-align:center}.yok h1{font:400 clamp(40px,7vw,72px)/1 Anton,sans-serif;text-transform:uppercase;color:var(--accent)}.yok p{margin:18px 0 28px;color:var(--yumusak);font-size:18px}.yok .cta{display:inline-block;text-decoration:none}
+
+/* her ekranda üstte görünür 'Tünele dön' (Tolga): menü çubuğu sabit, düğme belirgin */
+nav{position:sticky;top:0;z-index:50;background:var(--bg)}
+nav .back{display:inline-flex;align-items:center;border:1px solid #55555e;padding:10px 14px;font-size:13px!important;letter-spacing:.14em!important;color:var(--ink)}
+nav .back:hover{border-color:var(--ink)}
 </style><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e8201c%27/%3E%3C/svg%3E">
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
 </head>
@@ -115,9 +120,11 @@ const u=D2?[DON+D2.id,D2.ad,D2.aciklama||'','—']:(HU||URUNLER[0]);
 if(YOK){const m=document.querySelector('main'),gr=id&&/^d[23]:/.test(id),dk=gr?(id.startsWith('d3:')?['dukkan.html?d=3',typeof DUKKAN3!=='undefined'?DUKKAN3.ad:'dükkân']:['dukkan.html',typeof DUKKAN2!=='undefined'?DUKKAN2.ad:'dükkân']):['index.html','Halalar'];
   m.hidden=true;m.style.display='none';const y=document.createElement('section');y.className='yok';y.innerHTML=`<h1>Bu ürün artık yok</h1><p>Satılmış ya da kaldırılmış olabilir. Benzerlerine ${dk[1].replace(/[<>&"]/g,'')} dükkânında bakabilirsin.</p><a class="cta on" href="${dk[0]}">Dükkâna git →</a>`;m.after(y);document.title='Hit Pazarı · Ürün bulunamadı'}
 const fotolar=D2?(D2.gorseller||[D2.gorsel]):[`kaynak/web/${u[0]}.webp`].concat(((typeof GALERI!=='undefined'&&GALERI[u[0]])||[]).map(g=>`kaynak/web/${g}.webp`));
-if(D2){const l=document.querySelector('nav .logo');l.textContent=DK.ad;l.href=DHREF;const b=document.querySelector('nav .back');b.textContent='← '+DK.ad;b.href=DHREF;if(D2.fiyat)document.getElementById('bTeklif').hidden=true}
+if(D2){const l=document.querySelector('nav .logo');l.textContent=DK.ad;l.href=DHREF;if(D2.fiyat)document.getElementById('bTeklif').hidden=true}
 // geri: geldiğin tünel (Pazar, kendi tünelin, dükkân); doğrudan gelindiyse Pazar tüneli
-{const r=document.referrer;if(!D2&&r&&r.indexOf(location.origin)===0&&/\/index\.html/.test(r))document.querySelector('nav .back').href=r}
+// 'Tünele dön': geldiğin tünel; yoksa ürünün kendi dükkânının tüneli (DSG ?dukkan=2, Önsal ?dukkan=3, Halalar)
+{const b=document.querySelector('nav .back'),r=document.referrer;b.textContent='← Tünele dön';
+ b.href=r&&r.indexOf(location.origin)===0&&/\/index\.html/.test(r)?r:(DON==='d2:'?'index.html?dukkan=2':DON==='d3:'?'index.html?dukkan=3':'index.html')}
 const ana=document.getElementById('img');ana.src=fotolar[0];
 const kat=D2?(D2.kategori||''):((typeof KATEGORI!=='undefined'&&KATEGORI[u[0]])||'');
 document.getElementById('k').textContent=[kat,u[3]==='—'?'':u[3]].filter(Boolean).join(' · ')||(D2?DK.ad:'Halalar koleksiyonu');
