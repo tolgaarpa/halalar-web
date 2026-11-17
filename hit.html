@@ -315,6 +315,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
   <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="sepet" href="#hesap" aria-label="Beğenilerim"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.300-9.200C1.500 8.200 3.300 4.500 7 4.500c2.200 0 3.600 1.300 5 3.200 1.400-1.900 2.800-3.200 5-3.200 3.700 0 5.500 3.700 4.300 6.800-1.800 4.600-9.300 9.200-9.300 9.200z"/></svg><i id="sepetN">0</i></a></span></nav>
 <div class="hp-menu" id="hpMenu" hidden>
   <a href="index.html?mod=kategori"><b>Kategoriler</b><small>Kategori seçerek gez</small></a>
+  <a href="#" data-tunel-kur><b>Kendi tünelin</b><small>Kategorileri seç, kendi tünelinde gez</small></a>
   <button class="hpm-dukkan" id="hpmDukkan" type="button" aria-expanded="false" aria-controls="hpmListe"><b>Dükkânlar</b><small>Dükkân seçerek gez</small></button>
   <div class="hpm-liste" id="hpmListe" hidden><a href="index.html"><b>Halalar</b></a><a href="dukkan.html"><b id="hpmD2">DSG</b></a><a href="dukkan.html?d=3"><b id="hpmD3">Önsal Elektronik</b></a></div>
 </div>
@@ -432,6 +433,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 <script src="veri/kategoriler.js"></script>
 <script src="veri/dukkan2.js"></script>
 <script src="veri/dukkan3.js"></script>
+<script src="veri/tunel-kur.js"></script>
 <script>
 const KEY='halalar-app-v1';   // telefon uygulamasıyla aynı kayıt (aynı alan adı)
 let D={begeni:[],islem:[]};
@@ -557,7 +559,7 @@ listeler();
 // ---- ana sayfa: kaydırınca parçalan, pazara gir ----
 document.documentElement.classList.add('ev');
 const kapi=document.getElementById('kapi');let girildi=false;
-const sekmeAcik=()=>!document.getElementById('katman').hidden||[document.getElementById('hpMenu'),document.getElementById('hikMenu')].some(m=>m&&!m.hidden);
+const sekmeAcik=()=>!document.getElementById('katman').hidden||(window.tunelKurAcik&&tunelKurAcik())||[document.getElementById('hpMenu'),document.getElementById('hikMenu')].some(m=>m&&!m.hidden);
 function pazaraGir(){if(girildi||sekmeAcik())return;girildi=true;
   // kamera kolajın ortasına doğru dalar (tek katman, GPU ile), ekran kararınca pazar tüneli açılır
   const az=matchMedia('(prefers-reduced-motion: reduce)').matches,k=kapi.querySelector('.kolaj img'),r=k?k.getBoundingClientRect():null;
