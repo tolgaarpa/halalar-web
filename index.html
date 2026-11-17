@@ -255,9 +255,11 @@ function kaynak(id,px){if(px>340)buyukIste(id);const L=KOPYA[id];if(L)for(const 
 // tekrar: kısa listede çok, uzun listede az (aynı ürün sık sık dönmesin); en az 3, en çok 12 tur
 const LISTE=[];for(let t=0;t<(KMOD?1:Math.max(3,Math.min(TEKRAR,Math.ceil(700/KAYNAK.length))));t++)KAYNAK.forEach(u=>LISTE.push(u));
 const N=LISTE.length;
+const DIK=innerHeight>innerWidth*1.15;
 const items=LISTE.map((u,i)=>{
   const ar=ASPECT[u[0]]||1;
-  const X=1.4, Y=1.35, per=2*(2*X+2*Y);            // çerçeve çevresine eşit dağılım
+  // dikey ekranda (telefon) çerçeve daralır: yan kenardaki ürünler ekrana girer, 3 ve 9 yönü boş kalmaz
+  const X=DIK?0.95:1.4, Y=1.35, per=2*(2*X+2*Y);            // çerçeve çevresine eşit dağılım
   const p=((i*0.6180339)%1)*per;
   const inn=((i*0.4142)%1)*0.2;   // ürünler çerçeveye yakın: ortada yürüyecek boşluk kalır
   let xv,yv;
@@ -266,8 +268,7 @@ const items=LISTE.map((u,i)=>{
   else if(p<4*X+2*Y){xv=X-(p-2*X-2*Y); yv=Y-inn}
   else {xv=-X+inn; yv=Y-(p-4*X-2*Y)}
   // kademe: ortadaki görüş hattı boş kalsın; üst/alt kenardaki ürünler ortadan yanlara açılır (arkadakiler görünür)
-  if(Math.abs(yv)>Math.abs(xv)){const a=Math.abs(xv),g=0.55;xv=(xv<0?-1:1)*(g+a*(X-g)/X)}
-  else{const a=Math.abs(yv),g=0.35;yv=(yv<0?-1:1)*(g+a*(Y-g)/Y)}
+  if(Math.abs(yv)/Y>Math.abs(xv)/X){const a=Math.abs(xv),g=0.4*X;xv=(xv<0?-1:1)*(g+a*(X-g)/X)}
   const w=((ar>1.25?460:ar<0.75?300:380)+((i*13)%6)*45)*(KMOD?1.25:IRI?.8:1);   // büyük fotoğraflı dükkân ürünleri bir tık küçük   // kategori modunda ikonlar bir tık büyük
   const z=-(i*STEP)-250;
   let rot=0;
