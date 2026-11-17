@@ -325,6 +325,20 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 .sokak .vitrin2 .v2-tabela{font-size:clamp(22px,2.4vw,34px)}
 @media(max-width:900px){.sokak{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}}
 @media(max-width:600px){.sokak{grid-template-columns:minmax(0,1fr);gap:40px}}
+
+/* Hesabım (giriş yapılmış): solda karşılama + özet sayılar + hızlı geçiş; biletin içinde liste geniş */
+.uye-ozet .selam{font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(30px,3vw,44px);line-height:1.1;max-width:none!important;color:#fff}
+.uye-ozet .sayilar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:26px}
+.uye-ozet .sayilar a{display:flex;flex-direction:column;gap:6px;padding:16px 14px;border:1px solid #ffffff44;color:#fff;text-decoration:none;transition:background .2s,border-color .2s}
+.uye-ozet .sayilar a:hover{background:#ffffff14;border-color:#fff}
+.uye-ozet .sayilar b{font:400 40px/1 Anton,sans-serif}
+.uye-ozet .sayilar span{font:700 12px/1.25 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#cdd3f5}
+.uye-ozet .hizli{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+.uye-ozet .hap{background:#fff;color:var(--siyah)}.uye-ozet .hap:hover{background:var(--kirmizi);color:#fff}
+.uye-ozet .hap.ikinci{background:none;color:#fff;box-shadow:inset 0 0 0 2px #fff}
+#hesap.girisli .bilet .gov{justify-content:flex-start}
+#hesap.girisli .raflar{max-height:440px}
+@media(max-width:600px){.uye-ozet .sayilar b{font-size:32px}.uye-ozet .sayilar a{padding:12px 10px}}
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e3171b%27/%3E%3C/svg%3E">
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
@@ -385,10 +399,16 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 </div></section>
 
 <section class="bolum" id="hesap"><div class="sar">
-  <h2>Üye girişi</h2>
+  <h2 id="hBas">Üye girişi</h2>
   <div class="hesap">
-    <div class="yazi"><p>Google hesabınla gir; beğendiklerin, verdiğin teklifler ve iletişim bilgilerin tek yerde dursun.</p>
+    <div class="yazi" id="hYazi"><p>Google hesabınla gir; beğendiklerin, verdiğin teklifler ve iletişim bilgilerin tek yerde dursun.</p>
       <small>Girmeden de gezebilirsin. Şifre tutmayız.</small></div>
+    <!-- giriş yapılmışken: karşılama, özet ve hızlı geçişler -->
+    <div class="yazi uye-ozet" id="hOzet" hidden>
+      <p class="selam">Merhaba, <span id="oAd"></span></p>
+      <div class="sayilar"><a href="#hesap" data-s="begeni"><b id="oB">0</b><span>Beğeni</span></a><a href="#hesap" data-s="islem"><b id="oI">0</b><span>Teklif ve talep</span></a><a href="#hesap" data-s="islem"><b id="oK">0</b><span>Cevap bekleyen</span></a></div>
+      <div class="hizli"><a class="hap" href="index.html?mod=pazar">Pazara gir</a><a class="hap ikinci" href="#" data-tunel-kur>Kendi tünelin</a></div>
+    </div>
     <div class="bilet">
       <div class="gov">
         <div id="girisYok">
@@ -557,6 +577,7 @@ const fiyatYaz=id=>DUK[id]?(DUK[id].fiyat?TL(DUK[id].fiyat):'Teklif ile'):TL(FIY
 const kutu=(id,alt)=>{const d=DUK[id],u=d?[id,d.ad]:U(id);if(!u)return '';return `<a href="urun.html?id=${encodeURIComponent(id)}"><img src="${d?esc(d.gorsel):res(id)}" alt="" loading="lazy"><b>${esc(u[1])}</b><small>${d?esc(d.dukkan)+' · ':''}${alt}</small></a>`};
 function listeler(){
   document.getElementById('nB').textContent=D.begeni.length;document.getElementById('nI').textContent=D.islem.length;
+  {const o=id=>document.getElementById(id);if(o('oB')){o('oB').textContent=D.begeni.length;o('oI').textContent=D.islem.length;o('oK').textContent=D.islem.filter(x=>!x.durum||x.durum==='Beklemede').length}}
   document.getElementById('s-begeni').innerHTML=D.begeni.length?D.begeni.slice().reverse().map(id=>kutu(id,fiyatYaz(id))).join(''):'<div class="yok">Henüz beğeni yok. Telefon uygulamasında sağa kaydırdıkların burada görünür.</div>';
   document.getElementById('s-islem').innerHTML=D.islem.length?D.islem.map(x=>kutu(x.id,`${x.tur==='teklif'?'Teklif':'Alım'} · ${TL(x.tutar)} · ${esc(x.durum)}`)).join(''):'<div class="yok">Henüz teklif yok.</div>';
   document.getElementById('sepetN').textContent=D.begeni.length;
@@ -564,6 +585,7 @@ function listeler(){
 async function durumTazele(){if(!VT)return;let d=false;
   await Promise.all(D.islem.filter(x=>x.ref).map(async x=>{try{const s=await VT.collection('durumlar').doc(x.ref).get().then(d=>d.exists?d:VT.collection('talepler').doc(x.ref).get()).catch(()=>VT.collection('talepler').doc(x.ref).get());if(!s.exists)return;const v=s.data();if(v.durum!==x.durum){x.durum=v.durum;d=true}}catch(e){}}));
   if(d){kaydetD();listeler()}}
+document.querySelectorAll('#hOzet .sayilar a').forEach(a=>a.onclick=e=>{e.preventDefault();const b=document.querySelector('#sekme button[data-s="'+a.dataset.s+'"]');if(b)b.click()});
 document.querySelectorAll('#sekme button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#sekme button').forEach(x=>x.classList.toggle('on',x===b));
   ['begeni','islem','bilgi'].forEach(s=>document.getElementById('s-'+s).hidden=s!==b.dataset.s)});
@@ -587,6 +609,8 @@ document.getElementById('cikis').onclick=()=>auth&&auth.signOut();
 function goster(u){
   document.getElementById('girisYok').hidden=!!u;document.getElementById('girisVar').hidden=!u;
   document.getElementById('ustHesap').textContent=u?'Hesabım':'Üye girişi';
+  document.getElementById('hBas').textContent=u?'Hesabım':'Üye girişi';document.getElementById('hYazi').hidden=!!u;document.getElementById('hOzet').hidden=!u;document.getElementById('hesap').classList.toggle('girisli',!!u);
+  if(u)document.getElementById('oAd').textContent=(u.displayName||(u.email||'').split('@')[0]).split(' ')[0];
   if(!u){document.getElementById('biletNo').textContent='0001';return}
   const ad=u.displayName||(u.email||'').split('@')[0];
   document.getElementById('pAd').textContent=ad;document.getElementById('pMail').textContent=u.email||'';
