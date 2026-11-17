@@ -5,4 +5,5 @@ exclude:
   - docs/
   - artifacts/
   - hit-deneme.html
+  - deneme-dsg.html
   - .tmp/
