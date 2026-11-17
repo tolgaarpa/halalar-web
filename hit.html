@@ -339,6 +339,15 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 #hesap.girisli .bilet .gov{justify-content:flex-start}
 #hesap.girisli .raflar{max-height:440px}
 @media(max-width:600px){.uye-ozet .sayilar b{font-size:32px}.uye-ozet .sayilar a{padding:12px 10px}}
+
+/* telefonda 'Nasıl çalışır' dört yönü kartın etrafında kalır: üstte Teklif, solda Geç, sağda Beğen, altta Satın al */
+@media(max-width:900px){
+#nasil .yonler{grid-template-columns:minmax(0,1fr) minmax(0,46vw) minmax(0,1fr);gap:14px 8px}
+#nasil .kart{grid-column:2;grid-row:2;width:100%}
+#nasil .y-ust{grid-column:2;grid-row:1}#nasil .y-alt{grid-column:2;grid-row:3}
+#nasil .y-sol{grid-column:1;grid-row:2;justify-self:end;text-align:right}#nasil .y-sag{grid-column:3;grid-row:2;justify-self:start;text-align:left}
+#nasil .yon b{font-size:15px}#nasil .yon small{font-size:12px}#nasil .yon .ok2{font-size:22px}
+}
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e3171b%27/%3E%3C/svg%3E">
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
@@ -355,7 +364,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
   <a href="index.html?mod=kategori"><b>Kategoriler</b><small>Kategori seçerek gez</small></a>
   <a href="#" data-tunel-kur><b>Kendi tünelin</b><small>Kategorileri seç, kendi tünelinde gez</small></a>
   <button class="hpm-dukkan" id="hpmDukkan" type="button" aria-expanded="false" aria-controls="hpmListe"><b>Dükkânlar</b><small>Dükkân seçerek gez</small></button>
-  <div class="hpm-liste" id="hpmListe" hidden><a href="dukkan.html"><b id="hpmD2">DSG</b></a><a href="index.html"><b>Halalar</b></a><a href="dukkan.html?d=3"><b id="hpmD3">Önsal Elektronik</b></a></div>
+  <div class="hpm-liste" id="hpmListe" hidden><a href="#dukkanlar"><b>Bütün dükkânlar</b></a><a href="dukkan.html"><b id="hpmD2">DSG</b></a><a href="index.html"><b>Halalar</b></a><a href="dukkan.html?d=3"><b id="hpmD3">Önsal Elektronik</b></a></div>
 </div>
 <script src="veri/hesap-ikon.js"></script>
 
