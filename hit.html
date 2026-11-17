@@ -315,7 +315,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 <div class="hp-menu" id="hpMenu" hidden>
   <a href="index.html?mod=kategori"><b>Kategoriler</b><small>Kategori seçerek gez</small></a>
   <button class="hpm-dukkan" id="hpmDukkan" type="button" aria-expanded="false" aria-controls="hpmListe"><b>Dükkânlar</b><small>Dükkân seçerek gez</small></button>
-  <div class="hpm-liste" id="hpmListe" hidden><a href="index.html"><b>Halalar</b></a><a href="dukkan.html"><b id="hpmD2">DSG</b></a></div>
+  <div class="hpm-liste" id="hpmListe" hidden><a href="index.html"><b>Halalar</b></a><a href="dukkan.html"><b id="hpmD2">DSG</b></a><a href="dukkan.html?d=3"><b id="hpmD3">Önsal Elektronik</b></a></div>
 </div>
 <script src="veri/hesap-ikon.js"></script>
 
@@ -338,7 +338,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 <div class="katman" id="katman" hidden role="dialog" aria-modal="true" aria-label="Hit Pazarı"><button class="katman-kapat" id="sekmeKapat" type="button" aria-label="Kapat">×</button>
 <section class="bolum" id="dukkanlar"><div class="sar">
   <div class="ust-satir"><h2 id="vAd">Halalar</h2>
-    <div class="oklar"><button class="ok" id="geri" aria-label="Önceki vitrin" disabled>←</button><span id="sira">1 / 2</span><button class="ok" id="ileri" aria-label="Sıradaki vitrin">→</button></div></div>
+    <div class="oklar"><button class="ok" id="geri" aria-label="Önceki vitrin" disabled>←</button><span id="sira">1 / 3</span><button class="ok" id="ileri" aria-label="Sıradaki vitrin">→</button></div></div>
   <div class="sokak" id="sokak">
     <article class="dukkan" data-ad="Halalar">
       <a class="foto" href="index.html"><img src="kaynak/vitrin/halalar.webp" alt="Halalar dükkânının gece vitrini, neon tabelası yanıyor" loading="lazy"></a>
@@ -350,6 +350,10 @@ html.ev,html.ev body{overflow:hidden;height:100%}
     <article class="dukkan kapali" id="d2" data-ad="DSG" aria-label="DSG">
       <a class="kepenk" href="dukkan.html"><div class="levha" id="d2Levha">Raflar dolduruluyor</div></a>
       <div class="icerik" id="d2Icerik"><div><p class="alt buyuk-alt" id="d2Slogan"></p><p class="d2kat" id="d2Kat"></p></div><a class="hap" href="dukkan.html" id="d2Gir">Dükkâna gir</a></div>
+    </article>
+    <article class="dukkan kapali" id="d3" data-ad="Önsal Elektronik" aria-label="Önsal Elektronik">
+      <a class="kepenk" href="dukkan.html?d=3"><div class="levha" id="d3Levha">Raflar dolduruluyor</div></a>
+      <div class="icerik" id="d3Icerik"><div><p class="alt buyuk-alt" id="d3Slogan"></p><p class="d2kat" id="d3Kat"></p></div><a class="hap" href="dukkan.html?d=3" id="d3Gir">Dükkâna gir</a></div>
     </article>
   </div>
 </div></section>
@@ -426,6 +430,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 <script src="veri/fiyatlar.js"></script>
 <script src="veri/kategoriler.js"></script>
 <script src="veri/dukkan2.js"></script>
+<script src="veri/dukkan3.js"></script>
 <script>
 const KEY='halalar-app-v1';   // telefon uygulamasıyla aynı kayıt (aynı alan adı)
 let D={begeni:[],islem:[]};
@@ -467,13 +472,14 @@ addEventListener('scroll',()=>{if(bekle&&scrollY<innerHeight*1.2){bekle=false;so
 const DOKUZ=['ig/ig_fender','h/fisher','3464','ig/ig_maske','h/daktilo','ig/ig_hoparlor','ek/3482_papagan','3490','h/actionman'].filter(U).slice(0,9);
 document.getElementById('raf9').innerHTML=DOKUZ.map(id=>`<a href="urun.html?id=${encodeURIComponent(id)}"><img src="${res(id)}" alt="${esc(U(id)[1])}" loading="lazy"><b>${esc(U(id)[1])}</b></a>`).join('');
 // sokak: okla kaydırılan vitrinler
-// ikinci dükkân (veri/dukkan2.js): adı, kategorileri; ürün varsa ilk 9 ürün vitrine
-if(typeof DUKKAN2!=='undefined'){const d=DUKKAN2,a=document.getElementById('d2');a.dataset.ad=d.ad;a.setAttribute('aria-label',d.ad);
-  document.getElementById('d2Slogan').textContent=d.slogan;document.getElementById('d2Kat').innerHTML=d.kategoriler.map(esc).join('<br>');
-  
-  if(d.urunler.length){document.getElementById('d2Levha').textContent=d.ad;const r=document.createElement('div');r.className='raf9';
-    r.innerHTML=d.urunler.filter(u=>u.stok!==0).slice(0,9).map(u=>`<a href="urun.html?id=${encodeURIComponent('d2:'+u.id)}"><img src="${esc(u.gorsel)}" alt="${esc(u.ad)}" loading="lazy" referrerpolicy="no-referrer"><b>${esc(u.ad)}</b></a>`).join('');
-    const ic=document.getElementById('d2Icerik');ic.replaceChild(r,ic.firstElementChild);ic.style.contain='size'}}
+// diğer dükkânlar (veri/dukkan2.js DSG, veri/dukkan3.js Önsal Elektronik): adı, kategorileri; ürün varsa ilk 9 ürün vitrine
+function vitrinKur(d,k,on){if(!d)return;const a=document.getElementById(k);a.dataset.ad=d.ad;a.setAttribute('aria-label',d.ad);
+  document.getElementById(k+'Slogan').textContent=d.slogan;document.getElementById(k+'Kat').innerHTML=d.kategoriler.map(esc).join('<br>');
+  if(d.urunler.length){document.getElementById(k+'Levha').textContent=d.ad;const r=document.createElement('div');r.className='raf9';
+    r.innerHTML=d.urunler.filter(u=>u.stok!==0).slice(0,9).map(u=>`<a href="urun.html?id=${encodeURIComponent(on+u.id)}"><img src="${esc(u.gorsel)}" alt="${esc(u.ad)}" loading="lazy" referrerpolicy="no-referrer"><b>${esc(u.ad)}</b></a>`).join('');
+    const ic=document.getElementById(k+'Icerik');ic.replaceChild(r,ic.firstElementChild);ic.style.contain='size'}}
+vitrinKur(typeof DUKKAN2!=='undefined'&&DUKKAN2,'d2','d2:');
+vitrinKur(typeof DUKKAN3!=='undefined'&&DUKKAN3,'d3','d3:');
 const sokak=document.getElementById('sokak'),vit=[...sokak.children],geri=document.getElementById('geri'),ileri=document.getElementById('ileri');
 const kacinci=()=>Math.round(sokak.scrollLeft/(sokak.clientWidth+32));
 function oklar(){const k=kacinci();document.getElementById('vAd').textContent=vit[Math.min(k,vit.length-1)].dataset.ad;geri.disabled=k<=0;ileri.disabled=k>=vit.length-1;document.getElementById('sira').textContent=(k+1)+' / '+vit.length}

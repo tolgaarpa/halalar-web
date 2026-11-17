@@ -94,22 +94,25 @@ main img{filter:drop-shadow(0 24px 30px rgba(0,0,0,.16))}
 <script src="veri/kategoriler.js"></script>
 <script src="veri/fiyatlar.js"></script>
 <script src="veri/dukkan2.js"></script>
+<script src="veri/dukkan3.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="veri/firebase-ayar.js"></script>
 <script>
 const id=new URLSearchParams(location.search).get('id');
-// ikinci dükkân ürünleri 'd2:' ile başlar (veri/dukkan2.js)
-const D2=id&&id.startsWith('d2:')&&typeof DUKKAN2!=='undefined'?DUKKAN2.urunler.find(x=>'d2:'+x.id===id):null;
-const SATICI=D2?'dukkan2':'halalar';
-const u=D2?['d2:'+D2.id,D2.ad,D2.aciklama||'','—']:(URUNLER.find(x=>x[0]===id)||URUNLER[0]);
+// diğer dükkânların ürünleri önekle başlar: 'd2:' DSG (veri/dukkan2.js), 'd3:' Önsal Elektronik (veri/dukkan3.js)
+const DSL=[typeof DUKKAN2!=='undefined'&&['d2:',DUKKAN2,'dukkan.html'],typeof DUKKAN3!=='undefined'&&['d3:',DUKKAN3,'dukkan.html?d=3']].filter(Boolean);
+const DS=id&&DSL.find(x=>id.startsWith(x[0]))||null,DK=DS&&DS[1],DON=DS?DS[0]:'',DHREF=DS?DS[2]:'';
+const D2=DK?DK.urunler.find(x=>DON+x.id===id)||null:null;
+const SATICI=D2?DK.id:'halalar';
+const u=D2?[DON+D2.id,D2.ad,D2.aciklama||'','—']:(URUNLER.find(x=>x[0]===id)||URUNLER[0]);
 const fotolar=D2?(D2.gorseller||[D2.gorsel]):[`kaynak/web/${u[0]}.webp`].concat(((typeof GALERI!=='undefined'&&GALERI[u[0]])||[]).map(g=>`kaynak/web/${g}.webp`));
-if(D2){const l=document.querySelector('nav .logo');l.textContent=DUKKAN2.ad;l.href='dukkan.html';const b=document.querySelector('nav .back');b.textContent='← '+DUKKAN2.ad;b.href='dukkan.html';if(D2.fiyat)document.getElementById('bTeklif').hidden=true}
+if(D2){const l=document.querySelector('nav .logo');l.textContent=DK.ad;l.href=DHREF;const b=document.querySelector('nav .back');b.textContent='← '+DK.ad;b.href=DHREF;if(D2.fiyat)document.getElementById('bTeklif').hidden=true}
 const ana=document.getElementById('img');ana.src=fotolar[0];
 const kat=D2?(D2.kategori||''):((typeof KATEGORI!=='undefined'&&KATEGORI[u[0]])||'');
-document.getElementById('k').textContent=[kat,u[3]==='—'?'':u[3]].filter(Boolean).join(' · ')||(D2?DUKKAN2.ad:'Halalar koleksiyonu');
-document.getElementById('h').textContent=u[1];document.getElementById('p').textContent=u[2];document.title=(D2?DUKKAN2.ad:'Halalar')+' · '+u[1];
+document.getElementById('k').textContent=[kat,u[3]==='—'?'':u[3]].filter(Boolean).join(' · ')||(D2?DK.ad:'Halalar koleksiyonu');
+document.getElementById('h').textContent=u[1];document.getElementById('p').textContent=u[2];document.title=(D2?DK.ad:'Halalar')+' · '+u[1];
 if(fotolar.length>1){const kutu=document.getElementById('acilar');
   fotolar.forEach((f,i)=>{const b=document.createElement('button');b.className=i?'':'on';b.setAttribute('aria-label',(i+1)+'. açı');
     const im=document.createElement('img');im.src=f;im.alt='';im.loading='lazy';b.appendChild(im);
@@ -137,7 +140,7 @@ function ac(tur){
       <p class="not">Teklifin dükkâna iletilir; dükkân seni telefonla arar. Durumu Hit Pazarı'nda "Tekliflerim"de görürsün.</p>
       <div class="hata" id="khata"></div><div class="dug"><button class="cta" type="button" id="vz">Vazgeç</button><button class="cta on" type="submit" id="gn">Teklifi gönder</button></div>`;
     form.querySelectorAll('.hizli button').forEach(b=>b.onclick=()=>{document.getElementById('tk').value=b.dataset.v})}
-  else{form.innerHTML=`<h2>Satın al</h2><div class="ozet"><div><span>Ürün</span><span>${TL(FY)}</span></div><div><span>Teslimat</span><span>${D2?esc(DUKKAN2.teslim):'Dükkândan teslim'}</span></div><div><b>Toplam</b><b>${TL(FY)}</b></div></div>${kisiHTML()}
+  else{form.innerHTML=`<h2>Satın al</h2><div class="ozet"><div><span>Ürün</span><span>${TL(FY)}</span></div><div><span>Teslimat</span><span>${D2?esc(DK.teslim):'Dükkândan teslim'}</span></div><div><b>Toplam</b><b>${TL(FY)}</b></div></div>${kisiHTML()}
       <p class="not">${D2?'Siparişin bize düşer; seni arayıp ödeme ve teslimat adresini teyit ederiz. <a href="satis-kosullari.html" target="_blank" rel="noopener">Satış koşulları ve cayma hakkı</a>.':'Burada ödeme alınmaz; talebin dükkâna düşer, dükkân seni arayıp ürünü ayırır.'}</p>
       <div class="hata" id="khata"></div><div class="dug"><button class="cta" type="button" id="vz">Vazgeç</button><button class="cta on" type="submit" id="gn">Satın alma talebini gönder</button></div>`}
   form.dataset.tur=tur;document.getElementById('vz').onclick=kapat;
