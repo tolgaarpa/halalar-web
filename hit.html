@@ -370,7 +370,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
       <a class="foto" href="index.html"><img src="kaynak/vitrin/halalar.webp" alt="Halalar dükkânının gece vitrini, neon tabelası yanıyor" loading="lazy"></a>
       <div class="icerik">
         <div class="raf9" id="raf9"></div>
-        <a class="hap" href="index.html">Halalar tüneline gir</a>
+        <a class="hap" href="index.html">Dükkâna gir</a>
       </div>
     </article>
     <article class="dukkan kapali" id="d2" data-ad="DSG" aria-label="DSG">
@@ -521,6 +521,12 @@ function oklar(){const k=kacinci();geri.disabled=k<=0;ileri.disabled=k>=vit.leng
 const git=k=>{k=Math.max(0,Math.min(vit.length-1,k));sokak.scrollTo({left:vit[k].offsetLeft-sokak.offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});setTimeout(oklar,600)};
 geri.onclick=()=>git(kacinci()-1);ileri.onclick=()=>git(kacinci()+1);
 sokak.addEventListener('scroll',oklar,{passive:true});oklar();
+// Halalar da diğer dükkânlar gibi: vitrin fotoğrafı yerine kendi ürünleriyle ışıklı vitrin
+{const ha=vit.find(a=>a.dataset.ad==='Halalar'),f=ha&&ha.querySelector('a.foto');
+  if(f&&typeof URUNLER!=='undefined'&&URUNLER.length){const V=[];for(let i=0;i<6;i++)V.push(URUNLER[(i*17+3)%URUNLER.length]);
+    const v=document.createElement('a');v.className='foto vitrin2';v.href=f.getAttribute('href');v.setAttribute('aria-label','Halalar dükkânına gir');
+    v.innerHTML=`<span class="v2-tabela">Halalar</span><span class="v2-raf">${V.map(u=>`<img src="kaynak/k/web/${esc(u[0])}.webp" data-b="kaynak/web/${esc(u[0])}.webp" alt="" loading="lazy">`).join('')}</span>`;
+    v.querySelectorAll('img').forEach(im=>im.onerror=()=>{if(im.src.indexOf('/k/')>-1)im.src=im.dataset.b});f.replaceWith(v)}}
 // Dükkânlar: hepsi eşit, alfabetik kartlar (kimse ayrıcalıklı değil); her kartta ad ve ürün sayısı
 {const say={'Halalar':typeof URUNLER!=='undefined'?URUNLER.length:0};[typeof DUKKAN2!=='undefined'&&DUKKAN2,typeof DUKKAN3!=='undefined'&&DUKKAN3].filter(Boolean).forEach(d=>say[d.ad]=d.urunler.filter(u=>u.stok!==0).length);
   vit.slice().sort((a,b)=>a.dataset.ad.localeCompare(b.dataset.ad,'tr')).forEach(a=>{const h=document.createElement('div');h.className='d-bas';h.innerHTML=`<h3>${esc(a.dataset.ad)}</h3><span>${say[a.dataset.ad]||0} ürün</span>`;a.prepend(h);sokak.appendChild(a)})}
