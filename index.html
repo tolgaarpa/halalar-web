@@ -323,7 +323,11 @@ function pickIs(it,x,y){
   const u=Math.floor((lx_/it.sw+0.5)*48), v=Math.floor((ly_/it.sh+0.5)*48);
   if(u<0||u>47||v<0||v>47)return false; return d[(v*48+u)*4+3]>40}
 function pick(x,y){ for(let j=drawn.length-1;j>=0;j--){ if(pickIs(drawn[j],x,y))return drawn[j] } return null }
-function showCard(it){card.style.left=Math.min(lx+16,innerWidth-230)+'px';card.style.top=Math.min(ly+16,innerHeight-110)+'px';document.getElementById('c-k').textContent=KMOD?'Kategori':[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];document.getElementById('c-p').textContent=it.u[2];card.classList.add('on')}
+// menü açıkken ürün kartı görünmez; menü açılınca kart kapanır, tünel durur (Tolga 17.11)
+const menuAcik=()=>['hikMenu','hpMenu'].some(i=>{const m=document.getElementById(i);return m&&!m.hidden})||!!(window.tunelKurAcik&&tunelKurAcik());
+{const izle=new MutationObserver(()=>{if(menuAcik()){clearTimeout(hoverT);card.classList.remove('on');hot=null;open=false}else if(!document.getElementById('ara').classList.contains('on'))open=true});
+ ['hikMenu','hpMenu'].forEach(i=>{const m=document.getElementById(i);if(m)izle.observe(m,{attributes:true,attributeFilter:['hidden']})})}
+function showCard(it){if(menuAcik())return;card.style.left=Math.min(lx+16,innerWidth-230)+'px';card.style.top=Math.min(ly+16,innerHeight-110)+'px';document.getElementById('c-k').textContent=KMOD?'Kategori':[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];document.getElementById('c-p').textContent=it.u[2];card.classList.add('on')}
 let cand=null,candT=0,offT=null;
 function setHot(o){
   if(o===hot){clearTimeout(offT);offT=null;cand=null;return}
