@@ -251,7 +251,7 @@ function buyukIste(id){if(BUYUK[id]||(IMG[id]&&IMG[id].dataset.b))return;const b
 function kaynak(id,px){if(px>340)buyukIste(id);const L=KOPYA[id];if(L)for(const k of L)if(Math.max(k.width,k.height)>=px)return k;const b=BUYUK[id];return b&&b.hazir?b:IMG[id]}
 // --- yerleşim (önceki ile aynı kurallar) ---
 const LISTE=[];for(let t=0;t<(KMOD?1:Math.max(TEKRAR,Math.ceil(60/KAYNAK.length)));t++)KAYNAK.forEach(u=>LISTE.push(u));
-if(KDS==='2')LISTE.length=Math.round(LISTE.length*0.7);   // DSG tünelinde ürün sayısı %30 az
+if(KDS==='2')LISTE.length=Math.round(LISTE.length*0.35);   // DSG tünelinde ürün sayısı denemedeki gibi (yarı tur, %30 az)
 const N=LISTE.length;
 const items=LISTE.map((u,i)=>{
   const ar=ASPECT[u[0]]||1;
