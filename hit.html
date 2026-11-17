@@ -113,6 +113,7 @@ a.kepenk{display:block;text-decoration:none}
 .raf9 img{position:absolute;left:8%;top:6%;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 12px 14px rgba(0,0,0,.7))}
 .raf9 b{position:absolute;left:10px;right:10px;bottom:8px;font:600 13px/1.2 "Barlow Condensed",sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--yumusak);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .2s}
 .raf9 a:hover b,.raf9 a:focus-visible b{opacity:1}
+@media(hover:none){.raf9 b{opacity:1}}
 .icerik .hap{align-self:flex-start;margin-left:4px}
 /* kepenk: sıradaki vitrin */
 .kepenk{position:relative;overflow:hidden;aspect-ratio:591/868;max-height:720px;width:100%;
@@ -311,7 +312,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 </defs></svg>
 
 <nav><span class="hp-satir"><a class="marka" href="hit.html" id="marka" aria-label="Hit Pazarı ana sayfa"><span class="cizgi" aria-hidden="true">//</span><span class="ad">HİT PAZARI</span><span class="alt">Dijital<br>Dükkân</span></a><button class="hp-ac" id="hpAc" type="button" aria-label="Hit Pazarı menüsü" aria-expanded="false" aria-controls="hpMenu"></button></span>
-  <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="sepet" href="#hesap" aria-label="Beğendiklerim"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1.200 13H3.800z"/><path d="M8.500 10V6.500a3.500 3.500 0 0 1 7 0V10"/></svg><i id="sepetN">0</i></a></span></nav>
+  <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="sepet" href="#hesap" aria-label="Beğenilerim"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.300-9.200C1.500 8.200 3.300 4.500 7 4.500c2.200 0 3.600 1.300 5 3.200 1.400-1.900 2.800-3.200 5-3.200 3.700 0 5.500 3.700 4.300 6.800-1.800 4.600-9.300 9.200-9.300 9.200z"/></svg><i id="sepetN">0</i></a></span></nav>
 <div class="hp-menu" id="hpMenu" hidden>
   <a href="index.html?mod=kategori"><b>Kategoriler</b><small>Kategori seçerek gez</small></a>
   <button class="hpm-dukkan" id="hpmDukkan" type="button" aria-expanded="false" aria-controls="hpmListe"><b>Dükkânlar</b><small>Dükkân seçerek gez</small></button>
@@ -373,7 +374,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
         </div>
         <div id="girisVar" hidden>
           <div class="kim"><div class="av" id="av"></div><div><b id="pAd"></b><small id="pMail"></small></div></div>
-          <div class="sekme" id="sekme"><button data-s="begeni" class="on">Beğenilerim<i id="nB">0</i></button><button data-s="islem">Tekliflerim<i id="nI">0</i></button><button data-s="bilgi">Bilgilerim</button></div>
+          <div class="sekme" id="sekme"><button data-s="begeni" class="on">Beğenilerim<i id="nB">0</i></button><button data-s="islem">Teklif ve taleplerim<i id="nI">0</i></button><button data-s="bilgi">Bilgilerim</button></div>
           <div class="raflar" id="s-begeni"></div>
           <div class="raflar" id="s-islem" hidden></div>
           <div id="s-bilgi" hidden><div class="form">
@@ -556,7 +557,7 @@ listeler();
 // ---- ana sayfa: kaydırınca parçalan, pazara gir ----
 document.documentElement.classList.add('ev');
 const kapi=document.getElementById('kapi');let girildi=false;
-const sekmeAcik=()=>!document.getElementById('katman').hidden;
+const sekmeAcik=()=>!document.getElementById('katman').hidden||[document.getElementById('hpMenu'),document.getElementById('hikMenu')].some(m=>m&&!m.hidden);
 function pazaraGir(){if(girildi||sekmeAcik())return;girildi=true;
   // kamera kolajın ortasına doğru dalar (tek katman, GPU ile), ekran kararınca pazar tüneli açılır
   const az=matchMedia('(prefers-reduced-motion: reduce)').matches,k=kapi.querySelector('.kolaj img'),r=k?k.getBoundingClientRect():null;
@@ -566,7 +567,7 @@ function pazaraGir(){if(girildi||sekmeAcik())return;girildi=true;
 function desteAdres(id){const y={'8766':'8769','8770':'8771'}[location.port];const kok=y?`${location.protocol}//${location.hostname}:${y}/`:'https://tolgaarpa.github.io/halalar-app/';return kok+'index.html'+(id?'#u='+encodeURIComponent(id):'')}
 document.getElementById('pazaraGir').onclick=pazaraGir;
 // tünel görsellerini boşta önceden indir: pazara girince ekran boş/siyah kalmasın
-(window.requestIdleCallback||(f=>setTimeout(f,1200)))(()=>{if(typeof URUNLER==='undefined')return;let i=0;(function sira(){for(let n=0;n<8&&i<URUNLER.length;n++,i++){const im=new Image();im.decoding='async';im.src='kaynak/web/'+URUNLER[i][0]+'.webp'}if(i<URUNLER.length)setTimeout(sira,120)})()});
+(window.requestIdleCallback||(f=>setTimeout(f,1200)))(()=>{if(typeof URUNLER==='undefined')return;let i=0;const SON=Math.min(24,URUNLER.length);(function sira(){for(let n=0;n<8&&i<SON;n++,i++){const im=new Image();im.decoding='async';im.src='kaynak/web/'+URUNLER[i][0]+'.webp'}if(i<SON)setTimeout(sira,120)})()});
 addEventListener('wheel',e=>{if(!sekmeAcik()&&e.deltaY>8)pazaraGir()},{passive:true});
 let dokY=null;addEventListener('touchstart',e=>{dokY=e.touches[0].clientY},{passive:true});
 addEventListener('touchmove',e=>{if(dokY!==null&&!sekmeAcik()&&dokY-e.touches[0].clientY>40){dokY=null;pazaraGir()}},{passive:true});
@@ -579,6 +580,7 @@ const menuKapa=()=>{hpMenu.hidden=true;marka.setAttribute('aria-expanded','false
 const hpmD=document.getElementById('hpmDukkan'),hpmL=document.getElementById('hpmListe');
 hpmD.onclick=()=>{hpmL.hidden=!hpmL.hidden;hpmD.setAttribute('aria-expanded',String(!hpmL.hidden))};
 if(typeof DUKKAN2!=='undefined'&&DUKKAN2.ad)document.getElementById('hpmD2').textContent=DUKKAN2.ad;
+if(typeof DUKKAN3!=='undefined'&&DUKKAN3.ad)document.getElementById('hpmD3').textContent=DUKKAN3.ad;
 marka.onclick=e=>{e.stopPropagation();hpMenu.hidden=!hpMenu.hidden;marka.setAttribute('aria-expanded',String(!hpMenu.hidden))};
 addEventListener('click',e=>{if(!hpMenu.hidden&&!e.target.closest('#hpMenu,#hpAc'))menuKapa()});
 function sekmeAc(id){const s=document.getElementById(id);if(!s||s.parentElement!==sekme)return false;

@@ -179,6 +179,7 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 <div class="katlar" id="katlar"></div><div class="sonuc" id="sonuc"></div></div>
 <script src="veri/urunler.js"></script>
 <script src="veri/dukkan2.js"></script>
+<script src="veri/dukkan3.js"></script>
 <script src="veri/aspect.js"></script>
 <script src="veri/galeri.js"></script>
 <script src="veri/kategoriler.js"></script>
@@ -188,6 +189,9 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 const KMOD=new URLSearchParams(location.search).get('mod')==='kategori'&&typeof KATEGORI_IKON!=='undefined';
 // Pazar modu (?mod=pazar): ana sayfadan kaydırınca girilen, bütün dükkânların ürünleri karışık; her girişte farklı sıra
 const KPAZAR=new URLSearchParams(location.search).get('mod')==='pazar';
+// Dükkân tüneli (?dukkan=2 DSG, ?dukkan=3 Önsal Elektronik): yalnız o dükkânın ürünleri
+const KDS=new URLSearchParams(location.search).get('dukkan');
+const KD=KDS==='2'&&typeof DUKKAN2!=='undefined'?['d2:',DUKKAN2,'dukkan.html']:KDS==='3'&&typeof DUKKAN3!=='undefined'?['d3:',DUKKAN3,'dukkan.html?d=3']:null;
 // her tekrar turunda kategori kendi içinden başka bir ürünle gelir (ilk turda ikonik görsel)
 const KSEC=new URLSearchParams(location.search).get('kat');
 const KFILTRE=!KMOD&&KSEC&&typeof KATEGORI!=='undefined'?URUNLER.filter(u=>KATEGORI[u[0]]===KSEC):null;
@@ -196,10 +200,14 @@ if(KFILTRE&&KFILTRE.length){document.querySelector('nav .logo').textContent=KSEC
   // giriş: tabela ortada, kamera kendiliğinden içeri süzülür; tabela büyüyüp kaybolur, ürünler derinden belirir
   setTimeout(()=>{if(target<10)target=520},450);setTimeout(function izle(){if(camZ>110){kg.classList.add('off');return}requestAnimationFrame(izle)},0)}
 // Pazar modunda diğer dükkânın (DSG) tünele hazır ürünleri de karışır: kimlik 'd2:<id>', görsel kendi yolundan
-const GOR={},D2T=[];if(KPAZAR&&typeof DUKKAN2!=='undefined')DUKKAN2.urunler.filter(x=>x.tunel).forEach(x=>{const id='d2:'+x.id;GOR[id]=x.gorsel;if(x.oran)ASPECT[id]=x.oran;D2T.push([id,x.ad,x.aciklama||'',x.kategori])});
+const GOR={};
+function dukT(on,D){return D.urunler.filter(x=>x.tunel&&x.stok!==0).map(x=>{const id=on+x.id;GOR[id]=x.tgorsel||x.gorsel;const o=x.toran||x.oran;if(o)ASPECT[id]=o;return [id,x.ad,x.aciklama||'',x.kategori]})}
+const D2T=KPAZAR&&typeof DUKKAN2!=='undefined'?dukT('d2:',DUKKAN2):[];
+const KDT=KD?dukT(KD[0],KD[1]):null;
 const KAYNAK=KMOD?(()=>{const L=[],ks=Object.keys(KATEGORI_IKON);
   const uy=k=>URUNLER.filter(u=>KATEGORI[u[0]]===k&&u[0]!==KATEGORI_IKON[k]).map(u=>u[0]);
-  for(let t=0;t<8;t++)ks.forEach(k=>{const d=uy(k);const id=t===0||!d.length?KATEGORI_IKON[k]:d[(t-1)%d.length];L.push([id,k,'Bu kategorideki ürünleri gör','—'])});return L})():(KFILTRE&&KFILTRE.length?KFILTRE:KPAZAR?(()=>{const L=URUNLER.concat(D2T);for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}return L})():URUNLER);
+  for(let t=0;t<8;t++)ks.forEach(k=>{const d=uy(k);const id=t===0||!d.length?KATEGORI_IKON[k]:d[(t-1)%d.length];L.push([id,k,'Bu kategorideki ürünleri gör','—'])});return L})():(KDT&&KDT.length?KDT:KFILTRE&&KFILTRE.length?KFILTRE:KPAZAR?(()=>{const L=URUNLER.concat(D2T);for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}return L})():URUNLER);
+if(KDT&&KDT.length){const l=document.querySelector('nav .logo');l.textContent=KD[1].ad;l.href=KD[2];document.title='Hit Pazarı · '+KD[1].ad+' tüneli';document.getElementById('desteAc').style.display='none';setTimeout(()=>{if(target<10)target=520},250)}
 if(KPAZAR){document.querySelector('nav .logo').textContent='Pazar';document.title='Hit Pazarı · Pazar';setTimeout(()=>{if(target<10)target=520},250)}
 if(KMOD){document.querySelector('nav .logo').textContent='Kategoriler';document.getElementById('end').textContent='kategoriler';document.title='Hit Pazarı · Kategoriler';document.querySelector('#card .go').textContent='Ürünleri gör →'}
 // Her ürüne tünelde bir yer: z (derinlik), x/y (yana ofset), boyut. Deterministik dağılım.
@@ -316,7 +324,7 @@ let lx=-1,ly=-1;
 function hover(){if(lx<0)return;let o=pick(lx,ly);if(!o&&nearHot(lx,ly))o=hot;setHot(o)}
 addEventListener('mousemove',e=>{lx=e.clientX;ly=e.clientY;hover()});
 setInterval(hover,90);
-cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o){if(KMOD){target=clamp(camZ+1600);document.getElementById('kperde').classList.add('on');setTimeout(()=>location.href='index.html?kat='+encodeURIComponent(o.u[1]),620)}else location.href=innerWidth>=900||o.u[0].startsWith('d2:')?'urun.html?id='+encodeURIComponent(o.u[0]):desteAdres(o.u[0])}});   // bilgisayarda web ürün sayfası, telefonda kart destesi
+cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o){if(KMOD){target=clamp(camZ+1600);document.getElementById('kperde').classList.add('on');setTimeout(()=>location.href='index.html?kat='+encodeURIComponent(o.u[1]),620)}else location.href=innerWidth>=900||/^d[23]:/.test(o.u[0])?'urun.html?id='+encodeURIComponent(o.u[0]):desteAdres(o.u[0])}});   // bilgisayarda web ürün sayfası, telefonda kart destesi
 // ürüne dokununca kart destesi (Geç / Teklif / Satın al / Beğen) o üründen başlar: telefon uygulamasının destesi
 document.getElementById('desteAc').onclick=e=>{e.preventDefault();location.href=desteAdres((items.find(it=>it.dz>-1500&&it.dz<200)||items[0]).u[0])};
 if(KMOD)document.getElementById('desteAc').hidden=true;

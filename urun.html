@@ -119,7 +119,7 @@ if(fotolar.length>1){const kutu=document.getElementById('acilar');
     b.onclick=()=>{ana.src=f;kutu.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))};kutu.appendChild(b)})}
 
 // ---- teklif / satın alma: uygulamadaki akışın aynısı (aynı veritabanı, aynı kurallar) ----
-const KEY='halalar-app-v1';                 // uygulamayla ortak kayıt: Tekliflerim'de görünür
+const KEY='halalar-app-v1';                 // uygulamayla ortak kayıt: Teklif ve taleplerim'de görünür
 const oku=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}};
 const yaz=f=>{try{const x=oku();f(x);localStorage.setItem(KEY,JSON.stringify(x))}catch(e){}};
 const TL=n=>(n||0).toLocaleString('tr-TR')+' ₺';
@@ -128,6 +128,7 @@ const FY=D2?(D2.fiyat||0):((typeof FIYAT!=='undefined'&&FIYAT[u[0]])||0);
 document.getElementById('fy').innerHTML=FY?`${TL(FY)}${D2?'<small>KDV DAHİL</small>':'<small>ÖRNEK FİYAT</small>'}`:'';
 let VT=null;try{firebase.initializeApp(FIREBASE_AYAR);VT=firebase.firestore()}catch(e){console.warn('veritabanı yok',e)}
 const form=document.getElementById('talep'),tamam=document.getElementById('tamam'),bT=document.getElementById('bTeklif'),bA=document.getElementById('bAlim');
+if(!D2)bA.textContent='Satın alma talebi';
 // fiyatı henüz girilmemiş ürün: satın alma yok, yalnız teklif
 if(!FY){bA.hidden=true;bA.style.display='none';bT.hidden=false;document.getElementById('fy').innerHTML='<small>FİYAT YAKINDA · TEKLİFİNİ YAZ</small>'}
 function kisiHTML(){const k=oku().kisi||{};return `<div class="alanlar"><input id="kad" autocomplete="name" placeholder="Adın" aria-label="Adın" value="${esc(k.ad)}"><input id="ktel" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon (05..)" aria-label="Telefon" value="${esc(k.tel)}"></div>
@@ -137,7 +138,7 @@ function ac(tur){
   if(tur==='teklif'){const o=[.7,.8,.9].map(r=>Math.round(FY*r/50)*50);
     form.innerHTML=`<h2>Teklif ver</h2><div class="tutar"><input id="tk" inputmode="numeric" aria-label="Teklif tutarı" value="${o[1]||''}"><span>₺</span></div>
       <div class="hizli">${o.filter(v=>v>0).map(v=>`<button type="button" data-v="${v}">${TL(v)}</button>`).join('')}</div>${kisiHTML()}
-      <p class="not">Teklifin dükkâna iletilir; dükkân seni telefonla arar. Durumu Hit Pazarı'nda "Tekliflerim"de görürsün.</p>
+      <p class="not">Teklifin dükkâna iletilir; dükkân seni telefonla arar. Durumu Hit Pazarı'nda "Teklif ve taleplerim"de görürsün.</p>
       <div class="hata" id="khata"></div><div class="dug"><button class="cta" type="button" id="vz">Vazgeç</button><button class="cta on" type="submit" id="gn">Teklifi gönder</button></div>`;
     form.querySelectorAll('.hizli button').forEach(b=>b.onclick=()=>{document.getElementById('tk').value=b.dataset.v})}
   else{form.innerHTML=`<h2>Satın al</h2><div class="ozet"><div><span>Ürün</span><span>${TL(FY)}</span></div><div><span>Teslimat</span><span>${D2?esc(DK.teslim):'Dükkândan teslim'}</span></div><div><b>Toplam</b><b>${TL(FY)}</b></div></div>${kisiHTML()}
@@ -159,7 +160,7 @@ form.onsubmit=async e=>{e.preventDefault();const tur=form.dataset.tur,h=document
   try{const r=await VT.collection('talepler').add({urun:u[0],urunAd:u[1],tur,tutar,ad,tel,durum:'Beklemede',zaman:firebase.firestore.FieldValue.serverTimestamp(),satici:SATICI});
     yaz(x=>{x.kisi={ad,tel,rza:true};x.islem=x.islem||[];x.islem.unshift({id:u[0],ref:r.id,satici:SATICI,tur,tutar,zaman:Date.now(),durum:'Beklemede'})});
     form.hidden=true;bT.classList.remove('on');bA.classList.remove('on');tamam.hidden=false;
-    tamam.innerHTML=`<b>${tur==='teklif'?'Teklifin gönderildi: '+TL(tutar):'Satın alma talebin gönderildi'}</b><p>Dükkân seni ${esc(tel)} numarasından arayacak. Durumu <a href="hit.html#hesap">Hit Pazarı › Tekliflerim</a>'den takip edebilirsin.</p>`;
+    tamam.innerHTML=`<b>${tur==='teklif'?'Teklifin gönderildi: '+TL(tutar):'Satın alma talebin gönderildi'}</b><p>Dükkân seni ${esc(tel)} numarasından arayacak. Durumu <a href="hit.html#hesap">Hit Pazarı › Teklif ve taleplerim</a>'den takip edebilirsin.</p>`;
     tamam.focus&&tamam.scrollIntoView({block:'nearest',behavior:'smooth'})}
   catch(err){console.warn(err);h.textContent='Gönderilemedi. İnternetini kontrol edip tekrar dene.';btn.disabled=false;btn.textContent=eski}};
 </script>

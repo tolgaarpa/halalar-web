@@ -24,7 +24,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/altus-al75-uhd-9825-google-tv.webp",
 "kaynak/onsal/altus-al75-uhd-9825-google-tv_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-cm-121460-d",
@@ -39,7 +40,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-cm-121460-d.webp",
 "kaynak/onsal/al-cm-121460-d_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-375-xe",
@@ -54,7 +56,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-375-xe.webp",
 "kaynak/onsal/al-375-xe_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-380-xe",
@@ -69,7 +72,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-380-xe.webp",
 "kaynak/onsal/al-380-xe_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "ala-332-w",
@@ -83,7 +87,8 @@ const DUKKAN3={
 "oran": 1.0,
 "gorseller": [
 "kaynak/onsal/ala-332-w.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-km-1160",
@@ -101,7 +106,8 @@ const DUKKAN3={
 "kaynak/onsal/al-km-1160_3.webp",
 "kaynak/onsal/al-km-1160_4.webp",
 "kaynak/onsal/al-km-1160_5.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hey-29b8-17-a-20-enerji-verimlilik-sinifi-9-kg-kapasite-1200-dev-dak",
@@ -118,7 +124,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hey-29b8-17-a-20-enerji-verimlilik-sinifi-9-kg-kapasite-1200-dev-dak_2.webp",
 "kaynak/onsal/hoover-hey-29b8-17-a-20-enerji-verimlilik-sinifi-9-kg-kapasite-1200-dev-dak_3.webp",
 "kaynak/onsal/hoover-hey-29b8-17-a-20-enerji-verimlilik-sinifi-9-kg-kapasite-1200-dev-dak_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hbwr-4138bl10-17-a-40-enerji-verimlilik-sinifi-13-kg-yikama-kapasitesi-8",
@@ -135,7 +142,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hbwr-4138bl10-17-a-40-enerji-verimlilik-sinifi-13-kg-yikama-kapasitesi-8_2.webp",
 "kaynak/onsal/hoover-hbwr-4138bl10-17-a-40-enerji-verimlilik-sinifi-13-kg-yikama-kapasitesi-8_3.webp",
 "kaynak/onsal/hoover-hbwr-4138bl10-17-a-40-enerji-verimlilik-sinifi-13-kg-yikama-kapasitesi-8_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-306-b",
@@ -150,7 +158,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-306-b.webp",
 "kaynak/onsal/al-306-b_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "alk-464-e",
@@ -165,7 +174,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/alk-464-e.webp",
 "kaynak/onsal/alk-464-e_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-38-i",
@@ -181,7 +191,8 @@ const DUKKAN3={
 "kaynak/onsal/al-38-i.webp",
 "kaynak/onsal/al-38-i_2.webp",
 "kaynak/onsal/al-38-i_3.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz",
@@ -198,7 +209,10 @@ const DUKKAN3={
 "kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz_2.webp",
 "kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz_3.webp",
 "kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz_4.webp"
-]
+],
+"tunel": true,
+"tgorsel": "kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz_tunel.webp",
+"toran": 0.326
 },
 {
 "id": "alk-482-e",
@@ -213,7 +227,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/alk-482-e.webp",
 "kaynak/onsal/alk-482-e_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "ala-332-b",
@@ -228,7 +243,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/ala-332-b.webp",
 "kaynak/onsal/ala-332-b_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hey-210b8-17-a-20-enerji-verimlilik-sinifi-10-kg-kapasite-1200-dev-dak",
@@ -245,7 +261,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hey-210b8-17-a-20-enerji-verimlilik-sinifi-10-kg-kapasite-1200-dev-dak_2.webp",
 "kaynak/onsal/hoover-hey-210b8-17-a-20-enerji-verimlilik-sinifi-10-kg-kapasite-1200-dev-dak_3.webp",
 "kaynak/onsal/hoover-hey-210b8-17-a-20-enerji-verimlilik-sinifi-10-kg-kapasite-1200-dev-dak_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hvw6mbb-60-cm-4-gozu-gazli-siyah-cam",
@@ -262,7 +279,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hvw6mbb-60-cm-4-gozu-gazli-siyah-cam_2.webp",
 "kaynak/onsal/hoover-hvw6mbb-60-cm-4-gozu-gazli-siyah-cam_3.webp",
 "kaynak/onsal/hoover-hvw6mbb-60-cm-4-gozu-gazli-siyah-cam_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "altus-al-bz-3250-cift-kapili-buzdolabi-250-litre-statik-buzdolabi-e-enerji-sinif",
@@ -281,7 +299,8 @@ const DUKKAN3={
 "kaynak/onsal/altus-al-bz-3250-cift-kapili-buzdolabi-250-litre-statik-buzdolabi-e-enerji-sinif_4.webp",
 "kaynak/onsal/altus-al-bz-3250-cift-kapili-buzdolabi-250-litre-statik-buzdolabi-e-enerji-sinif_5.webp",
 "kaynak/onsal/altus-al-bz-3250-cift-kapili-buzdolabi-250-litre-statik-buzdolabi-e-enerji-sinif_6.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-ho3158b-ankastre-firin-33704421",
@@ -298,7 +317,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-ho3158b-ankastre-firin-33704421_2.webp",
 "kaynak/onsal/hoover-ho3158b-ankastre-firin-33704421_3.webp",
 "kaynak/onsal/hoover-ho3158b-ankastre-firin-33704421_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "alk-9060-alk-9070",
@@ -313,7 +333,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/alk-9060-alk-9070.webp",
 "kaynak/onsal/alk-9060-alk-9070_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hf-3e53e0w-17-5-programli-beyaz",
@@ -330,7 +351,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hf-3e53e0w-17-5-programli-beyaz_2.webp",
 "kaynak/onsal/hoover-hf-3e53e0w-17-5-programli-beyaz_3.webp",
 "kaynak/onsal/hoover-hf-3e53e0w-17-5-programli-beyaz_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-cm-91050-91050-r",
@@ -345,7 +367,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-cm-91050-91050-r.webp",
 "kaynak/onsal/al-cm-91050-91050-r_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hgd-411bl10gc-17-a-40-enerji-verimlilik-sinifi-11-kg-kapasite-1400-dev-da",
@@ -362,7 +385,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hgd-411bl10gc-17-a-40-enerji-verimlilik-sinifi-11-kg-kapasite-1400-dev-da_2.webp",
 "kaynak/onsal/hoover-hgd-411bl10gc-17-a-40-enerji-verimlilik-sinifi-11-kg-kapasite-1400-dev-da_3.webp",
 "kaynak/onsal/hoover-hgd-411bl10gc-17-a-40-enerji-verimlilik-sinifi-11-kg-kapasite-1400-dev-da_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "alk-1260",
@@ -376,7 +400,8 @@ const DUKKAN3={
 "oran": 1.0,
 "gorseller": [
 "kaynak/onsal/alk-1260.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-cm-91254-d",
@@ -391,7 +416,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-cm-91254-d.webp",
 "kaynak/onsal/al-cm-91254-d_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "ala-570-w",
@@ -406,7 +432,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/ala-570-w.webp",
 "kaynak/onsal/ala-570-w_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hbp-410bl10-17-a-40-enerji-verimlilik-sinifi-10-kg-kapasite-1400-dev-dak",
@@ -423,7 +450,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hbp-410bl10-17-a-40-enerji-verimlilik-sinifi-10-kg-kapasite-1400-dev-dak_2.webp",
 "kaynak/onsal/hoover-hbp-410bl10-17-a-40-enerji-verimlilik-sinifi-10-kg-kapasite-1400-dev-dak_3.webp",
 "kaynak/onsal/hoover-hbp-410bl10-17-a-40-enerji-verimlilik-sinifi-10-kg-kapasite-1400-dev-dak_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "altus-ala-189-dw-ankastre-beyaz-cam-ocak",
@@ -439,7 +467,8 @@ const DUKKAN3={
 "kaynak/onsal/altus-ala-189-dw-ankastre-beyaz-cam-ocak.webp",
 "kaynak/onsal/altus-ala-189-dw-ankastre-beyaz-cam-ocak_2.webp",
 "kaynak/onsal/altus-ala-189-dw-ankastre-beyaz-cam-ocak_3.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-cm-71045-r",
@@ -456,7 +485,8 @@ const DUKKAN3={
 "kaynak/onsal/al-cm-71045-r_2.webp",
 "kaynak/onsal/al-cm-71045-r_3.webp",
 "kaynak/onsal/al-cm-71045-r_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hh64cc-4-gozu-elektrikli-vitroseramik-yuzey-siyah-cam",
@@ -472,7 +502,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hh64cc-4-gozu-elektrikli-vitroseramik-yuzey-siyah-cam.webp",
 "kaynak/onsal/hoover-hh64cc-4-gozu-elektrikli-vitroseramik-yuzey-siyah-cam_2.webp",
 "kaynak/onsal/hoover-hh64cc-4-gozu-elektrikli-vitroseramik-yuzey-siyah-cam_3.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "ala-570-g",
@@ -487,7 +518,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/ala-570-g.webp",
 "kaynak/onsal/ala-570-g_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "ala-570-b",
@@ -502,7 +534,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/ala-570-b.webp",
 "kaynak/onsal/ala-570-b_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi",
@@ -519,7 +552,10 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi_2.webp",
 "kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi_3.webp",
 "kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi_4.webp"
-]
+],
+"tunel": true,
+"tgorsel": "kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi_tunel.webp",
+"toran": 0.727
 },
 {
 "id": "hoover-hocg5t718en1-antrasit-cam-442-l-hacim-kombi-tipi",
@@ -534,7 +570,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/hoover-hocg5t718en1-antrasit-cam-442-l-hacim-kombi-tipi.webp",
 "kaynak/onsal/hoover-hocg5t718en1-antrasit-cam-442-l-hacim-kombi-tipi_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hodq4t718ex-e-enerji-verimlilik-sinifi-inox-467-l-hacim-total-no-frost",
@@ -551,7 +588,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hodq4t718ex-e-enerji-verimlilik-sinifi-inox-467-l-hacim-total-no-frost_2.webp",
 "kaynak/onsal/hoover-hodq4t718ex-e-enerji-verimlilik-sinifi-inox-467-l-hacim-total-no-frost_3.webp",
 "kaynak/onsal/hoover-hodq4t718ex-e-enerji-verimlilik-sinifi-inox-467-l-hacim-total-no-frost_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "alk-472-e",
@@ -567,7 +605,8 @@ const DUKKAN3={
 "kaynak/onsal/alk-472-e.webp",
 "kaynak/onsal/alk-472-e_2.webp",
 "kaynak/onsal/alk-472-e_3.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hdg6c1gbtk-60-cm-dokunmatik-kontrol-maksimum-emis-gucu-447-m3-h-siyah-cam",
@@ -584,7 +623,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hdg6c1gbtk-60-cm-dokunmatik-kontrol-maksimum-emis-gucu-447-m3-h-siyah-cam_2.webp",
 "kaynak/onsal/hoover-hdg6c1gbtk-60-cm-dokunmatik-kontrol-maksimum-emis-gucu-447-m3-h-siyah-cam_3.webp",
 "kaynak/onsal/hoover-hdg6c1gbtk-60-cm-dokunmatik-kontrol-maksimum-emis-gucu-447-m3-h-siyah-cam_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-375-ne",
@@ -599,7 +639,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-375-ne.webp",
 "kaynak/onsal/al-375-ne_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "demirdokum-dt4-titanium-digital-65-d",
@@ -614,7 +655,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/demirdokum-dt4-titanium-digital-65-d.webp",
 "kaynak/onsal/demirdokum-dt4-titanium-digital-65-d_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hf-6c7f0x-17-8-programli-inox",
@@ -631,7 +673,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hf-6c7f0x-17-8-programli-inox_2.webp",
 "kaynak/onsal/hoover-hf-6c7f0x-17-8-programli-inox_3.webp",
 "kaynak/onsal/hoover-hf-6c7f0x-17-8-programli-inox_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak",
@@ -650,7 +693,10 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_4.webp",
 "kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_5.webp",
 "kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_6.webp"
-]
+],
+"tunel": true,
+"tgorsel": "kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_tunel.webp",
+"toran": 0.725
 },
 {
 "id": "ala-159-gb-db",
@@ -667,7 +713,8 @@ const DUKKAN3={
 "kaynak/onsal/ala-159-gb-db_2.webp",
 "kaynak/onsal/ala-159-gb-db_3.webp",
 "kaynak/onsal/ala-159-gb-db_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hodq4t718ew-e-enerji-verimlilik-sinifi-beyaz-467-l-hacim-total-no-frost",
@@ -684,7 +731,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hodq4t718ew-e-enerji-verimlilik-sinifi-beyaz-467-l-hacim-total-no-frost_2.webp",
 "kaynak/onsal/hoover-hodq4t718ew-e-enerji-verimlilik-sinifi-beyaz-467-l-hacim-total-no-frost_3.webp",
 "kaynak/onsal/hoover-hodq4t718ew-e-enerji-verimlilik-sinifi-beyaz-467-l-hacim-total-no-frost_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-cm-101254-d",
@@ -699,7 +747,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-cm-101254-d.webp",
 "kaynak/onsal/al-cm-101254-d_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "alk-471-xe",
@@ -714,7 +763,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/alk-471-xe.webp",
 "kaynak/onsal/alk-471-xe_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hi-3e7l0s-17-tam-entegre-5-programli-ankastre-bulasik",
@@ -731,7 +781,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hi-3e7l0s-17-tam-entegre-5-programli-ankastre-bulasik_2.webp",
 "kaynak/onsal/hoover-hi-3e7l0s-17-tam-entegre-5-programli-ankastre-bulasik_3.webp",
 "kaynak/onsal/hoover-hi-3e7l0s-17-tam-entegre-5-programli-ankastre-bulasik_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hf-5b2s1px-17-10-programli-inox",
@@ -748,7 +799,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hf-5b2s1px-17-10-programli-inox_2.webp",
 "kaynak/onsal/hoover-hf-5b2s1px-17-10-programli-inox_3.webp",
 "kaynak/onsal/hoover-hf-5b2s1px-17-10-programli-inox_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hvw6mw-60-cm-4-gozu-gazli-beyaz-cam",
@@ -762,7 +814,8 @@ const DUKKAN3={
 "oran": 1.242,
 "gorseller": [
 "kaynak/onsal/hoover-hvw6mw-60-cm-4-gozu-gazli-beyaz-cam.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-355-be",
@@ -777,7 +830,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-355-be.webp",
 "kaynak/onsal/al-355-be_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-366-be",
@@ -792,7 +846,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-366-be.webp",
 "kaynak/onsal/al-366-be_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-5556-g-gd",
@@ -807,7 +862,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-5556-g-gd.webp",
 "kaynak/onsal/al-5556-g-gd_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-380-xie",
@@ -822,7 +878,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-380-xie.webp",
 "kaynak/onsal/al-380-xie_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "ala-527-g",
@@ -840,7 +897,8 @@ const DUKKAN3={
 "kaynak/onsal/ala-527-g_3.webp",
 "kaynak/onsal/ala-527-g_4.webp",
 "kaynak/onsal/ala-527-g_5.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-445-nx",
@@ -855,7 +913,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-445-nx.webp",
 "kaynak/onsal/al-445-nx_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "ala-527-w",
@@ -870,7 +929,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/ala-527-w.webp",
 "kaynak/onsal/ala-527-w_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hre-h11a2tbe-17-a-11-kg-kurutma-kapasitesi-isi-pompali",
@@ -887,7 +947,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hre-h11a2tbe-17-a-11-kg-kurutma-kapasitesi-isi-pompali_2.webp",
 "kaynak/onsal/hoover-hre-h11a2tbe-17-a-11-kg-kurutma-kapasitesi-isi-pompali_3.webp",
 "kaynak/onsal/hoover-hre-h11a2tbe-17-a-11-kg-kurutma-kapasitesi-isi-pompali_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "alk-1840-a-arti-arti",
@@ -905,7 +966,8 @@ const DUKKAN3={
 "kaynak/onsal/alk-1840-a-arti-arti_3.webp",
 "kaynak/onsal/alk-1840-a-arti-arti_4.webp",
 "kaynak/onsal/alk-1840-a-arti-arti_5.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth",
@@ -922,7 +984,10 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth_2.webp",
 "kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth_3.webp",
 "kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth_4.webp"
-]
+],
+"tunel": true,
+"tgorsel": "kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth_tunel.webp",
+"toran": 0.723
 },
 {
 "id": "al-333-be",
@@ -937,7 +1002,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-333-be.webp",
 "kaynak/onsal/al-333-be_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-380-nfe",
@@ -952,7 +1018,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-380-nfe.webp",
 "kaynak/onsal/al-380-nfe_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-434-p",
@@ -966,7 +1033,8 @@ const DUKKAN3={
 "oran": 1.0,
 "gorseller": [
 "kaynak/onsal/al-434-p.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-cm-81050-81050-r",
@@ -981,7 +1049,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-cm-81050-81050-r.webp",
 "kaynak/onsal/al-cm-81050-81050-r_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hmc510uv-011-uv-c-isinli-temizleyici-supurge-0-6-l-toz-hacmi",
@@ -997,7 +1066,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hmc510uv-011-uv-c-isinli-temizleyici-supurge-0-6-l-toz-hacmi.webp",
 "kaynak/onsal/hoover-hmc510uv-011-uv-c-isinli-temizleyici-supurge-0-6-l-toz-hacmi_2.webp",
 "kaynak/onsal/hoover-hmc510uv-011-uv-c-isinli-temizleyici-supurge-0-6-l-toz-hacmi_3.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-5000-serisi-cx5535-00-beyaz-kule-tipi-fanli-vantilator",
@@ -1011,7 +1081,8 @@ const DUKKAN3={
 "oran": 0.35,
 "gorseller": [
 "kaynak/onsal/philips-5000-serisi-cx5535-00-beyaz-kule-tipi-fanli-vantilator.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-30-tf",
@@ -1026,7 +1097,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-30-tf.webp",
 "kaynak/onsal/al-30-tf_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-799-tkm",
@@ -1041,7 +1113,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-799-tkm.webp",
 "kaynak/onsal/al-799-tkm_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "altus-al-5545-m-buharli-utu",
@@ -1058,7 +1131,8 @@ const DUKKAN3={
 "kaynak/onsal/altus-al-5545-m-buharli-utu_2.webp",
 "kaynak/onsal/altus-al-5545-m-buharli-utu_3.webp",
 "kaynak/onsal/altus-al-5545-m-buharli-utu_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-xb2142-10-750-w-toz-torbasiz-elektrikli-supurge",
@@ -1075,7 +1149,8 @@ const DUKKAN3={
 "kaynak/onsal/philips-xb2142-10-750-w-toz-torbasiz-elektrikli-supurge_2.webp",
 "kaynak/onsal/philips-xb2142-10-750-w-toz-torbasiz-elektrikli-supurge_3.webp",
 "kaynak/onsal/philips-xb2142-10-750-w-toz-torbasiz-elektrikli-supurge_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-5000-serisi-cx5535-11-40w-kule-tipi-vantilator-kanatsiz-tasarim-genis-sa",
@@ -1089,7 +1164,8 @@ const DUKKAN3={
 "oran": 0.35,
 "gorseller": [
 "kaynak/onsal/philips-5000-serisi-cx5535-11-40w-kule-tipi-vantilator-kanatsiz-tasarim-genis-sa.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-psg9050-20-9000-serisi-buhar-kazanli-utu-750-g-a-varan-sok-buhar-actives",
@@ -1105,7 +1181,8 @@ const DUKKAN3={
 "kaynak/onsal/philips-psg9050-20-9000-serisi-buhar-kazanli-utu-750-g-a-varan-sok-buhar-actives.webp",
 "kaynak/onsal/philips-psg9050-20-9000-serisi-buhar-kazanli-utu-750-g-a-varan-sok-buhar-actives_2.webp",
 "kaynak/onsal/philips-psg9050-20-9000-serisi-buhar-kazanli-utu-750-g-a-varan-sok-buhar-actives_3.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-ep5544-80-seramik-ogutuculu-20-cesit-icecek-hazirlama-imkani-tam-otomati",
@@ -1122,7 +1199,8 @@ const DUKKAN3={
 "kaynak/onsal/philips-ep5544-80-seramik-ogutuculu-20-cesit-icecek-hazirlama-imkani-tam-otomati_2.webp",
 "kaynak/onsal/philips-ep5544-80-seramik-ogutuculu-20-cesit-icecek-hazirlama-imkani-tam-otomati_3.webp",
 "kaynak/onsal/philips-ep5544-80-seramik-ogutuculu-20-cesit-icecek-hazirlama-imkani-tam-otomati_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "altus-al-11-rd-yagli-radyator-2000-w",
@@ -1138,7 +1216,10 @@ const DUKKAN3={
 "kaynak/onsal/altus-al-11-rd-yagli-radyator-2000-w.webp",
 "kaynak/onsal/altus-al-11-rd-yagli-radyator-2000-w_2.webp",
 "kaynak/onsal/altus-al-11-rd-yagli-radyator-2000-w_3.webp"
-]
+],
+"tunel": true,
+"tgorsel": "kaynak/onsal/altus-al-11-rd-yagli-radyator-2000-w_tunel.webp",
+"toran": 0.532
 },
 {
 "id": "altus-almd-15-mikrodalga-firin",
@@ -1155,7 +1236,8 @@ const DUKKAN3={
 "kaynak/onsal/altus-almd-15-mikrodalga-firin_2.webp",
 "kaynak/onsal/altus-almd-15-mikrodalga-firin_3.webp",
 "kaynak/onsal/altus-almd-15-mikrodalga-firin_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-4000-serisi-fc9332-07-torbasiz-elektrikli-supurge-philips-7000-serisi-ds",
@@ -1174,7 +1256,8 @@ const DUKKAN3={
 "kaynak/onsal/philips-4000-serisi-fc9332-07-torbasiz-elektrikli-supurge-philips-7000-serisi-ds_4.webp",
 "kaynak/onsal/philips-4000-serisi-fc9332-07-torbasiz-elektrikli-supurge-philips-7000-serisi-ds_5.webp",
 "kaynak/onsal/philips-4000-serisi-fc9332-07-torbasiz-elektrikli-supurge-philips-7000-serisi-ds_6.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "almd-25",
@@ -1189,7 +1272,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/almd-25.webp",
 "kaynak/onsal/almd-25_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-5000-serisi-hd6301-90-2200w-izgara-ve-tost-makinesi-cikarilabilir-plakal",
@@ -1206,7 +1290,8 @@ const DUKKAN3={
 "kaynak/onsal/philips-5000-serisi-hd6301-90-2200w-izgara-ve-tost-makinesi-cikarilabilir-plakal_2.webp",
 "kaynak/onsal/philips-5000-serisi-hd6301-90-2200w-izgara-ve-tost-makinesi-cikarilabilir-plakal_3.webp",
 "kaynak/onsal/philips-5000-serisi-hd6301-90-2200w-izgara-ve-tost-makinesi-cikarilabilir-plakal_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-728-i",
@@ -1221,7 +1306,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-728-i.webp",
 "kaynak/onsal/al-728-i_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-xb9185-07-marathon-ultimate-toz-torbasiz-elektrikli-supurge-899-w-powerc",
@@ -1238,7 +1324,8 @@ const DUKKAN3={
 "kaynak/onsal/philips-xb9185-07-marathon-ultimate-toz-torbasiz-elektrikli-supurge-899-w-powerc_2.webp",
 "kaynak/onsal/philips-xb9185-07-marathon-ultimate-toz-torbasiz-elektrikli-supurge-899-w-powerc_3.webp",
 "kaynak/onsal/philips-xb9185-07-marathon-ultimate-toz-torbasiz-elektrikli-supurge-899-w-powerc_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "black-decker-bhsmp2008-qs-buharli-temizleyici",
@@ -1254,7 +1341,8 @@ const DUKKAN3={
 "kaynak/onsal/black-decker-bhsmp2008-qs-buharli-temizleyici.webp",
 "kaynak/onsal/black-decker-bhsmp2008-qs-buharli-temizleyici_2.webp",
 "kaynak/onsal/black-decker-bhsmp2008-qs-buharli-temizleyici_3.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-opal-blender-problend-teknolojisi-guclu-motor-buz-kirma-fonksiyonu-dayan",
@@ -1269,7 +1357,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/philips-opal-blender-problend-teknolojisi-guclu-motor-buz-kirma-fonksiyonu-dayan.webp",
 "kaynak/onsal/philips-opal-blender-problend-teknolojisi-guclu-motor-buz-kirma-fonksiyonu-dayan_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-6725",
@@ -1285,7 +1374,8 @@ const DUKKAN3={
 "kaynak/onsal/al-6725.webp",
 "kaynak/onsal/al-6725_2.webp",
 "kaynak/onsal/al-6725_3.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-hd7546-20-cafe-gaia-gri-filtre-kahve-makinesi",
@@ -1299,7 +1389,8 @@ const DUKKAN3={
 "oran": 0.583,
 "gorseller": [
 "kaynak/onsal/philips-hd7546-20-cafe-gaia-gri-filtre-kahve-makinesi.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "philips-5000-serisi-hr2695-00-el-blenderi-siyah-inox-1200-watt",
@@ -1313,7 +1404,8 @@ const DUKKAN3={
 "oran": 1.0,
 "gorseller": [
 "kaynak/onsal/philips-5000-serisi-hr2695-00-el-blenderi-siyah-inox-1200-watt.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-1128",
@@ -1327,7 +1419,8 @@ const DUKKAN3={
 "oran": 1.0,
 "gorseller": [
 "kaynak/onsal/al-1128.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-729",
@@ -1342,7 +1435,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-729.webp",
 "kaynak/onsal/al-729_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-1127",
@@ -1356,7 +1450,8 @@ const DUKKAN3={
 "oran": 1.0,
 "gorseller": [
 "kaynak/onsal/al-1127.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-40-tfb",
@@ -1370,7 +1465,8 @@ const DUKKAN3={
 "oran": 1.0,
 "gorseller": [
 "kaynak/onsal/al-40-tfb.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "altus-al-3434-b-blender-seti",
@@ -1387,7 +1483,8 @@ const DUKKAN3={
 "kaynak/onsal/altus-al-3434-b-blender-seti_2.webp",
 "kaynak/onsal/altus-al-3434-b-blender-seti_3.webp",
 "kaynak/onsal/altus-al-3434-b-blender-seti_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-40-tfd",
@@ -1401,7 +1498,8 @@ const DUKKAN3={
 "oran": 0.75,
 "gorseller": [
 "kaynak/onsal/al-40-tfd.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-3455-b-3455-g",
@@ -1416,7 +1514,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-3455-b-3455-g.webp",
 "kaynak/onsal/al-3455-b-3455-g_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-15-a",
@@ -1430,7 +1529,8 @@ const DUKKAN3={
 "oran": 0.993,
 "gorseller": [
 "kaynak/onsal/al-15-a.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-2213-g",
@@ -1445,7 +1545,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-2213-g.webp",
 "kaynak/onsal/al-2213-g_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-60-htb",
@@ -1460,7 +1561,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-60-htb.webp",
 "kaynak/onsal/al-60-htb_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "altus-al-3455-g-blender-set",
@@ -1477,7 +1579,8 @@ const DUKKAN3={
 "kaynak/onsal/altus-al-3455-g-blender-set_2.webp",
 "kaynak/onsal/altus-al-3455-g-blender-set_3.webp",
 "kaynak/onsal/altus-al-3455-g-blender-set_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "almd-20",
@@ -1492,7 +1595,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/almd-20.webp",
 "kaynak/onsal/almd-20_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "hoover-hs530-011-wet-dry-hali-ve-koltuk-yikama-makinesi",
@@ -1512,7 +1616,8 @@ const DUKKAN3={
 "kaynak/onsal/hoover-hs530-011-wet-dry-hali-ve-koltuk-yikama-makinesi_5.webp",
 "kaynak/onsal/hoover-hs530-011-wet-dry-hali-ve-koltuk-yikama-makinesi_6.webp",
 "kaynak/onsal/hoover-hs530-011-wet-dry-hali-ve-koltuk-yikama-makinesi_7.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-18-acw",
@@ -1527,7 +1632,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-18-acw.webp",
 "kaynak/onsal/al-18-acw_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-795",
@@ -1546,7 +1652,8 @@ const DUKKAN3={
 "kaynak/onsal/al-795_4.webp",
 "kaynak/onsal/al-795_5.webp",
 "kaynak/onsal/al-795_6.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-4054-c",
@@ -1561,7 +1668,8 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/al-4054-c.webp",
 "kaynak/onsal/al-4054-c_2.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-795-i",
@@ -1579,7 +1687,8 @@ const DUKKAN3={
 "kaynak/onsal/al-795-i_3.webp",
 "kaynak/onsal/al-795-i_4.webp",
 "kaynak/onsal/al-795-i_5.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "arzum-ar4117-easyforce-plus-cyclone-890-w-toz-torbasiz-elektrikli-supurge",
@@ -1595,7 +1704,8 @@ const DUKKAN3={
 "kaynak/onsal/arzum-ar4117-easyforce-plus-cyclone-890-w-toz-torbasiz-elektrikli-supurge.webp",
 "kaynak/onsal/arzum-ar4117-easyforce-plus-cyclone-890-w-toz-torbasiz-elektrikli-supurge_2.webp",
 "kaynak/onsal/arzum-ar4117-easyforce-plus-cyclone-890-w-toz-torbasiz-elektrikli-supurge_3.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-606-st-sg-sr",
@@ -1612,7 +1722,8 @@ const DUKKAN3={
 "kaynak/onsal/al-606-st-sg-sr_2.webp",
 "kaynak/onsal/al-606-st-sg-sr_3.webp",
 "kaynak/onsal/al-606-st-sg-sr_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-808-sm",
@@ -1629,7 +1740,8 @@ const DUKKAN3={
 "kaynak/onsal/al-808-sm_2.webp",
 "kaynak/onsal/al-808-sm_3.webp",
 "kaynak/onsal/al-808-sm_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "arzum-ar5028-lisa-xl-32-mm-seramik-sac-masasi",
@@ -1646,7 +1758,8 @@ const DUKKAN3={
 "kaynak/onsal/arzum-ar5028-lisa-xl-32-mm-seramik-sac-masasi_2.webp",
 "kaynak/onsal/arzum-ar5028-lisa-xl-32-mm-seramik-sac-masasi_3.webp",
 "kaynak/onsal/arzum-ar5028-lisa-xl-32-mm-seramik-sac-masasi_4.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "al-7044-s",
@@ -1665,7 +1778,8 @@ const DUKKAN3={
 "kaynak/onsal/al-7044-s_4.webp",
 "kaynak/onsal/al-7044-s_5.webp",
 "kaynak/onsal/al-7044-s_6.webp"
-]
+],
+"tunel": true
 },
 {
 "id": "arzum-ar5027-lisa-25-mm-seramik-sac-masasi",
@@ -1682,7 +1796,8 @@ const DUKKAN3={
 "kaynak/onsal/arzum-ar5027-lisa-25-mm-seramik-sac-masasi_2.webp",
 "kaynak/onsal/arzum-ar5027-lisa-25-mm-seramik-sac-masasi_3.webp",
 "kaynak/onsal/arzum-ar5027-lisa-25-mm-seramik-sac-masasi_4.webp"
-]
+],
+"tunel": true
 }
 ]
 };

@@ -18,7 +18,7 @@ nav .hik .hik-menu .hik-alt a{padding:8px 20px;font-size:14px;color:#cfcac1}
   const k=document.createElement('span');k.className='hik';
   k.innerHTML=`<button class="hik-btn" id="hikBtn" type="button" aria-label="Hesap ve bilgiler" aria-expanded="false" aria-controls="hikMenu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c.8-4.4 4.2-6.6 8.5-6.6s7.7 2.2 8.5 6.6"/></svg></button>
 <div class="hik-menu" id="hikMenu" hidden>
-  <a href="${y('hesap')}"><b id="ustHesap">Hesabım</b><small>Üye girişi, beğenilerim, tekliflerim</small></a>
+  <a href="${y('hesap')}"><b id="ustHesap">Hesabım</b><small>Üye girişi, beğenilerim, teklif ve taleplerim</small></a>
   <a href="${y('bilmen')}"><b>Bilmen gerekenler</b><small>Fiyat, ödeme, ürün durumu</small></a>
   <a href="${y('nasil')}"><b>Nasıl çalışır?</b><small>Kaydır, seç, teklif yap, satın al</small></a>
   <a href="${y('dukkan-ac')}"><b>Dükkân aç</b><small>Dükkânını sokağa aç</small></a>
