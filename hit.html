@@ -301,9 +301,9 @@ html.ev,html.ev body{overflow:hidden;height:100%}
   .kisayol{display:none}
 }
 @view-transition{navigation:auto}
-/* ana görsel kaldırıldı (Tolga 17.11): ortada arkadaki tünel görünür; başlık ve söz yerinde. Yeni görsel gelince bu iki satır kalkar */
-.kolaj>img{visibility:hidden}
-.sahne{opacity:.95}
+/* ana görsel (Tolga 17.11): yeni kolaj düz zeminden kesildi (kolaj-c.webp, şeffaf); gradyan/maske yok, bütün ürünler tam */
+.kolaj{width:calc(var(--kw)*.86);aspect-ratio:1313/1379;-webkit-mask-image:none;mask-image:none}
+.kolaj>img{aspect-ratio:1313/1379;clip-path:none;-webkit-mask:none;mask:none;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e3171b%27/%3E%3C/svg%3E">
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
@@ -334,7 +334,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
       <button class="gir dv" id="pazaraGir" type="button" aria-label="Pazara gir">PAZARA GİR <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" aria-hidden="true"><path d="M2 12h19M13 4l8 8-8 8"/></svg></button><span class="gir-alt">Bütün dükkânlar tek tünelde · ürüne dokun, teklif ver, satın al</span>
     </div>
     <div class="kolaj">
-      <img src="kaynak/referans/kolaj-seffaf.webp" alt="" width="747" height="785">
+      <img src="kaynak/referans/kolaj-c.webp" alt="" width="1313" height="1379">
     </div>
     <p class="soz dv"><span>HER ŞEYİN</span><span>BİR HİKÂYESİ</span><span class="var">VAR</span></p>
   </div>
