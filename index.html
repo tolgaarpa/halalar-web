@@ -364,9 +364,12 @@ function desteAdres(id){const p=location.port,yerel={'8766':'8769','8770':'8771'
   // deste, girilen tünelin ürünleriyle açılır: t=pazar | dukkan:2 | dukkan:3 | sec:<seçim> | kat:<Halalar kategorisi> | (boş = Halalar)
   const q=new URLSearchParams(location.search);
   const t=KPAZAR?'pazar':(KDT&&KDT.length)?'dukkan:'+KDS:(KST&&KST.length)?'sec:'+q.get('sec'):(KFILTRE&&KFILTRE.length)?'kat:'+KSEC:/^d[23]:/.test(id||'')?'pazar':'';
-  return kok+'index.html'+(t?'?t='+encodeURIComponent(t):'')+'#u='+encodeURIComponent(id)}
+  const z=Math.round(camZ);return kok+'index.html'+(t?'?t='+encodeURIComponent(t):'')+(z>0?(t?'&':'?')+'z='+z:'')+'#u='+encodeURIComponent(id)}
 addEventListener('mousemove',e=>{if(!card.classList.contains('on'))return;kartYer(e.clientX,e.clientY)});
 target=parseFloat(new URLSearchParams(location.search).get('z')||0);
+// bulunduğun derinlik adreste tutulur (?z=): ürüne, desteye, menüye gidip geri dönünce tünel aynı noktadan açılır
+function konumKaydet(){if(typeof camZ==='undefined')return;const q=new URLSearchParams(location.search),z=Math.round(camZ);if(q.get('z')===String(z))return;if(z>0)q.set('z',z);else q.delete('z');const s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:''))}
+addEventListener('click',konumKaydet,true);addEventListener('pagehide',konumKaydet);setInterval(konumKaydet,1500);
 
 // --- arama ve kategoriler ---
 (()=>{// dükkân tünelinde (?dukkan=) arama yalnız o dükkânın ürünlerinde ve kategorilerinde

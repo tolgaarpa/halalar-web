@@ -123,8 +123,11 @@ const fotolar=D2?(D2.gorseller||[D2.gorsel]):[`kaynak/web/${u[0]}.webp`].concat(
 if(D2){const l=document.querySelector('nav .logo');l.textContent=DK.ad;l.href=DHREF;if(D2.fiyat)document.getElementById('bTeklif').hidden=true}
 // geri: geldiğin tünel (Pazar, kendi tünelin, dükkân); doğrudan gelindiyse Pazar tüneli
 // 'Tünele dön': geldiğin tünel; yoksa ürünün kendi dükkânının tüneli (DSG ?dukkan=2, Önsal ?dukkan=3, Halalar)
-{const b=document.querySelector('nav .back'),r=document.referrer;b.textContent='← Tünele dön';
- b.href=r&&r.indexOf(location.origin)===0&&/\/index\.html/.test(r)?r:(DON==='d2:'?'index.html?dukkan=2':DON==='d3:'?'index.html?dukkan=3':'index.html')}
+// geri: geldiğin yere, aynı noktaya (tünelde aynı derinlik, öneriden gelindiyse önceki ürün, Dükkânlar'dan gelindiyse Dükkânlar); dışarıdan gelindiyse ürünün dükkân tüneli
+{const b=document.querySelector('nav .back'),r=document.referrer,ic=r&&r.indexOf(location.origin)===0&&r.split('#')[0]!==location.href.split('#')[0];
+ const tunelden=ic&&/\/index\.html/.test(r);b.textContent=tunelden||!ic?'← Tünele dön':'← Geri';
+ b.href=ic?r:(DON==='d2:'?'index.html?dukkan=2':DON==='d3:'?'index.html?dukkan=3':'index.html');
+ if(ic&&history.length>1)b.onclick=e=>{e.preventDefault();history.back()}}
 const ana=document.getElementById('img');ana.src=fotolar[0];
 const kat=D2?(D2.kategori||''):((typeof KATEGORI!=='undefined'&&KATEGORI[u[0]])||'');
 document.getElementById('k').textContent=[kat,u[3]==='—'?'':u[3]].filter(Boolean).join(' · ')||(D2?DK.ad:'Halalar koleksiyonu');
