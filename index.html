@@ -338,7 +338,7 @@ let lx=-1,ly=-1;
 function hover(){if(lx<0)return;let o=pick(lx,ly);if(!o&&nearHot(lx,ly))o=hot;setHot(o)}
 addEventListener('mousemove',e=>{lx=e.clientX;ly=e.clientY;hover()});
 setInterval(hover,90);
-cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o){if(KMOD){target=clamp(camZ+1600);document.getElementById('kperde').classList.add('on');setTimeout(()=>location.href='index.html?kat='+encodeURIComponent(o.u[1]),620)}else location.href=innerWidth>=900||/^d[23]:/.test(o.u[0])?'urun.html?id='+encodeURIComponent(o.u[0]):desteAdres(o.u[0])}});   // bilgisayarda web ürün sayfası, telefonda kart destesi
+cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o){if(KMOD){target=clamp(camZ+1600);document.getElementById('kperde').classList.add('on');setTimeout(()=>location.href='index.html?kat='+encodeURIComponent(o.u[1]),620)}else location.href='urun.html?id='+encodeURIComponent(o.u[0])}});   // telefonda da bilgisayarda da Hit Pazarı ürün sayfası (Halalar destesine değil)
 // ürüne dokununca kart destesi (Geç / Teklif / Satın al / Beğen) o üründen başlar: telefon uygulamasının destesi
 document.getElementById('desteAc').onclick=e=>{e.preventDefault();location.href=desteAdres((items.find(it=>it.dz>-1500&&it.dz<200)||items[0]).u[0])};
 if(KMOD)document.getElementById('desteAc').hidden=true;
