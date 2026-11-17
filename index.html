@@ -224,7 +224,9 @@ if(KST&&KST.length){const l=document.querySelector('nav .logo');l.textContent='S
 if(KPAZAR){document.querySelector('nav .logo').textContent='Pazar';document.title='Hit Pazarı · Pazar';setTimeout(()=>{if(target<10)target=520},250)}
 if(KMOD){document.querySelector('nav .logo').textContent='Kategoriler';document.getElementById('end').textContent='kategoriler';document.title='Hit Pazarı · Kategoriler';document.querySelector('#card .go').textContent='Ürünleri gör →'}
 // Her ürüne tünelde bir yer: z (derinlik), x/y (yana ofset), boyut. Deterministik dağılım.
-const STEP=KMOD?110:32;                        // ürünler arası derinlik
+// büyük fotoğraflı dükkân ürünleri (giyim, beyaz eşya) ağırlıktaysa ürünler arası mesafe açılır: tünel kalabalık görünmesin
+const IRI=!KMOD&&KAYNAK.filter(u=>/^d[23]:/.test(u[0])).length>KAYNAK.length*.5;
+const STEP=KMOD?110:IRI?46:32;                        // ürünler arası derinlik
 const TEKRAR=12;                      // liste tekrarı: tünel uzun ve dolu
 const P=600;                          // perspektif (eski CSS ile aynı)
 const BG='#0b0b0d';
@@ -250,19 +252,23 @@ KAYNAK.forEach(u=>{ const id=u[0]; if(IMG[id])return; const im=new Image(); IMG[
 function buyukIste(id){if(BUYUK[id]||(IMG[id]&&IMG[id].dataset.b))return;const b=new Image();BUYUK[id]=b;b.onload=()=>{KOPYA[id]=kopyala(b);b.hazir=1};b.src=yolB(id)}
 function kaynak(id,px){if(px>340)buyukIste(id);const L=KOPYA[id];if(L)for(const k of L)if(Math.max(k.width,k.height)>=px)return k;const b=BUYUK[id];return b&&b.hazir?b:IMG[id]}
 // --- yerleşim (önceki ile aynı kurallar) ---
-const LISTE=[];for(let t=0;t<(KMOD?1:Math.max(TEKRAR,Math.ceil(60/KAYNAK.length)));t++)KAYNAK.forEach(u=>LISTE.push(u));
+// tekrar: kısa listede çok, uzun listede az (aynı ürün sık sık dönmesin); en az 3, en çok 12 tur
+const LISTE=[];for(let t=0;t<(KMOD?1:Math.max(3,Math.min(TEKRAR,Math.ceil(700/KAYNAK.length))));t++)KAYNAK.forEach(u=>LISTE.push(u));
 const N=LISTE.length;
 const items=LISTE.map((u,i)=>{
   const ar=ASPECT[u[0]]||1;
   const X=1.4, Y=1.35, per=2*(2*X+2*Y);            // çerçeve çevresine eşit dağılım
   const p=((i*0.6180339)%1)*per;
-  const inn=((i*0.4142)%1)*0.35;
+  const inn=((i*0.4142)%1)*0.2;   // ürünler çerçeveye yakın: ortada yürüyecek boşluk kalır
   let xv,yv;
   if(p<2*X){xv=-X+p; yv=-Y+inn}
   else if(p<2*X+2*Y){xv=X-inn; yv=-Y+(p-2*X)}
   else if(p<4*X+2*Y){xv=X-(p-2*X-2*Y); yv=Y-inn}
   else {xv=-X+inn; yv=Y-(p-4*X-2*Y)}
-  const w=((ar>1.25?460:ar<0.75?300:380)+((i*13)%6)*45)*(KMOD?1.25:1);   // kategori modunda ikonlar bir tık büyük
+  // kademe: ortadaki görüş hattı boş kalsın; üst/alt kenardaki ürünler ortadan yanlara açılır (arkadakiler görünür)
+  if(Math.abs(yv)>Math.abs(xv)){const a=Math.abs(xv),g=0.55;xv=(xv<0?-1:1)*(g+a*(X-g)/X)}
+  else{const a=Math.abs(yv),g=0.35;yv=(yv<0?-1:1)*(g+a*(Y-g)/Y)}
+  const w=((ar>1.25?460:ar<0.75?300:380)+((i*13)%6)*45)*(KMOD?1.25:IRI?.8:1);   // büyük fotoğraflı dükkân ürünleri bir tık küçük   // kategori modunda ikonlar bir tık büyük
   const z=-(i*STEP)-250;
   let rot=0;
   if(ar<0.75){ const mag=9+((i*0.7548)%1)*11; const side=Math.abs(xv)>Math.abs(yv)?Math.sign(xv):(((i*0.31)%1)<0.5?-1:1); rot=-side*mag; }
