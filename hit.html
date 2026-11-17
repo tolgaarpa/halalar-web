@@ -4,7 +4,7 @@
 <meta charset="utf-8"><link rel="prefetch" href="index.html">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b0b0d">
-<title>Hit Pazarı</title>
+<title>Hit Pazarı</title><meta name="description" content="Hit Pazarı: vintage, koleksiyon ve özel parçaların dijital dükkânı. Tünelde gez, beğen, teklif ver, satın al."><meta property="og:type" content="website"><meta property="og:site_name" content="Hit Pazarı"><meta property="og:title" content="Hit Pazarı · Dijital dükkân"><meta property="og:description" content="Hit Pazarı: vintage, koleksiyon ve özel parçaların dijital dükkânı. Tünelde gez, beğen, teklif ver, satın al."><meta property="og:url" content="https://tolgaarpa.github.io/halalar-web/hit.html"><meta property="og:image" content="https://tolgaarpa.github.io/halalar-web/kaynak/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -567,7 +567,7 @@ function pazaraGir(){if(girildi||sekmeAcik())return;girildi=true;
 function desteAdres(id){const y={'8766':'8769','8770':'8771'}[location.port];const kok=y?`${location.protocol}//${location.hostname}:${y}/`:'https://tolgaarpa.github.io/halalar-app/';return kok+'index.html'+(id?'#u='+encodeURIComponent(id):'')}
 document.getElementById('pazaraGir').onclick=pazaraGir;
 // tünel görsellerini boşta önceden indir: pazara girince ekran boş/siyah kalmasın
-(window.requestIdleCallback||(f=>setTimeout(f,1200)))(()=>{if(typeof URUNLER==='undefined')return;let i=0;const SON=Math.min(24,URUNLER.length);(function sira(){for(let n=0;n<8&&i<SON;n++,i++){const im=new Image();im.decoding='async';im.src='kaynak/web/'+URUNLER[i][0]+'.webp'}if(i<SON)setTimeout(sira,120)})()});
+(window.requestIdleCallback||(f=>setTimeout(f,1200)))(()=>{if(typeof URUNLER==='undefined')return;let i=0;const SON=Math.min(24,URUNLER.length);(function sira(){for(let n=0;n<8&&i<SON;n++,i++){const im=new Image();im.decoding='async';im.src='kaynak/k/web/'+URUNLER[i][0]+'.webp'}if(i<SON)setTimeout(sira,120)})()});
 addEventListener('wheel',e=>{if(!sekmeAcik()&&e.deltaY>8)pazaraGir()},{passive:true});
 let dokY=null;addEventListener('touchstart',e=>{dokY=e.touches[0].clientY},{passive:true});
 addEventListener('touchmove',e=>{if(dokY!==null&&!sekmeAcik()&&dokY-e.touches[0].clientY>40){dokY=null;pazaraGir()}},{passive:true});
