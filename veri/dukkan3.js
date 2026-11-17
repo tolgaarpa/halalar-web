@@ -108,7 +108,6 @@ const DUKKAN3={
 "kaynak/onsal/al-km-1160.webp",
 "kaynak/onsal/al-km-1160_2.webp",
 "kaynak/onsal/al-km-1160_3.webp",
-"kaynak/onsal/al-km-1160_4.webp",
 "kaynak/onsal/al-km-1160_5.webp"
 ],
 "tunel": true,
@@ -127,8 +126,7 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/hoover-hey-29b8-17-a-20-enerji-verimlilik-sinifi-9-kg-kapasite-1200-dev-dak.webp",
 "kaynak/onsal/hoover-hey-29b8-17-a-20-enerji-verimlilik-sinifi-9-kg-kapasite-1200-dev-dak_2.webp",
-"kaynak/onsal/hoover-hey-29b8-17-a-20-enerji-verimlilik-sinifi-9-kg-kapasite-1200-dev-dak_3.webp",
-"kaynak/onsal/hoover-hey-29b8-17-a-20-enerji-verimlilik-sinifi-9-kg-kapasite-1200-dev-dak_4.webp"
+"kaynak/onsal/hoover-hey-29b8-17-a-20-enerji-verimlilik-sinifi-9-kg-kapasite-1200-dev-dak_3.webp"
 ],
 "tunel": true,
 "tgorsel": "kaynak/onsal/t/hoover-hey-29b8-17-a-20-enerji-verimlilik-sinifi-9-kg-kapasite-1200-dev-dak.webp"
@@ -146,8 +144,7 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/hoover-hbwr-4138bl10-17-a-40-enerji-verimlilik-sinifi-13-kg-yikama-kapasitesi-8.webp",
 "kaynak/onsal/hoover-hbwr-4138bl10-17-a-40-enerji-verimlilik-sinifi-13-kg-yikama-kapasitesi-8_2.webp",
-"kaynak/onsal/hoover-hbwr-4138bl10-17-a-40-enerji-verimlilik-sinifi-13-kg-yikama-kapasitesi-8_3.webp",
-"kaynak/onsal/hoover-hbwr-4138bl10-17-a-40-enerji-verimlilik-sinifi-13-kg-yikama-kapasitesi-8_4.webp"
+"kaynak/onsal/hoover-hbwr-4138bl10-17-a-40-enerji-verimlilik-sinifi-13-kg-yikama-kapasitesi-8_3.webp"
 ],
 "tunel": true,
 "tgorsel": "kaynak/onsal/t/hoover-hbwr-4138bl10-17-a-40-enerji-verimlilik-sinifi-13-kg-yikama-kapasitesi-8.webp"
@@ -198,8 +195,7 @@ const DUKKAN3={
 "oran": 1.0,
 "gorseller": [
 "kaynak/onsal/al-38-i.webp",
-"kaynak/onsal/al-38-i_2.webp",
-"kaynak/onsal/al-38-i_3.webp"
+"kaynak/onsal/al-38-i_2.webp"
 ],
 "tunel": true,
 "tgorsel": "kaynak/onsal/t/al-38-i.webp"
@@ -211,11 +207,11 @@ const DUKKAN3={
 "marka": "Hoover",
 "kategori": "Beyaz Eşya",
 "fiyat": 34254,
-"gorsel": "kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz.webp",
+"gorsel": "kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz_tunel.webp",
 "stok": 1,
-"oran": 1.0,
+"oran": 0.326,
 "gorseller": [
-"kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz.webp",
+"kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz_tunel.webp",
 "kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz_2.webp",
 "kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz_3.webp",
 "kaynak/onsal/hoover-honcq2t618ew-355-l-no-frost-kombi-buzdolabi-beyaz_4.webp"
@@ -271,8 +267,7 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/hoover-hey-210b8-17-a-20-enerji-verimlilik-sinifi-10-kg-kapasite-1200-dev-dak.webp",
 "kaynak/onsal/hoover-hey-210b8-17-a-20-enerji-verimlilik-sinifi-10-kg-kapasite-1200-dev-dak_2.webp",
-"kaynak/onsal/hoover-hey-210b8-17-a-20-enerji-verimlilik-sinifi-10-kg-kapasite-1200-dev-dak_3.webp",
-"kaynak/onsal/hoover-hey-210b8-17-a-20-enerji-verimlilik-sinifi-10-kg-kapasite-1200-dev-dak_4.webp"
+"kaynak/onsal/hoover-hey-210b8-17-a-20-enerji-verimlilik-sinifi-10-kg-kapasite-1200-dev-dak_3.webp"
 ],
 "tunel": true,
 "tgorsel": "kaynak/onsal/t/hoover-hey-210b8-17-a-20-enerji-verimlilik-sinifi-10-kg-kapasite-1200-dev-dak.webp"
@@ -507,9 +502,7 @@ const DUKKAN3={
 "oran": 1.0,
 "gorseller": [
 "kaynak/onsal/al-cm-71045-r.webp",
-"kaynak/onsal/al-cm-71045-r_2.webp",
-"kaynak/onsal/al-cm-71045-r_3.webp",
-"kaynak/onsal/al-cm-71045-r_4.webp"
+"kaynak/onsal/al-cm-71045-r_2.webp"
 ],
 "tunel": true,
 "tgorsel": "kaynak/onsal/t/al-cm-71045-r.webp"
@@ -573,11 +566,11 @@ const DUKKAN3={
 "marka": "Hoover",
 "kategori": "Beyaz Eşya",
 "fiyat": 23937,
-"gorsel": "kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi.webp",
+"gorsel": "kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi_tunel.webp",
 "stok": 1,
-"oran": 1.0,
+"oran": 0.727,
 "gorseller": [
-"kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi.webp",
+"kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi_tunel.webp",
 "kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi_2.webp",
 "kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi_3.webp",
 "kaynak/onsal/hoover-hgd-10n1bc-17-10-kg-isi-pompali-kurutma-makinesi_4.webp"
@@ -653,8 +646,7 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/hoover-hdg6c1gbtk-60-cm-dokunmatik-kontrol-maksimum-emis-gucu-447-m3-h-siyah-cam.webp",
 "kaynak/onsal/hoover-hdg6c1gbtk-60-cm-dokunmatik-kontrol-maksimum-emis-gucu-447-m3-h-siyah-cam_2.webp",
-"kaynak/onsal/hoover-hdg6c1gbtk-60-cm-dokunmatik-kontrol-maksimum-emis-gucu-447-m3-h-siyah-cam_3.webp",
-"kaynak/onsal/hoover-hdg6c1gbtk-60-cm-dokunmatik-kontrol-maksimum-emis-gucu-447-m3-h-siyah-cam_4.webp"
+"kaynak/onsal/hoover-hdg6c1gbtk-60-cm-dokunmatik-kontrol-maksimum-emis-gucu-447-m3-h-siyah-cam_3.webp"
 ],
 "tunel": true,
 "tgorsel": "kaynak/onsal/t/hoover-hdg6c1gbtk-60-cm-dokunmatik-kontrol-maksimum-emis-gucu-447-m3-h-siyah-cam.webp"
@@ -687,8 +679,7 @@ const DUKKAN3={
 "stok": 1,
 "oran": 0.752,
 "gorseller": [
-"kaynak/onsal/demirdokum-dt4-titanium-digital-65-d.webp",
-"kaynak/onsal/demirdokum-dt4-titanium-digital-65-d_2.webp"
+"kaynak/onsal/demirdokum-dt4-titanium-digital-65-d.webp"
 ],
 "tunel": true,
 "tgorsel": "kaynak/onsal/t/demirdokum-dt4-titanium-digital-65-d.webp"
@@ -719,14 +710,13 @@ const DUKKAN3={
 "marka": "Hoover",
 "kategori": "Beyaz Eşya",
 "fiyat": 25798,
-"gorsel": "kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak.webp",
+"gorsel": "kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_tunel.webp",
 "stok": 1,
-"oran": 1.0,
+"oran": 0.725,
 "gorseller": [
-"kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak.webp",
+"kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_tunel.webp",
 "kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_2.webp",
 "kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_3.webp",
-"kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_4.webp",
 "kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_5.webp",
 "kaynak/onsal/hoover-hgd-412bl10c-17-a-40-enerji-verimlilik-sinifi-12-kg-kapasite-1400-dev-dak_6.webp"
 ],
@@ -747,8 +737,7 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/ala-159-gb-db.webp",
 "kaynak/onsal/ala-159-gb-db_2.webp",
-"kaynak/onsal/ala-159-gb-db_3.webp",
-"kaynak/onsal/ala-159-gb-db_4.webp"
+"kaynak/onsal/ala-159-gb-db_3.webp"
 ],
 "tunel": true,
 "tgorsel": "kaynak/onsal/t/ala-159-gb-db.webp"
@@ -819,8 +808,7 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/hoover-hi-3e7l0s-17-tam-entegre-5-programli-ankastre-bulasik.webp",
 "kaynak/onsal/hoover-hi-3e7l0s-17-tam-entegre-5-programli-ankastre-bulasik_2.webp",
-"kaynak/onsal/hoover-hi-3e7l0s-17-tam-entegre-5-programli-ankastre-bulasik_3.webp",
-"kaynak/onsal/hoover-hi-3e7l0s-17-tam-entegre-5-programli-ankastre-bulasik_4.webp"
+"kaynak/onsal/hoover-hi-3e7l0s-17-tam-entegre-5-programli-ankastre-bulasik_3.webp"
 ],
 "tunel": true,
 "tgorsel": "kaynak/onsal/t/hoover-hi-3e7l0s-17-tam-entegre-5-programli-ankastre-bulasik.webp"
@@ -941,8 +929,6 @@ const DUKKAN3={
 "gorseller": [
 "kaynak/onsal/ala-527-g.webp",
 "kaynak/onsal/ala-527-g_2.webp",
-"kaynak/onsal/ala-527-g_3.webp",
-"kaynak/onsal/ala-527-g_4.webp",
 "kaynak/onsal/ala-527-g_5.webp"
 ],
 "tunel": true,
@@ -1028,18 +1014,17 @@ const DUKKAN3={
 "marka": "Hoover",
 "kategori": "Beyaz Eşya",
 "fiyat": 24719,
-"gorsel": "kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth.webp",
+"gorsel": "kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth_tam.webp",
 "stok": 1,
 "oran": 1.0,
 "gorseller": [
-"kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth.webp",
+"kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth_tam.webp",
 "kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth_2.webp",
-"kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth_3.webp",
-"kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth_4.webp"
+"kaynak/onsal/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth_3.webp"
 ],
 "tunel": true,
 "tgorsel": "kaynak/onsal/t/hoover-hbr-10n1bx-17-10-kg-isi-pompali-kurutma-makinesi-wi-fi-bluetooth.webp",
-"toran": 0.723
+"toran": 1.0
 },
 {
 "id": "al-333-be",
@@ -1119,9 +1104,7 @@ const DUKKAN3={
 "stok": 1,
 "oran": 1.0,
 "gorseller": [
-"kaynak/onsal/hoover-hmc510uv-011-uv-c-isinli-temizleyici-supurge-0-6-l-toz-hacmi.webp",
-"kaynak/onsal/hoover-hmc510uv-011-uv-c-isinli-temizleyici-supurge-0-6-l-toz-hacmi_2.webp",
-"kaynak/onsal/hoover-hmc510uv-011-uv-c-isinli-temizleyici-supurge-0-6-l-toz-hacmi_3.webp"
+"kaynak/onsal/hoover-hmc510uv-011-uv-c-isinli-temizleyici-supurge-0-6-l-toz-hacmi.webp"
 ],
 "tunel": true
 },
@@ -1265,11 +1248,11 @@ const DUKKAN3={
 "marka": "Altus",
 "kategori": "Küçük Ev Aletleri",
 "fiyat": 4041,
-"gorsel": "kaynak/onsal/altus-al-11-rd-yagli-radyator-2000-w.webp",
+"gorsel": "kaynak/onsal/altus-al-11-rd-yagli-radyator-2000-w_tam.webp",
 "stok": 1,
-"oran": 0.993,
+"oran": 1.0,
 "gorseller": [
-"kaynak/onsal/altus-al-11-rd-yagli-radyator-2000-w.webp",
+"kaynak/onsal/altus-al-11-rd-yagli-radyator-2000-w_tam.webp",
 "kaynak/onsal/altus-al-11-rd-yagli-radyator-2000-w_2.webp",
 "kaynak/onsal/altus-al-11-rd-yagli-radyator-2000-w_3.webp"
 ],
@@ -1356,12 +1339,11 @@ const DUKKAN3={
 "marka": "Altus",
 "kategori": "Küçük Ev Aletleri",
 "fiyat": 1104,
-"gorsel": "kaynak/onsal/al-728-i.webp",
+"gorsel": "kaynak/onsal/al-728-i_tam.webp",
 "stok": 1,
 "oran": 1.0,
 "gorseller": [
-"kaynak/onsal/al-728-i.webp",
-"kaynak/onsal/al-728-i_2.webp"
+"kaynak/onsal/al-728-i_tam.webp"
 ],
 "tunel": true
 },
@@ -1536,9 +1518,7 @@ const DUKKAN3={
 "oran": 0.979,
 "gorseller": [
 "kaynak/onsal/altus-al-3434-b-blender-seti.webp",
-"kaynak/onsal/altus-al-3434-b-blender-seti_2.webp",
-"kaynak/onsal/altus-al-3434-b-blender-seti_3.webp",
-"kaynak/onsal/altus-al-3434-b-blender-seti_4.webp"
+"kaynak/onsal/altus-al-3434-b-blender-seti_2.webp"
 ],
 "tunel": true
 },
