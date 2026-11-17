@@ -84,7 +84,7 @@ main img{filter:drop-shadow(0 24px 30px rgba(0,0,0,.16))}
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
 </head>
 <body>
-<nav><span class="hpi-sol"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><a class="logo" href="index.html#ic">Halalar</a></span><a class="back" href="index.html#ic">← tünele giriş</a></nav>
+<nav><span class="hpi-sol"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><a class="logo" href="index.html#ic">Halalar</a></span><a class="back" href="index.html?mod=pazar">← tünele dön</a></nav>
 <script src="veri/hesap-ikon.js"></script>
 <main><div class="foto"><img id="img" alt=""><div class="acilar" id="acilar"></div></div><div><div class="k" id="k"></div><h1 id="h"></h1><p id="p"></p><div class="fiyat" id="fy"></div>
   <div class="eylem"><button class="cta" id="bTeklif" type="button">Teklif ver</button><button class="cta" id="bAlim" type="button">Satın al</button></div>
@@ -116,6 +116,8 @@ if(YOK){const m=document.querySelector('main'),gr=id&&/^d[23]:/.test(id),dk=gr?(
   m.hidden=true;m.style.display='none';const y=document.createElement('section');y.className='yok';y.innerHTML=`<h1>Bu ürün artık yok</h1><p>Satılmış ya da kaldırılmış olabilir. Benzerlerine ${dk[1].replace(/[<>&"]/g,'')} dükkânında bakabilirsin.</p><a class="cta on" href="${dk[0]}">Dükkâna git →</a>`;m.after(y);document.title='Hit Pazarı · Ürün bulunamadı'}
 const fotolar=D2?(D2.gorseller||[D2.gorsel]):[`kaynak/web/${u[0]}.webp`].concat(((typeof GALERI!=='undefined'&&GALERI[u[0]])||[]).map(g=>`kaynak/web/${g}.webp`));
 if(D2){const l=document.querySelector('nav .logo');l.textContent=DK.ad;l.href=DHREF;const b=document.querySelector('nav .back');b.textContent='← '+DK.ad;b.href=DHREF;if(D2.fiyat)document.getElementById('bTeklif').hidden=true}
+// geri: geldiğin tünel (Pazar, kendi tünelin, dükkân); doğrudan gelindiyse Pazar tüneli
+{const r=document.referrer;if(!D2&&r&&r.indexOf(location.origin)===0&&/\/index\.html/.test(r))document.querySelector('nav .back').href=r}
 const ana=document.getElementById('img');ana.src=fotolar[0];
 const kat=D2?(D2.kategori||''):((typeof KATEGORI!=='undefined'&&KATEGORI[u[0]])||'');
 document.getElementById('k').textContent=[kat,u[3]==='—'?'':u[3]].filter(Boolean).join(' · ')||(D2?DK.ad:'Halalar koleksiyonu');
