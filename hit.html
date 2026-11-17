@@ -614,7 +614,7 @@ function desteAdres(id){const y={'8766':'8769','8770':'8771'}[location.port];con
 document.getElementById('pazaraGir').onclick=pazaraGir;
 // tünel görsellerini boşta önceden indir: pazara girince ekran boş/siyah kalmasın
 (window.requestIdleCallback||(f=>setTimeout(f,1200)))(()=>{if(typeof URUNLER==='undefined')return;let i=0;const SON=Math.min(24,URUNLER.length);(function sira(){for(let n=0;n<8&&i<SON;n++,i++){const im=new Image();im.decoding='async';im.src='kaynak/k/web/'+URUNLER[i][0]+'.webp'}if(i<SON)setTimeout(sira,120)})()});
-addEventListener('wheel',e=>{if(!sekmeAcik()&&e.deltaY>8)pazaraGir()},{passive:true});
+addEventListener('wheel',e=>{if(!sekmeAcik()&&e.deltaY>8&&e.deltaY>Math.abs(e.deltaX)*1.5)pazaraGir()},{passive:true});   // yana iki parmak (geri/ileri) pazara sokmaz
 let dokY=null;addEventListener('touchstart',e=>{dokY=e.touches[0].clientY},{passive:true});
 addEventListener('touchmove',e=>{if(dokY!==null&&!sekmeAcik()&&dokY-e.touches[0].clientY>40){dokY=null;pazaraGir()}},{passive:true});
 addEventListener('keydown',e=>{if(!sekmeAcik()&&['ArrowDown','PageDown',' '].includes(e.key)&&!e.target.closest('input,textarea,button,a')){e.preventDefault();pazaraGir()}});

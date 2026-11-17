@@ -9,7 +9,7 @@
 <style>
 :root{--ink:#f2efe9;--paper:#0b0b0d;--accent:#e8201c;--muted:#8d887f}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{overflow:hidden;overscroll-behavior:none;touch-action:none;height:100%;background:var(--paper);color:var(--ink);font-family:Barlow,system-ui,sans-serif}
+html,body{overflow:hidden;overscroll-behavior-y:none;overscroll-behavior-x:auto;touch-action:none;height:100%;background:var(--paper);color:var(--ink);font-family:Barlow,system-ui,sans-serif}
 body{height:100vh;overflow:hidden}
 body.locked{overflow:hidden}
 #cover{position:fixed;inset:0;z-index:50;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity 1s,visibility 1s}
@@ -275,10 +275,11 @@ const THIN_Z=1100;
 let mx=0,my=0; addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5)});
 let camZ=0,target=0,open=true;
 const clamp=v=>Math.min(Math.max(v,0),TOTAL);
-addEventListener('wheel',e=>{if(!open)return;e.preventDefault();
+// iki parmakla yana kaydırma (tarayıcının geri/ileri hareketi) tünele karışmaz; dikey kaydırma tüneli sürer
+addEventListener('wheel',e=>{if(!open)return;if(Math.abs(e.deltaX)>Math.abs(e.deltaY))return;e.preventDefault();
   if(Math.abs(e.deltaY)<2)return;
   if(target<=0&&e.deltaY<0){target=0;if(KPAZAR&&!geriGit){geriTop+=-e.deltaY;clearTimeout(geriSifir);geriSifir=setTimeout(()=>geriTop=0,400);if(geriTop>600)geriGit=setTimeout(()=>location.href='hit.html',60)}return}
-  target=clamp(target+e.deltaY*1.4)},{passive:false});
+  target=clamp(target+e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?600:2.4))},{passive:false});   // dokunmatik yüzeyde de akıcı ilerlesin
 let geriGit=null,geriTop=0,geriSifir=null,geriDokun=0;   // tünel başında geri dönüş için bilinçli, uzun bir kaydırma gerekir
 let ty=null;addEventListener('touchstart',e=>{ty=e.touches[0].clientY;geriDokun=0},{passive:true});
 addEventListener('touchmove',e=>{if(!open||ty===null)return;const y=e.touches[0].clientY;if(KPAZAR&&target<=0&&y>ty&&!geriGit){geriDokun+=y-ty;if(geriDokun>220){geriGit=1;location.href='hit.html';return}}else geriDokun=0;target=clamp(target+(ty-y)*3);ty=y;e.preventDefault()},{passive:false});
