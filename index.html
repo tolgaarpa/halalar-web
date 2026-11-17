@@ -212,9 +212,13 @@ const KST=KSECIM?(()=>{const L=[].concat(typeof KATEGORI!=='undefined'?URUNLER.f
   typeof DUKKAN2!=='undefined'?dukT('d2:',DUKKAN2).filter(u=>KSECIM.includes('d2:'+u[3])):[],
   typeof DUKKAN3!=='undefined'?dukT('d3:',DUKKAN3).filter(u=>KSECIM.includes('d3:'+u[3])):[]);
   for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}return L})():null;
+// Kategoriler tünelinde diğer dükkânların genel kategorileri de var (Giyim, Beyaz Eşya, ...); dokununca o kategorinin kendi tüneli (?sec=)
+const SKAT=new Map();if(KMOD){if(typeof DUKKAN2!=='undefined'){const g=dukT('d2:',DUKKAN2).map(u=>u[0]);if(g.length)SKAT.set('Giyim',g)}
+  if(typeof DUKKAN3!=='undefined'){const d=dukT('d3:',DUKKAN3);DUKKAN3.kategoriler.filter(k=>k!=='Televizyon').forEach(k=>{const g=d.filter(u=>u[3]===k).map(u=>u[0]);if(g.length)SKAT.set(k,g)})}}
 const KAYNAK=KMOD?(()=>{const L=[],ks=Object.keys(KATEGORI_IKON);
   const uy=k=>URUNLER.filter(u=>KATEGORI[u[0]]===k&&u[0]!==KATEGORI_IKON[k]).map(u=>u[0]);
-  for(let t=0;t<8;t++)ks.forEach(k=>{const d=uy(k);const id=t===0||!d.length?KATEGORI_IKON[k]:d[(t-1)%d.length];L.push([id,k,'Bu kategorideki ürünleri gör','—'])});return L})():(KDT&&KDT.length?KDT:KST&&KST.length?KST:KFILTRE&&KFILTRE.length?KFILTRE:KPAZAR?(()=>{const L=URUNLER.concat(D2T);for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}return L})():URUNLER);
+  for(let t=0;t<8;t++)ks.forEach(k=>{const d=uy(k);const id=t===0||!d.length?KATEGORI_IKON[k]:d[(t-1)%d.length];L.push([id,k,'Bu kategorideki ürünleri gör','—'])});
+  for(let t=0;t<8;t++)SKAT.forEach((g,k)=>L.push([g[(t*7)%g.length],k,'Bu kategorideki ürünleri gör','—']));return L})():(KDT&&KDT.length?KDT:KST&&KST.length?KST:KFILTRE&&KFILTRE.length?KFILTRE:KPAZAR?(()=>{const L=URUNLER.concat(D2T);for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}return L})():URUNLER);
 if(KDT&&KDT.length){const l=document.querySelector('nav .logo');l.textContent=KD[1].ad;l.href=KD[2];document.title='Hit Pazarı · '+KD[1].ad+' tüneli';document.getElementById('desteAc').style.display='none';setTimeout(()=>{if(target<10)target=520},250)}
 if(KST&&KST.length){const l=document.querySelector('nav .logo');l.textContent='Senin tünelin';l.title='Kategorileri değiştir';l.onclick=e=>{e.preventDefault();tunelKurAc()};document.title='Hit Pazarı · Senin tünelin';setTimeout(()=>{if(target<10)target=520},250)}
 if(KPAZAR){document.querySelector('nav .logo').textContent='Pazar';document.title='Hit Pazarı · Pazar';setTimeout(()=>{if(target<10)target=520},250)}
@@ -273,11 +277,11 @@ let camZ=0,target=0,open=true;
 const clamp=v=>Math.min(Math.max(v,0),TOTAL);
 addEventListener('wheel',e=>{if(!open)return;e.preventDefault();
   if(Math.abs(e.deltaY)<2)return;
-  if(target<=0&&e.deltaY<0){target=0;if(KPAZAR&&!geriGit)geriGit=setTimeout(()=>location.href='hit.html',60);return}
+  if(target<=0&&e.deltaY<0){target=0;if(KPAZAR&&!geriGit){geriTop+=-e.deltaY;clearTimeout(geriSifir);geriSifir=setTimeout(()=>geriTop=0,400);if(geriTop>600)geriGit=setTimeout(()=>location.href='hit.html',60)}return}
   target=clamp(target+e.deltaY*1.4)},{passive:false});
-let geriGit=null;
-let ty=null;addEventListener('touchstart',e=>{ty=e.touches[0].clientY},{passive:true});
-addEventListener('touchmove',e=>{if(!open||ty===null)return;const y=e.touches[0].clientY;if(KPAZAR&&target<=0&&y-ty>60&&!geriGit){geriGit=1;location.href='hit.html';return}target=clamp(target+(ty-y)*3);ty=y;e.preventDefault()},{passive:false});
+let geriGit=null,geriTop=0,geriSifir=null,geriDokun=0;   // tünel başında geri dönüş için bilinçli, uzun bir kaydırma gerekir
+let ty=null;addEventListener('touchstart',e=>{ty=e.touches[0].clientY;geriDokun=0},{passive:true});
+addEventListener('touchmove',e=>{if(!open||ty===null)return;const y=e.touches[0].clientY;if(KPAZAR&&target<=0&&y>ty&&!geriGit){geriDokun+=y-ty;if(geriDokun>220){geriGit=1;location.href='hit.html';return}}else geriDokun=0;target=clamp(target+(ty-y)*3);ty=y;e.preventDefault()},{passive:false});
 addEventListener('keydown',e=>{if(!open)return;if(e.key==='ArrowDown'||e.key===' '||e.key==='PageDown')target=clamp(target+400);if(e.key==='ArrowUp'||e.key==='PageUp')target=clamp(target-400)});
 let drawn=[];                       // bu karede çizilenler, uzaktan yakına
 function render(){
@@ -342,26 +346,31 @@ let lx=-1,ly=-1;
 function hover(){if(lx<0)return;let o=pick(lx,ly);if(!o&&nearHot(lx,ly))o=hot;setHot(o)}
 addEventListener('mousemove',e=>{lx=e.clientX;ly=e.clientY;hover()});
 setInterval(hover,90);
-cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o){if(KMOD){target=clamp(camZ+1600);document.getElementById('kperde').classList.add('on');setTimeout(()=>location.href='index.html?kat='+encodeURIComponent(o.u[1]),620)}else location.href='urun.html?id='+encodeURIComponent(o.u[0])}});   // telefonda da bilgisayarda da Hit Pazarı ürün sayfası (Halalar destesine değil)
+cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o){if(KMOD){target=clamp(camZ+1600);document.getElementById('kperde').classList.add('on');setTimeout(()=>location.href=SKAT.has(o.u[1])?'index.html?sec='+encodeURIComponent(o.u[1]):'index.html?kat='+encodeURIComponent(o.u[1]),620)}else location.href='urun.html?id='+encodeURIComponent(o.u[0])}});   // telefonda da bilgisayarda da Hit Pazarı ürün sayfası (Halalar destesine değil)
 // ürüne dokununca kart destesi (Geç / Teklif / Satın al / Beğen) o üründen başlar: telefon uygulamasının destesi
 document.getElementById('desteAc').onclick=e=>{e.preventDefault();location.href=desteAdres((items.find(it=>it.dz>-1500&&it.dz<200)||items[0]).u[0])};
 if(KMOD)document.getElementById('desteAc').hidden=true;
 function desteAdres(id){const p=location.port,yerel={'8766':'8769','8770':'8771'}[p];
   const kok=yerel?`${location.protocol}//${location.hostname}:${yerel}/`:'https://tolgaarpa.github.io/halalar-app/';
-  return kok+'index.html#u='+encodeURIComponent(id)}
+  // Pazar / kendi tünelin ya da başka dükkânın ürünü: deste bütün dükkânların ürünleriyle açılır
+  const hep=KPAZAR||!!(KST&&KST.length)||/^d[23]:/.test(id||'');
+  return kok+'index.html'+(hep?'?pazar=1':'')+'#u='+encodeURIComponent(id)}
 addEventListener('mousemove',e=>{if(!card.classList.contains('on'))return;const x=Math.min(e.clientX+16,innerWidth-230),y=Math.min(e.clientY+16,innerHeight-110);card.style.left=x+'px';card.style.top=y+'px'});
 target=parseFloat(new URLSearchParams(location.search).get('z')||0);
 
 // --- arama ve kategoriler ---
 (()=>{// dükkân tünelinde (?dukkan=) arama yalnız o dükkânın ürünlerinde ve kategorilerinde
-  const DM=!!(KDT&&KDT.length),AL=DM?KDT:URUNLER,DKAT={};if(DM)KDT.forEach(u=>DKAT[u[0]]=u[3]);
-  const KAT=id=>DM?(DKAT[id]||''):(typeof KATEGORI!=='undefined'&&KATEGORI[id])||'';
+  // Pazar ve 'Kendi tünelin'de arama bütün dükkânlarda (Halalar + DSG + Önsal)
+  const DM=!!(KDT&&KDT.length),HEPSI=!DM&&(KPAZAR||!!(KST&&KST.length)),DKAT={};
+  const EKL=HEPSI?[].concat(typeof DUKKAN2!=='undefined'?dukT('d2:',DUKKAN2):[],typeof DUKKAN3!=='undefined'?dukT('d3:',DUKKAN3):[]):[];
+  const AL=DM?KDT:HEPSI?URUNLER.concat(EKL):URUNLER;(DM?KDT:EKL).forEach(u=>DKAT[u[0]]=u[3]);
+  const KAT=id=>DKAT[id]||(typeof KATEGORI!=='undefined'&&KATEGORI[id])||'';
   const kutu=document.getElementById('araKutu'),kl=document.getElementById('katlar'),so=document.getElementById('sonuc'),pen=document.getElementById('ara');let kat='';
   const norm=t=>(t||'').toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
   const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   // popülerlik (şimdilik kategorideki ürün sayısı) sırasıyla; ilk 3 büyük, sonraki 4 orta, kalanı küçük
   const SAY={};AL.forEach(u=>{const k=KAT(u[0]);if(k)SAY[k]=(SAY[k]||0)+1});
-  const KS=(DM?KD[1].kategoriler:typeof KATEGORILER!=='undefined'?KATEGORILER:[]).slice().sort((a,b)=>(SAY[b]||0)-(SAY[a]||0));
+  const KS=(DM?KD[1].kategoriler:[].concat(typeof KATEGORILER!=='undefined'?KATEGORILER:[],HEPSI&&typeof DUKKAN2!=='undefined'?DUKKAN2.kategoriler:[],HEPSI&&typeof DUKKAN3!=='undefined'?DUKKAN3.kategoriler:[])).filter(k=>SAY[k]).slice().sort((a,b)=>(SAY[b]||0)-(SAY[a]||0));
   kl.innerHTML=`<button data-k="" class="on b3">Tümü</button>`+KS.map((k,i)=>`<button data-k="${esc(k)}" class="${i<3?'b1':i<7?'b2':'b3'}">${esc(k)}</button>`).join('');
   kl.onclick=e=>{const b=e.target.closest('button');if(!b)return;kat=b.dataset.k;kl.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));goster()};
   function goster(){const q=norm(kutu.value).trim();
@@ -369,7 +378,7 @@ target=parseFloat(new URLSearchParams(location.search).get('z')||0);
     // önem sırası: beğendiklerin önce, sonra popüler kategoriler; ilk satır 4, sonra 5, sonra 6'şar (kademeli küçülür)
     {let B=[];try{B=(JSON.parse(localStorage.getItem('halalar-app-v1'))||{}).begeni||[]}catch(e){}const puan=u=>(B.includes(u[0])?1000:0)+(SAY[KAT(u[0])]||0);L.sort((x,y)=>puan(y)-puan(x))}
     const kd=i=>i<4?'s4':i<9?'s5':'s6';
-    so.innerHTML=L.length?L.map((u,i)=>`<a class="oge ${kd(i)}" href="urun.html?id=${encodeURIComponent(u[0])}"><img loading="lazy" src="${esc(GOR[u[0]]||'kaynak/web/'+u[0]+'.webp')}" alt=""><b>${esc(u[1])}</b><small>${esc((DM?[KAT(u[0])]:[KAT(u[0]),u[3]==='—'?'':u[3]]).filter(Boolean).join(' · '))}</small></a>`).join(''):'<div class="yok">Sonuç yok</div>'}
+    so.innerHTML=L.length?L.map((u,i)=>`<a class="oge ${kd(i)}" href="urun.html?id=${encodeURIComponent(u[0])}"><img loading="lazy" src="${esc(GOR[u[0]]||'kaynak/web/'+u[0]+'.webp')}" alt=""><b>${esc(u[1])}</b><small>${esc((DM||/^d[23]:/.test(u[0])?[KAT(u[0])]:[KAT(u[0]),u[3]==='—'?'':u[3]]).filter(Boolean).join(' · '))}</small></a>`).join(''):'<div class="yok">Sonuç yok</div>'}
   kutu.oninput=goster;
   document.getElementById('araAc').onclick=()=>{pen.classList.add('on');open=false;card.classList.remove('on');goster();setTimeout(()=>kutu.focus(),50)};
   document.getElementById('araKapat').onclick=()=>{pen.classList.remove('on');open=true};

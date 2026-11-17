@@ -513,10 +513,13 @@ addEventListener('scroll',cubukDurum,{passive:true});cubukDurum();
 // ---- hesap ----
 let auth=null,VT=null;
 try{firebase.initializeApp(FIREBASE_AYAR);auth=firebase.auth();VT=firebase.firestore()}catch(e){console.warn(e)}
-const kutu=(id,alt)=>{const u=U(id);if(!u)return '';return `<a href="urun.html?id=${encodeURIComponent(id)}"><img src="${res(id)}" alt="" loading="lazy"><b>${esc(u[1])}</b><small>${alt}</small></a>`};
+// hesap listeleri bütün dükkânların ürünlerini tanır (Halalar + DSG 'd2:' + Önsal 'd3:')
+const DUK={};[['d2:',typeof DUKKAN2!=='undefined'?DUKKAN2:null],['d3:',typeof DUKKAN3!=='undefined'?DUKKAN3:null]].forEach(([on,dk])=>{if(dk)dk.urunler.forEach(x=>DUK[on+x.id]=Object.assign({dukkan:dk.ad},x))});
+const fiyatYaz=id=>DUK[id]?(DUK[id].fiyat?TL(DUK[id].fiyat):'Teklif ile'):TL(FIYAT[id]);
+const kutu=(id,alt)=>{const d=DUK[id],u=d?[id,d.ad]:U(id);if(!u)return '';return `<a href="urun.html?id=${encodeURIComponent(id)}"><img src="${d?esc(d.gorsel):res(id)}" alt="" loading="lazy"><b>${esc(u[1])}</b><small>${d?esc(d.dukkan)+' · ':''}${alt}</small></a>`};
 function listeler(){
   document.getElementById('nB').textContent=D.begeni.length;document.getElementById('nI').textContent=D.islem.length;
-  document.getElementById('s-begeni').innerHTML=D.begeni.length?D.begeni.slice().reverse().map(id=>kutu(id,TL(FIYAT[id]))).join(''):'<div class="yok">Henüz beğeni yok. Telefon uygulamasında sağa kaydırdıkların burada görünür.</div>';
+  document.getElementById('s-begeni').innerHTML=D.begeni.length?D.begeni.slice().reverse().map(id=>kutu(id,fiyatYaz(id))).join(''):'<div class="yok">Henüz beğeni yok. Telefon uygulamasında sağa kaydırdıkların burada görünür.</div>';
   document.getElementById('s-islem').innerHTML=D.islem.length?D.islem.map(x=>kutu(x.id,`${x.tur==='teklif'?'Teklif':'Alım'} · ${TL(x.tutar)} · ${esc(x.durum)}`)).join(''):'<div class="yok">Henüz teklif yok.</div>';
   document.getElementById('sepetN').textContent=D.begeni.length;
   const k=D.kisi||{};document.getElementById('fAd').value=k.ad||'';document.getElementById('fTel').value=k.tel||''}
