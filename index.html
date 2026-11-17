@@ -107,7 +107,7 @@ nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:
 .deste-ac small{font:700 11px/1 "Barlow Condensed",sans-serif;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
 .deste-ac:hover{background:#e8201c}
 .deste-ac[hidden]{display:none}
-@media(min-width:900px){.deste-ac{display:none}}
+
 #hint{bottom:110px}
 #ara{background:#fff;color:#111114}
 #ara input{background:#fff;border:0;border-bottom:2px solid #111114;border-radius:0;color:#111114;font:500 20px Barlow;padding:12px 2px}
@@ -219,7 +219,7 @@ const KAYNAK=KMOD?(()=>{const L=[],ks=Object.keys(KATEGORI_IKON);
   const uy=k=>URUNLER.filter(u=>KATEGORI[u[0]]===k&&u[0]!==KATEGORI_IKON[k]).map(u=>u[0]);
   for(let t=0;t<8;t++)ks.forEach(k=>{const d=uy(k);const id=t===0||!d.length?KATEGORI_IKON[k]:d[(t-1)%d.length];L.push([id,k,'Bu kategorideki ürünleri gör','—'])});
   for(let t=0;t<8;t++)SKAT.forEach((g,k)=>L.push([g[(t*7)%g.length],k,'Bu kategorideki ürünleri gör','—']));return L})():(KDT&&KDT.length?KDT:KST&&KST.length?KST:KFILTRE&&KFILTRE.length?KFILTRE:KPAZAR?(()=>{const L=URUNLER.concat(D2T);for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}return L})():URUNLER);
-if(KDT&&KDT.length){const l=document.querySelector('nav .logo');l.textContent=KD[1].ad;l.href=KD[2];document.title='Hit Pazarı · '+KD[1].ad+' tüneli';document.getElementById('desteAc').style.display='none';setTimeout(()=>{if(target<10)target=520},250)}
+if(KDT&&KDT.length){const l=document.querySelector('nav .logo');l.textContent=KD[1].ad;l.href=KD[2];document.title='Hit Pazarı · '+KD[1].ad+' tüneli';setTimeout(()=>{if(target<10)target=520},250)}
 if(KST&&KST.length){const l=document.querySelector('nav .logo');l.textContent='Senin tünelin';l.title='Kategorileri değiştir';l.onclick=e=>{e.preventDefault();tunelKurAc()};document.title='Hit Pazarı · Senin tünelin';setTimeout(()=>{if(target<10)target=520},250)}
 if(KPAZAR){document.querySelector('nav .logo').textContent='Pazar';document.title='Hit Pazarı · Pazar';setTimeout(()=>{if(target<10)target=520},250)}
 if(KMOD){document.querySelector('nav .logo').textContent='Kategoriler';document.getElementById('end').textContent='kategoriler';document.title='Hit Pazarı · Kategoriler';document.querySelector('#card .go').textContent='Ürünleri gör →'}
@@ -355,9 +355,10 @@ document.getElementById('desteAc').onclick=e=>{e.preventDefault();location.href=
 if(KMOD)document.getElementById('desteAc').hidden=true;
 function desteAdres(id){const p=location.port,yerel={'8766':'8769','8770':'8771'}[p];
   const kok=yerel?`${location.protocol}//${location.hostname}:${yerel}/`:'https://tolgaarpa.github.io/halalar-app/';
-  // Pazar / kendi tünelin ya da başka dükkânın ürünü: deste bütün dükkânların ürünleriyle açılır
-  const hep=KPAZAR||!!(KST&&KST.length)||/^d[23]:/.test(id||'');
-  return kok+'index.html'+(hep?'?pazar=1':'')+'#u='+encodeURIComponent(id)}
+  // deste, girilen tünelin ürünleriyle açılır: t=pazar | dukkan:2 | dukkan:3 | sec:<seçim> | kat:<Halalar kategorisi> | (boş = Halalar)
+  const q=new URLSearchParams(location.search);
+  const t=KPAZAR?'pazar':(KDT&&KDT.length)?'dukkan:'+KDS:(KST&&KST.length)?'sec:'+q.get('sec'):(KFILTRE&&KFILTRE.length)?'kat:'+KSEC:/^d[23]:/.test(id||'')?'pazar':'';
+  return kok+'index.html'+(t?'?t='+encodeURIComponent(t):'')+'#u='+encodeURIComponent(id)}
 addEventListener('mousemove',e=>{if(!card.classList.contains('on'))return;kartYer(e.clientX,e.clientY)});
 target=parseFloat(new URLSearchParams(location.search).get('z')||0);
 
