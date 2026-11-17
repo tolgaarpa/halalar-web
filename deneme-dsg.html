@@ -225,7 +225,7 @@ if(KPAZAR){document.querySelector('nav .logo').textContent='Pazar';document.titl
 if(KMOD){document.querySelector('nav .logo').textContent='Kategoriler';document.getElementById('end').textContent='kategoriler';document.title='Hit Pazarı · Kategoriler';document.querySelector('#card .go').textContent='Ürünleri gör →'}
 // Her ürüne tünelde bir yer: z (derinlik), x/y (yana ofset), boyut. Deterministik dağılım.
 /* DENEME: DSG'de ürünler arası %10 daha uzak */
-const STEP=KMOD?110:(KDS==='2'?35.2:32);                        // ürünler arası derinlik
+const STEP=KMOD?110:(KDS==='2'?42:32);   /* DENEME 4: seyrek */                        // ürünler arası derinlik
 const TEKRAR=12;                      // liste tekrarı: tünel uzun ve dolu
 const P=600;                          // perspektif (eski CSS ile aynı)
 const BG='#0b0b0d';
@@ -254,7 +254,7 @@ function kaynak(id,px){if(px>340)buyukIste(id);const L=KOPYA[id];if(L)for(const 
 /* DENEME: DSG tünelinde ürün sayısı yarıya (12 tur yerine 6) */
 const LISTE=[];for(let t=0;t<(KMOD?1:Math.ceil(Math.max(TEKRAR,Math.ceil(60/KAYNAK.length))/(KDS==='2'?2:1)));t++)KAYNAK.forEach(u=>LISTE.push(u));
 /* DENEME: DSG'de sayı %10 daha az */
-if(KDS==='2')LISTE.length=Math.round(LISTE.length*0.9);
+if(KDS==='2')LISTE.length=Math.round(LISTE.length*0.7);   /* DENEME 4: sayı %30 az */
 const N=LISTE.length;
 const items=LISTE.map((u,i)=>{
   const ar=ASPECT[u[0]]||1;
@@ -268,7 +268,7 @@ const items=LISTE.map((u,i)=>{
   else {xv=-X+inn; yv=Y-(p-4*X-2*Y)}
   /* DENEME: DSG'de orta biraz boş: üst/alt kenardaki ürünler tam ortaya gelmez */
   if(KDS==='2'&&Math.abs(yv)>Math.abs(xv)){const a=Math.abs(xv),g=0.3;xv=(xv<0?-1:1)*(g+a*(X-g)/X)}
-  const w=((ar>1.25?460:ar<0.75?300:380)+((i*13)%6)*45)*(KMOD?1.25:1)*(/^d2:/.test(u[0])?1.04:1);   /* DENEME 3: DSG ürünleri şimdikinin 1,3 katı (0.8x1.3) */   // kategori modunda ikonlar bir tık büyük; kıyafetler (DSG) %20 küçük (Tolga)
+  const w=((ar>1.25?460:ar<0.75?300:380)+((i*13)%6)*45)*(KMOD?1.25:1)*(/^d2:/.test(u[0])?(u[3]==='Alt giyim'?0.48:0.6):1);   /* DENEME 4: DSG ufak (0.6), pantolonlar daha da ufak (0.48) */   // kategori modunda ikonlar bir tık büyük; kıyafetler (DSG) %20 küçük (Tolga)
   const z=-(i*STEP)-250;
   let rot=0;
   if(ar<0.75){ const mag=9+((i*0.7548)%1)*11; const side=Math.abs(xv)>Math.abs(yv)?Math.sign(xv):(((i*0.31)%1)<0.5?-1:1); rot=-side*mag; }
