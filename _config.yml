@@ -7,4 +7,5 @@ exclude:
   - hit-deneme.html
   - deneme-dsg.html
   - deneme-beyaz.html
+  - deneme-kontur.html
   - .tmp/
