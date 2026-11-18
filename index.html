@@ -377,7 +377,7 @@ function render(){
     if(KMOD&&it.op>.25&&it.sw>70&&it.dz>-1400){const fs=Math.max(14,Math.min(72,it.sw*.15));g.save();g.globalAlpha=it.op;g.font=fs+'px Anton, Impact, sans-serif';g.textAlign='center';g.textBaseline='top';g.shadowColor=GUNDUZ?'#fff':'#000';g.shadowBlur=GUNDUZ?12:14;g.fillStyle=GUNDUZ?'#111114':'#f2efe9';g.fillText(it.u[1].toLocaleUpperCase('tr-TR'),it.sx,it.sy+it.sh/2+fs*.35);g.restore()}
   }
   document.getElementById('end').classList.toggle('on',camZ>TOTAL-STEP*1.2);
-  if(card.classList.contains('on')&&(Math.abs(camZ-kartZ)>30||!drawn.includes(hot)))kartKapa();   // kaydırınca açıklama kapanır
+  if(card.classList.contains('on')&&(Math.abs(target-kartZ)>30||!drawn.includes(hot)))kartKapa();   // kaydırınca açıklama kapanır
   if(lx>=0){const n=performance.now();if(n-hoverSon>=90){hoverSon=n;hover()}}
   if(camZ!==target||kirli)requestAnimationFrame(render);
   else{calisiyor=false;if(lx>=0)hover();if(typeof konumKaydet==='function')konumKaydet()}   // hiçbir şey kıpırdamıyorsa çizim durur
@@ -399,7 +399,7 @@ const menuAcik=()=>['hikMenu','hpMenu'].some(i=>{const m=document.getElementById
 // ürün kartı ekrandan taşmaz ve alttaki 'Kaydır, seç' düğmesinin üstüne binmez
 function kartYer(x,y){const w=card.offsetWidth,h=card.offsetHeight,dg=document.getElementById('desteAc'),dr=dg&&getComputedStyle(dg).display!=='none'&&dg.getBoundingClientRect().height>0?dg.getBoundingClientRect():null;
   const alt=(dr?dr.top:innerHeight)-14;card.style.left=Math.max(8,Math.min(x+16,innerWidth-w-8))+'px';card.style.top=Math.max(8,Math.min(y+16,alt-h))+'px'}
-function showCard(it,x,y){if(menuAcik())return;hot=it;kartZ=camZ;document.getElementById('c-k').textContent=KMOD?'Kategori':[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];document.getElementById('c-p').textContent=it.u[2];kartYer(x,y);card.classList.add('on')}
+function showCard(it,x,y){if(menuAcik())return;hot=it;kartZ=target;document.getElementById('c-k').textContent=KMOD?'Kategori':[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];document.getElementById('c-p').textContent=it.u[2];kartYer(x,y);card.classList.add('on')}
 // fare gezince açıklama çıkmaz, yalnız imleç değişir. İlk tıklama açıklama, aynı ürüne ikinci tıklama ürün sayfası
 let kartZ=0;
 function kartKapa(){card.classList.remove('on');hot=null}
