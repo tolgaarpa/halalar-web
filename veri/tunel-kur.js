@@ -51,7 +51,22 @@
 .tk-git small{font:500 13px Barlow,sans-serif;text-transform:none;letter-spacing:0;opacity:.85;margin-left:8px}
 .tk-git:disabled{background:#2a2a30;color:#8d887f;cursor:default}
 .tk-cip:focus-visible,.tk-git:focus-visible,.tk-x:focus-visible,.tk-hep:focus-visible,.tk-tem:focus-visible{outline:2px solid #e8201c;outline-offset:2px}
-@media(max-width:560px){.tk-ic{padding:20px 16px 130px}.tk-alt>div{padding:0 16px}.tk-cip{font-size:14px;padding:9px 14px}.tk-git{padding:15px 18px;font-size:18px}}`;
+@media(max-width:560px){.tk-ic{padding:20px 16px 130px}.tk-alt>div{padding:0 16px}.tk-cip{font-size:14px;padding:9px 14px}.tk-git{padding:15px 18px;font-size:18px}}
+html[data-tema="gunduz"] .tk{background:#fffffff7;color:#111114}
+html[data-tema="gunduz"] .tk-x{border-color:#c9c9d0;color:#111114}
+html[data-tema="gunduz"] .tk-x:hover{border-color:#111114}
+html[data-tema="gunduz"] .tk-ac{color:#4a4a52}
+html[data-tema="gunduz"] .tk-gb{border-bottom-color:#e4e4e8}
+html[data-tema="gunduz"] .tk-gb small{color:#77777f}
+html[data-tema="gunduz"] .tk-hep,html[data-tema="gunduz"] .tk-tem{color:#4a4a52}
+html[data-tema="gunduz"] .tk-hep:hover{color:#111114}
+html[data-tema="gunduz"] .tk-cip{background:#fff;border-color:#c9c9d0;color:#111114}
+html[data-tema="gunduz"] .tk-cip i{color:#77777f}
+html[data-tema="gunduz"] .tk-cip:hover{border-color:#111114}
+html[data-tema="gunduz"] .tk-cip[aria-pressed="true"]{background:#111114;border-color:#111114;color:#fff}
+html[data-tema="gunduz"] .tk-cip[aria-pressed="true"] i{color:#c9c9d0}
+html[data-tema="gunduz"] .tk-alt{background:linear-gradient(#fff0,#fffffff5 35%)}
+html[data-tema="gunduz"] .tk-git:disabled{background:#e4e4e8;color:#8a8a92}`;
   let kur=null,sec=new Set(),G=[];
   function olustur(){
     const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);

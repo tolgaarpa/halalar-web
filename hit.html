@@ -348,7 +348,33 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 #nasil .y-sol{grid-column:1;grid-row:2;justify-self:end;text-align:right}#nasil .y-sag{grid-column:3;grid-row:2;justify-self:start;text-align:left}
 #nasil .yon b{font-size:15px}#nasil .yon small{font-size:12px}#nasil .yon .ok2{font-size:22px}
 }
-</style>
+
+/* Gündüz teması: Bütün dükkânlar ekranı beyaz */
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on){--zemin:#fff;--ink:#111114;--yumusak:#4a4a52;--muted:#77777f;--line:#e4e4e8;--panel:#f6f6f8}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .katman{background:#fff}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .katman-kapat{background:#fff;border-color:#c9c9d0;color:#111114}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav.dolu{background:#ffffffeb}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hp-logo,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav .marka .ad,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hp-ac{color:#111114}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav .marka .alt,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav .sag a.uye{border-left-color:#c9c9d0}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav .hik .hik-btn{background:#fff;border-color:#c9c9d0;color:#111114}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav .hik .hik-btn:hover,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav .hik .hik-btn[aria-expanded="true"]{background:#f1f1f3;border-color:#111114}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hik-menu,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hp-menu{background:#fffffff7;border-color:#dcdce1;box-shadow:0 24px 50px #0002}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav .hik .hik-menu a,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hp-menu>a,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hpm-dukkan,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hpm-liste a{color:#111114}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav .hik .hik-menu a small,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hp-menu>a small,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hpm-dukkan small,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hp-menu .alt-link a{color:#77777f}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav .hik .hik-menu .hik-alt a{color:#4a4a52}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hik-menu .hik-alt,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hp-menu .alt-link{border-top-color:#e4e4e8}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hpm-liste{border-left-color:#dcdce1}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) nav .hik .hik-menu a:hover,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hp-menu>a:hover,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hpm-dukkan:hover,html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hpm-liste a:hover{background:#f1f1f3;color:#111114}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .vitrin2{background:#fff;border:1px solid #e4e4e8;outline:0;box-shadow:none}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .v2-tabela{color:#e8201c;text-shadow:none;box-shadow:none}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .vitrin2:hover .v2-tabela{background:#e8201c;color:#fff;box-shadow:none}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .v2-raf{background:linear-gradient(transparent 32.5%,#e4e4e8 32.5%,#e4e4e8 33.5%,transparent 33.5%,transparent 66%,#e4e4e8 66%,#e4e4e8 67%,transparent 67%)}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .v2-raf img{filter:drop-shadow(0 8px 10px rgba(0,0,0,.16))}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .raf9 a{background:#fff}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .raf9 img{filter:drop-shadow(0 8px 10px rgba(0,0,0,.16))}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .kepenk{background:#f1f1f3;box-shadow:none}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .kepenk .levha{background:#fff;border-color:#c9c9d0}
+</style><script>try{if(localStorage.getItem('hp-tema')==='gunduz')document.documentElement.dataset.tema='gunduz'}catch(e){}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e3171b%27/%3E%3C/svg%3E">
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
 </head>
@@ -510,20 +536,22 @@ secim.forEach((id,i)=>{const im=new Image();im.src=res(id);im.alt='';im.decoding
 const azHareket=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let mx=0,my=0,cx=0,cy=0,kam=0,son=performance.now(),bekle=false;
 addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
-function kare(t){const dt=Math.min(.05,(t-son)/1000);son=t;
+function kare(t){if(!document.getElementById('katman').hidden){bekle=true;return}   // üstte Dükkânlar gibi bir ekran açıkken arkadaki tünel çizilmez
+  const dt=Math.min(.05,(t-son)/1000);son=t;
   const W=innerWidth,H=Math.max(innerHeight,560),RX=W*.40,RY=H*.42,olc=Math.max(.55,Math.min(1,Math.min(W,H)/800));
   if(!azHareket)kam+=dt*55;cx+=(mx-cx)*.05;cy+=(my-cy)*.05;
   const dal=Math.min(scrollY,H)*2.2,vx=W/2-cx*W*.08,vy=H/2-cy*H*.08;
   for(const p of PARCA){let dz=((p.z+kam+dal)%L+L)%L-L+160;   // -L+160 .. 160
     const k=P/(P-dz),sis=Math.min(1,Math.max(0,(-dz-200)/(L*.6))),gecis=dz>40?Math.max(0,1-(dz-40)/120):1,giris=Math.min(1,(dz+L-160)/300);
     const x=vx+Math.cos(p.a)*RX*p.r*k,y=vy+Math.sin(p.a)*RY*p.r*k;
-    p.im.style.width=(p.w*olc)+'px';
+    {const gn=p.w*olc;if(p.gn!==gn){p.gn=gn;p.im.style.width=gn+'px'}}   // genişlik her karede yazılmaz
     p.im.style.transform=`translate3d(${x}px,${y}px,0) translate(-50%,-50%) scale(${k}) rotate(${p.rot}deg)`;
     const yar=p.w*olc*k*.45,nx=Math.max(0,Math.abs(x-vx)-yar)/(W*.27),ny=Math.max(0,Math.abs(y-vy)-yar)/(H*.33),d=Math.hypot(nx,ny),orta=d<1?Math.max(.08,d*d*d):1;   // yazının önü açık kalsın
     p.im.style.opacity=((1-sis*.97)*gecis*giris*orta).toFixed(3);p.im.style.zIndex=Math.round(3000+dz)}
   if(scrollY<H*1.2)requestAnimationFrame(kare);else bekle=true}
 requestAnimationFrame(kare);
-addEventListener('scroll',()=>{if(bekle&&scrollY<innerHeight*1.2){bekle=false;son=performance.now();requestAnimationFrame(kare)}},{passive:true});
+function kareDevam(){if(bekle&&scrollY<innerHeight*1.2&&document.getElementById('katman').hidden){bekle=false;son=performance.now();requestAnimationFrame(kare)}}
+addEventListener('scroll',kareDevam,{passive:true});
 
 // Halalar vitrini: 9 ürün
 const DOKUZ=['ig/ig_fender','h/fisher','3464','ig/ig_maske','h/daktilo','ig/ig_hoparlor','ek/3482_papagan','3490','h/actionman'].filter(U).slice(0,9);
@@ -666,7 +694,7 @@ addEventListener('click',e=>{if(!hpMenu.hidden&&!e.target.closest('#hpMenu,#hpAc
 function sekmeAc(id){const s=document.getElementById(id);if(!s||s.parentElement!==sekme)return false;
   sekme.querySelectorAll(':scope>section').forEach(x=>x.classList.toggle('on',x===s));sekme.hidden=false;sekme.scrollTop=0;menuKapa();
   if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);if(id==='dukkanlar'&&typeof oklar==='function')setTimeout(oklar,30);return true}
-function sekmeKapa(){sekme.hidden=true;history.replaceState(null,'',location.pathname+location.search)}
+function sekmeKapa(){sekme.hidden=true;kareDevam();history.replaceState(null,'',location.pathname+location.search)}
 document.getElementById('sekmeKapat').onclick=sekmeKapa;
 addEventListener('keydown',e=>{if(e.key==='Escape'){if(!hpMenu.hidden)menuKapa();else if(sekmeAcik())sekmeKapa()}});
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||a.id==='marka')return;const id=a.getAttribute('href').slice(1);if(id&&sekmeAc(id))e.preventDefault()});

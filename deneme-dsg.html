@@ -245,10 +245,10 @@ const yolB=id=>GOR[id]||`kaynak/web/${id}.webp`, yolK=id=>yolB(id).replace(/^kay
 function kopyala(im){const L=[];for(const m of [96,192,384,640]){const s=m/Math.max(im.naturalWidth,im.naturalHeight);if(s>=1)break;const k=document.createElement('canvas');k.width=Math.max(1,Math.round(im.naturalWidth*s));k.height=Math.max(1,Math.round(im.naturalHeight*s));k.getContext('2d').drawImage(im,0,0,k.width,k.height);L.push(k)}return L}
 KAYNAK.forEach(u=>{ const id=u[0]; if(IMG[id])return; const im=new Image(); IMG[id]=im;
   im.onerror=()=>{if(!im.dataset.b){im.dataset.b='1';im.src=yolB(id)}};   // küçük kopya yoksa asıl fotoğraf
-  im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d');x.drawImage(im,0,0,48,48);ALPHA[id]=x.getImageData(0,0,48,48).data;
+  im.onload=()=>{uyan();const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d');x.drawImage(im,0,0,48,48);ALPHA[id]=x.getImageData(0,0,48,48).data;
     if(!BUYUK[id]||!BUYUK[id].hazir)KOPYA[id]=kopyala(im)};
   im.src=yolK(id) });
-function buyukIste(id){if(BUYUK[id]||(IMG[id]&&IMG[id].dataset.b))return;const b=new Image();BUYUK[id]=b;b.onload=()=>{KOPYA[id]=kopyala(b);b.hazir=1};b.src=yolB(id)}
+function buyukIste(id){if(BUYUK[id]||(IMG[id]&&IMG[id].dataset.b))return;const b=new Image();BUYUK[id]=b;b.onload=()=>{uyan();KOPYA[id]=kopyala(b);b.hazir=1};b.src=yolB(id)}
 function kaynak(id,px){if(px>340)buyukIste(id);const L=KOPYA[id];if(L)for(const k of L)if(Math.max(k.width,k.height)>=px)return k;const b=BUYUK[id];return b&&b.hazir?b:IMG[id]}
 // --- yerleşim (önceki ile aynı kurallar) ---
 /* DENEME: DSG tünelinde ürün sayısı yarıya (12 tur yerine 6) */
@@ -280,6 +280,9 @@ const TOTAL=(N+1)*STEP;
 const THIN_Z=1100;
 let mx=0,my=0; addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5)});
 let camZ=0,target=0,open=true;
+{const ol=()=>{if(!document.getElementById('ara').classList.contains('on'))uyan()};['wheel','touchstart','touchmove','keydown','mousemove','click'].forEach(t=>addEventListener(t,ol,{passive:true,capture:true}));
+ addEventListener('resize',uyan);addEventListener('pageshow',uyan);document.addEventListener('visibilitychange',uyan);if(document.fonts)document.fonts.ready.then(uyan);
+ setInterval(()=>{if(camZ!==target&&!calisiyor)uyan()},250)}
 const clamp=v=>Math.min(Math.max(v,0),TOTAL);
 // iki parmakla yana kaydırma (tarayıcının geri/ileri hareketi) tünele karışmaz; dikey kaydırma tüneli sürer
 addEventListener('wheel',e=>{if(!open)return;if(Math.abs(e.deltaX)>Math.abs(e.deltaY))return;e.preventDefault();
@@ -291,7 +294,11 @@ let ty=null;addEventListener('touchstart',e=>{ty=e.touches[0].clientY;geriDokun=
 addEventListener('touchmove',e=>{if(!open||ty===null)return;const y=e.touches[0].clientY;if(KPAZAR&&target<=0&&y>ty&&!geriGit){geriDokun+=y-ty;if(geriDokun>220){geriGit=1;location.href='hit.html';return}}else geriDokun=0;target=clamp(target+(ty-y)*3);ty=y;e.preventDefault()},{passive:false});
 addEventListener('keydown',e=>{if(!open)return;if(e.key==='ArrowDown'||e.key===' '||e.key==='PageDown')target=clamp(target+400);if(e.key==='ArrowUp'||e.key==='PageUp')target=clamp(target-400)});
 let drawn=[];                       // bu karede çizilenler, uzaktan yakına
+// çizim yalnız bir şey değişince çalışır: kaydırma, fare, yeni görsel, tema, ekran boyutu
+let kirli=true,calisiyor=false,hoverSon=0;
+function uyan(){kirli=true;if(!calisiyor){calisiyor=true;requestAnimationFrame(render)}}
 function render(){
+  kirli=false;
   camZ+=(target-camZ)*0.12; if(Math.abs(target-camZ)<0.05)camZ=target;
   document.getElementById('depth').textContent=Math.round(camZ/40)+' m';
   document.getElementById('hint').classList.toggle('off',camZ>200);
@@ -322,9 +329,11 @@ function render(){
     if(KMOD&&it.op>.25&&it.sw>70&&it.dz>-1400){const fs=Math.max(14,Math.min(72,it.sw*.15));g.save();g.globalAlpha=it.op;g.font=fs+'px Anton, Impact, sans-serif';g.textAlign='center';g.textBaseline='top';g.shadowColor='#000';g.shadowBlur=14;g.fillStyle='#f2efe9';g.fillText(it.u[1].toLocaleUpperCase('tr-TR'),it.sx,it.sy+it.sh/2+fs*.35);g.restore()}
   }
   document.getElementById('end').classList.toggle('on',camZ>TOTAL-STEP*1.2);
-  requestAnimationFrame(render);
+  if(lx>=0){const n=performance.now();if(n-hoverSon>=90){hoverSon=n;hover()}}
+  if(camZ!==target||kirli)requestAnimationFrame(render);
+  else{calisiyor=false;if(lx>=0)hover();if(typeof konumKaydet==='function')konumKaydet()}   // hiçbir şey kıpırdamıyorsa çizim durur
 }
-requestAnimationFrame(render);
+uyan();
 // --- seçim: o noktada gerçekten görünen, en öndeki ürün ---
 const card=document.getElementById('card'); let hoverT=null,hot=null;
 function pickIs(it,x,y){
@@ -347,15 +356,15 @@ function setHot(o){
   if(o===hot){clearTimeout(offT);offT=null;cand=null;return}
   if(!o){ if(!offT) offT=setTimeout(()=>{hot=null;cand=null;card.classList.remove('on');cv.style.cursor='';offT=null},250); return }
   clearTimeout(offT);offT=null;
-  const now=performance.now(); if(o!==cand){cand=o;candT=now;return}
-  if(now-candT<220)return;
+  const now=performance.now(); if(o!==cand){cand=o;candT=now;hoverSonra();return}
+  if(now-candT<220){hoverSonra();return}
   hot=o; cv.style.cursor='pointer'; clearTimeout(hoverT);
   if(card.classList.contains('on'))showCard(o); else hoverT=setTimeout(()=>{if(hot===o)showCard(o)},250)}
 function nearHot(x,y){if(!hot||!drawn.includes(hot))return false;for(const [ox,oy] of [[0,0],[7,0],[-7,0],[0,7],[0,-7],[5,5],[-5,5],[5,-5],[-5,-5]])if(pickIs(hot,x+ox,y+oy))return true;return false}
 let lx=-1,ly=-1;
 function hover(){if(lx<0)return;let o=pick(lx,ly);if(!o&&nearHot(lx,ly))o=hot;setHot(o)}
 addEventListener('mousemove',e=>{lx=e.clientX;ly=e.clientY;hover()});
-setInterval(hover,90);
+let hoverZ=null;function hoverSonra(){clearTimeout(hoverZ);hoverZ=setTimeout(hover,230)}
 cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o){if(KMOD){target=clamp(camZ+1600);document.getElementById('kperde').classList.add('on');setTimeout(()=>location.href=SKAT.has(o.u[1])?'index.html?sec='+encodeURIComponent(o.u[1]):'index.html?kat='+encodeURIComponent(o.u[1]),620)}else location.href='urun.html?id='+encodeURIComponent(o.u[0])}});   // telefonda da bilgisayarda da Hit Pazarı ürün sayfası (Halalar destesine değil)
 // ürüne dokununca kart destesi (Geç / Teklif / Satın al / Beğen) o üründen başlar: telefon uygulamasının destesi
 document.getElementById('desteAc').onclick=e=>{e.preventDefault();location.href=desteAdres((items.find(it=>it.dz>-1500&&it.dz<200)||items[0]).u[0])};
