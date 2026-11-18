@@ -6,4 +6,5 @@ exclude:
   - artifacts/
   - hit-deneme.html
   - deneme-dsg.html
+  - deneme-beyaz.html
   - .tmp/

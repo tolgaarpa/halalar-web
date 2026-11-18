@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halalar</title><meta name="description" content="Halalar dükkânının vintage ve koleksiyon parçaları tek tünelde. Kaydır, beğen, teklif ver."><meta property="og:type" content="website"><meta property="og:site_name" content="Hit Pazarı"><meta property="og:title" content="Hit Pazarı · Tünel"><meta property="og:description" content="Halalar dükkânının vintage ve koleksiyon parçaları tek tünelde. Kaydır, beğen, teklif ver."><meta property="og:url" content="https://tolgaarpa.github.io/hitpazari/index.html"><meta property="og:image" content="https://tolgaarpa.github.io/hitpazari/kaynak/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#f2efe9;--paper:#0b0b0d;--accent:#e8201c;--muted:#8d887f}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow:hidden;overscroll-behavior-y:none;overscroll-behavior-x:auto;touch-action:none;height:100%;background:var(--paper);color:var(--ink);font-family:Barlow,system-ui,sans-serif}
+body{height:100vh;overflow:hidden}
+body.locked{overflow:hidden}
+#cover{position:fixed;inset:0;z-index:50;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity 1s,visibility 1s}
+#cover.gone{opacity:0;visibility:hidden}
+.small{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+#cover h1{font-family:Anton,sans-serif;text-transform:uppercase;font-weight:300;font-size:clamp(54px,11vw,170px);letter-spacing:-.03em;line-height:.9;text-align:center}
+#cover p{font-family:Anton,sans-serif;text-transform:uppercase;font-style:italic;font-weight:300;font-size:clamp(18px,2.4vw,28px);color:#333}
+#cover button{border:1px solid var(--ink);background:none;padding:14px 38px;border-radius:3px;font:500 13px/1 Barlow;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:.3s}
+#cover button:hover{background:var(--ink);color:#fff}
+nav{position:fixed;top:0;left:0;right:0;z-index:60;transform:translateZ(0);text-shadow:0 1px 8px rgba(0,0,0,.9);display:flex;justify-content:space-between;align-items:center;padding:22px 32px;pointer-events:none}
+nav .logo{font-family:Anton,sans-serif;text-transform:uppercase;font-size:17px;letter-spacing:-.01em;color:#cfcac1;text-decoration:none;pointer-events:auto;margin-top:4px}
+nav .marka{display:flex;flex-direction:column;align-items:flex-start}
+nav .hit{pointer-events:auto;font-family:Anton,sans-serif;text-transform:uppercase;font-size:28px;letter-spacing:-.02em;color:#ff5a1f;text-decoration:none;line-height:1}
+nav .depth{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+/* ---- tünel ---- */
+#world{position:fixed;inset:0;z-index:1;isolation:isolate;perspective:600px;perspective-origin:50% 50%;overflow:hidden}
+#cam{position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none}
+.obj{position:absolute;left:50%;top:50%;transform-style:preserve-3d;cursor:pointer;pointer-events:auto;will-change:transform,opacity}
+.obj img{display:block;width:100%;filter:drop-shadow(0 30px 50px rgba(0,0,0,.7));pointer-events:auto}
+
+.vignette{display:none}
+/* detay kartı */
+#card{position:fixed;z-index:45;background:#f2efe9;color:#111;padding:10px 13px;border-radius:3px;width:210px;z-index:70;opacity:0;transform:translateY(8px);transition:.25s;pointer-events:none}
+#card.on{opacity:1;transform:none}
+#card .k{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#666}
+#card h3{font-family:Anton,sans-serif;text-transform:uppercase;font-weight:400;font-size:18px;letter-spacing:-.01em;margin:3px 0 4px;line-height:1.1}
+#card p{font-size:12px;color:#333;line-height:1.35}
+#card .go{display:block;margin-top:6px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#111}
+.hint{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);z-index:40;transition:.6s}
+.hint.off{opacity:0}
+#end{position:fixed;inset:0;display:grid;place-items:center;z-index:30;opacity:0;pointer-events:none;transition:.8s;font-family:Anton,sans-serif;text-transform:uppercase;font-weight:600;font-size:clamp(70px,20vw,320px);letter-spacing:-.05em;color:var(--accent)}
+#end.on{opacity:1}
+/* arama */
+nav .sag{display:flex;gap:18px;align-items:center}
+nav .ara-ac{pointer-events:auto;background:none;border:1px solid #444;color:var(--ink);border-radius:3px;padding:9px 18px;font:500 12px Barlow;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+nav .ara-ac:hover{border-color:var(--ink)}
+#ara{position:fixed;inset:0;z-index:80;background:rgba(11,11,13,.97);display:none;flex-direction:column;touch-action:pan-y}
+#ara.on{display:flex}
+#ara .ust2{display:flex;gap:12px;align-items:center;padding:22px 32px 12px;max-width:1200px;width:100%;margin:0 auto}
+#ara input{flex:1;min-width:0;background:#17171b;border:1px solid #2a2a30;color:var(--ink);border-radius:3px;padding:13px 20px;font:400 16px Barlow;outline:none}
+#ara .kapat{background:none;border:1px solid #444;color:var(--ink);border-radius:3px;padding:12px 18px;font:500 12px Barlow;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+#ara .katlar{display:flex;gap:8px;flex-wrap:wrap;padding:4px 32px 16px;max-width:1200px;width:100%;margin:0 auto}
+#ara .katlar button{background:none;border:1px solid #2a2a30;color:#aaa;border-radius:3px;padding:8px 14px;font:500 12px Barlow;cursor:pointer}
+#ara .katlar button.on{background:var(--ink);color:#111;border-color:var(--ink)}
+#ara .sonuc{flex:1;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;padding:4px 32px 40px;max-width:1200px;width:100%;margin:0 auto;align-content:start;touch-action:pan-y}
+#ara .oge{background:#141417;border:1px solid #222;border-radius:3px;padding:12px;color:var(--ink);text-decoration:none;display:block}
+#ara .oge:hover{border-color:#555}
+#ara .oge img{width:100%;aspect-ratio:1;object-fit:contain;display:block;margin-bottom:10px}
+#ara .oge b{display:block;font-weight:500;font-size:14px;line-height:1.25}
+#ara .oge small{display:block;color:#888;font-size:11px;margin-top:4px}
+#ara .yok{grid-column:1/-1;color:#888;text-align:center;padding:40px 0}
+@media(max-width:600px){#ara .ust2,#ara .katlar,#ara .sonuc{padding-left:16px;padding-right:16px}#ara .sonuc{grid-template-columns:repeat(2,1fr);gap:10px}nav{padding:18px 16px}}
+
+/* Hit Pazarı logosu: kırmızı çift eğik çizgi + HİT PAZARI (her sayfanın sol üstünde) */
+html{font-synthesis:none}
+.hpi-sol{display:flex;align-items:center;gap:12px;min-width:0}
+.hp-logo{display:inline-flex;align-items:center;gap:.36em;flex:none;text-decoration:none;pointer-events:auto;color:#f2efe9;font:400 22px/1 Anton,"Arial Narrow",Impact,sans-serif;letter-spacing:.005em;white-space:nowrap;text-shadow:none}
+.hp-satir{display:flex;align-items:center;gap:4px;min-width:0}
+.hp-ac{flex:none;display:grid;place-items:center;width:40px;height:40px;margin:0;padding:0;background:none;border:0;color:#f2efe9;cursor:pointer;pointer-events:auto}
+.hp-ac::before{content:"";width:10px;height:10px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s}
+.hp-ac[aria-expanded="true"]::before{transform:rotate(225deg) translate(-2px,-2px)}
+.hp-ac:hover{color:#e8201c}
+.hp-logo .hp-c{color:#e8201c;font-size:1.1em;letter-spacing:-.04em;transform:skewX(-14deg)}
+/* vintage dili: Anton başlık, Barlow gövde, kırmızı vurgu */
+nav .logo{font:700 15px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.24em;color:#cfcac1;margin-top:0;padding-left:12px;border-left:1px solid #55555e}
+nav .depth,.hint{font-family:"Barlow Condensed",sans-serif;font-weight:700}
+nav .ara-ac,#ara .kapat{border-color:#55555e;font:700 14px/1 "Barlow Condensed",sans-serif;letter-spacing:.2em}
+#ara .katlar button{font:700 14px/1 "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+#ara .oge{background:#141418;border-color:#26262c}
+#ara .oge b{font-weight:600}
+#card{background:#ece5d2}
+#card h3{font-size:20px;letter-spacing:.01em;line-height:1.12}
+#card .go{color:#e8201c;font-weight:700}
+#end{font-weight:400;letter-spacing:0;transform:skewX(-8deg)}
+nav{background:linear-gradient(#0b0b0de6,#0b0b0d00);padding-bottom:34px}
+nav .hp-logo{text-shadow:0 1px 8px rgba(0,0,0,.9)}
+@media(max-width:600px){.hp-logo{font-size:19px}nav .logo{font-size:13px;letter-spacing:.16em;padding-left:9px}nav .sag{gap:10px}.hpi-sol{gap:9px}}
+
+/* tünel başlığı: Hit Pazarı logosu 2 kat, dükkân adı alt satırda 3 kat büyük ve kırmızı */
+.hpi-sol{flex-direction:column;align-items:flex-start;gap:9px}
+nav .hp-logo{font-size:42.5px}
+nav .logo{font:400 51px/1.08 Anton,"Arial Narrow",Impact,sans-serif;letter-spacing:.005em;text-transform:uppercase;color:#e8201c;border-left:0;padding-left:0;margin-top:0}
+@media(max-width:600px){.hpi-sol{gap:3px}nav .hp-logo{font-size:20px}nav .logo{font-size:14px;letter-spacing:.01em}nav .ara-ac{font-size:16px!important;padding:10px 12px!important}}
+nav .ara-ac{font-size:28px!important;padding:18px 36px!important;letter-spacing:.16em!important}
+@media(max-width:600px){nav .ara-ac{font-size:16px!important;padding:10px 12px!important}}
+/* ara: dükkân içi gibi beyaz, çerçevesiz, dekupe ürünler */
+#kgiris{position:fixed;inset:0;z-index:30;display:none;place-items:center;pointer-events:none;transition:opacity .6s,transform .9s cubic-bezier(.3,0,.2,1)}
+#kgiris.on{display:grid}#kgiris.off{opacity:0;transform:scale(1.6)}
+#kgiris div{display:flex;flex-direction:column;align-items:center;gap:14px}
+#kgiris img{height:min(46vh,480px);max-width:70vw;object-fit:contain;filter:drop-shadow(0 30px 40px rgba(0,0,0,.8))}
+#kgiris b{font:400 clamp(56px,9vw,150px)/1 Anton,Impact,sans-serif;text-transform:uppercase;color:#e8201c;text-shadow:0 4px 30px #000}
+#kperde{position:fixed;inset:0;z-index:90;background:#0b0b0d;opacity:0;pointer-events:none;transition:opacity .55s ease-in}
+#kperde.on{opacity:1}
+.deste-ac{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:55;display:flex;flex-direction:column;align-items:center;gap:4px;background:#1b2fa0;color:#fff;text-decoration:none;padding:14px 30px 12px;font:400 24px/1 Anton,Impact,sans-serif;letter-spacing:.02em;box-shadow:0 12px 30px #000a;white-space:nowrap}
+.deste-ac small{font:700 11px/1 "Barlow Condensed",sans-serif;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
+.deste-ac:hover{background:#e8201c}
+.deste-ac[hidden]{display:none}
+
+#hint{bottom:110px}
+#ara{background:#fff;color:#111114}
+#ara input{background:#fff;border:0;border-bottom:2px solid #111114;border-radius:0;color:#111114;font:500 20px Barlow;padding:12px 2px}
+#ara input::placeholder{color:#8a8a92}
+#ara .kapat{border-color:#c9c9d0;color:#111114}
+#ara .katlar button{border-color:#c9c9d0;color:#111114;background:#fff}
+#ara .katlar button.on{background:#e8201c;border-color:#e8201c;color:#fff}
+#ara .sonuc{gap:30px 22px}
+#ara .oge{background:none;border:0;border-radius:0;padding:0;color:#111114;text-align:center}
+#ara .oge:hover{border:0}
+#ara .oge img{padding:8%;filter:drop-shadow(0 12px 14px rgba(0,0,0,.14));transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+#ara .oge:hover img{transform:translateY(-5px) scale(1.03)}
+#ara .oge:hover b{color:#e8201c}
+#ara .oge small{color:#77777f}
+#ara .yok{color:#77777f}
+#ara .ara-bas{display:flex;align-items:baseline;gap:14px;padding:18px 32px 0;max-width:1200px;width:100%;margin:0 auto}
+#ara .ara-bas .hp-logo{color:#111114;text-shadow:none;font-size:30px;display:inline-flex!important}
+#ara .ara-bas .hp-a{display:inline!important}
+#ara .ara-bas b{font:400 30px/1 Anton,Impact,sans-serif;text-transform:uppercase;color:#e8201c}
+#ara .ust2{padding-top:10px}
+
+#ara .katlar{align-items:center}
+#ara .katlar button.b1{font-size:26px;padding:14px 22px}
+#ara .katlar button.b2{font-size:19px;padding:11px 17px}
+#ara .katlar button.b3{font-size:14px;padding:8px 13px}
+@view-transition{navigation:auto}
+
+#ara .sonuc{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:22px 0}
+#ara .oge{padding:0 4px!important;min-width:0}
+#ara .oge.s4{grid-column:span 15}#ara .oge.s5{grid-column:span 12}#ara .oge.s6{grid-column:span 10}
+#ara .oge b{font-size:13px;line-height:1.2}#ara .oge.s5 b{font-size:11.5px}#ara .oge.s6 b{font-size:10.5px}
+#ara .oge small{font-size:10px}#ara .oge.s6 small{display:none}
+#ara .oge img{padding:4%}
+
+.hp-menu{position:fixed;top:clamp(104px,16vh,190px);left:16px;z-index:95;width:min(340px,calc(100vw - 32px));background:#0b0b0df5;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid #2a2a30;box-shadow:0 30px 60px #000c;padding:6px 0}
+.hp-menu a{display:block;padding:11px 20px;text-decoration:none;color:#f2efe9;border-left:3px solid transparent}
+.hp-menu a b{display:block;font:400 21px/1.1 Anton,sans-serif;text-transform:uppercase}
+.hp-menu a small{display:block;margin-top:2px;font-size:12.5px;color:#9a958d}
+.hp-menu a:hover,.hp-menu a:focus-visible{background:#16161a;border-left-color:#e8201c}
+.hpm-dukkan{display:flex;flex-wrap:wrap;align-items:baseline;width:100%;background:none;border:0;border-left:3px solid transparent;padding:11px 20px;color:#f2efe9;text-align:left;cursor:pointer;font:inherit}
+.hpm-dukkan b{font:400 21px/1.1 Anton,sans-serif;text-transform:uppercase}
+.hpm-dukkan b::after{content:"";display:inline-block;width:8px;height:8px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);margin-left:12px;transition:transform .2s}
+.hpm-dukkan[aria-expanded="true"] b::after{transform:rotate(225deg) translate(-1px,-1px)}
+.hpm-dukkan small{flex-basis:100%;margin-top:2px;font-size:12.5px;color:#9a958d}
+.hpm-dukkan:hover,.hpm-dukkan:focus-visible{background:#16161a;border-left-color:#e8201c}
+.hp-menu .hpm-liste{margin:2px 0 6px 20px;border-left:1px solid #2a2a30}
+.hp-menu .hpm-liste a{padding:9px 18px;color:#cfcac1;border-left:0}
+.hp-menu .hpm-liste a b{font-size:19px}
+
+/* BEYAZ TEMA DENEMESİ: yalnız bu dosya, canlıya girmez */
+:root{--ink:#111114;--paper:#fff;--muted:#77777f}
+nav{background:linear-gradient(#ffffffeb,#ffffff00);text-shadow:none}
+nav .hp-logo,.hp-logo{color:#111114;text-shadow:none}
+.hp-ac{color:#111114}
+nav .ara-ac,#ara .kapat{border-color:#111114;color:#111114}
+nav .ara-ac{background:#ffffffcc}
+html nav .hik .hik-btn{background:#fff;border-color:#c9c9d0;color:#111114}
+html nav .hik .hik-btn:hover,html nav .hik .hik-btn[aria-expanded="true"]{background:#f1f1f3;border-color:#111114}
+html .hik-menu{background:#fffffff7;border-color:#dcdce1;box-shadow:0 24px 50px #0002}
+html nav .hik .hik-menu a{color:#111114}
+html nav .hik .hik-menu a small{color:#77777f}
+html nav .hik .hik-menu a:hover,html nav .hik .hik-menu a:focus-visible{background:#f1f1f3}
+.hp-menu{background:#fffffff7!important;border-color:#dcdce1!important;box-shadow:0 24px 50px #0002!important}
+.hp-menu a,.hpm-dukkan{color:#111114}
+.hp-menu a small,.hpm-dukkan small{color:#77777f}
+.hp-menu a:hover,.hp-menu a:focus-visible,.hpm-dukkan:hover,.hpm-dukkan:focus-visible{background:#f1f1f3}
+.hp-menu .hpm-liste{border-left-color:#dcdce1}
+.hp-menu .hpm-liste a{color:#111114}
+#card{background:#111114;color:#fff;box-shadow:0 14px 34px #0003}
+#card .k,#card p{color:#c9c9d0}
+#kperde{background:#fff}
+#kgiris img{filter:drop-shadow(0 24px 30px rgba(0,0,0,.25))}
+#kgiris b{text-shadow:none}
+</style>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e8201c%27/%3E%3C/svg%3E">
+<script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
+</head>
+<body>
+<nav><span class="hpi-sol"><span class="hp-satir"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı ana sayfa"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><button class="hp-ac" id="hpAc" type="button" aria-label="Hit Pazarı menüsü" aria-expanded="false" aria-controls="hpMenu"></button></span><a class="logo" href="#">Halalar</a></span><span class="sag"><span class="depth" id="depth">0 m</span><button class="ara-ac" id="araAc">Ara</button></span></nav>
+<div class="hp-menu" id="hpMenu" hidden>
+  <a href="deneme-beyaz.html?mod=kategori"><b>Kategoriler</b><small>Kategori seçerek gez</small></a>
+  <a href="#" data-tunel-kur><b>Kendi tünelin</b><small>Kategorileri seç, kendi tünelinde gez</small></a>
+  <button class="hpm-dukkan" id="hpmDukkan" type="button" aria-expanded="false" aria-controls="hpmListe"><b>Dükkânlar</b><small>Dükkân seçerek gez</small></button>
+  <div class="hpm-liste" id="hpmListe" hidden><a href="hit.html#dukkanlar"><b>Bütün dükkânlar</b></a><a href="deneme-beyaz.html?dukkan=2"><b>DSG</b></a><a href="deneme-beyaz.html"><b>Halalar</b></a><a href="deneme-beyaz.html?dukkan=3"><b>Önsal Elektronik</b></a></div>
+</div>
+<script src="veri/hesap-ikon.js"></script>
+<div id="world"><div id="cam"></div></div>
+<div class="vignette"></div>
+<div id="card"><div class="k" id="c-k"></div><h3 id="c-h"></h3><p id="c-p"></p><span class="go">Ürünü aç →</span></div>
+<div id="kgiris" aria-hidden="true"><div><img id="kgImg" alt=""><b id="kgAd"></b></div></div><div id="kperde"></div>
+<a class="deste-ac" id="desteAc" href="#">KAYDIR, SEÇ <small>beğen · teklif ver · satın al</small></a>
+<div class="hint" id="hint">kaydır ↓ içeri gir</div>
+<div id="end"></div>
+<div id="ara"><div class="ara-bas"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><b>Ara</b></div><div class="ust2"><input id="araKutu" type="search" placeholder="Ürün ara: plak, tablo, porselen…" autocomplete="off"><button class="kapat" id="araKapat">Kapat</button></div>
+<div class="katlar" id="katlar"></div><div class="sonuc" id="sonuc"></div></div>
+<script src="veri/urunler.js"></script>
+<script src="veri/dukkan2.js"></script>
+<script src="veri/dukkan3.js"></script>
+<script src="veri/aspect.js"></script>
+<script src="veri/galeri.js"></script>
+<script src="veri/kategoriler.js"></script>
+<script src="veri/kategori-ikon.js"></script>
+<script src="veri/tunel-kur.js"></script>
+<script>
+// Kategori modu (?mod=kategori): aynı tünel, ürün yerine kategorilerin ikonik görselleri; dokununca o kategori açılır
+const KMOD=new URLSearchParams(location.search).get('mod')==='kategori'&&typeof KATEGORI_IKON!=='undefined';
+// Pazar modu (?mod=pazar): ana sayfadan kaydırınca girilen, bütün dükkânların ürünleri karışık; her girişte farklı sıra
+const KPAZAR=new URLSearchParams(location.search).get('mod')==='pazar';
+// Dükkân tüneli (?dukkan=2 DSG, ?dukkan=3 Önsal Elektronik): yalnız o dükkânın ürünleri
+const KDS=new URLSearchParams(location.search).get('dukkan');
+const KD=KDS==='2'&&typeof DUKKAN2!=='undefined'?['d2:',DUKKAN2,'dukkan.html']:KDS==='3'&&typeof DUKKAN3!=='undefined'?['d3:',DUKKAN3,'dukkan.html?d=3']:null;
+// her tekrar turunda kategori kendi içinden başka bir ürünle gelir (ilk turda ikonik görsel)
+const KSEC=new URLSearchParams(location.search).get('kat');
+const KFILTRE=!KMOD&&KSEC&&typeof KATEGORI!=='undefined'?URUNLER.filter(u=>KATEGORI[u[0]]===KSEC):null;
+if(KFILTRE&&KFILTRE.length){document.querySelector('nav .logo').textContent=KSEC;document.title='Hit Pazarı · '+KSEC;
+  const kg=document.getElementById('kgiris');document.getElementById('kgAd').textContent=KSEC;document.getElementById('kgImg').src='kaynak/web/'+((typeof KATEGORI_IKON!=='undefined'&&KATEGORI_IKON[KSEC])||KFILTRE[0][0])+'.webp';kg.classList.add('on');
+  // giriş: tabela ortada, kamera kendiliğinden içeri süzülür; tabela büyüyüp kaybolur, ürünler derinden belirir
+  setTimeout(()=>{if(target<10)target=520},450);setTimeout(function izle(){if(camZ>110){kg.classList.add('off');return}requestAnimationFrame(izle)},0)}
+// Pazar modunda diğer dükkânın (DSG) tünele hazır ürünleri de karışır: kimlik 'd2:<id>', görsel kendi yolundan
+const GOR={};
+function dukT(on,D){return D.urunler.filter(x=>x.tunel&&x.stok!==0).map(x=>{const id=on+x.id;GOR[id]=x.tgorsel||x.gorsel;const o=x.toran||x.oran;if(o)ASPECT[id]=o;return [id,x.ad,x.aciklama||'',x.kategori]})}
+const D2T=KPAZAR?[].concat(typeof DUKKAN2!=='undefined'?dukT('d2:',DUKKAN2):[],typeof DUKKAN3!=='undefined'?dukT('d3:',DUKKAN3):[]):[];
+const KDT=KD?dukT(KD[0],KD[1]):null;
+// Kendi tünelin (?sec=Giyim~Beyaz Eşya): ziyaretçinin seçtiği genel kategoriler, bütün dükkânlardan karışık
+const KSECIM=(()=>{const s=new URLSearchParams(location.search).get('sec');if(!s)return null;const L=s.split('~').filter(Boolean);return window.tunelSecimCoz?tunelSecimCoz(L):L})();
+const KST=KSECIM?(()=>{const L=[].concat(typeof KATEGORI!=='undefined'?URUNLER.filter(u=>KSECIM.includes('h:'+KATEGORI[u[0]])):[],
+  typeof DUKKAN2!=='undefined'?dukT('d2:',DUKKAN2).filter(u=>KSECIM.includes('d2:'+u[3])):[],
+  typeof DUKKAN3!=='undefined'?dukT('d3:',DUKKAN3).filter(u=>KSECIM.includes('d3:'+u[3])):[]);
+  for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}return L})():null;
+// Kategoriler tünelinde diğer dükkânların genel kategorileri de var (Giyim, Beyaz Eşya, ...); dokununca o kategorinin kendi tüneli (?sec=)
+const SKAT=new Map();if(KMOD){if(typeof DUKKAN2!=='undefined'){const g=dukT('d2:',DUKKAN2).map(u=>u[0]);if(g.length)SKAT.set('Giyim',g)}
+  if(typeof DUKKAN3!=='undefined'){const d=dukT('d3:',DUKKAN3);DUKKAN3.kategoriler.filter(k=>k!=='Televizyon').forEach(k=>{const g=d.filter(u=>u[3]===k).map(u=>u[0]);if(g.length)SKAT.set(k,g)})}}
+const KAYNAK=KMOD?(()=>{const L=[],ks=Object.keys(KATEGORI_IKON);
+  const uy=k=>URUNLER.filter(u=>KATEGORI[u[0]]===k&&u[0]!==KATEGORI_IKON[k]).map(u=>u[0]);
+  for(let t=0;t<8;t++)ks.forEach(k=>{const d=uy(k);const id=t===0||!d.length?KATEGORI_IKON[k]:d[(t-1)%d.length];L.push([id,k,'Bu kategorideki ürünleri gör','—'])});
+  for(let t=0;t<8;t++)SKAT.forEach((g,k)=>L.push([g[(t*7)%g.length],k,'Bu kategorideki ürünleri gör','—']));return L})():(KDT&&KDT.length?KDT:KST&&KST.length?KST:KFILTRE&&KFILTRE.length?KFILTRE:KPAZAR?(()=>{const L=URUNLER.concat(D2T);for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}return L})():URUNLER);
+if(KDT&&KDT.length){const l=document.querySelector('nav .logo');l.textContent=KD[1].ad;l.href=KD[2];document.title='Hit Pazarı · '+KD[1].ad+' tüneli';setTimeout(()=>{if(target<10)target=520},250)}
+if(KST&&KST.length){const l=document.querySelector('nav .logo');l.textContent='Senin tünelin';l.title='Kategorileri değiştir';l.onclick=e=>{e.preventDefault();tunelKurAc()};document.title='Hit Pazarı · Senin tünelin';setTimeout(()=>{if(target<10)target=520},250)}
+if(KPAZAR){document.querySelector('nav .logo').textContent='Pazar';document.title='Hit Pazarı · Pazar';setTimeout(()=>{if(target<10)target=520},250)}
+// tünelin sonundaki büyük yazı: girilen tünelin adı (DSG, Önsal, Pazar, kategori...), her yerde Halalar değil
+document.getElementById('end').textContent=KMOD?'kategoriler':(KDT&&KDT.length)?KD[1].ad:(KST&&KST.length)?'Senin tünelin':KPAZAR?'Pazar':(KFILTRE&&KFILTRE.length)?KSEC:'Halalar';
+if(KMOD){document.querySelector('nav .logo').textContent='Kategoriler';document.getElementById('end').textContent='kategoriler';document.title='Hit Pazarı · Kategoriler';document.querySelector('#card .go').textContent='Ürünleri gör →'}
+// Her ürüne tünelde bir yer: z (derinlik), x/y (yana ofset), boyut. Deterministik dağılım.
+const STEP=KMOD?110:(KDS==='2'?42:32);   // DSG tünelinde seyrek (Tolga denemesi 4)                        // ürünler arası derinlik
+const TEKRAR=12;                      // liste tekrarı: tünel uzun ve dolu
+const P=600;                          // perspektif (eski CSS ile aynı)
+const BG='#ffffff';
+// --- tuval: bütün tünel tek yüzeye çizilir (katman/bellek sorunu yok) ---
+const world=document.getElementById('world'); world.innerHTML='';
+const cv=document.createElement('canvas'); cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;display:block';
+world.appendChild(cv); const g=cv.getContext('2d');
+let DPR=1,VW=0,VH=0,SC=1;
+function boyut(){DPR=Math.min(window.devicePixelRatio||1,1.5);VW=innerWidth;VH=innerHeight;SC=Math.max(0.42,Math.min(1,VW/1440*1.5));   // telefonda uygulamadaki gibi küçük
+  cv.width=Math.round(VW*DPR);cv.height=Math.round(VH*DPR)}
+boyut(); addEventListener('resize',boyut);
+// --- görseller: her ürün bir kez yüklenir, alfa haritası çıkarılır ---
+const IMG={}, ALPHA={}, KOPYA={}, BUYUK={};
+// önce küçük kopya (kaynak/k/..., en çok 360 px) iner: uzaktaki ürün için yeter, telefonda veri az gider.
+// ürün yaklaşıp büyük çizilmesi gerekince asıl fotoğraf o an indirilir.
+const yolB=id=>GOR[id]||`kaynak/web/${id}.webp`, yolK=id=>yolB(id).replace(/^kaynak\//,'kaynak/k/');
+function kopyala(im){const L=[];for(const m of [96,192,384,640]){const s=m/Math.max(im.naturalWidth,im.naturalHeight);if(s>=1)break;const k=document.createElement('canvas');k.width=Math.max(1,Math.round(im.naturalWidth*s));k.height=Math.max(1,Math.round(im.naturalHeight*s));k.getContext('2d').drawImage(im,0,0,k.width,k.height);L.push(k)}return L}
+KAYNAK.forEach(u=>{ const id=u[0]; if(IMG[id])return; const im=new Image(); IMG[id]=im;
+  im.onerror=()=>{if(!im.dataset.b){im.dataset.b='1';im.src=yolB(id)}};   // küçük kopya yoksa asıl fotoğraf
+  im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d');x.drawImage(im,0,0,48,48);ALPHA[id]=x.getImageData(0,0,48,48).data;
+    if(!BUYUK[id]||!BUYUK[id].hazir)KOPYA[id]=kopyala(im)};
+  im.src=yolK(id) });
+function buyukIste(id){if(BUYUK[id]||(IMG[id]&&IMG[id].dataset.b))return;const b=new Image();BUYUK[id]=b;b.onload=()=>{KOPYA[id]=kopyala(b);b.hazir=1};b.src=yolB(id)}
+function kaynak(id,px){if(px>340)buyukIste(id);const L=KOPYA[id];if(L)for(const k of L)if(Math.max(k.width,k.height)>=px)return k;const b=BUYUK[id];return b&&b.hazir?b:IMG[id]}
+// --- yerleşim (önceki ile aynı kurallar) ---
+const LISTE=[];for(let t=0;t<(KMOD?1:Math.max(TEKRAR,Math.ceil(60/KAYNAK.length)));t++)KAYNAK.forEach(u=>LISTE.push(u));
+if(KDS==='2')LISTE.length=Math.round(LISTE.length*0.35);   // DSG tünelinde ürün sayısı denemedeki gibi (yarı tur, %30 az)
+const N=LISTE.length;
+const items=LISTE.map((u,i)=>{
+  const ar=ASPECT[u[0]]||1;
+  const X=1.4, Y=1.35, per=2*(2*X+2*Y);            // çerçeve çevresine eşit dağılım
+  const p=((i*0.6180339)%1)*per;
+  const inn=((i*0.4142)%1)*0.35;
+  let xv,yv;
+  if(p<2*X){xv=-X+p; yv=-Y+inn}
+  else if(p<2*X+2*Y){xv=X-inn; yv=-Y+(p-2*X)}
+  else if(p<4*X+2*Y){xv=X-(p-2*X-2*Y); yv=Y-inn}
+  else {xv=-X+inn; yv=Y-(p-4*X-2*Y)}
+  // DSG tünelinde orta biraz boş: üst/alt kenardaki ürünler tam ortaya gelmez
+  if(KDS==='2'&&Math.abs(yv)>Math.abs(xv)){const a=Math.abs(xv),g=0.3;xv=(xv<0?-1:1)*(g+a*(X-g)/X)}
+  const w=((ar>1.25?460:ar<0.75?300:380)+((i*13)%6)*45)*(KMOD?1.25:1)*(/^d2:/.test(u[0])?(KDS==='2'?(u[3]==='Alt giyim'?0.48:0.6):0.8):1);   // kategori modunda ikonlar bir tık büyük; kıyafetler (DSG) %20 küçük (Tolga)
+  const z=-(i*STEP)-250;
+  let rot=0;
+  if(ar<0.75){ const mag=9+((i*0.7548)%1)*11; const side=Math.abs(xv)>Math.abs(yv)?Math.sign(xv):(((i*0.31)%1)<0.5?-1:1); rot=-side*mag; }
+  else rot=(((i*0.5698)%1)-0.5)*4;
+  return {i,u,x:xv,y:yv,z,w,ar,rot:rot*Math.PI/180,thin:(i%3!==0),
+          sx:0,sy:0,sw:0,sh:0,op:0,dz:0};
+});
+const TOTAL=(N+1)*STEP;
+const THIN_Z=1100;
+let mx=0,my=0; addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5)});
+let camZ=0,target=0,open=true;
+const clamp=v=>Math.min(Math.max(v,0),TOTAL);
+// iki parmakla yana kaydırma (tarayıcının geri/ileri hareketi) tünele karışmaz; dikey kaydırma tüneli sürer
+addEventListener('wheel',e=>{if(!open)return;if(Math.abs(e.deltaX)>Math.abs(e.deltaY))return;e.preventDefault();
+  if(Math.abs(e.deltaY)<2)return;
+  if(target<=0&&e.deltaY<0){target=0;if(KPAZAR&&!geriGit){geriTop+=-e.deltaY;clearTimeout(geriSifir);geriSifir=setTimeout(()=>geriTop=0,400);if(geriTop>600)geriGit=setTimeout(()=>location.href='hit.html',60)}return}
+  target=clamp(target+e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?600:2.4))},{passive:false});   // dokunmatik yüzeyde de akıcı ilerlesin
+let geriGit=null,geriTop=0,geriSifir=null,geriDokun=0;   // tünel başında geri dönüş için bilinçli, uzun bir kaydırma gerekir
+let ty=null;addEventListener('touchstart',e=>{ty=e.touches[0].clientY;geriDokun=0},{passive:true});
+addEventListener('touchmove',e=>{if(!open||ty===null)return;const y=e.touches[0].clientY;if(KPAZAR&&target<=0&&y>ty&&!geriGit){geriDokun+=y-ty;if(geriDokun>220){geriGit=1;location.href='hit.html';return}}else geriDokun=0;target=clamp(target+(ty-y)*3);ty=y;e.preventDefault()},{passive:false});
+addEventListener('keydown',e=>{if(!open)return;if(e.key==='ArrowDown'||e.key===' '||e.key==='PageDown')target=clamp(target+400);if(e.key==='ArrowUp'||e.key==='PageUp')target=clamp(target-400)});
+let drawn=[];                       // bu karede çizilenler, uzaktan yakına
+function render(){
+  camZ+=(target-camZ)*0.12; if(Math.abs(target-camZ)<0.05)camZ=target;
+  document.getElementById('depth').textContent=Math.round(camZ/40)+' m';
+  document.getElementById('hint').classList.toggle('off',camZ>200);
+  const cx=mx*-60, cy=my*-40;
+  drawn=[];
+  for(const it of items){
+    const dz=it.z+camZ; it.dz=dz;
+    if(dz>250||dz<-7000)continue;
+    let vis=1; if(KFILTRE&&KFILTRE.length) vis*=Math.min(1,camZ/350);
+    if(dz>0) vis*=Math.max(0,(250-dz)/250);
+    if(dz<-5500) vis*=Math.max(0,(7000+dz)/1500);
+    if(it.thin) vis*=Math.min(1,Math.max(0,(dz+THIN_Z+500)/500));
+    if(vis<=0.01)continue;
+    const im=IMG[it.u[0]]; if(!im.complete||!im.naturalWidth)continue;
+    const fog=Math.min(1,Math.max(0,(-dz-2000)/10000));
+    const k=P/(P-dz);
+    it.op=(1-fog*0.6)*vis;
+    it.sw=it.w*SC*k; it.sh=it.sw*im.naturalHeight/im.naturalWidth;
+    it.sx=VW/2+(it.x*VW*0.5+cx)*k; it.sy=VH/2+(it.y*VH*0.5+cy)*k;
+    if(it.sx+it.sw<-50||it.sx-it.sw>VW+50||it.sy+it.sh<-50||it.sy-it.sh>VH+50)continue;  // ekran dışı
+    drawn.push(it);
+  }
+  drawn.sort((a,b)=>a.dz-b.dz);
+  g.setTransform(DPR,0,0,DPR,0,0); g.globalAlpha=1; g.fillStyle=BG; g.fillRect(0,0,VW,VH);
+  for(const it of drawn){
+    g.save(); g.globalAlpha=it.op; if(it.dz>-2200&&it.sw>50){g.shadowColor='rgba(20,18,15,.3)';g.shadowBlur=Math.min(26,it.sw*.07);g.shadowOffsetY=Math.min(16,it.sw*.04)} g.translate(it.sx,it.sy); g.rotate(it.rot);
+    g.drawImage(kaynak(it.u[0],Math.max(it.sw,it.sh)*DPR),-it.sw/2,-it.sh/2,it.sw,it.sh); g.restore();
+    if(KMOD&&it.op>.25&&it.sw>70&&it.dz>-1400){const fs=Math.max(14,Math.min(72,it.sw*.15));g.save();g.globalAlpha=it.op;g.font=fs+'px Anton, Impact, sans-serif';g.textAlign='center';g.textBaseline='top';g.shadowColor='#fff';g.shadowBlur=12;g.fillStyle='#111114';g.fillText(it.u[1].toLocaleUpperCase('tr-TR'),it.sx,it.sy+it.sh/2+fs*.35);g.restore()}
+  }
+  document.getElementById('end').classList.toggle('on',camZ>TOTAL-STEP*1.2);
+  requestAnimationFrame(render);
+}
+requestAnimationFrame(render);
+// --- seçim: o noktada gerçekten görünen, en öndeki ürün ---
+const card=document.getElementById('card'); let hoverT=null,hot=null;
+function pickIs(it,x,y){
+  const d=ALPHA[it.u[0]]; if(!d||it.op<0.05)return false;
+  const dx=x-it.sx, dy=y-it.sy, c=Math.cos(it.rot), s=Math.sin(it.rot);
+  const lx_=dx*c+dy*s, ly_=-dx*s+dy*c;                 // eğimi geri al
+  const u=Math.floor((lx_/it.sw+0.5)*48), v=Math.floor((ly_/it.sh+0.5)*48);
+  if(u<0||u>47||v<0||v>47)return false; return d[(v*48+u)*4+3]>40}
+function pick(x,y){ for(let j=drawn.length-1;j>=0;j--){ if(pickIs(drawn[j],x,y))return drawn[j] } return null }
+// menü açıkken ürün kartı görünmez; menü açılınca kart kapanır, tünel durur (Tolga 17.11)
+const menuAcik=()=>['hikMenu','hpMenu'].some(i=>{const m=document.getElementById(i);return m&&!m.hidden})||!!(window.tunelKurAcik&&tunelKurAcik());
+{const izle=new MutationObserver(()=>{if(menuAcik()){clearTimeout(hoverT);card.classList.remove('on');hot=null;open=false}else if(!document.getElementById('ara').classList.contains('on'))open=true});
+ ['hikMenu','hpMenu'].forEach(i=>{const m=document.getElementById(i);if(m)izle.observe(m,{attributes:true,attributeFilter:['hidden']})})}
+// ürün kartı ekrandan taşmaz ve alttaki 'Kaydır, seç' düğmesinin üstüne binmez
+function kartYer(x,y){const w=card.offsetWidth,h=card.offsetHeight,dg=document.getElementById('desteAc'),dr=dg&&getComputedStyle(dg).display!=='none'&&dg.getBoundingClientRect().height>0?dg.getBoundingClientRect():null;
+  const alt=(dr?dr.top:innerHeight)-14;card.style.left=Math.max(8,Math.min(x+16,innerWidth-w-8))+'px';card.style.top=Math.max(8,Math.min(y+16,alt-h))+'px'}
+function showCard(it){if(menuAcik())return;document.getElementById('c-k').textContent=KMOD?'Kategori':[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];document.getElementById('c-p').textContent=it.u[2];kartYer(lx,ly);card.classList.add('on')}
+let cand=null,candT=0,offT=null;
+function setHot(o){
+  if(o===hot){clearTimeout(offT);offT=null;cand=null;return}
+  if(!o){ if(!offT) offT=setTimeout(()=>{hot=null;cand=null;card.classList.remove('on');cv.style.cursor='';offT=null},250); return }
+  clearTimeout(offT);offT=null;
+  const now=performance.now(); if(o!==cand){cand=o;candT=now;return}
+  if(now-candT<220)return;
+  hot=o; cv.style.cursor='pointer'; clearTimeout(hoverT);
+  if(card.classList.contains('on'))showCard(o); else hoverT=setTimeout(()=>{if(hot===o)showCard(o)},250)}
+function nearHot(x,y){if(!hot||!drawn.includes(hot))return false;for(const [ox,oy] of [[0,0],[7,0],[-7,0],[0,7],[0,-7],[5,5],[-5,5],[5,-5],[-5,-5]])if(pickIs(hot,x+ox,y+oy))return true;return false}
+let lx=-1,ly=-1;
+function hover(){if(lx<0)return;let o=pick(lx,ly);if(!o&&nearHot(lx,ly))o=hot;setHot(o)}
+addEventListener('mousemove',e=>{lx=e.clientX;ly=e.clientY;hover()});
+setInterval(hover,90);
+cv.addEventListener('click',e=>{const o=pick(e.clientX,e.clientY);if(o){if(KMOD){target=clamp(camZ+1600);document.getElementById('kperde').classList.add('on');setTimeout(()=>location.href=SKAT.has(o.u[1])?'deneme-beyaz.html?sec='+encodeURIComponent(o.u[1]):'index.html?kat='+encodeURIComponent(o.u[1]),620)}else location.href='urun.html?id='+encodeURIComponent(o.u[0])}});   // telefonda da bilgisayarda da Hit Pazarı ürün sayfası (Halalar destesine değil)
+// ürüne dokununca kart destesi (Geç / Teklif / Satın al / Beğen) o üründen başlar: telefon uygulamasının destesi
+document.getElementById('desteAc').onclick=e=>{e.preventDefault();location.href=desteAdres((items.find(it=>it.dz>-1500&&it.dz<200)||items[0]).u[0])};
+if(KMOD)document.getElementById('desteAc').hidden=true;
+function desteAdres(id){const p=location.port,yerel={'8766':'8769','8770':'8771'}[p];
+  const kok=yerel?`${location.protocol}//${location.hostname}:${yerel}/`:'https://tolgaarpa.github.io/halalar-app/';
+  // deste, girilen tünelin ürünleriyle açılır: t=pazar | dukkan:2 | dukkan:3 | sec:<seçim> | kat:<Halalar kategorisi> | (boş = Halalar)
+  const q=new URLSearchParams(location.search);
+  const t=KPAZAR?'pazar':(KDT&&KDT.length)?'dukkan:'+KDS:(KST&&KST.length)?'sec:'+q.get('sec'):(KFILTRE&&KFILTRE.length)?'kat:'+KSEC:/^d[23]:/.test(id||'')?'pazar':'';
+  const z=Math.round(camZ);return kok+'index.html'+(t?'?t='+encodeURIComponent(t):'')+(z>0?(t?'&':'?')+'z='+z:'')+'#u='+encodeURIComponent(id)}
+addEventListener('mousemove',e=>{if(!card.classList.contains('on'))return;kartYer(e.clientX,e.clientY)});
+target=parseFloat(new URLSearchParams(location.search).get('z')||0);
+// bulunduğun derinlik adreste tutulur (?z=): ürüne, desteye, menüye gidip geri dönünce tünel aynı noktadan açılır
+function konumKaydet(){if(typeof camZ==='undefined')return;const q=new URLSearchParams(location.search),z=Math.round(camZ);if(q.get('z')===String(z))return;if(z>0)q.set('z',z);else q.delete('z');const s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:''))}
+addEventListener('click',konumKaydet,true);addEventListener('pagehide',konumKaydet);setInterval(konumKaydet,1500);
+
+// --- arama ve kategoriler ---
+(()=>{// dükkân tünelinde (?dukkan=) arama yalnız o dükkânın ürünlerinde ve kategorilerinde
+  // Pazar ve 'Kendi tünelin'de arama bütün dükkânlarda (Halalar + DSG + Önsal)
+  const DM=!!(KDT&&KDT.length),HEPSI=!DM&&(KPAZAR||!!(KST&&KST.length)),DKAT={};
+  const EKL=HEPSI?[].concat(typeof DUKKAN2!=='undefined'?dukT('d2:',DUKKAN2):[],typeof DUKKAN3!=='undefined'?dukT('d3:',DUKKAN3):[]):[];
+  const AL=DM?KDT:HEPSI?URUNLER.concat(EKL):URUNLER;(DM?KDT:EKL).forEach(u=>DKAT[u[0]]=u[3]);
+  const KAT=id=>DKAT[id]||(typeof KATEGORI!=='undefined'&&KATEGORI[id])||'';
+  const kutu=document.getElementById('araKutu'),kl=document.getElementById('katlar'),so=document.getElementById('sonuc'),pen=document.getElementById('ara');let kat='';
+  const norm=t=>(t||'').toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
+  const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  // popülerlik (şimdilik kategorideki ürün sayısı) sırasıyla; ilk 3 büyük, sonraki 4 orta, kalanı küçük
+  const SAY={};AL.forEach(u=>{const k=KAT(u[0]);if(k)SAY[k]=(SAY[k]||0)+1});
+  const KS=(DM?KD[1].kategoriler:[].concat(typeof KATEGORILER!=='undefined'?KATEGORILER:[],HEPSI&&typeof DUKKAN2!=='undefined'?DUKKAN2.kategoriler:[],HEPSI&&typeof DUKKAN3!=='undefined'?DUKKAN3.kategoriler:[])).filter(k=>SAY[k]).slice().sort((a,b)=>(SAY[b]||0)-(SAY[a]||0));
+  kl.innerHTML=`<button data-k="" class="on b3">Tümü</button>`+KS.map((k,i)=>`<button data-k="${esc(k)}" class="${i<3?'b1':i<7?'b2':'b3'}">${esc(k)}</button>`).join('');
+  kl.onclick=e=>{const b=e.target.closest('button');if(!b)return;kat=b.dataset.k;kl.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));goster()};
+  function goster(){const q=norm(kutu.value).trim();
+    const L=AL.filter(u=>(!kat||KAT(u[0])===kat)&&(!q||q.split(/\s+/).every(w=>norm(u[1]+' '+u[2]+' '+u[3]+' '+KAT(u[0])).includes(w))));
+    // önem sırası: beğendiklerin önce, sonra popüler kategoriler; ilk satır 4, sonra 5, sonra 6'şar (kademeli küçülür)
+    {let B=[];try{B=(JSON.parse(localStorage.getItem('halalar-app-v1'))||{}).begeni||[]}catch(e){}const puan=u=>(B.includes(u[0])?1000:0)+(SAY[KAT(u[0])]||0);L.sort((x,y)=>puan(y)-puan(x))}
+    const kd=i=>i<4?'s4':i<9?'s5':'s6';
+    so.innerHTML=L.length?L.map((u,i)=>`<a class="oge ${kd(i)}" href="urun.html?id=${encodeURIComponent(u[0])}"><img loading="lazy" src="${esc(GOR[u[0]]||'kaynak/web/'+u[0]+'.webp')}" alt=""><b>${esc(u[1])}</b><small>${esc((DM||/^d[23]:/.test(u[0])?[KAT(u[0])]:[KAT(u[0]),u[3]==='—'?'':u[3]]).filter(Boolean).join(' · '))}</small></a>`).join(''):'<div class="yok">Sonuç yok</div>'}
+  kutu.oninput=goster;
+  document.getElementById('araAc').onclick=()=>{pen.classList.add('on');open=false;card.classList.remove('on');goster();setTimeout(()=>kutu.focus(),50)};
+  document.getElementById('araKapat').onclick=()=>{pen.classList.remove('on');open=true};
+  addEventListener('tunelkur',e=>{open=!e.detail;if(e.detail)card.classList.remove('on')});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&pen.classList.contains('on'))document.getElementById('araKapat').click()});
+})();
+
+
+// gövde kaymasın: arama kutusuna odaklanınca tarayıcı sayfayı yukarı itip başlığı (logoyu) ekrandan çıkarıyordu
+document.body.addEventListener('scroll',()=>{if(document.body.scrollTop)document.body.scrollTop=0});addEventListener('scroll',()=>{if(scrollY&&getComputedStyle(document.body).overflow==='hidden')scrollTo(0,0)});
+
+// dükkân adı (PAZAR / HALALAR) logodaki HİT PAZARI yazısının hizasından başlar, // çizgisinin değil
+(()=>{const a=document.querySelector('nav .hp-a'),d=document.querySelector('nav .logo'),k=document.querySelector('nav .hpi-sol');if(!a||!d||!k)return;
+  const hizala=()=>{d.style.marginLeft=Math.max(0,a.getBoundingClientRect().left-k.getBoundingClientRect().left)+'px'};
+  hizala();addEventListener('resize',hizala);if(document.fonts)document.fonts.ready.then(hizala)})();
+// logo menüsü: her sayfada aynı yol haritası
+(()=>{const l=document.getElementById('hpAc'),m=document.getElementById('hpMenu');if(!l||!m)return;
+  const kapa=()=>{m.hidden=true;l.setAttribute('aria-expanded','false')};
+  const hd=document.getElementById('hpmDukkan'),hl=document.getElementById('hpmListe');if(hd)hd.onclick=e=>{e.stopPropagation();hl.hidden=!hl.hidden;hd.setAttribute('aria-expanded',String(!hl.hidden))};
+  l.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();m.hidden=!m.hidden;l.setAttribute('aria-expanded',String(!m.hidden));if(typeof open!=='undefined')open=m.hidden});
+  addEventListener('click',e=>{if(!m.hidden&&!e.target.closest('#hpMenu'))kapa()});addEventListener('keydown',e=>{if(e.key==='Escape')kapa()})})();
+</script>
+</body>
+</html>
