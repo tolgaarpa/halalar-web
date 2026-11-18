@@ -85,7 +85,33 @@ main img{filter:drop-shadow(0 24px 30px rgba(0,0,0,.16))}
 nav{position:sticky;top:0;z-index:50;background:var(--bg)}
 nav .back{display:inline-flex;align-items:center;border:1px solid #55555e;padding:10px 14px;font-size:13px!important;letter-spacing:.14em!important;color:var(--ink)}
 nav .back:hover{border-color:var(--ink)}
-</style><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e8201c%27/%3E%3C/svg%3E">
+
+/* tema: Gece siyah, Gündüz beyaz (tünel menüsünden seçilir) */
+html:not([data-tema="gunduz"]){--bg:#0b0b0d;--ink:#f2efe9;--yumusak:#cfcac1;--muted:#8d887f;--line:#26262c;--panel:#141418}
+html:not([data-tema="gunduz"]) .hp-logo{color:#f2efe9}
+html:not([data-tema="gunduz"]) .logo{border-left-color:#55555e}
+html:not([data-tema="gunduz"]) main img{filter:drop-shadow(0 40px 60px rgba(0,0,0,.7))}
+html:not([data-tema="gunduz"]) .cta{border-color:#55555e}
+html:not([data-tema="gunduz"]) .cta:hover{border-color:var(--ink)}
+html:not([data-tema="gunduz"]) .cta.on{border-color:var(--mavi)}
+html:not([data-tema="gunduz"]) .cta.on:hover{border-color:var(--accent)}
+html:not([data-tema="gunduz"]) .hizli button{border-color:#3a3a42}
+html:not([data-tema="gunduz"]) .alanlar input{background:#0d0d10;border-color:#3a3a42}
+html:not([data-tema="gunduz"]) .alanlar input:focus{border-color:var(--ink)}
+html:not([data-tema="gunduz"]) .rza input{accent-color:#f2efe9}
+html:not([data-tema="gunduz"]) .hata{color:#ff6b5e}
+html:not([data-tema="gunduz"]) .acilar img{filter:none}
+html[data-tema="gunduz"] nav .back{border-color:#c9c9d0}
+html[data-tema="gunduz"] nav .back:hover{border-color:#111114}
+html[data-tema="gunduz"] nav .hik .hik-btn{background:#fff;border-color:#c9c9d0;color:#111114}
+html[data-tema="gunduz"] nav .hik .hik-btn:hover,html[data-tema="gunduz"] nav .hik .hik-btn[aria-expanded="true"]{background:#f1f1f3;border-color:#111114}
+html[data-tema="gunduz"] .hik-menu{background:#fffffff7;border-color:#dcdce1;box-shadow:0 24px 50px #0002}
+html[data-tema="gunduz"] nav .hik .hik-menu a{color:#111114}
+html[data-tema="gunduz"] nav .hik .hik-menu a small{color:#77777f}
+html[data-tema="gunduz"] nav .hik .hik-menu .hik-alt a{color:#4a4a52}
+html[data-tema="gunduz"] .hik-menu .hik-alt{border-top-color:#e4e4e8}
+html[data-tema="gunduz"] nav .hik .hik-menu a:hover,html[data-tema="gunduz"] nav .hik .hik-menu a:focus-visible{background:#f1f1f3}
+</style><script>try{if(localStorage.getItem('hp-tema')==='gunduz')document.documentElement.dataset.tema='gunduz'}catch(e){}</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e8201c%27/%3E%3C/svg%3E">
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
 </head>
 <body>
