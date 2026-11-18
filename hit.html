@@ -349,6 +349,14 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 #nasil .yon b{font-size:15px}#nasil .yon small{font-size:12px}#nasil .yon .ok2{font-size:22px}
 }
 
+.hpm-sec{display:flex;justify-content:space-between;align-items:center;width:100%;background:none;border:0;padding:9px 18px;color:#cfcac1;cursor:pointer;text-align:left;font:inherit}
+.hpm-sec b{font:400 19px/1.1 Anton,sans-serif;text-transform:uppercase}
+.hpm-sec:hover,.hpm-sec:focus-visible{background:#16161a}
+.hpm-sec[aria-pressed="true"]{color:#e8201c}
+.hpm-sec[aria-pressed="true"]::after{content:"✓";font-size:17px;font-weight:700}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hpm-sec{color:#111114}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hpm-sec[aria-pressed="true"]{color:#e8201c}
+html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .hpm-sec:hover{background:#f1f1f3}
 /* Gündüz teması: Bütün dükkânlar ekranı beyaz */
 html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on){--zemin:#fff;--ink:#111114;--yumusak:#4a4a52;--muted:#77777f;--line:#e4e4e8;--panel:#f6f6f8}
 html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .katman{background:#fff}
@@ -391,6 +399,8 @@ html[data-tema="gunduz"]:has(#katman:not([hidden]) #dukkanlar.on) .kepenk .levha
   <a href="#" data-tunel-kur><b>Kendi tünelin</b><small>Kategorileri seç, kendi tünelinde gez</small></a>
   <button class="hpm-dukkan" id="hpmDukkan" type="button" aria-expanded="false" aria-controls="hpmListe"><b>Dükkânlar</b><small>Dükkân seçerek gez</small></button>
   <div class="hpm-liste" id="hpmListe" hidden><a href="#dukkanlar"><b>Bütün dükkânlar</b></a><a href="index.html?dukkan=2"><b id="hpmD2">DSG</b></a><a href="index.html"><b>Halalar</b></a><a href="index.html?dukkan=3"><b id="hpmD3">Önsal Elektronik</b></a></div>
+  <button class="hpm-dukkan" id="hpmTema" type="button" aria-expanded="false" aria-controls="hpmTemaL"><b>Tema</b><small>Gece ya da gündüz</small></button>
+  <div class="hpm-liste" id="hpmTemaL" hidden><button class="hpm-sec" type="button" data-tema="gece" aria-pressed="false"><b>Gece</b></button><button class="hpm-sec" type="button" data-tema="gunduz" aria-pressed="false"><b>Gündüz</b></button></div>
 </div>
 <script src="veri/hesap-ikon.js"></script>
 
@@ -687,6 +697,8 @@ const menuKapa=()=>{hpMenu.hidden=true;marka.setAttribute('aria-expanded','false
 // Dükkânlar: dükkân adları ayrı bir alt listede, tıklayınca açılır
 const hpmD=document.getElementById('hpmDukkan'),hpmL=document.getElementById('hpmListe');
 hpmD.onclick=()=>{hpmL.hidden=!hpmL.hidden;hpmD.setAttribute('aria-expanded',String(!hpmL.hidden))};
+{const d=document.getElementById('hpmTema'),L=document.getElementById('hpmTemaL'),B=[...L.querySelectorAll('.hpm-sec')],isle=()=>{const g=document.documentElement.dataset.tema==='gunduz';B.forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.tema==='gunduz')===g)))};isle();addEventListener('hptema',isle);
+ d.onclick=()=>{L.hidden=!L.hidden;d.setAttribute('aria-expanded',String(!L.hidden))};B.forEach(b=>b.onclick=()=>hpTema(b.dataset.tema))}
 if(typeof DUKKAN2!=='undefined'&&DUKKAN2.ad)document.getElementById('hpmD2').textContent=DUKKAN2.ad;
 if(typeof DUKKAN3!=='undefined'&&DUKKAN3.ad)document.getElementById('hpmD3').textContent=DUKKAN3.ad;
 marka.onclick=e=>{e.stopPropagation();hpMenu.hidden=!hpMenu.hidden;marka.setAttribute('aria-expanded',String(!hpMenu.hidden))};
