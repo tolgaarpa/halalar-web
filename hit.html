@@ -486,6 +486,7 @@ html.ev,html.ev body{overflow:hidden;height:100%}
 <script src="veri/kategoriler.js"></script>
 <script src="veri/dukkan2.js"></script>
 <script src="veri/dukkan3.js"></script>
+<script src="veri/kontur.js"></script>
 <script src="veri/tunel-kur.js"></script>
 <script>
 const KEY='halalar-app-v1';   // telefon uygulamasıyla aynı kayıt (aynı alan adı)
@@ -537,10 +538,10 @@ function vitrinKur(d,k,on){if(!d)return;const a=document.getElementById(k);a.dat
     if(kp){const sec=d.urunler.filter(u=>u.stok!==0&&u.tunel).slice(0,24),V=[];for(let i=0;i<6&&sec.length;i++)V.push(sec[(i*5)%sec.length]);
       const kc=p=>p.replace(/^kaynak\//,'kaynak/k/');
       const v=document.createElement('a');v.className='foto vitrin2';v.href=kp.getAttribute('href');v.setAttribute('aria-label',d.ad+' dükkânına gir');
-      v.innerHTML=`<span class="v2-tabela">${esc(d.ad)}</span><span class="v2-raf">${V.map(u=>`<img src="${esc(kc(u.tgorsel||u.gorsel))}" data-b="${esc(u.tgorsel||u.gorsel)}" alt="" loading="lazy">`).join('')}</span>`;
+      v.innerHTML=`<span class="v2-tabela">${esc(d.ad)}</span><span class="v2-raf">${V.map(u=>`<img class="${window.HPK?HPK.sinif(on+u.id):''}" src="${esc(kc(u.tgorsel||u.gorsel))}" data-b="${esc(u.tgorsel||u.gorsel)}" alt="" loading="lazy">`).join('')}</span>`;
       v.querySelectorAll('img').forEach(im=>im.onerror=()=>{if(im.src.indexOf('/k/')>-1)im.src=im.dataset.b});
       kp.replaceWith(v)}const r=document.createElement('div');r.className='raf9';
-    r.innerHTML=d.urunler.filter(u=>u.stok!==0).slice(0,9).map(u=>`<a href="urun.html?id=${encodeURIComponent(on+u.id)}"><img src="${esc(u.gorsel)}" alt="${esc(u.ad)}" loading="lazy" referrerpolicy="no-referrer"><b>${esc(u.ad)}</b></a>`).join('');
+    r.innerHTML=d.urunler.filter(u=>u.stok!==0).slice(0,9).map(u=>`<a href="urun.html?id=${encodeURIComponent(on+u.id)}"><img class="${window.HPK?HPK.sinif(on+u.id):''}" src="${esc(u.gorsel)}" alt="${esc(u.ad)}" loading="lazy" referrerpolicy="no-referrer"><b>${esc(u.ad)}</b></a>`).join('');
     const ic=document.getElementById(k+'Icerik');ic.replaceChild(r,ic.firstElementChild);ic.style.contain='size'}}
 vitrinKur(typeof DUKKAN2!=='undefined'&&DUKKAN2,'d2','d2:');
 vitrinKur(typeof DUKKAN3!=='undefined'&&DUKKAN3,'d3','d3:');

@@ -18,7 +18,7 @@
   const sira=(L,puan)=>L.map(x=>[x,puan(x)*1e10+(h(id+x.id)%1e9)]).sort((a,b)=>b[1]-a[1]).map(a=>a[0]);
   const ayni=sira(T.filter(x=>x.dukkan===bu.dukkan&&x.id!==id),x=>x.kat===bu.kat?1:0).slice(0,8);
   const pazar=sira(T.filter(x=>x.dukkan!==bu.dukkan),x=>x.genel===bu.genel?1:0).slice(0,8);
-  const kart=x=>`<a class="o-kart" href="urun.html?id=${encodeURIComponent(x.id)}"><span class="o-g"><img src="${esc(kucuk(x.gorsel))}" data-b="${esc(x.gorsel)}" alt="" loading="lazy"></span><small>${esc(bu.dukkan===x.dukkan?x.kat:x.dad)}</small><b>${esc(x.ad)}</b><i>${x.fiyat?TL(x.fiyat)+(x.ornek?' <em>örnek</em>':''):'Teklif ile'}</i></a>`;
+  const kart=x=>`<a class="o-kart" href="urun.html?id=${encodeURIComponent(x.id)}"><span class="o-g"><img class="${window.HPK?HPK.sinif(x.id):''}" src="${esc(kucuk(x.gorsel))}" data-b="${esc(x.gorsel)}" alt="" loading="lazy"></span><small>${esc(bu.dukkan===x.dukkan?x.kat:x.dad)}</small><b>${esc(x.ad)}</b><i>${x.fiyat?TL(x.fiyat)+(x.ornek?' <em>örnek</em>':''):'Teklif ile'}</i></a>`;
   const blok=(bas,alt,L,link)=>L.length?`<div class="o-blok"><div class="o-bas"><h2>${bas}</h2>${link?`<a href="${link[0]}">${link[1]} →</a>`:''}</div><p>${alt}</p><div class="o-sira">${L.map(kart).join('')}</div></div>`:'';
   kutu.innerHTML=blok(esc(bu.dad)+' dükkânından','Aynı dükkânın başka ürünleri',ayni,[bu.href,'Dükkâna git'])+blok('Pazardan öneriler','Diğer dükkânlardan benzerleri',pazar,['index.html?mod=pazar','Pazara gir']);
   kutu.querySelectorAll('img[data-b]').forEach(im=>im.onerror=()=>{if(im.src.indexOf('/k/')>-1)im.src=im.dataset.b});

@@ -67,6 +67,8 @@ nav .back{display:inline-flex;align-items:center;border:1px solid #55555e;paddin
 <footer><a href="hit.html">Hit Pazarı</a><a href="satis-kosullari.html">Satış koşulları ve cayma hakkı</a><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">Aydınlatma metni</a></footer>
 <script src="veri/dukkan2.js"></script>
 <script src="veri/dukkan3.js"></script>
+<script src="veri/kontur.js"></script>
+<script>document.documentElement.classList.add('kn-beyaz')</script>
 <script>
 const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const TL=n=>(n||0).toLocaleString('tr-TR')+' ₺';
@@ -82,7 +84,7 @@ const kat=document.getElementById('kat');
 function ciz(){const raf=document.getElementById('raf');const l=D.urunler.filter(u=>u.stok!==0&&(sec==='Hepsi'||u.kategori===sec));
   if(!D.urunler.length){raf.innerHTML=`<div class="bos"><div><h2>Raflar dolduruluyor</h2><p>${esc(D.kategoriler.join(', '))} ürünleri çok yakında burada. Şimdilik Halalar'ın tünelinde gezebilirsin.</p><p><a href="index.html">Halalar tüneline gir →</a></p></div><div class="rafl" aria-hidden="true"><span></span><span></span><span></span></div></div>`;return}
   if(!l.length){raf.innerHTML='<div class="bos"><div><h2>Bu rafta şu an ürün yok</h2><p>Başka bir kategoriye bak.</p></div></div>';return}
-  raf.innerHTML=l.map(u=>`<a class="urun" href="urun.html?id=${encodeURIComponent(ON+u.id)}"><div class="g"><img src="${esc(u.gorsel)}" alt="${esc(u.ad)}" loading="lazy" referrerpolicy="no-referrer"></div><div class="b"><small>${esc(u.kategori)}</small><h2>${esc(u.ad)}</h2><div class="f">${u.fiyat?TL(u.fiyat):'Teklif ver'}</div></div></a>`).join('')}
+  raf.innerHTML=l.map(u=>`<a class="urun" href="urun.html?id=${encodeURIComponent(ON+u.id)}"><div class="g"><img class="${window.HPK?HPK.sinif(ON+u.id):''}" src="${esc(u.gorsel)}" alt="${esc(u.ad)}" loading="lazy" referrerpolicy="no-referrer"></div><div class="b"><small>${esc(u.kategori)}</small><h2>${esc(u.ad)}</h2><div class="f">${u.fiyat?TL(u.fiyat):'Teklif ver'}</div></div></a>`).join('')}
 ciz();
 </script>
 </body></html>

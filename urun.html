@@ -128,6 +128,7 @@ html[data-tema="gunduz"] nav .hik .hik-menu a:hover,html[data-tema="gunduz"] nav
 <script src="veri/fiyatlar.js"></script>
 <script src="veri/dukkan2.js"></script>
 <script src="veri/dukkan3.js"></script>
+<script src="veri/kontur.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -154,7 +155,7 @@ if(D2){const l=document.querySelector('nav .logo');l.textContent=DK.ad;l.href=DH
  const tunelden=ic&&/\/index\.html/.test(r);b.textContent=tunelden||!ic?'← Tünele dön':'← Geri';
  b.href=ic?r:(DON==='d2:'?'index.html?dukkan=2':DON==='d3:'?'index.html?dukkan=3':'index.html');
  if(ic&&history.length>1)b.onclick=e=>{e.preventDefault();history.back()}}
-const ana=document.getElementById('img');ana.src=fotolar[0];
+const ana=document.getElementById('img');ana.src=fotolar[0];if(window.HPK&&HPK.sinif(id))ana.classList.add(HPK.sinif(id));
 const kat=D2?(D2.kategori||''):((typeof KATEGORI!=='undefined'&&KATEGORI[u[0]])||'');
 document.getElementById('k').textContent=[kat,u[3]==='—'?'':u[3]].filter(Boolean).join(' · ')||(D2?DK.ad:'Halalar koleksiyonu');
 document.getElementById('h').textContent=u[1];document.getElementById('p').textContent=u[2];document.title=YOK?'Hit Pazarı · Ürün bulunamadı':(D2?DK.ad:'Halalar')+' · '+u[1];
