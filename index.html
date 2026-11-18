@@ -426,7 +426,7 @@ function desteAdres(id){const p=location.port,yerel={'8766':'8769','8770':'8771'
 addEventListener('mousemove',e=>{if(!card.classList.contains('on'))return;kartYer(e.clientX,e.clientY)});
 target=parseFloat(new URLSearchParams(location.search).get('z')||0);
 // bulunduğun derinlik adreste tutulur (?z=): ürüne, desteye, menüye gidip geri dönünce tünel aynı noktadan açılır
-function konumKaydet(){if(typeof camZ==='undefined')return;const q=new URLSearchParams(location.search),z=Math.round(camZ);if(q.get('z')===String(z))return;if(z>0)q.set('z',z);else q.delete('z');const s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:''))}
+function konumKaydet(){if(typeof camZ==='undefined')return;const q=new URLSearchParams(location.search),z=Math.round(target);if(q.get('z')===String(z))return;if(z>0)q.set('z',z);else q.delete('z');const s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:''))}
 addEventListener('click',konumKaydet,true);addEventListener('pagehide',konumKaydet);document.addEventListener('visibilitychange',()=>{if(document.hidden)konumKaydet()});
 
 // --- arama ve kategoriler ---

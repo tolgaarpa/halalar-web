@@ -724,7 +724,9 @@ addEventListener('click',e=>{if(!hpMenu.hidden&&!e.target.closest('#hpMenu,#hpAc
 function sekmeAc(id){const s=document.getElementById(id);if(!s||s.parentElement!==sekme)return false;
   sekme.querySelectorAll(':scope>section').forEach(x=>x.classList.toggle('on',x===s));sekme.hidden=false;sekme.scrollTop=0;menuKapa();
   if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);if(id==='dukkanlar'&&typeof oklar==='function')setTimeout(oklar,30);return true}
-function sekmeKapa(){sekme.hidden=true;kareDevam();history.replaceState(null,'',location.pathname+location.search)}
+// başka sayfadan doğrudan bir bölüme gelindiyse kapatınca geldiğin yere dönülür
+const sekmeGelis=(()=>{try{const u=new URL(document.referrer);return location.hash.length>1&&u.origin===location.origin&&!/\/hit\.html$/.test(u.pathname)&&history.length>1}catch(e){return false}})();
+function sekmeKapa(){if(sekmeGelis){history.back();return}sekme.hidden=true;kareDevam();history.replaceState(null,'',location.pathname+location.search)}
 document.getElementById('sekmeKapat').onclick=sekmeKapa;
 addEventListener('keydown',e=>{if(e.key==='Escape'){if(!hpMenu.hidden)menuKapa();else if(sekmeAcik())sekmeKapa()}});
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||a.id==='marka')return;const id=a.getAttribute('href').slice(1);if(id&&sekmeAc(id))e.preventDefault()});

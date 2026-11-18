@@ -16,6 +16,10 @@ nav .hik .hik-menu a:hover,nav .hik .hik-menu a:focus-visible{background:#16161a
 .hik-menu .hik-alt{border-top:1px solid #222227;margin-top:6px;padding-top:4px}
 nav .hik .hik-menu .hik-alt a{padding:8px 20px;font-size:14px;color:#cfcac1}
 .hik-menu[hidden]{display:none}
+nav .hik a.hik-hesap{display:inline-flex;align-items:center;margin:0 10px 0 0;padding:11px 14px;border:0;background:#1b2fa0;color:#fff;font:700 15px/1 "Barlow Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+nav .hik a.hik-hesap:hover{background:#e8201c;color:#fff}
+nav .hik a.hik-hesap[hidden]{display:none}
+@media(max-width:600px){nav .hik a.hik-hesap{position:absolute;top:calc(100% + 3px);right:0;margin:0;padding:5px 7px;font-size:11px;letter-spacing:.06em;z-index:2}}
 .hik-tema{display:flex;align-items:center;gap:8px;padding:12px 20px;border-top:1px solid #222227;margin-top:6px;color:#f2efe9}
 .hik-tema b{font:400 20px/1.1 Anton,sans-serif;text-transform:uppercase;letter-spacing:.01em;margin-right:auto}
 .hik-tb{background:none;border:1px solid #3a3a42;color:inherit;padding:8px 11px;font:700 14px/1 "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
@@ -50,6 +54,9 @@ html[data-tema="gunduz"] nav .hik .hik-menu a:hover,html[data-tema="gunduz"] nav
   const b=k.querySelector('#hikBtn'),m=k.querySelector('#hikMenu'),TB=[...k.querySelectorAll('.hik-tb')];
   const temaIsle=()=>{const g=document.documentElement.dataset.tema==='gunduz';TB.forEach(x=>x.setAttribute('aria-pressed',String((x.dataset.tema==='gunduz')===g)))};temaIsle();addEventListener('hptema',temaIsle);
   TB.forEach(x=>x.onclick=()=>hpTema(x.dataset.tema));
+  // giriş yapan üyeye her sayfada görünür Hesabım yolu
+  const hy=document.createElement('a');hy.className='hik-hesap';hy.href=y('hesap');hy.textContent='Hesabım';k.insertBefore(hy,b);
+  const uyeIsle=()=>{let v=false;try{v=localStorage.getItem('hp-uye')==='1'}catch(e){}hy.hidden=!v};uyeIsle();addEventListener('hpuye',uyeIsle);addEventListener('storage',e=>{if(e.key==='hp-uye')uyeIsle()});
   const kapa=()=>{m.hidden=true;b.setAttribute('aria-expanded','false')};
   b.addEventListener('click',e=>{e.stopPropagation();m.hidden=!m.hidden;b.setAttribute('aria-expanded',String(!m.hidden))});
   m.addEventListener('click',e=>{if(e.target.closest('a'))setTimeout(kapa,0)});
