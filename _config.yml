@@ -10,4 +10,5 @@ exclude:
   - deneme-kontur.html
   - deneme-hafif.html
   - deneme-donus.html
+  - deneme-bakis.html
   - .tmp/
