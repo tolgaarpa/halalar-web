@@ -381,7 +381,8 @@ function render(){
     const im=IMG[it.u[0]]; if(!im.complete||!im.naturalWidth)continue;
     const fog=Math.min(1,Math.max(0,(-dz-2000)/10000));
     const k=P/(P-dz);
-    it.op=(1-fog*0.6)*vis*(it.yan?Math.min(1,Math.abs(bak)/0.45):1);if(it.op<0.01)continue;
+    {const d=Math.min(1,Math.abs(bak)/0.45);it.op=(1-fog*0.6)*vis*(it.yan?d:1)*(((it.i*0.7071)%1)<0.3?1-d:1)}   // dönünce ürünlerin %30'u kaybolur (Tolga 19.11)
+    if(it.op<0.01)continue;
     it.sw=it.w*SC*k; it.sh=it.sw*im.naturalHeight/im.naturalWidth;
     it.sx=VW/2+X*k; it.sy=VH/2+(it.y*VH*0.5+cy)*k;
     if(it.sx+it.sw<-50||it.sx-it.sw>VW+50||it.sy+it.sh<-50||it.sy-it.sh>VH+50)continue;  // ekran dışı
