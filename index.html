@@ -212,11 +212,12 @@ html[data-tema="gunduz"] #kgiris b{text-shadow:none}
 <div class="hint" id="hint">kaydır ↓ içeri gir</div>
 <div id="end"></div>
 <div id="ara"><div class="ara-bas"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><b>Ara</b></div><div class="ust2"><input id="araKutu" type="search" placeholder="Ürün ara: plak, tablo, porselen…" autocomplete="off"><button class="kapat" id="araKapat">Kapat</button></div>
-<div class="katlar" id="katlar"></div><div class="sonuc" id="sonuc"></div></div>
+<div class="katlar" id="katlar"></div><div id="filtre"></div><div class="sonuc" id="sonuc"></div></div>
 <script src="veri/urunler.js"></script>
 <script src="veri/dukkan2.js"></script>
 <script src="veri/dukkan3.js"></script>
 <script src="veri/kontur.js"></script>
+<script src="veri/filtre.js"></script>
 <script src="veri/aspect.js"></script>
 <script src="veri/galeri.js"></script>
 <script src="veri/kategoriler.js"></script>
@@ -433,6 +434,7 @@ addEventListener('click',konumKaydet,true);addEventListener('pagehide',konumKayd
   const AL=DM?KDT:HEPSI?URUNLER.concat(EKL):URUNLER;(DM?KDT:EKL).forEach(u=>DKAT[u[0]]=u[3]);
   const KAT=id=>DKAT[id]||(typeof KATEGORI!=='undefined'&&KATEGORI[id])||'';
   const kutu=document.getElementById('araKutu'),kl=document.getElementById('katlar'),so=document.getElementById('sonuc'),pen=document.getElementById('ara');let kat='';
+  const fl=window.HPF?HPF.kur(document.getElementById('filtre'),()=>goster()):{suz:i=>new Set(i),durum:()=>null,yukle(){},temizle(){}};
   const norm=t=>(t||'').toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
   const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   // popülerlik (şimdilik kategorideki ürün sayısı) sırasıyla; ilk 3 büyük, sonraki 4 orta, kalanı küçük
@@ -442,13 +444,17 @@ addEventListener('click',konumKaydet,true);addEventListener('pagehide',konumKayd
   kl.onclick=e=>{const b=e.target.closest('button');if(!b)return;kat=b.dataset.k;kl.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));goster()};
   function goster(){const q=norm(kutu.value).trim();
     const L=AL.filter(u=>(!kat||KAT(u[0])===kat)&&(!q||q.split(/\s+/).every(w=>norm(u[1]+' '+u[2]+' '+u[3]+' '+KAT(u[0])).includes(w))));
+    {const izin=fl.suz(L.map(u=>u[0]));for(let i=L.length-1;i>=0;i--)if(!izin.has(L[i][0]))L.splice(i,1)}   // kategoriye özel filtreler (veri/filtre.js)
     // önem sırası: beğendiklerin önce, sonra popüler kategoriler; ilk satır 4, sonra 5, sonra 6'şar (kademeli küçülür)
     {let B=[];try{B=(JSON.parse(localStorage.getItem('halalar-app-v1'))||{}).begeni||[]}catch(e){}const puan=u=>(B.includes(u[0])?1000:0)+(SAY[KAT(u[0])]||0);L.sort((x,y)=>puan(y)-puan(x))}
     const kd=i=>i<4?'s4':i<9?'s5':'s6';
     so.innerHTML=L.length?L.map((u,i)=>`<a class="oge ${kd(i)}" href="urun.html?id=${encodeURIComponent(u[0])}"><img class="${window.HPK?HPK.sinif(u[0]):''}" loading="lazy" src="${esc(GOR[u[0]]||'kaynak/web/'+u[0]+'.webp')}" alt=""><b>${esc(u[1])}</b><small>${esc((DM||/^d[23]:/.test(u[0])?[KAT(u[0])]:[KAT(u[0]),u[3]==='—'?'':u[3]]).filter(Boolean).join(' · '))}</small></a>`).join(''):'<div class="yok">Sonuç yok</div>'}
   kutu.oninput=goster;
+  // ürüne girip geri dönünce Ara aynı arama, kategori ve filtrelerle yeniden açılır
+  so.addEventListener('click',e=>{if(e.target.closest('a.oge'))try{sessionStorage.setItem('hp-ara',JSON.stringify({q:kutu.value,kat,f:fl.durum(),t:Date.now()}))}catch(_){}});
   document.getElementById('araAc').onclick=()=>{pen.classList.add('on');open=false;card.classList.remove('on');goster();setTimeout(()=>kutu.focus(),50)};
-  document.getElementById('araKapat').onclick=()=>{pen.classList.remove('on');open=true};
+  document.getElementById('araKapat').onclick=()=>{pen.classList.remove('on');open=true;try{sessionStorage.removeItem('hp-ara')}catch(_){}};
+  try{const d=JSON.parse(sessionStorage.getItem('hp-ara')||'null');if(d&&Date.now()-d.t<1800000&&/urun\.html/.test(document.referrer)){kutu.value=d.q||'';kat=d.kat||'';kl.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.k===kat));fl.yukle(d.f);pen.classList.add('on');open=false;goster()}}catch(_){}
   addEventListener('tunelkur',e=>{open=!e.detail;if(e.detail)card.classList.remove('on')});
   addEventListener('keydown',e=>{if(e.key==='Escape'&&pen.classList.contains('on'))document.getElementById('araKapat').click()});
 })();
