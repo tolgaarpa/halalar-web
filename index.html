@@ -325,7 +325,7 @@ const items=LISTE.map((u,i)=>{
 });
 const TOTAL=(N+1)*STEP;
 // yanlarda ikinci sıra ürün: yalnız sağa sola bakınca belirir
-for(let j=0;j<N*(innerWidth<768?2:1);j++){const i=j%N,kat=Math.floor(j/N),u=LISTE[(i+Math.floor(N/2)+kat*Math.floor(N/3))%N],ar=ASPECT[u[0]]||1,sag=j%2?1:-1;items.push({i:N+j,u,x:0,xa:sag*(1.15+((j*0.618)%1)*1.2),y:(((j*0.377)%1)-0.5)*2.4,z:-(i*STEP)-250+STEP/2-kat*STEP/4,w:(ar>1.25?460:ar<0.75?300:380)*(/^d2:/.test(u[0])?(KDS==='2'?0.6:0.8):1)*(KMOD?1.25:1),ar,rot:(((i*0.5698)%1)-0.5)*4*Math.PI/180,thin:false,sx:0,sy:0,sw:0,sh:0,op:0,dz:0,yan:1})}
+{const SK=KAYNAK.length,PERM=[...Array(SK).keys()];for(let a=SK-1;a>0;a--){const b=Math.floor(((a*0.6180339+0.31)%1)*(a+1));[PERM[a],PERM[b]]=[PERM[b],PERM[a]]}const KATS=innerWidth<768?Math.max(1,Math.min(3,Math.round(SK/45))):1;for(let j=0;j<N*KATS;j++){const i=Math.floor(j/KATS),kat=j%KATS,u=KAYNAK[PERM[(j+Math.floor(SK/2))%SK]],ar=ASPECT[u[0]]||1,sag=(i+kat)%2?1:-1;items.push({i:N+j,u,x:0,xa:sag*(1.15+((j*0.618)%1)*1.2),y:(((j*0.377)%1)-0.5)*2.4,z:-(i*STEP)-250+STEP/2-kat*STEP/KATS,w:(ar>1.25?460:ar<0.75?300:380)*(/^d2:/.test(u[0])?(KDS==='2'?0.6:0.8):1)*(KMOD?1.25:1),ar,rot:(((j*0.5698)%1)-0.5)*4*Math.PI/180,thin:false,sx:0,sy:0,sw:0,sh:0,op:0,dz:0,yan:1})}}
 const THIN_Z=1100;
 let mx=0,my=0; addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5)});
 let camZ=0,target=0,open=true;
@@ -372,7 +372,7 @@ function render(){
   for(const it of items){
     const dz0=it.z+camZ;
     if(dz0>P+900||dz0<-7000)continue;
-    let X=it.yan?it.xa*Math.max(700,VW*0.7)+cx:it.x*VW*0.5+cx,dz=dz0;if(bak){const c=Math.cos(bak),sn=Math.sin(bak),Zr=dz0-P;const X2=X*c+Zr*sn;dz=-X*sn+Zr*c+P;X=X2}
+    let X=it.yan?it.xa*(VW<768?450:Math.max(700,VW*0.7))+cx:it.x*VW*0.5+cx,dz=dz0;if(bak){const c=Math.cos(bak),sn=Math.sin(bak),Zr=dz0-P;const X2=X*c+Zr*sn;dz=-X*sn+Zr*c+P;X=X2}
     if(dz>250)continue;it.dz=dz;
     let vis=1; if(KFILTRE&&KFILTRE.length) vis*=Math.min(1,camZ/350);
     if(dz>0) vis*=Math.max(0,(250-dz)/250);
