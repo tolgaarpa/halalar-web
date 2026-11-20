@@ -53,7 +53,7 @@ window.HPF=(()=>{
 .hpf-et{display:inline-flex;align-items:center;gap:6px;background:#f1f1f3;border:1px solid #dcdce1;color:#111114;padding:6px 9px;font:600 13px/1 Barlow,sans-serif;cursor:pointer}
 .hpf-et::after{content:"×";font-size:16px;line-height:1;color:#e8201c}
 .hpf-tem{background:none;border:0;color:#4a4a52;font:500 13px Barlow,sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px 2px}
-.hpf-panel{margin-top:10px;border-top:1px solid #e4e4e8;padding-top:6px;max-height:min(46vh,420px);overflow-y:auto;overscroll-behavior:contain}
+.hpf-panel{margin-top:10px;border-top:1px solid #e4e4e8;padding-top:6px}
 .hpf-panel[hidden]{display:none}
 .hpf-g{padding:8px 0;border-bottom:1px solid #f1f1f3}
 .hpf-g>b{display:block;font:400 18px/1.1 Anton,sans-serif;text-transform:uppercase;letter-spacing:.01em;margin-bottom:7px}
@@ -66,7 +66,7 @@ window.HPF=(()=>{
 .hpf-goster{display:none;width:100%;margin-top:10px;background:#1b2fa0;color:#fff;border:0;padding:13px;font:400 18px/1 Anton,sans-serif;text-transform:uppercase;letter-spacing:.03em;cursor:pointer}
 @media(max-width:600px){.hpf{padding:0 16px 8px}.hpf-goster{display:block}}`;document.head.appendChild(s)}
   // host: filtrelerin çizileceği kutu; degisti(): seçim değişince sayfa sonuçları yeniden süzer
-  function kur(host,degisti){css();host.classList.add('hpf');const SEC={};let taban=[],acik=innerWidth>=900;
+  function kur(host,degisti){css();host.classList.add('hpf');const SEC={};let taban=[],acik=true;   // telefonda da açık başlar (Tolga 21.11)
     const kac=()=>Object.values(SEC).reduce((t,s)=>t+s.size,0);
     const uyar=(id,haric)=>{const o=oz(id);return Object.keys(SEC).every(g=>g===haric||!SEC[g].size||(o[g]||[]).some(v=>SEC[g].has(v)))};
     function ciz(sonucSay){const G={};taban.forEach(id=>{const o=oz(id);Object.keys(o).forEach(g=>o[g].forEach(v=>{(G[g]=G[g]||{})[v]=0}))});

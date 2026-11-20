@@ -325,7 +325,7 @@ const items=LISTE.map((u,i)=>{
 });
 const TOTAL=(N+1)*STEP;
 // yanlarda ikinci sıra ürün: yalnız sağa sola bakınca belirir
-for(let i=0;i<N;i++){const u=LISTE[(i+Math.floor(N/2))%N],ar=ASPECT[u[0]]||1,sag=i%2?1:-1;items.push({i:N+i,u,x:0,xa:sag*(1.15+((i*0.618)%1)*1.2),y:(((i*0.377)%1)-0.5)*2.4,z:-(i*STEP)-250+STEP/2,w:(ar>1.25?460:ar<0.75?300:380)*(/^d2:/.test(u[0])?(KDS==='2'?0.6:0.8):1)*(KMOD?1.25:1),ar,rot:(((i*0.5698)%1)-0.5)*4*Math.PI/180,thin:false,sx:0,sy:0,sw:0,sh:0,op:0,dz:0,yan:1})}
+for(let j=0;j<N*(innerWidth<768?2:1);j++){const i=j%N,kat=Math.floor(j/N),u=LISTE[(i+Math.floor(N/2)+kat*Math.floor(N/3))%N],ar=ASPECT[u[0]]||1,sag=j%2?1:-1;items.push({i:N+j,u,x:0,xa:sag*(1.15+((j*0.618)%1)*1.2),y:(((j*0.377)%1)-0.5)*2.4,z:-(i*STEP)-250+STEP/2-kat*STEP/4,w:(ar>1.25?460:ar<0.75?300:380)*(/^d2:/.test(u[0])?(KDS==='2'?0.6:0.8):1)*(KMOD?1.25:1),ar,rot:(((i*0.5698)%1)-0.5)*4*Math.PI/180,thin:false,sx:0,sy:0,sw:0,sh:0,op:0,dz:0,yan:1})}
 const THIN_Z=1100;
 let mx=0,my=0; addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5)});
 let camZ=0,target=0,open=true;
