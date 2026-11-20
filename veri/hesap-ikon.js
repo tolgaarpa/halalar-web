@@ -63,3 +63,6 @@ html[data-tema="gunduz"] nav .hik .hik-menu a:hover,html[data-tema="gunduz"] nav
   addEventListener('click',e=>{if(!m.hidden&&!e.target.closest('.hik'))kapa()});
   addEventListener('keydown',e=>{if(e.key==='Escape')kapa()});
 })();
+
+// Görüş bildir sekmesi (test dönemi): her sayfaya bu dosyayla gelir (veri/gorus.js)
+;(()=>{const s=document.currentScript;if(!s||!s.src)return;const g=document.createElement("script");g.src=s.src.replace(/[^/]*$/,"")+"gorus.js";g.defer=true;document.head.appendChild(g)})();

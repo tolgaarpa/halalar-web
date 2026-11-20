@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="tr">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><!-- test dönemi: Google listelemesin (Tolga 21.11) -->
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Halalar</title><meta name="description" content="Halalar dükkânının vintage ve koleksiyon parçaları tek tünelde. Kaydır, beğen, teklif ver."><meta property="og:type" content="website"><meta property="og:site_name" content="Hit Pazarı"><meta property="og:title" content="Hit Pazarı · Tünel"><meta property="og:description" content="Halalar dükkânının vintage ve koleksiyon parçaları tek tünelde. Kaydır, beğen, teklif ver."><meta property="og:url" content="https://tolgaarpa.github.io/hitpazari/index.html"><meta property="og:image" content="https://tolgaarpa.github.io/hitpazari/kaynak/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -251,7 +251,7 @@ if(KFILTRE&&KFILTRE.length){document.querySelector('nav .logo').textContent=KSEC
   setTimeout(()=>{if(target<10)target=520},450);setTimeout(function izle(){if(camZ>110){kg.classList.add('off');return}requestAnimationFrame(izle)},0)}
 // Pazar modunda diğer dükkânın (DSG) tünele hazır ürünleri de karışır: kimlik 'd2:<id>', görsel kendi yolundan
 const GOR={};
-function dukT(on,D){return D.urunler.filter(x=>x.tunel&&x.stok!==0).map(x=>{const id=on+x.id;GOR[id]=x.tgorsel||x.gorsel;const o=x.toran||x.oran;if(o)ASPECT[id]=o;return [id,x.ad,x.aciklama||'',x.kategori]})}
+function dukT(on,D){return D.urunler.filter(x=>x.tunel&&x.stok!==0).map(x=>{const id=on+x.id;GOR[id]=x.tgorsel||x.gorsel;const o=x.toran||x.oran;if(o)ASPECT[id]=o;return [id,x.ad,x.aciklama||'',x.kategori,x.tamAd||'']})}
 const D2T=KPAZAR?[].concat(typeof DUKKAN2!=='undefined'?dukT('d2:',DUKKAN2):[],typeof DUKKAN3!=='undefined'?dukT('d3:',DUKKAN3):[]):[];
 const KDT=KD?dukT(KD[0],KD[1]):null;
 // Kendi tünelin (?sec=Giyim~Beyaz Eşya): ziyaretçinin seçtiği genel kategoriler, bütün dükkânlardan karışık
@@ -480,7 +480,7 @@ addEventListener('click',konumKaydet,true);addEventListener('pagehide',konumKayd
   function goster(){const q=norm(kutu.value).trim();
     // arama: kelime başından eşleşir ("ram" seramik/program getirmez); önce ad ve kategoride arar, orada yoksa açıklamada (Tolga 21.11)
     const kc=t=>(t||'').toLocaleLowerCase('tr-TR'),parca=(t,f)=>f(t).split(/[^a-z0-9çğıöşü]+/).filter(Boolean),ham=kutu.value,ka=u=>!kat||KAT(u[0])===kat;
-    const esle=(m,f)=>{const T=parca(m,f),W=parca(ham,f);return W.every(w=>T.some(t=>t.startsWith(w)))},ad=u=>u[1]+' '+(u[3]==='—'?'':u[3])+' '+KAT(u[0]),hep=u=>u[1]+' '+u[2]+' '+u[3]+' '+KAT(u[0]);
+    const esle=(m,f)=>{const T=parca(m,f),W=parca(ham,f);return W.every(w=>T.some(t=>t.startsWith(w)))},ad=u=>u[1]+' '+(u[3]==='—'?'':u[3])+' '+KAT(u[0]),hep=u=>u[1]+' '+u[2]+' '+u[3]+' '+KAT(u[0])+' '+(u[4]||'');
     let L=AL.filter(ka);if(parca(ham,kc).length)for(const [m,f] of [[ad,kc],[hep,kc],[ad,norm],[hep,norm]]){L=AL.filter(u=>ka(u)&&esle(m(u),f));if(L.length)break}   // önce Türkçe harfle (masa≠maşa), yoksa harfsiz (camasir→çamaşır)
     {const izin=fl.suz(L.map(u=>u[0]));for(let i=L.length-1;i>=0;i--)if(!izin.has(L[i][0]))L.splice(i,1)}   // kategoriye özel filtreler (veri/filtre.js)
     // önem sırası: beğendiklerin önce, sonra popüler kategoriler; ilk satır 4, sonra 5, sonra 6'şar (kademeli küçülür)

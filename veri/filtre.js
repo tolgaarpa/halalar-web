@@ -28,11 +28,11 @@ window.HPF=(()=>{
       o['Fiyat']=[fiyatK(u.fiyat)];o['Tür']=[buyukIlk(u.ad.split(' · ')[0].trim())];
       o['Beden']=u.kategori==='Alt giyim'?['28','30','32','34','36','38']:['S','M','L','XL','XXL'];   // örnek: her ürün her bedende var sayılır (sahip 19.11)
       const r=renkler(m);if(r.length)o['Renk']=r}}
-    else if(/^d3:/.test(id)&&typeof DUKKAN3!=='undefined'){const u=DUKKAN3.urunler.find(x=>'d3:'+x.id===id);if(u){const m=kucuk(u.ad+' '+(u.aciklama||''));
+    else if(/^d3:/.test(id)&&typeof DUKKAN3!=='undefined'){const u=DUKKAN3.urunler.find(x=>'d3:'+x.id===id);if(u){const A=u.tamAd||u.ad,m=kucuk(A+' '+(u.aciklama||''));   // tamAd: model kodlu tam ad (dukkan3.js)
       o['Fiyat']=[fiyatK(u.fiyat)];if(u.marka)o['Marka']=[u.marka];
-      const t=ONSAL.find(x=>x[1].test(kucuk(u.ad)))||ONSAL.find(x=>x[1].test(m));if(t)o['Tür']=[t[0]];
-      const r=renkler(kucuk(u.ad));if(r.length)o['Renk']=r;
-      const kg=u.ad.match(/(\d+(?:[.,]\d+)?)(?:\/\d+)?\s*kg/i),lt=u.ad.match(/(\d+)\s*(?:L|lt|litre)\b/i);
+      const t=ONSAL.find(x=>x[1].test(kucuk(A)))||ONSAL.find(x=>x[1].test(m));if(t)o['Tür']=[t[0]];
+      const r=renkler(kucuk(A));if(r.length)o['Renk']=r;
+      const kg=A.match(/(\d+(?:[.,]\d+)?)(?:\/\d+)?\s*kg/i),lt=A.match(/(\d+)\s*(?:L|lt|litre)\b/i);
       if(kg&&t&&/Çamaşır|Kurutma|Bulaşık/.test(t[0])){const v=parseFloat(kg[1].replace(',','.'));o['Kapasite']=[v<=8?KAPK[0]:v<=10?KAPK[1]:KAPK[2]]}
       else if(lt&&t&&t[0]==='Buzdolabı'){const v=+lt[1];o['Kapasite']=[v<300?KAPK[3]:v<450?KAPK[4]:KAPK[5]]}}}
     else if(typeof URUNLER!=='undefined'){const u=URUNLER.find(x=>x[0]===id);if(u){

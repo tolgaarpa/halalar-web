@@ -1837,3 +1837,16 @@ const DUKKAN3={
 }
 ]
 };
+
+// Kısa ad (Tolga 21.11): tünelde, kartlarda ve aramada yalnız marka + ürünün ne olduğu ("Altus Buzdolabı").
+// Model kodlu tam ad (tamAd) ürün sayfasında görünür; aramada model koduyla da bulunur.
+(()=>{const T=[['google tv','Televizyon'],['kurutmalı çamaşır makinesi','Kurutmalı Çamaşır Makinesi'],['çamaşır makinesi','Çamaşır Makinesi'],['kurutma makinesi','Kurutma Makinesi'],
+  ['buzdolabı','Buzdolabı'],['mikrodalga fırın','Mikrodalga Fırın'],['ankastre fırın','Ankastre Fırın'],['fırın','Fırın'],['aspiratör','Aspiratör'],['davlumbaz','Davlumbaz'],
+  ['ocak','Ankastre Ocak'],['klima','Klima'],['bulaşık','Bulaşık Makinesi'],['termosifon','Termosifon'],['yatak temizleyici','Yatak Süpürgesi'],['süpürge','Süpürge'],
+  ['türk kahvesi makinesi','Türk Kahvesi Makinesi'],['filtre kahve makinesi','Filtre Kahve Makinesi'],['espresso makinesi','Espresso Makinesi'],['çay makinesi','Çay Makinesi'],
+  ['ızgara ve tost makinesi','Izgara ve Tost Makinesi'],['tost makinesi','Tost Makinesi'],['ütü','Ütü'],['radyatör','Yağlı Radyatör'],['su ısıtıcı','Su Isıtıcı'],
+  ['buharlı temizleyici','Buharlı Temizleyici'],['el blenderi','El Blenderi'],['blender set','Blender Seti'],['blender','Blender'],['koltuk yıkama','Halı ve Koltuk Yıkama Makinesi'],
+  ['halı yıkama','Halı Yıkama Makinesi'],['su sebili','Su Sebili'],['hava temizleyici','Vantilatör ve Hava Temizleyici'],['vantilatör','Vantilatör'],['banyo tartısı','Banyo Tartısı'],
+  ['saç maşası','Saç Maşası'],['saç kurutma makinesi','Saç Kurutma Makinesi'],[' tv','Televizyon']];
+  const k=t=>(t||'').toLocaleLowerCase('tr-TR');
+  DUKKAN3.urunler.forEach(u=>{if(u.tamAd)return;u.tamAd=u.ad;const m=' '+k(u.ad)+' ',a=' '+k(u.aciklama)+' ',t=T.find(x=>m.includes(x[0]))||T.find(x=>a.includes(x[0]));u.ad=(u.marka?u.marka+' ':'')+(t?t[1]:u.kategori)})})();
