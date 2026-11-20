@@ -403,6 +403,9 @@ html[data-tema="gunduz"] #toast{color:#fff}
 </style><script>try{if(localStorage.getItem('hp-tema')==='gunduz')document.documentElement.dataset.tema='gunduz'}catch(e){}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%230b0b0d%27/%3E%3Cpath d=%27M12 50 22 14h9L21 50zM30 50 40 14h9L39 50z%27 fill=%27%23e3171b%27/%3E%3C/svg%3E">
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
+<style>/* ana sayfa kısayolları (Tolga 21.11): katmandaki bölümler ilk bakışta görünsün */
+.kisa-yol{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px}.kisa-yol a{color:#f2efe9;opacity:.8;font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(242,239,233,.35);padding-bottom:4px}
+.kisa-yol a:hover{opacity:1}html[data-tema="gunduz"] .kisa-yol a{color:#111114;border-bottom-color:rgba(17,17,20,.35)}nav .sepet i[hidden]{display:none}</style>
 </head>
 <body>
 <svg class="svg-gizli" aria-hidden="true" focusable="false"><defs>
@@ -411,7 +414,7 @@ html[data-tema="gunduz"] #toast{color:#fff}
 </defs></svg>
 
 <nav><span class="hp-satir"><a class="marka" href="hit.html" id="marka" aria-label="Hit Pazarı ana sayfa"><span class="cizgi" aria-hidden="true">//</span><span class="ad">HİT PAZARI</span><span class="alt">Dijital<br>Dükkân</span></a><button class="hp-ac" id="hpAc" type="button" aria-label="Hit Pazarı menüsü" aria-expanded="false" aria-controls="hpMenu"></button></span>
-  <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="sepet" href="#hesap" aria-label="Beğenilerim"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.300-9.200C1.500 8.200 3.300 4.500 7 4.500c2.200 0 3.600 1.300 5 3.200 1.400-1.900 2.800-3.200 5-3.200 3.700 0 5.500 3.700 4.300 6.800-1.800 4.600-9.300 9.200-9.300 9.200z"/></svg><i id="sepetN">0</i></a></span></nav>
+  <span class="sag"><a class="l" href="#dukkanlar">Dükkânlar</a><a class="sepet" href="#hesap" aria-label="Beğenilerim"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.300-9.200C1.500 8.200 3.300 4.500 7 4.500c2.200 0 3.600 1.300 5 3.200 1.400-1.900 2.800-3.200 5-3.200 3.700 0 5.500 3.700 4.300 6.800-1.800 4.600-9.300 9.200-9.300 9.200z"/></svg><i id="sepetN" hidden>0</i></a></span></nav>
 <div class="hp-menu" id="hpMenu" hidden>
   <a href="index.html?mod=kategori"><b>Kategoriler</b><small>Kategori seçerek gez</small></a>
   <a href="#" data-tunel-kur><b>Kendi tünelin</b><small>Kategorileri seç, kendi tünelinde gez</small></a>
@@ -429,7 +432,7 @@ html[data-tema="gunduz"] #toast{color:#fff}
       <h1 class="dv"><span>HİT</span><span>PAZARI</span></h1>
       <span class="altb">Dijital Dükkân</span>
       <p>Tünelde gez; beğen, teklif ver, pazarlık et.</p>
-      <button class="gir dv" id="pazaraGir" type="button" aria-label="Pazara gir">PAZARA GİR <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" aria-hidden="true"><path d="M2 12h19M13 4l8 8-8 8"/></svg></button><span class="gir-alt">Bütün dükkânlar tek tünelde · ürüne dokun, teklif ver, satın al</span>
+      <button class="gir dv" id="pazaraGir" type="button" aria-label="Pazara gir">PAZARA GİR <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" aria-hidden="true"><path d="M2 12h19M13 4l8 8-8 8"/></svg></button><span class="gir-alt">Bütün dükkânlar tek tünelde · ürüne dokun, teklif ver, satın al</span><span class="kisa-yol"><a href="#dukkanlar">Dükkânlar</a><a href="#nasil">Nasıl çalışır</a><a href="#bilmen">Bilmen gerekenler</a></span>
     </div>
     <div class="kolaj">
       <img src="kaynak/referans/kolaj-c.webp" alt="" width="1313" height="1379">
@@ -646,7 +649,7 @@ function listeler(){
   {const o=id=>document.getElementById(id);if(o('oB')){o('oB').textContent=D.begeni.length;o('oI').textContent=D.islem.length;o('oK').textContent=D.islem.filter(x=>!x.durum||x.durum==='Beklemede').length}}
   document.getElementById('s-begeni').innerHTML=D.begeni.length?D.begeni.slice().reverse().map(id=>kutu(id,fiyatYaz(id))).join(''):'<div class="yok">Henüz beğeni yok. Telefon uygulamasında sağa kaydırdıkların burada görünür.</div>';
   document.getElementById('s-islem').innerHTML=D.islem.length?D.islem.map(x=>kutu(x.id,`${x.tur==='teklif'?'Teklif':'Alım'} · ${TL(x.tutar)} · ${esc(x.durum)}`)).join(''):'<div class="yok">Henüz teklif yok.</div>';
-  document.getElementById('sepetN').textContent=D.begeni.length;
+  {const n=document.getElementById('sepetN');n.textContent=D.begeni.length;n.hidden=!D.begeni.length}   // boşken rozet görünmez (Tolga 21.11)
   const k=D.kisi||{};document.getElementById('fAd').value=k.ad||'';document.getElementById('fTel').value=k.tel||''}
 async function durumTazele(){if(!VT)return;let d=false;
   await Promise.all(D.islem.filter(x=>x.ref).map(async x=>{try{const s=await VT.collection('durumlar').doc(x.ref).get().then(d=>d.exists?d:VT.collection('talepler').doc(x.ref).get()).catch(()=>VT.collection('talepler').doc(x.ref).get());if(!s.exists)return;const v=s.data();if(v.durum!==x.durum){x.durum=v.durum;d=true}}catch(e){}}));
