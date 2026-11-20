@@ -24,6 +24,7 @@
   .hpg-alt button{border:1px solid #55555e;background:none;color:inherit;padding:11px 18px;font:700 14px/1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
   .hpg-alt .hpg-gon{background:#e8201c;border-color:#e8201c;color:#fff}
   .hpg-alt button:disabled{opacity:.5;cursor:default}
+  .hpg-wa{display:inline-block;margin-top:6px;color:#25d366;font:600 14px/1 Barlow,sans-serif;text-decoration:none}
   .hpg-dur{min-height:18px;font-size:13px;color:#9a958c;margin-top:8px}
   html[data-tema="gunduz"] .hpg-kut{background:#fff;color:#111114;border-color:#dcdce1}
   html[data-tema="gunduz"] .hpg-kut textarea,html[data-tema="gunduz"] .hpg-kut input{background:#f4f4f6;border-color:#dcdce1}
@@ -37,6 +38,7 @@
       <textarea class="hpg-met" maxlength="1000" placeholder="Ne gördün?"></textarea>
       <input class="hpg-il" maxlength="80" autocomplete="name" placeholder="Adın ya da telefonun (istersen)">
       <div class="hpg-dur" role="status"></div>
+      <a class="hpg-wa" href="https://wa.me/905326337206" target="_blank" rel="noopener">ya da WhatsApp\'tan yaz →</a>
       <div class="hpg-alt"><button type="button" class="hpg-kap">Vazgeç</button><button type="button" class="hpg-gon">Gönder</button></div></div>`;
     document.body.append(sek,pen);
     const met=pen.querySelector('.hpg-met'),il=pen.querySelector('.hpg-il'),dur=pen.querySelector('.hpg-dur'),gon=pen.querySelector('.hpg-gon');

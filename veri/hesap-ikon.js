@@ -43,9 +43,9 @@ html[data-tema="gunduz"] nav .hik .hik-menu a:hover,html[data-tema="gunduz"] nav
   <a href="${y('hesap')}"><b id="ustHesap">Hesabım</b><small>Üye girişi, beğenilerim, teklif ve taleplerim</small></a>
   <a href="${y('bilmen')}"><b>Bilmen gerekenler</b><small>Fiyat, ödeme, ürün durumu</small></a>
   <a href="${y('nasil')}"><b>Nasıl çalışır?</b><small>Kaydır, seç, teklif yap, satın al</small></a>
-  <a href="${y('dukkan-ac')}"><b>Dükkân aç</b><small>Dükkânını sokağa aç</small></a>
+  <a href="${y('dukkan-ac')}"><b>Dükkân aç</b><small>Dükkânını sokağa aç</small></a><a href="https://wa.me/905326337206" target="_blank" rel="noopener"><b>WhatsApp'tan yaz</b><small>Soru, sipariş, görüş</small></a>
   <div class="hik-tema"><b>Tema</b><button class="hik-tb" type="button" data-tema="gece">Gece</button><button class="hik-tb" type="button" data-tema="gunduz">Gündüz</button></div>
-  <div class="hik-alt"><a href="satis-kosullari.html">Satış koşulları</a><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">Aydınlatma metni</a><a href="https://tolgaarpa.github.io/halalar-app/panel.html">Dükkân girişi</a></div>
+  <div class="hik-alt"><a href="satis-kosullari.html">Satış koşulları</a><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html">Aydınlatma metni</a><a href="https://wa.me/905326337206" target="_blank" rel="noopener">WhatsApp</a></div>
 </div>`;
   // sağ taraf: sayfanın sağdaki öğeleri korunur, simge en sağa eklenir
   let sag=nav.querySelector(':scope>.sag');
