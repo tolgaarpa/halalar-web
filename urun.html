@@ -164,7 +164,7 @@ const ana=document.getElementById('img');ana.src=fotolar[0];if(window.HPK&&HPK.s
 const kat=D2?(D2.kategori||''):((typeof KATEGORI!=='undefined'&&KATEGORI[u[0]])||'');
 document.getElementById('k').textContent=[kat,u[3]==='—'?'':u[3]].filter(Boolean).join(' · ')||(D2?DK.ad:'Halalar koleksiyonu');
 document.getElementById('h').textContent=u[1];document.getElementById('p').textContent=u[2];
-if(D2&&D2.tamAd&&D2.tamAd!==D2.ad){const m=document.createElement('div');m.className='model';m.textContent=D2.tamAd;document.getElementById('h').after(m)}   // Önsal: model kodlu tam ad yalnız ürün sayfasında (Tolga 21.11)document.title=YOK?'Hit Pazarı · Ürün bulunamadı':u[1]+' · Hit Pazarı';
+if(D2&&D2.tamAd&&D2.tamAd!==D2.ad){const m=document.createElement('div');m.className='model';m.textContent=D2.tamAd;document.getElementById('h').after(m)}   /* Önsal: model kodlu tam ad yalnız ürün sayfasında (Tolga 21.11) */document.title=YOK?'Hit Pazarı · Ürün bulunamadı':u[1]+' · Hit Pazarı';
 if(fotolar.length>1){const kutu=document.getElementById('acilar');
   fotolar.forEach((f,i)=>{const b=document.createElement('button');b.className=i?'':'on';b.setAttribute('aria-label',(i+1)+'. açı');
     const im=document.createElement('img');im.src=f;im.alt='';im.loading='lazy';b.appendChild(im);
