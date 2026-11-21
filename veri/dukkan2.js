@@ -1438,3 +1438,13 @@ const DUKKAN2={
 (()=>{const T={'Üst giyim':900,'Polo yaka':1100,'Kazak':1400,'Örgü polo yaka':1300,'Kapüşonlu sweatshirt':1500,'Hırka':1600,'Kot pantolon':1500,'Eşofman altı':1000,
   'Kumaş pantolon':1400,'Sweatshirt':1300,'Yarım fermuarlı sweatshirt':1500,'Ceket':2800,'Gömlek':1200,'Jogger':1100,'Eşofman takımı':2200,'Mont':3500,'Kargo pantolon':1400,'Pantolon':1300};
   DUKKAN2.urunler.forEach((u,i)=>{if(u.fiyat)return;const t=u.ad.split(' · ')[0].trim(),b=T[t]||1200;u.fiyat=b+((i*7)%5)*100;u.ornek=true})})();
+
+// Ürün açıklamaları (sahip 21.11): açıklaması boş ürüne türüne göre kısa açıklama; gerçek açıklama gelince o kullanılır.
+(()=>{const T={'Üst giyim':'Günlük kullanıma uygun, rahat kesim üst giyim.','Polo yaka':'Yakalı, düğmeli polo yaka; hem rahat hem derli toplu.','Kazak':'Örgü dokulu, sıcak tutan kazak.',
+  'Örgü polo yaka':'Örgü dokulu polo yaka; ince ve şık.','Kapüşonlu sweatshirt':'Kapüşonlu, içi yumuşak sweatshirt.','Hırka':'Önü açık, katmanlı giyime uygun hırka.',
+  'Kot pantolon':'Beş cepli kot pantolon; her gün giyilir.','Eşofman altı':'Beli lastikli, rahat eşofman altı.','Kumaş pantolon':'Kumaş pantolon; iş ve günlük kullanıma uygun.',
+  'Sweatshirt':'Bisiklet yaka, içi yumuşak sweatshirt.','Yarım fermuarlı sweatshirt':'Yarım fermuarlı yakalı sweatshirt.','Ceket':'Hafif ceket; mevsim geçişleri için.',
+  'Gömlek':'Uzun kollu gömlek.','Jogger':'Paçası lastikli jogger pantolon.','Eşofman takımı':'Üst ve alttan oluşan eşofman takımı.','Mont':'Sıcak tutan mont; soğuk havalar için.',
+  'Kargo pantolon':'Yan cepli kargo pantolon.','Pantolon':'Günlük kullanıma uygun pantolon.'};
+  DUKKAN2.urunler.forEach(u=>{if(u.aciklama)return;const p=u.ad.split(' · ').map(x=>x.trim()),t=p[0],renk=p[1]||'',ek=p.slice(2).join(', ');
+    u.aciklama=(renk?renk+' '+t.toLocaleLowerCase('tr-TR'):t)+(ek?' ('+ek+')':'')+'. '+(T[t]||'')+' Ölçüler için beden tablosuna bak.'})})();

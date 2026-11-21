@@ -8,6 +8,7 @@ const KATEGORI_IKON={
   'Elektronik & Kamera':'ig/ig_polaroid_v2',
   'Mutfak & Sofra':'ig/ig_kupvazo',
   'Nostalji Eşya':'3476',
+  'Takı':'3494',
   'Spor & Koleksiyon':'3483',
   'Sandık & Çanta':'h/samsonite',
   'Kitap & Kâğıt':'h/70yil'

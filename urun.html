@@ -119,16 +119,30 @@ html[data-tema="gunduz"] nav .hik .hik-menu a:hover,html[data-tema="gunduz"] nav
 .bilgi{display:flex;flex-direction:column}.bilgi .k{order:1}.bilgi h1{order:2;font-size:clamp(26px,8vw,40px);margin:8px 0 10px}.bilgi .model{order:3;margin:-4px 0 8px}
 .bilgi .fiyat{order:4;margin-top:0;font-size:32px}.bilgi .eylem{order:5;margin-top:12px}.bilgi .talep{order:6}.bilgi .tamam{order:7}.bilgi #p{order:8;margin-top:18px}}</style>
 <style>/* beden seçimi */.beden{margin-top:16px}.beden b{display:block;font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.beden div{display:flex;flex-wrap:wrap;gap:8px}.beden button{min-width:48px;height:44px;padding:0 10px;border:1px solid #55555e;background:none;color:var(--ink);font:600 16px/1 Barlow,sans-serif;cursor:pointer}
+.beden .bsec{display:flex;flex-wrap:wrap;gap:8px}.beden .btab-ac{margin-left:10px;border:0;background:none;color:var(--ink);font:600 13px/1 Barlow,sans-serif;letter-spacing:0;text-transform:none;text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-width:0;height:auto;padding:0}.btab{margin-top:10px}.btab table{border-collapse:collapse;font:500 14px/1.3 Barlow,sans-serif;width:100%;max-width:340px}.btab th,.btab td{border:1px solid #33333a;padding:6px 8px;text-align:left}.btab th{font-weight:700}.btab small{display:block;margin-top:6px;color:var(--muted);font-size:12px}.beden button{min-width:48px;height:44px;padding:0 10px;border:1px solid #55555e;background:none;color:var(--ink);font:600 16px/1 Barlow,sans-serif;cursor:pointer}
 .beden button.on{background:var(--accent);border-color:var(--accent);color:#fff}.beden.uyar b{color:var(--accent)}.beden.uyar button{border-color:var(--accent)}
 html[data-tema="gunduz"] .beden button{border-color:#c9c9d0}@media(max-width:760px){.bilgi .beden{order:4;margin:4px 0 0}}</style>
 <style>.teslim{margin-top:10px;font:500 14px/1.4 Barlow,sans-serif;color:var(--muted)}@media(max-width:760px){.bilgi .teslim{order:4;margin:6px 0 0}}</style>
+<style>/* beğen, gönder, sor */.ek-eylem{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.ek-eylem button,.ek-eylem a{display:inline-flex;align-items:center;gap:6px;border:1px solid #55555e;background:none;color:var(--ink);padding:10px 14px;font:600 15px/1 Barlow,sans-serif;text-decoration:none;cursor:pointer}
+.ek-eylem button span{font-size:18px;line-height:.8}.ek-eylem button.on{border-color:var(--accent);color:var(--accent)}.ek-eylem a{border-color:#25d366;color:#25d366}
+.ek-not{min-height:18px;margin-top:6px;font:500 13px/1.4 Barlow,sans-serif;color:var(--muted)}html[data-tema="gunduz"] .ek-eylem button{border-color:#c9c9d0}
+@media(max-width:760px){.bilgi .ek-eylem{order:5}.bilgi .ek-not{order:5}}</style>
+<style>/* toplu teklif */.ek-eylem #bToplu.on{border-color:var(--accent);color:var(--accent)}
+.tbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:120;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#e8201c;color:#fff;padding:10px 12px 10px 16px;font:500 14px/1.3 Barlow,sans-serif;box-shadow:0 10px 30px #0006;max-width:560px;margin:0 auto}
+.tbar[hidden],.tpen[hidden]{display:none}
+.tbar button{border:0;background:#fff;color:#111;padding:10px 14px;font:700 14px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.tpen{position:fixed;inset:0;z-index:130;background:rgba(8,8,10,.72);display:flex;align-items:flex-end;justify-content:center;padding:12px;overflow-y:auto}
+.tkut{width:min(520px,100%);background:var(--paper,#0b0b0d);color:var(--ink);border:1px solid #2a2a30;padding:20px 18px;margin:auto 0 0}.tkut h2{font:400 26px/1 Anton,sans-serif;text-transform:uppercase;margin:0 0 6px}.tdk{color:var(--muted);font-size:14px;margin:4px 0 10px}
+.tkut ul{list-style:none;margin:8px 0;padding:0}.tkut li{display:grid;grid-template-columns:1fr auto 32px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #2a2a30;font-size:14px}.tkut li button{border:0;background:none;color:var(--muted);font-size:20px;cursor:pointer}
+.ttop{display:flex;justify-content:space-between;padding:10px 0;font-size:15px}html[data-tema="gunduz"] .tkut{background:#fff;border-color:#dcdce1}html[data-tema="gunduz"] .tkut li{border-color:#e4e4e8}
+@media(min-width:761px){.tpen{align-items:center}.tkut{margin:auto}}</style>
 </head>
 <body>
 <nav><span class="hpi-sol"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><a class="logo" href="index.html#ic">Halalar</a></span><a class="back" href="index.html?mod=pazar">← tünele dön</a></nav>
 <script src="veri/hesap-ikon.js"></script>
 <main><div class="foto"><img id="img" alt=""><div class="acilar" id="acilar"></div></div><div class="bilgi"><div class="k" id="k"></div><h1 id="h"></h1><p id="p"></p><div class="fiyat" id="fy"></div><div class="beden" id="beden" hidden></div><div class="teslim" id="tsl"></div>
   <div class="eylem"><button class="cta" id="bTeklif" type="button">Teklif ver</button><button class="cta" id="bAlim" type="button">Satın al</button></div>
+  <div class="ek-eylem" id="ekEylem"><button type="button" id="bBegen" aria-pressed="false"><span>♡</span> Beğen</button><button type="button" id="bPaylas">Arkadaşına gönder</button><a id="bSor" href="https://wa.me/905326337206" target="_blank" rel="noopener">WhatsApp'tan sor</a><button type="button" id="bToplu">+ Toplu teklife ekle</button></div><div class="ek-not" id="ekNot" role="status"></div>
   <form class="talep" id="talep" hidden novalidate></form>
   <div class="tamam" id="tamam" hidden role="status"></div></div></main>
 <section class="oneri" id="oneri" aria-label="Öneriler"></section>
@@ -190,10 +204,64 @@ if(!D2)bA.textContent='Satın alma talebi';
 if(!FY){bA.hidden=true;bA.style.display='none';bT.hidden=false;document.getElementById('fy').innerHTML='<small>FİYAT YAKINDA · TEKLİFİNİ YAZ</small>'}
 // DSG kıyafetlerinde beden seçimi (sahip 21.11): her ürün her bedende var sayılır (örnek); seçilen beden talebe yazılır
 const BEDENLER=D2&&DON==='d2:'?(D2.kategori==='Alt giyim'?['28','30','32','34','36','38']:['S','M','L','XL','XXL']):null;let BEDEN='';
-if(BEDENLER){const k=document.getElementById('beden');k.hidden=false;k.innerHTML='<b>Beden</b><div>'+BEDENLER.map(b=>`<button type="button" data-b="${b}">${b}</button>`).join('')+'</div>';
-  k.querySelectorAll('button').forEach(x=>x.onclick=()=>{BEDEN=x.dataset.b;k.classList.remove('uyar');k.querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===x));const h=document.getElementById('khata');if(h&&/Beden/.test(h.textContent))h.textContent=''})}
+if(BEDENLER){const k=document.getElementById('beden');k.hidden=false;const alt=D2.kategori==='Alt giyim',TB=alt?[['28','72','81'],['30','76','81'],['32','81','82'],['34','86','82'],['36','91','83'],['38','96','83']]:[['S','96–100','70'],['M','100–104','72'],['L','104–110','74'],['XL','110–116','76'],['XXL','116–122','78']];
+  k.innerHTML='<b>Beden <button type="button" class="btab-ac">Beden tablosu</button></b><div class="bsec">'+BEDENLER.map(b=>`<button type="button" data-b="${b}">${b}</button>`).join('')+'</div>'
+    +`<div class="btab" hidden><table><tr><th>Beden</th><th>${alt?'Bel':'Göğüs'} (cm)</th><th>${alt?'İç boy':'Boy'} (cm)</th></tr>${TB.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</table><small>Örnek ölçüler; ürüne göre birkaç santim değişebilir. Emin değilsen WhatsApp'tan sor.</small></div>`;
+  k.querySelector('.btab-ac').onclick=()=>{const t=k.querySelector('.btab');t.hidden=!t.hidden};
+  k.querySelectorAll('[data-b]').forEach(x=>x.onclick=()=>{BEDEN=x.dataset.b;k.classList.remove('uyar');k.querySelectorAll('[data-b]').forEach(y=>y.classList.toggle('on',y===x));const h=document.getElementById('khata');if(h&&/Beden/.test(h.textContent))h.textContent=''})}
 // teslimat bilgisi ürün sayfasında da görünür (sahip 21.11): her dükkân kargo yapar; Önsal'da kargo ve kurulum dahil
 const TESLIM=D2?(DK.teslim||'Kargo ile 1-3 iş günü'):'Kargo ile 1-3 iş günü · ya da dükkândan teslim';if(!YOK)document.getElementById('tsl').textContent='Teslimat: '+TESLIM;
+// beğen, arkadaşına gönder, WhatsApp'tan sor (sahip 21.11)
+const URL_=`https://tolgaarpa.github.io/hitpazari/urun.html?id=${encodeURIComponent(u[0])}`,WA='https://wa.me/905326337206';
+window.HP_WA_METIN=()=>`Merhaba, Hit Pazarı'ndaki şu ürünü sormak istiyorum:\n${(D2&&D2.tamAd)||u[1]}${FY?' ('+TL(FY)+(D2&&!D2.ornek?'':' örnek fiyat')+')':''}${typeof BEDEN!=='undefined'&&BEDEN?' · Beden '+BEDEN:''}\n${URL_}`;
+// bu sayfadaki bütün WhatsApp bağlantıları (menü, sayfa altı, görüş penceresi) ürün bilgisiyle hazır mesaj açar
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href^="'+WA+'"]');if(a)a.href=WA+'?text='+encodeURIComponent(HP_WA_METIN())},true);
+{const bb=document.getElementById('bBegen'),not=document.getElementById('ekNot');let nt;const yazNot=t=>{not.textContent=t;clearTimeout(nt);nt=setTimeout(()=>not.textContent='',3200)};
+  const isle=()=>{const v=(oku().begeni||[]).includes(u[0]);bb.classList.toggle('on',v);bb.setAttribute('aria-pressed',String(v));bb.innerHTML=v?'<span>♥</span> Beğendin':'<span>♡</span> Beğen'};
+  if(YOK)document.getElementById('ekEylem').hidden=true;
+  isle();bb.onclick=()=>{let v;yaz(x=>{x.begeni=x.begeni||[];const i=x.begeni.indexOf(u[0]);if(i<0){x.begeni.push(u[0]);v=true}else{x.begeni.splice(i,1);v=false}});isle();yazNot(v?'Beğenilerine eklendi. Hesabım › Beğenilerim\'de görürsün.':'Beğenilerinden çıkarıldı.')};
+  document.getElementById('bPaylas').onclick=async()=>{const t=`${u[1]}${FY?' · '+TL(FY):''} · Hit Pazarı`;
+    if(navigator.share){try{await navigator.share({title:t,text:t,url:URL_});return}catch(e){if(e&&e.name==='AbortError')return}}
+    window.open('https://wa.me/?text='+encodeURIComponent(t+'\n'+URL_),'_blank','noopener')}}
+// TOPLU TEKLİF (sahip 21.11): aynı dükkândan birkaç ürün tek teklifle; liste cihazda tutulur (hp-toplu)
+const TK='hp-toplu',tOku=()=>{try{return JSON.parse(localStorage.getItem(TK))||{d:'',l:[]}}catch(e){return {d:'',l:[]}}},tYaz=t=>{try{localStorage.setItem(TK,JSON.stringify(t))}catch(e){}};
+const DAD={halalar:'Halalar',dukkan2:(typeof DUKKAN2!=='undefined'&&DUKKAN2.ad)||'DSG',dukkan3:(typeof DUKKAN3!=='undefined'&&DUKKAN3.ad)||'Önsal Elektronik'};
+const tBar=document.createElement('div');tBar.className='tbar';tBar.hidden=true;document.body.appendChild(tBar);
+const tPen=document.createElement('div');tPen.className='tpen';tPen.hidden=true;document.body.appendChild(tPen);
+function tIsle(){const t=tOku(),b=document.getElementById('bToplu'),var_=t.l.some(x=>x.id===u[0]);
+  if(b){b.classList.toggle('on',var_);b.textContent=var_?'✓ Toplu teklifte':'+ Toplu teklife ekle'}
+  tBar.hidden=!t.l.length;document.body.style.paddingBottom=t.l.length?'84px':'';tBar.innerHTML=t.l.length?`<span><b>Toplu teklif</b> · ${t.l.length} ürün · ${esc(DAD[t.d]||'')}</span><button type="button">${t.l.length>1?'Teklif ver →':'Listeyi gör'}</button>`:'';
+  if(t.l.length)tBar.querySelector('button').onclick=tAc}
+document.getElementById('bToplu').onclick=()=>{const t=tOku(),i=t.l.findIndex(x=>x.id===u[0]);
+  if(i>=0){t.l.splice(i,1);if(!t.l.length)t.d='';tYaz(t);tIsle();return}
+  if(BEDENLER&&!BEDEN){const k=document.getElementById('beden');k.classList.add('uyar');k.scrollIntoView({block:'center',behavior:'smooth'});document.getElementById('ekNot').textContent='Önce bedenini seç, sonra toplu teklife ekle.';return}
+  if(t.l.length&&t.d!==SATICI){if(!confirm(`Toplu teklif yalnız aynı dükkânın ürünleriyle olur. Listendeki ${t.l.length} ürün ${DAD[t.d]} dükkânından. Listeyi boşaltıp ${DAD[SATICI]} ile başlayalım mı?`))return;t.l=[]}
+  t.d=SATICI;t.l.push({id:u[0],ad:(D2&&D2.tamAd)||u[1],fy:FY||0,b:BEDEN||''});tYaz(t);tIsle();
+  document.getElementById('ekNot').textContent=t.l.length>1?`Toplu teklifte ${t.l.length} ürün var. Alttaki çubuktan teklif ver.`:`Eklendi. ${DAD[SATICI]} dükkânından bir ürün daha ekle, hepsine tek teklif ver.`};
+function tAc(){const t=tOku(),top=t.l.reduce((a,x)=>a+(x.fy||0),0),o=top?Math.round(top*.85/50)*50:0;tPen.hidden=false;
+  tPen.innerHTML=`<form class="tkut" novalidate><h2>Toplu teklif</h2><p class="tdk">${esc(DAD[t.d]||'')} dükkânından ${t.l.length} ürün</p>
+    <ul>${t.l.map((x,i)=>`<li><span>${esc(x.ad)}${x.b?' · Beden '+esc(x.b):''}</span><span>${x.fy?TL(x.fy):'teklifle'}</span><button type="button" data-i="${i}" aria-label="Çıkar">×</button></li>`).join('')}</ul>
+    ${top?`<div class="ttop"><span>Liste toplamı</span><b>${TL(top)}</b></div>`:''}
+    ${t.l.length<2?'<p class="tdk">Toplu teklif için en az 2 ürün ekle.</p>':`<div class="tutar"><input id="ttk" inputmode="numeric" aria-label="Toplu teklif tutarı" value="${o||''}"><span>₺</span></div>${kisiHTML()}
+    <p class="not">Hepsi için tek teklifin dükkâna iletilir; dükkân seni telefonla arar.</p>`}
+    <div class="hata" id="thata"></div><div class="dug"><button class="cta" type="button" id="tvz">Kapat</button>${t.l.length<2?'':'<button class="cta on" type="submit" id="tgn">Toplu teklifi gönder</button>'}</div></form>`;
+  tPen.querySelector('#tvz').onclick=()=>{tPen.hidden=true};tPen.onclick=e=>{if(e.target===tPen)tPen.hidden=true};
+  tPen.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{const t=tOku();t.l.splice(+b.dataset.i,1);if(!t.l.length)t.d='';tYaz(t);tIsle();if(t.l.length)tAc();else tPen.hidden=true});
+  const f=tPen.querySelector('form');f.onsubmit=async e=>{e.preventDefault();const h=document.getElementById('thata');h.textContent='';const t=tOku();
+    const tutar=parseInt((document.getElementById('ttk').value||'').replace(/\D/g,''))||0;if(tutar<=0){h.textContent='Teklif tutarını yaz.';return}
+    const ad=document.getElementById('kad').value.trim(),tel=document.getElementById('ktel').value.replace(/[^0-9+]/g,'');
+    if(ad.length<2){h.textContent='Adını yaz, dükkân sana böyle hitap edecek.';return}
+    if(tel.replace(/\D/g,'').length<10){h.textContent='Telefon numaranı 10-11 hane olarak yaz.';return}
+    if(!document.getElementById('krz').checked){h.textContent='Göndermek için aydınlatma metnini onaylaman gerekiyor.';return}
+    if(!VT){h.textContent='Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene.';return}
+    const btn=document.getElementById('tgn');btn.disabled=true;btn.textContent='Gönderiliyor…';
+    const liste=t.l.map(x=>x.ad+(x.b?' · Beden '+x.b:'')+(x.fy?' ('+TL(x.fy)+')':'')+' ['+x.id+']').join('\n').slice(0,1500);
+    try{const r=await VT.collection('talepler').add({urun:('toplu:'+t.l.map(x=>x.id).join(',')).slice(0,120),urunAd:(`Toplu teklif (${t.l.length} ürün): `+t.l.map(x=>x.ad).join(' · ')).slice(0,120),liste,tur:'teklif',tutar,ad,tel,durum:'Beklemede',zaman:firebase.firestore.FieldValue.serverTimestamp(),satici:t.d});
+      yaz(x=>{x.kisi={ad,tel,rza:true};x.islem=x.islem||[];x.islem.unshift({id:t.l[0].id,ref:r.id,satici:t.d,tur:'teklif',tutar,toplu:t.l.length,zaman:Date.now(),durum:'Beklemede'})});
+      tYaz({d:'',l:[]});tIsle();f.innerHTML=`<h2>Toplu teklifin gönderildi</h2><p class="tdk">${TL(tutar)} · ${t.l.length} ürün. Dükkân seni ${esc(tel)} numarasından arayacak.</p><div class="dug"><button class="cta" type="button" id="tvz2">Tamam</button></div>`;document.getElementById('tvz2').onclick=()=>{tPen.hidden=true}}
+    catch(e){console.warn(e);h.textContent='Gönderilemedi. İnternetini kontrol edip tekrar dene.';btn.disabled=false;btn.textContent='Toplu teklifi gönder'}};
+  setTimeout(()=>{const i=document.getElementById('ttk');if(i)i.focus()},50)}
+addEventListener('storage',e=>{if(e.key===TK)tIsle()});
 function kisiHTML(){const k=oku().kisi||{};return `<div class="alanlar"><input id="kad" autocomplete="name" placeholder="Adın" aria-label="Adın" value="${esc(k.ad)}"><input id="ktel" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon (05..)" aria-label="Telefon" value="${esc(k.tel)}"></div>
   <label class="rza"><input type="checkbox" id="krz" ${k.rza?'checked':''}><span><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html" target="_blank" rel="noopener">Aydınlatma metnini</a> okudum. Adımın ve telefonumun yalnız bu talep için kullanılmasına ve Google'ın güvenli sunucularında (yurt dışında) saklanmasına izin veriyorum.</span></label>`}
 function ac(tur){
@@ -206,11 +274,12 @@ function ac(tur){
     form.querySelectorAll('.hizli button').forEach(b=>b.onclick=()=>{document.getElementById('tk').value=b.dataset.v})}
   else{form.innerHTML=`<h2>Satın al</h2><div class="ozet"><div><span>Ürün</span><span>${TL(FY)}</span></div><div><span>Teslimat</span><span>${esc(TESLIM)}</span></div><div><b>Toplam</b><b>${TL(FY)}</b></div></div>${kisiHTML()}
       <p class="not">${D2?'Siparişin bize düşer; seni arayıp ödeme ve teslimat adresini teyit ederiz. <a href="satis-kosullari.html" target="_blank" rel="noopener">Satış koşulları ve cayma hakkı</a>.':'Burada ödeme alınmaz; talebin dükkâna düşer, dükkân seni arayıp ürünü ayırır.'}</p>
+      <p class="not iade"><b>İade ve cayma hakkı:</b> Ürünü teslim aldıktan sonra 14 gün içinde gerekçe göstermeden iade edebilirsin. Ayrıntılar <a href="https://tolgaarpa.github.io/hitpazari/satis-kosullari.html" target="_blank" rel="noopener">satış koşullarında</a>.</p>
       <div class="hata" id="khata"></div><div class="dug"><button class="cta" type="button" id="vz">Vazgeç</button><button class="cta on" type="submit" id="gn">Satın alma talebini gönder</button></div>`}
   form.dataset.tur=tur;document.getElementById('vz').onclick=kapat;
   (tur==='teklif'?document.getElementById('tk'):document.getElementById('kad')).focus()}
 function kapat(){form.hidden=true;bT.classList.remove('on');bA.classList.remove('on')}
-bT.onclick=()=>ac('teklif');bA.onclick=()=>ac('alim');
+bT.onclick=()=>ac('teklif');bA.onclick=()=>ac('alim');if(YOK)document.getElementById('bToplu').hidden=true;tIsle();
 form.onsubmit=async e=>{e.preventDefault();const tur=form.dataset.tur,h=document.getElementById('khata');h.textContent='';
   const tutar=tur==='teklif'?(parseInt((document.getElementById('tk').value||'').replace(/\D/g,''))||0):FY;
   if(tutar<=0){h.textContent='Teklif tutarını yaz.';return}
