@@ -210,7 +210,7 @@ if(BEDENLER){const k=document.getElementById('beden');k.hidden=false;const alt=D
   k.querySelector('.btab-ac').onclick=()=>{const t=k.querySelector('.btab');t.hidden=!t.hidden};
   k.querySelectorAll('[data-b]').forEach(x=>x.onclick=()=>{BEDEN=x.dataset.b;k.classList.remove('uyar');k.querySelectorAll('[data-b]').forEach(y=>y.classList.toggle('on',y===x));const h=document.getElementById('khata');if(h&&/Beden/.test(h.textContent))h.textContent=''})}
 // teslimat bilgisi ürün sayfasında da görünür (sahip 21.11): her dükkân kargo yapar; Önsal'da kargo ve kurulum dahil
-const TESLIM=D2?(DK.teslim||'Kargo ile 1-3 iş günü'):'Kargo ile 1-3 iş günü · ya da dükkândan teslim';if(!YOK)document.getElementById('tsl').textContent='Teslimat: '+TESLIM;
+const TESLIM=D2?(DK.teslim||'Kargo ile 1-3 iş günü'):'Kargo ile 1-3 iş günü · ya da dükkândan teslim';if(!YOK)document.getElementById('tsl').innerHTML=esc('Teslimat: '+TESLIM)+(D2?'':'<br>Durum: ikinci el / koleksiyon parçası, fotoğraftaki gibidir. Merak ettiğini WhatsApp\'tan sor.');   /* koleksiyoncu turu */
 // beğen, arkadaşına gönder, WhatsApp'tan sor (sahip 21.11)
 const URL_=`https://tolgaarpa.github.io/hitpazari/urun.html?id=${encodeURIComponent(u[0])}`,WA='https://wa.me/905326337206';
 window.HP_WA_METIN=()=>`Merhaba, Hit Pazarı'ndaki şu ürünü sormak istiyorum:\n${(D2&&D2.tamAd)||u[1]}${FY?' ('+TL(FY)+(D2&&!D2.ornek?'':' örnek fiyat')+')':''}${typeof BEDEN!=='undefined'&&BEDEN?' · Beden '+BEDEN:''}\n${URL_}`;
