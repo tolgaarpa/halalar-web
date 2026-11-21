@@ -203,8 +203,8 @@ html[data-tema="gunduz"] #hint{color:#33333a;text-shadow:0 0 8px #fff,0 0 3px #f
 <meta name="robots" content="noindex"><style>/* tek tünel şeridi */
 .serit{position:fixed;left:0;right:0;z-index:46;display:flex;align-items:center;gap:8px;padding:8px 12px;pointer-events:auto}
 .serit .s-ic{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}.serit .s-ic::-webkit-scrollbar{display:none}
-.serit button{flex:none;border:1px solid rgba(242,239,233,.35);background:rgba(11,11,13,.6);color:#f2efe9;padding:9px 13px;border-radius:30px;font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.serit button.on{background:#e8201c;border-color:#e8201c;color:#fff}.serit .s-kart{border-color:#f2efe9}
+.serit button{flex:none;border:1px solid rgba(242,239,233,.35);background:rgba(11,11,13,.6);color:#f2efe9;padding:9px 11px;border-radius:30px;font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.serit button.on{background:#e8201c;border-color:#e8201c;color:#fff}.serit .s-kart{border-color:#f2efe9;font-size:17px;padding:7px 11px}
 html[data-tema="gunduz"] .serit button{background:rgba(255,255,255,.8);color:#111114;border-color:rgba(17,17,20,.3)}html[data-tema="gunduz"] .serit button.on{background:#e8201c;color:#fff;border-color:#e8201c}
 #desteAc{display:none!important}
 .kpen{position:fixed;inset:0;z-index:150;background:rgba(8,8,10,.72);display:flex;align-items:flex-end;justify-content:center;padding:12px}.kpen[hidden]{display:none}
@@ -452,7 +452,7 @@ const PAZAR_L=KAYNAK,KAT_=u=>/^d[23]:/.test(u[0])?u[3]:((typeof KATEGORI!=='unde
 const HAL_L=URUNLER,DSG_L=typeof DUKKAN2!=='undefined'?dukT('d2:',DUKKAN2):[],ONS_L=typeof DUKKAN3!=='undefined'?dukT('d3:',DUKKAN3):[];
 const TUM=URUNLER.concat(DSG_L,ONS_L),KATLAR=[...new Set(TUM.map(KAT_).filter(Boolean))].sort((a,b)=>TUM.filter(u=>KAT_(u)===b).length-TUM.filter(u=>KAT_(u)===a).length);
 const karis=L=>{L=L.slice();for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}return L};
-const serit=document.createElement('div');serit.className='serit';serit.innerHTML=`<div class="s-ic"><button data-f="hepsi">Hepsi</button><button data-f="halalar">Halalar</button><button data-f="dsg">${typeof DUKKAN2!=='undefined'?DUKKAN2.ad:'DSG'}</button><button data-f="onsal">Önsal</button><button data-f="kategori" class="s-kat">Kategori ▾</button></div><button class="s-kart" type="button" aria-label="Kart görünümü">▦ Kart</button>`;
+const serit=document.createElement('div');serit.className='serit';serit.innerHTML=`<div class="s-ic"><button data-f="hepsi">Hepsi</button><button data-f="kategori" class="s-kat">Kategori ▾</button><button data-f="halalar">Halalar</button><button data-f="dsg">${typeof DUKKAN2!=='undefined'?DUKKAN2.ad:'DSG'}</button><button data-f="onsal">Önsal</button></div><button class="s-kart" type="button" aria-label="Kart görünümü" title="Kart görünümü">▦</button>`;
 document.body.appendChild(serit);
 const kpen=document.createElement('div');kpen.className='kpen';kpen.hidden=true;document.body.appendChild(kpen);
 function seritYer(){const n=document.querySelector('nav');serit.style.top=(n?Math.round(n.getBoundingClientRect().bottom):64)+'px'}seritYer();addEventListener('resize',seritYer);
@@ -462,7 +462,7 @@ function sec(f,ilk){let L,dsg=false,ad,t=null;
   else if(f==='kat'){L=karis(TUM.filter(u=>KSET.has(KAT_(u))));ad=KSET.size===1?[...KSET][0]:KSET.size+' kategori';t='pazar'}
   else{f='hepsi';L=PAZAR_L;ad='Pazar';t='pazar'}
   if(!L.length)return;AKTIF=f;AKTIF_T=t;
-  if(!ilk||f!=='hepsi'){KUR=kur(L,dsg);items=KUR.items;TOTAL=KUR.TOTAL;gorselYukle(L);if(typeof kartKapa==='function')kartKapa();camZ=0;target=Math.min(520,TOTAL)}
+  if(!ilk||f!=='hepsi'){KUR=kur(L,dsg);items=KUR.items;TOTAL=KUR.TOTAL;gorselYukle(L);if(typeof kartKapa==='function')kartKapa();const z0=ilk?parseFloat(QP.get('z')||0)||0:0;camZ=0;target=Math.min(z0>0?z0:520,TOTAL)}   /* ürüne girip dönünce aynı derinlik */
   document.querySelector('nav .logo').textContent=ad;document.getElementById('end').textContent=ad;document.title='Hit Pazarı · '+ad+' (tek tünel deneme)';
   serit.querySelectorAll('[data-f]').forEach(b=>b.classList.toggle('on',b.dataset.f===(f==='kat'?'kategori':f)));
   const q=new URLSearchParams(location.search);['dukkan','kat','mod','sec'].forEach(k=>q.delete(k));q.set('f',f==='kat'?'k:'+[...KSET].join('~'):f);history.replaceState(null,'',location.pathname+'?'+q.toString());uyan()}
