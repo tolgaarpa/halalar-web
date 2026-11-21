@@ -563,7 +563,7 @@ const toast=t=>{const e=document.getElementById('toast');e.textContent=t;e.class
 const sahne=document.getElementById('sahne'),PARCA=[],P=700,L=2600;
 const secim=['ig/ig_fender','h/fisher','3464','ig/ig_maske','ig/ig_kurt','h/actionman','ek/3482_papagan','3490','ig/ig_hoparlor','h/daktilo']
   .concat(URUNLER.map(u=>u[0])).filter((v,i,a)=>a.indexOf(v)===i&&U(v)).slice(0,24);
-secim.forEach((id,i)=>{const im=new Image();im.src=res(id);im.alt='';im.decoding='async';sahne.appendChild(im);
+secim.forEach((id,i)=>{const im=new Image();im.onerror=()=>{if(!im.dataset.b){im.dataset.b=1;im.src=res(id)}};im.src=`kaynak/k/web/${id}.webp`;   /* arka plan tüneli küçük kopyayla: ilk açılış hafif (4. tur) */im.alt='';im.decoding='async';sahne.appendChild(im);
   PARCA.push({im,a:i*2.39996,r:.92+((i*37)%23)/23*.3,z:-(i/secim.length)*L,w:200+((i*53)%70),rot:((i*71)%28)-14})});
 const azHareket=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let mx=0,my=0,cx=0,cy=0,kam=0,son=performance.now(),bekle=false;

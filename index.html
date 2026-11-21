@@ -319,12 +319,14 @@ const IMG={}, ALPHA={}, KOPYA={}, BUYUK={};
 // ürün yaklaşıp büyük çizilmesi gerekince asıl fotoğraf o an indirilir.
 const yolB=id=>GOR[id]||`kaynak/web/${id}.webp`, yolK=id=>yolB(id).replace(/^kaynak\//,'kaynak/k/');
 function kopyala(im){const L=[];for(const m of [96,192,384,640]){const s=m/Math.max(im.naturalWidth,im.naturalHeight);if(s>=1)break;const k=document.createElement('canvas');k.width=Math.max(1,Math.round(im.naturalWidth*s));k.height=Math.max(1,Math.round(im.naturalHeight*s));k.getContext('2d').drawImage(im,0,0,k.width,k.height);L.push(k)}return L}
-const YUKLU=new Set();function gorselYukle(L){if(YUKLU.has(L))return;YUKLU.add(L);L.forEach(u=>{ const id=u[0]; if(IMG[id])return; const im=new Image(); IMG[id]=im;
+const YUKLU=new Set();function gorselYukle(L){if(YUKLU.has(L))return;YUKLU.add(L);   /* öndeki 40 ürün hemen, kalanı 20'şer: yavaş internette tünel hızlı açılır (4. tur) */
+  let i=40;const tek=u=>yukleBir(u);L.slice(0,40).forEach(tek);(function devam(){if(i>=L.length)return;L.slice(i,i+20).forEach(tek);i+=20;setTimeout(devam,350)})()}
+function yukleBir(u){{ const id=u[0]; if(IMG[id])return; const im=new Image(); IMG[id]=im;
   im.onerror=()=>{if(!im.dataset.b){im.dataset.b='1';im.src=yolB(id)}};   // küçük kopya yoksa asıl fotoğraf
   im.onload=()=>{uyan();const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d');x.drawImage(im,0,0,48,48);ALPHA[id]=x.getImageData(0,0,48,48).data;
     if(!BUYUK[id]||!BUYUK[id].hazir)KOPYA[id]=kopyala(im)};
-  im.src=yolK(id) })}
-gorselYukle(KAYNAK);
+  im.src=yolK(id) }}
+if(ILK==='hepsi'||ILK==='kategori')gorselYukle(KAYNAK);   /* dükkân ya da kategoriyle açılınca Pazar'ın görselleri boşuna inmesin */
 function buyukIste(id){if(BUYUK[id]||(IMG[id]&&IMG[id].dataset.b))return;const b=new Image();BUYUK[id]=b;b.onload=()=>{uyan();KOPYA[id]=kopyala(b);b.hazir=1};b.src=yolB(id)}
 function kaynak(id,px){if(px>340)buyukIste(id);const L=KOPYA[id];if(L)for(const k of L)if(Math.max(k.width,k.height)>=px)return k;const b=BUYUK[id];return b&&b.hazir?b:IMG[id]}
 // --- yerleşim (önceki ile aynı kurallar) ---

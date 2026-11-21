@@ -13,6 +13,7 @@
   const css=`.hpg-sek{position:fixed;right:0;top:50%;z-index:140;transform:translateY(-50%);writing-mode:vertical-rl;rotate:180deg;background:#e8201c;color:#fff;border:0;
     padding:12px 7px;font:700 12px/1 "Barlow Condensed",Barlow,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border-radius:0 6px 6px 0;opacity:.9}
   .hpg-sek:hover{opacity:1}
+  @media(max-width:760px){.hpg-sek{top:auto;bottom:150px;transform:none;padding:9px 5px;font-size:10.5px;opacity:.8}}
   .hpg-pen{position:fixed;inset:0;z-index:150;background:rgba(8,8,10,.72);display:flex;align-items:center;justify-content:center;padding:16px}
   .hpg-pen[hidden]{display:none}
   .hpg-kut{width:min(440px,100%);background:#111114;color:#f2efe9;border:1px solid #2a2a30;padding:22px 20px 18px;font:400 15px/1.45 Barlow,sans-serif}
