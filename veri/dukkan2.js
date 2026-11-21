@@ -1432,3 +1432,9 @@ const DUKKAN2={
 }
 ]
 };
+
+// ÖRNEK fiyatlar (sahip 21.11): gerçek fiyat gelene kadar türüne göre örnek fiyat; her yerde "örnek" diye gösterilir (u.ornek).
+// Gerçek fiyat girilen üründe (fiyat alanı dolu) bu kod hiçbir şey yapmaz.
+(()=>{const T={'Üst giyim':900,'Polo yaka':1100,'Kazak':1400,'Örgü polo yaka':1300,'Kapüşonlu sweatshirt':1500,'Hırka':1600,'Kot pantolon':1500,'Eşofman altı':1000,
+  'Kumaş pantolon':1400,'Sweatshirt':1300,'Yarım fermuarlı sweatshirt':1500,'Ceket':2800,'Gömlek':1200,'Jogger':1100,'Eşofman takımı':2200,'Mont':3500,'Kargo pantolon':1400,'Pantolon':1300};
+  DUKKAN2.urunler.forEach((u,i)=>{if(u.fiyat)return;const t=u.ad.split(' · ')[0].trim(),b=T[t]||1200;u.fiyat=b+((i*7)%5)*100;u.ornek=true})})();

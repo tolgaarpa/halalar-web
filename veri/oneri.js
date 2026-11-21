@@ -11,7 +11,7 @@
   if(typeof URUNLER!=='undefined')URUNLER.forEach(u=>{const k=(typeof KATEGORI!=='undefined'&&KATEGORI[u[0]])||'';
     T.push({id:u[0],ad:u[1],kat:k,genel:k==='Elektronik & Kamera'?'Elektronik':k,gorsel:`kaynak/web/${u[0]}.webp`,fiyat:typeof FIYAT!=='undefined'?FIYAT[u[0]]:0,ornek:true,dukkan:'halalar',dad:'Halalar',href:'index.html'})});
   [['d2:',typeof DUKKAN2!=='undefined'?DUKKAN2:null,'dukkan.html'],['d3:',typeof DUKKAN3!=='undefined'?DUKKAN3:null,'dukkan.html?d=3']].forEach(([on,D,href])=>{if(!D)return;
-    D.urunler.filter(x=>x.stok!==0).forEach(x=>T.push({id:on+x.id,ad:x.ad,kat:x.kategori||'',genel:on==='d2:'?'Giyim':x.kategori==='Televizyon'?'Elektronik':x.kategori||'',gorsel:x.gorsel,fiyat:x.fiyat||0,ornek:false,dukkan:D.id,dad:D.ad,href}))});
+    D.urunler.filter(x=>x.stok!==0).forEach(x=>T.push({id:on+x.id,ad:x.ad,kat:x.kategori||'',genel:on==='d2:'?'Giyim':x.kategori==='Televizyon'?'Elektronik':x.kategori||'',gorsel:x.gorsel,fiyat:x.fiyat||0,ornek:!!x.ornek,dukkan:D.id,dad:D.ad,href}))});
   const bu=T.find(x=>x.id===id);if(!bu)return;
   // sabit ama ürüne göre değişen sıra (her ürün sayfasında farklı öneriler, yenileyince aynı)
   const h=s=>{let v=2166136261;for(const c of s)v=Math.imul(v^c.charCodeAt(0),16777619);return v>>>0};

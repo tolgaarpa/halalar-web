@@ -9,7 +9,7 @@ const DUKKAN3={
 "Küçük Ev Aletleri",
 "Kişisel Bakım"
 ],
-"teslim": "Türkiye geneli ücretsiz kargo",
+"teslim": "Türkiye geneli ücretsiz kargo · kurulum dahil",
 "urunler": [
 {
 "id": "altus-al75-uhd-9825-google-tv",
@@ -1840,7 +1840,7 @@ const DUKKAN3={
 
 // Kısa ad (Tolga 21.11): tünelde, kartlarda ve aramada yalnız marka + ürünün ne olduğu ("Altus Buzdolabı").
 // Model kodlu tam ad (tamAd) ürün sayfasında görünür; aramada model koduyla da bulunur.
-(()=>{const T=[['google tv','Televizyon'],['kurutmalı çamaşır makinesi','Kurutmalı Çamaşır Makinesi'],['çamaşır makinesi','Çamaşır Makinesi'],['kurutma makinesi','Kurutma Makinesi'],
+(()=>{const T=[['google tv','Televizyon'],['kurutmalı çamaşır makinesi','Kurutmalı Çamaşır Makinesi'],['çamaşır makinesi','Çamaşır Makinesi'],['saç kurutma makinesi','Saç Kurutma Makinesi'],['kurutma makinesi','Kurutma Makinesi'],
   ['buzdolabı','Buzdolabı'],['mikrodalga fırın','Mikrodalga Fırın'],['ankastre fırın','Ankastre Fırın'],['fırın','Fırın'],['aspiratör','Aspiratör'],['davlumbaz','Davlumbaz'],
   ['ocak','Ankastre Ocak'],['klima','Klima'],['bulaşık','Bulaşık Makinesi'],['termosifon','Termosifon'],['yatak temizleyici','Yatak Süpürgesi'],['süpürge','Süpürge'],
   ['türk kahvesi makinesi','Türk Kahvesi Makinesi'],['filtre kahve makinesi','Filtre Kahve Makinesi'],['espresso makinesi','Espresso Makinesi'],['çay makinesi','Çay Makinesi'],
@@ -1849,4 +1849,17 @@ const DUKKAN3={
   ['halı yıkama','Halı Yıkama Makinesi'],['su sebili','Su Sebili'],['hava temizleyici','Vantilatör ve Hava Temizleyici'],['vantilatör','Vantilatör'],['banyo tartısı','Banyo Tartısı'],
   ['saç maşası','Saç Maşası'],['saç kurutma makinesi','Saç Kurutma Makinesi'],[' tv','Televizyon']];
   const k=t=>(t||'').toLocaleLowerCase('tr-TR');
-  DUKKAN3.urunler.forEach(u=>{if(u.tamAd)return;u.tamAd=u.ad;const m=' '+k(u.ad)+' ',a=' '+k(u.aciklama)+' ',t=T.find(x=>m.includes(x[0]))||T.find(x=>a.includes(x[0]));u.ad=(u.marka?u.marka+' ':'')+(t?t[1]:u.kategori)})})();
+  // ayırt edici özellik (sahip 21.11): litre, kg, BTU, kişilik, ekran, cm, watt; varsa renk ("Altus Buzdolabı · 477 L · İnoks")
+  const ozellik=u=>{const A=u.tamAd||u.ad,B=A+' '+(u.aciklama||''),r=[];let m;
+    if(m=B.match(/(\d{1,2}\.?\d{3})\s*BTU/i))r.push(m[1].replace(/^(\d+)(\d{3})$/,'$1.$2')+' BTU');
+    else if(m=A.match(/(\d+)\s*Kişilik/i))r.push(m[1]+' kişilik');
+    else if((m=B.match(/(\d+(?:[.,]\d+)?(?:\/\d+)?)\s*kg/i))&&/çamaşır|kurutma/i.test(A)&&!/saç/i.test(A))r.push(m[1]+' kg');
+    else if(m=(u.aciklama||'').match(/(\d{2,3})"/))r.push(m[1]+' inç');
+    else if(m=A.match(/(\d+(?:[.,]\d+)?)\s*(?:L|Litre|lt)\b/i))r.push(m[1]+' L');
+    else if(m=B.match(/(\d+(?:[.,]\d+)?)\s*L\b/))r.push(m[1]+' L');
+    else if(m=A.match(/(\d+)\s*cm/i))r.push(m[1]+' cm');
+    else if(m=A.match(/(\d+)\s*mm/i))r.push(m[1]+' mm');
+    else if(m=B.match(/(\d{3,4})\s*W(?:att)?\b/i))r.push(m[1]+' W');
+    if(m=A.match(/\b(Beyaz|Siyah|Gri|Gümüş|Antrasit|İnoks|Inox)\b/i))r.push(/no[kx]s?$/i.test(m[1])?'İnoks':m[1].charAt(0).toLocaleUpperCase('tr-TR')+m[1].slice(1).toLocaleLowerCase('tr-TR'))
+    return r.join(' · ')};
+  DUKKAN3.urunler.forEach(u=>{if(u.tamAd)return;u.tamAd=u.ad;const m=' '+k(u.ad)+' ',a=' '+k(u.aciklama)+' ',t=T.find(x=>m.includes(x[0]))||T.find(x=>a.includes(x[0]));u.ad=(u.marka?u.marka+' ':'')+(t?t[1]:u.kategori);const oz=ozellik(u);if(oz)u.ad+=' · '+oz})})();

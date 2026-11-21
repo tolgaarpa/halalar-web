@@ -193,6 +193,12 @@ html[data-tema="gunduz"] #kgiris b{text-shadow:none}
 <script>try{if(localStorage.getItem('hp-tema')==='gunduz')document.documentElement.dataset.tema='gunduz'}catch(e){}</script>
 <script>/* yerel deneme (bilgisayar/ev ağı): canlı site adreslerini yerel kopyaya çevir; canlıda hiçbir şey yapmaz */(()=>{const y={'8766':['8766','8769'],'8769':['8766','8769'],'8770':['8770','8771'],'8771':['8770','8771']}[location.port];if(!y)return;const o=location.protocol+'//'+location.hostname+':';const f=h=>String(h).replace('https://tolgaarpa.github.io/hitpazari/',o+y[0]+'/').replace('https://tolgaarpa.github.io/halalar-app/',o+y[1]+'/');window.yerelCevir=f;const d=()=>document.querySelectorAll('a[href^="https://tolgaarpa.github.io/"]').forEach(a=>a.setAttribute('href',f(a.getAttribute('href'))));new MutationObserver(d).observe(document.documentElement,{subtree:true,childList:true});addEventListener('DOMContentLoaded',d)})()</script>
 <style>/* Ara: bütün pencere kayar, fare nerede olursa olsun (Tolga 21.11) */#ara{overflow-y:auto;overscroll-behavior:contain}#ara>*{flex-shrink:0}#ara .sonuc{flex:none;overflow:visible}</style>
+<style>#card .c-f{font:400 22px/1.1 Anton,Impact,sans-serif;margin:4px 0 6px;color:var(--accent)}#card .c-f small{font:700 11px/1 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;opacity:.7;color:var(--ink)}#card .c-f:empty{display:none}</style>
+<style>/* okunurluk (sahip 21.11: yaşlılar da rahat okusun) */
+#hint{font-size:15px;letter-spacing:.12em;color:#cfcac1;text-shadow:0 0 8px #000,0 0 3px #000;white-space:nowrap}
+html[data-tema="gunduz"] #hint{color:#33333a;text-shadow:0 0 8px #fff,0 0 3px #fff}
+#card{width:240px;padding:12px 15px}#card .k{font-size:12px;letter-spacing:.2em}#card p{font-size:14px;line-height:1.4}#card .go{font-size:13px;letter-spacing:.14em}</style>
+<script>addEventListener('DOMContentLoaded',()=>{const h=document.getElementById('hint');if(h)h.textContent=matchMedia('(pointer:coarse)').matches?'Parmağını yukarı sür · ürüne dokun':'Kaydırarak ilerle · ürüne tıkla'})</script>
 </head>
 <body>
 <nav><span class="hpi-sol"><span class="hp-satir"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı ana sayfa"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><button class="hp-ac" id="hpAc" type="button" aria-label="Hit Pazarı menüsü" aria-expanded="false" aria-controls="hpMenu"></button></span><a class="logo" href="#">Halalar</a></span><span class="sag"><span class="depth" id="depth">0 m</span><button class="ara-ac" id="araAc">Ara</button></span></nav>
@@ -207,9 +213,9 @@ html[data-tema="gunduz"] #kgiris b{text-shadow:none}
 <script src="veri/hesap-ikon.js"></script>
 <div id="world"><div id="cam"></div></div>
 <div class="vignette"></div>
-<div id="card"><div class="k" id="c-k"></div><h3 id="c-h"></h3><p id="c-p"></p><span class="go">Ürüne gir →</span></div>
+<div id="card"><div class="k" id="c-k"></div><h3 id="c-h"></h3><div class="c-f" id="c-f"></div><p id="c-p"></p><span class="go">Ürüne gir →</span></div>
 <div id="kgiris" aria-hidden="true"><div><img id="kgImg" alt=""><b id="kgAd"></b></div></div><div id="kperde"></div>
-<a class="deste-ac" id="desteAc" href="#">KAYDIR, SEÇ <small>beğen · teklif ver · satın al</small></a>
+<a class="deste-ac" id="desteAc" href="#">KAYDIR, SEÇ <small>ürünleri tek tek kartla gör</small></a>
 <div class="hint" id="hint">kaydır ↓ içeri gir</div>
 <div id="end"></div>
 <button id="onune" type="button">↺ Önüne bak</button>
@@ -227,6 +233,7 @@ html[data-tema="gunduz"] #bakIp{color:#111114;text-shadow:0 0 10px #fff,0 0 4px 
 <script src="veri/urunler.js"></script>
 <script src="veri/dukkan2.js"></script>
 <script src="veri/dukkan3.js"></script>
+<script src="veri/fiyatlar.js"></script>
 <script src="veri/kontur.js"></script>
 <script src="veri/filtre.js"></script>
 <script src="veri/aspect.js"></script>
@@ -435,7 +442,10 @@ const menuAcik=()=>['hikMenu','hpMenu'].some(i=>{const m=document.getElementById
 // ürün kartı ekrandan taşmaz ve alttaki 'Kaydır, seç' düğmesinin üstüne binmez
 function kartYer(x,y){const w=card.offsetWidth,h=card.offsetHeight,dg=document.getElementById('desteAc'),dr=dg&&getComputedStyle(dg).display!=='none'&&dg.getBoundingClientRect().height>0?dg.getBoundingClientRect():null;
   const alt=(dr?dr.top:innerHeight)-14;card.style.left=Math.max(8,Math.min(x+16,innerWidth-w-8))+'px';card.style.top=Math.max(8,Math.min(y+16,alt-h))+'px'}
-function showCard(it,x,y){if(menuAcik())return;hot=it;kartZ=target;kartBak=bakT;document.getElementById('c-k').textContent=KMOD?'Kategori':[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];document.getElementById('c-p').textContent=it.u[2];kartYer(x,y);card.classList.add('on')}
+// kartta fiyat (sahip 21.11): Halalar ve DSG fiyatları örnek, Önsal gerçek
+function kartFiyat(id){const m=/^d([23]):(.+)$/.exec(id);if(m){const D=m[1]==='2'?(typeof DUKKAN2!=='undefined'&&DUKKAN2):(typeof DUKKAN3!=='undefined'&&DUKKAN3);const u=D&&D.urunler.find(x=>x.id===m[2]);return u&&u.fiyat?[u.fiyat,!!u.ornek]:null}
+  const f=typeof FIYAT!=='undefined'&&FIYAT[id];return f?[f,true]:null}
+function showCard(it,x,y){if(menuAcik())return;hot=it;kartZ=target;kartBak=bakT;document.getElementById('c-k').textContent=KMOD?'Kategori':[(typeof KATEGORI!=='undefined'&&KATEGORI[it.u[0]])||'',it.u[3]==='—'?'':it.u[3]].filter(Boolean).join(' · ');document.getElementById('c-h').textContent=it.u[1];{const f=KMOD?null:kartFiyat(it.u[0]),e=document.getElementById('c-f');e.innerHTML=f?f[0].toLocaleString('tr-TR')+' ₺'+(f[1]?' <small>örnek</small>':''):(KMOD?'':'<small>Fiyat için teklif ver</small>')}document.getElementById('c-p').textContent=it.u[2];kartYer(x,y);card.classList.add('on')}
 // fare gezince açıklama çıkmaz, yalnız imleç değişir. İlk tıklama açıklama, aynı ürüne ikinci tıklama ürün sayfası
 let kartZ=0;
 function kartKapa(){card.classList.remove('on');hot=null}

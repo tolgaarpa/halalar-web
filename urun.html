@@ -118,11 +118,16 @@ html[data-tema="gunduz"] nav .hik .hik-menu a:hover,html[data-tema="gunduz"] nav
 @media(max-width:760px){main{padding-top:1vh;gap:10px;min-height:0}main img{max-height:34vh}.acilar{margin-top:8px;gap:6px}.acilar button{width:44px;height:44px}
 .bilgi{display:flex;flex-direction:column}.bilgi .k{order:1}.bilgi h1{order:2;font-size:clamp(26px,8vw,40px);margin:8px 0 10px}.bilgi .model{order:3;margin:-4px 0 8px}
 .bilgi .fiyat{order:4;margin-top:0;font-size:32px}.bilgi .eylem{order:5;margin-top:12px}.bilgi .talep{order:6}.bilgi .tamam{order:7}.bilgi #p{order:8;margin-top:18px}}</style>
+<style>/* beden seçimi */.beden{margin-top:16px}.beden b{display:block;font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.beden div{display:flex;flex-wrap:wrap;gap:8px}.beden button{min-width:48px;height:44px;padding:0 10px;border:1px solid #55555e;background:none;color:var(--ink);font:600 16px/1 Barlow,sans-serif;cursor:pointer}
+.beden button.on{background:var(--accent);border-color:var(--accent);color:#fff}.beden.uyar b{color:var(--accent)}.beden.uyar button{border-color:var(--accent)}
+html[data-tema="gunduz"] .beden button{border-color:#c9c9d0}@media(max-width:760px){.bilgi .beden{order:4;margin:4px 0 0}}</style>
+<style>.teslim{margin-top:10px;font:500 14px/1.4 Barlow,sans-serif;color:var(--muted)}@media(max-width:760px){.bilgi .teslim{order:4;margin:6px 0 0}}</style>
 </head>
 <body>
 <nav><span class="hpi-sol"><a class="hp-logo" href="hit.html" aria-label="Hit Pazarı"><span class="hp-c" aria-hidden="true">//</span><span class="hp-a">HİT PAZARI</span></a><a class="logo" href="index.html#ic">Halalar</a></span><a class="back" href="index.html?mod=pazar">← tünele dön</a></nav>
 <script src="veri/hesap-ikon.js"></script>
-<main><div class="foto"><img id="img" alt=""><div class="acilar" id="acilar"></div></div><div class="bilgi"><div class="k" id="k"></div><h1 id="h"></h1><p id="p"></p><div class="fiyat" id="fy"></div>
+<main><div class="foto"><img id="img" alt=""><div class="acilar" id="acilar"></div></div><div class="bilgi"><div class="k" id="k"></div><h1 id="h"></h1><p id="p"></p><div class="fiyat" id="fy"></div><div class="beden" id="beden" hidden></div><div class="teslim" id="tsl"></div>
   <div class="eylem"><button class="cta" id="bTeklif" type="button">Teklif ver</button><button class="cta" id="bAlim" type="button">Satın al</button></div>
   <form class="talep" id="talep" hidden novalidate></form>
   <div class="tamam" id="tamam" hidden role="status"></div></div></main>
@@ -152,7 +157,7 @@ const u=D2?[DON+D2.id,D2.ad,D2.aciklama||'','—']:(HU||URUNLER[0]);
 if(YOK){const m=document.querySelector('main'),gr=id&&/^d[23]:/.test(id),dk=gr?(id.startsWith('d3:')?['dukkan.html?d=3',typeof DUKKAN3!=='undefined'?DUKKAN3.ad:'dükkân']:['dukkan.html',typeof DUKKAN2!=='undefined'?DUKKAN2.ad:'dükkân']):['index.html','Halalar'];
   m.hidden=true;m.style.display='none';const y=document.createElement('section');y.className='yok';y.innerHTML=`<h1>Bu ürün artık yok</h1><p>Satılmış ya da kaldırılmış olabilir. Benzerlerine ${dk[1].replace(/[<>&"]/g,'')} dükkânında bakabilirsin.</p><a class="cta on" href="${dk[0]}">Dükkâna git →</a>`;m.after(y);document.title='Hit Pazarı · Ürün bulunamadı'}
 const fotolar=D2?(D2.gorseller||[D2.gorsel]):[`kaynak/web/${u[0]}.webp`].concat(((typeof GALERI!=='undefined'&&GALERI[u[0]])||[]).map(g=>`kaynak/web/${g}.webp`));
-if(D2){const l=document.querySelector('nav .logo');l.textContent=DK.ad;l.href=DHREF;if(D2.fiyat)document.getElementById('bTeklif').hidden=true}
+if(D2){const l=document.querySelector('nav .logo');l.textContent=DK.ad;l.href=DHREF;if(D2.fiyat&&!D2.ornek)document.getElementById('bTeklif').hidden=true}   /* örnek fiyatlı üründe teklif açık kalır */
 // geri: geldiğin tünel (Pazar, kendi tünelin, dükkân); doğrudan gelindiyse Pazar tüneli
 // 'Tünele dön': geldiğin tünel; yoksa ürünün kendi dükkânının tüneli (DSG ?dukkan=2, Önsal ?dukkan=3, Halalar)
 // geri: geldiğin yere, aynı noktaya (tünelde aynı derinlik, öneriden gelindiyse önceki ürün, Dükkânlar'dan gelindiyse Dükkânlar); dışarıdan gelindiyse ürünün dükkân tüneli
@@ -177,12 +182,18 @@ const yaz=f=>{try{const x=oku();f(x);localStorage.setItem(KEY,JSON.stringify(x))
 const TL=n=>(n||0).toLocaleString('tr-TR')+' ₺';
 const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const FY=D2?(D2.fiyat||0):((typeof FIYAT!=='undefined'&&FIYAT[u[0]])||0);
-document.getElementById('fy').innerHTML=FY?`${TL(FY)}${D2?'<small>KDV DAHİL</small>':'<small>ÖRNEK FİYAT</small>'}`:'';
+document.getElementById('fy').innerHTML=FY?`${TL(FY)}${D2&&!D2.ornek?'<small>KDV DAHİL</small>':'<small>ÖRNEK FİYAT</small>'}`:'';
 let VT=null;try{firebase.initializeApp(FIREBASE_AYAR);VT=firebase.firestore()}catch(e){console.warn('veritabanı yok',e)}
 const form=document.getElementById('talep'),tamam=document.getElementById('tamam'),bT=document.getElementById('bTeklif'),bA=document.getElementById('bAlim');
 if(!D2)bA.textContent='Satın alma talebi';
 // fiyatı henüz girilmemiş ürün: satın alma yok, yalnız teklif
 if(!FY){bA.hidden=true;bA.style.display='none';bT.hidden=false;document.getElementById('fy').innerHTML='<small>FİYAT YAKINDA · TEKLİFİNİ YAZ</small>'}
+// DSG kıyafetlerinde beden seçimi (sahip 21.11): her ürün her bedende var sayılır (örnek); seçilen beden talebe yazılır
+const BEDENLER=D2&&DON==='d2:'?(D2.kategori==='Alt giyim'?['28','30','32','34','36','38']:['S','M','L','XL','XXL']):null;let BEDEN='';
+if(BEDENLER){const k=document.getElementById('beden');k.hidden=false;k.innerHTML='<b>Beden</b><div>'+BEDENLER.map(b=>`<button type="button" data-b="${b}">${b}</button>`).join('')+'</div>';
+  k.querySelectorAll('button').forEach(x=>x.onclick=()=>{BEDEN=x.dataset.b;k.classList.remove('uyar');k.querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===x));const h=document.getElementById('khata');if(h&&/Beden/.test(h.textContent))h.textContent=''})}
+// teslimat bilgisi ürün sayfasında da görünür (sahip 21.11): her dükkân kargo yapar; Önsal'da kargo ve kurulum dahil
+const TESLIM=D2?(DK.teslim||'Kargo ile 1-3 iş günü'):'Kargo ile 1-3 iş günü · ya da dükkândan teslim';if(!YOK)document.getElementById('tsl').textContent='Teslimat: '+TESLIM;
 function kisiHTML(){const k=oku().kisi||{};return `<div class="alanlar"><input id="kad" autocomplete="name" placeholder="Adın" aria-label="Adın" value="${esc(k.ad)}"><input id="ktel" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon (05..)" aria-label="Telefon" value="${esc(k.tel)}"></div>
   <label class="rza"><input type="checkbox" id="krz" ${k.rza?'checked':''}><span><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html" target="_blank" rel="noopener">Aydınlatma metnini</a> okudum; adımın ve telefonumun talebim için işlenmesine ve ABD'deki sunucularda saklanmasına açık rıza veriyorum.</span></label>`}
 function ac(tur){
@@ -193,7 +204,7 @@ function ac(tur){
       <p class="not">Teklifin dükkâna iletilir; dükkân seni telefonla arar. Durumu Hit Pazarı'nda "Teklif ve taleplerim"de görürsün.</p>
       <div class="hata" id="khata"></div><div class="dug"><button class="cta" type="button" id="vz">Vazgeç</button><button class="cta on" type="submit" id="gn">Teklifi gönder</button></div>`;
     form.querySelectorAll('.hizli button').forEach(b=>b.onclick=()=>{document.getElementById('tk').value=b.dataset.v})}
-  else{form.innerHTML=`<h2>Satın al</h2><div class="ozet"><div><span>Ürün</span><span>${TL(FY)}</span></div><div><span>Teslimat</span><span>${D2?esc(DK.teslim):'Dükkândan teslim'}</span></div><div><b>Toplam</b><b>${TL(FY)}</b></div></div>${kisiHTML()}
+  else{form.innerHTML=`<h2>Satın al</h2><div class="ozet"><div><span>Ürün</span><span>${TL(FY)}</span></div><div><span>Teslimat</span><span>${esc(TESLIM)}</span></div><div><b>Toplam</b><b>${TL(FY)}</b></div></div>${kisiHTML()}
       <p class="not">${D2?'Siparişin bize düşer; seni arayıp ödeme ve teslimat adresini teyit ederiz. <a href="satis-kosullari.html" target="_blank" rel="noopener">Satış koşulları ve cayma hakkı</a>.':'Burada ödeme alınmaz; talebin dükkâna düşer, dükkân seni arayıp ürünü ayırır.'}</p>
       <div class="hata" id="khata"></div><div class="dug"><button class="cta" type="button" id="vz">Vazgeç</button><button class="cta on" type="submit" id="gn">Satın alma talebini gönder</button></div>`}
   form.dataset.tur=tur;document.getElementById('vz').onclick=kapat;
@@ -203,14 +214,15 @@ bT.onclick=()=>ac('teklif');bA.onclick=()=>ac('alim');
 form.onsubmit=async e=>{e.preventDefault();const tur=form.dataset.tur,h=document.getElementById('khata');h.textContent='';
   const tutar=tur==='teklif'?(parseInt((document.getElementById('tk').value||'').replace(/\D/g,''))||0):FY;
   if(tutar<=0){h.textContent='Teklif tutarını yaz.';return}
+  if(BEDENLER&&!BEDEN){h.textContent='Bedenini seç (fiyatın hemen altında).';const k=document.getElementById('beden');k.classList.add('uyar');k.scrollIntoView({block:'center',behavior:'smooth'});return}
   const ad=document.getElementById('kad').value.trim(),tel=document.getElementById('ktel').value.replace(/[^0-9+]/g,'');
   if(ad.length<2){h.textContent='Adını yaz, dükkân sana böyle hitap edecek.';return}
   if(tel.replace(/\D/g,'').length<10){h.textContent='Telefon numaranı 10-11 hane olarak yaz.';return}
   if(!document.getElementById('krz').checked){h.textContent='Göndermek için aydınlatma metnini onaylaman gerekiyor.';return}
   if(!VT){h.textContent='Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene.';return}
   const btn=document.getElementById('gn'),eski=btn.textContent;btn.disabled=true;btn.textContent='Gönderiliyor…';
-  try{const r=await VT.collection('talepler').add({urun:u[0],urunAd:((D2&&D2.tamAd)||u[1]).slice(0,120),tur,tutar,ad,tel,durum:'Beklemede',zaman:firebase.firestore.FieldValue.serverTimestamp(),satici:SATICI});
-    yaz(x=>{x.kisi={ad,tel,rza:true};x.islem=x.islem||[];x.islem.unshift({id:u[0],ref:r.id,satici:SATICI,tur,tutar,zaman:Date.now(),durum:'Beklemede'})});
+  try{const r=await VT.collection('talepler').add({urun:u[0],urunAd:(((D2&&D2.tamAd)||u[1])+(BEDEN?' · Beden '+BEDEN:'')).slice(0,120),tur,tutar,ad,tel,durum:'Beklemede',zaman:firebase.firestore.FieldValue.serverTimestamp(),satici:SATICI});
+    yaz(x=>{x.kisi={ad,tel,rza:true};x.islem=x.islem||[];x.islem.unshift({id:u[0],ref:r.id,satici:SATICI,tur,tutar,...(BEDEN?{beden:BEDEN}:{}),zaman:Date.now(),durum:'Beklemede'})});
     form.hidden=true;bT.classList.remove('on');bA.classList.remove('on');tamam.hidden=false;
     tamam.innerHTML=`<b>${tur==='teklif'?'Teklifin gönderildi: '+TL(tutar):'Satın alma talebin gönderildi'}</b><p>Dükkân seni ${esc(tel)} numarasından arayacak. Durumu <a href="hit.html#hesap">Hit Pazarı › Teklif ve taleplerim</a>'den takip edebilirsin.</p>`;
     tamam.focus&&tamam.scrollIntoView({block:'nearest',behavior:'smooth'})}
