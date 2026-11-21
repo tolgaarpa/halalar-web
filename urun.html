@@ -195,7 +195,7 @@ if(BEDENLER){const k=document.getElementById('beden');k.hidden=false;k.innerHTML
 // teslimat bilgisi ürün sayfasında da görünür (sahip 21.11): her dükkân kargo yapar; Önsal'da kargo ve kurulum dahil
 const TESLIM=D2?(DK.teslim||'Kargo ile 1-3 iş günü'):'Kargo ile 1-3 iş günü · ya da dükkândan teslim';if(!YOK)document.getElementById('tsl').textContent='Teslimat: '+TESLIM;
 function kisiHTML(){const k=oku().kisi||{};return `<div class="alanlar"><input id="kad" autocomplete="name" placeholder="Adın" aria-label="Adın" value="${esc(k.ad)}"><input id="ktel" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon (05..)" aria-label="Telefon" value="${esc(k.tel)}"></div>
-  <label class="rza"><input type="checkbox" id="krz" ${k.rza?'checked':''}><span><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html" target="_blank" rel="noopener">Aydınlatma metnini</a> okudum; adımın ve telefonumun talebim için işlenmesine ve ABD'deki sunucularda saklanmasına açık rıza veriyorum.</span></label>`}
+  <label class="rza"><input type="checkbox" id="krz" ${k.rza?'checked':''}><span><a href="https://tolgaarpa.github.io/halalar-app/kvkk.html" target="_blank" rel="noopener">Aydınlatma metnini</a> okudum. Adımın ve telefonumun yalnız bu talep için kullanılmasına ve Google'ın güvenli sunucularında (yurt dışında) saklanmasına izin veriyorum.</span></label>`}
 function ac(tur){
   tamam.hidden=true;form.hidden=false;bT.classList.toggle('on',tur==='teklif');bA.classList.toggle('on',tur==='alim');
   if(tur==='teklif'){const o=[.7,.8,.9].map(r=>Math.round(FY*r/50)*50);
